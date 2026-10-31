@@ -1592,17 +1592,17 @@
 
       // 1. Đội Thua về
       if (nLoseHome > 0) {
-        sections.push(`${formatK(payLoseHome)}. Đội Thua về (${nLoseHome}). Tổng: ${formatK(totalLoseHomeSub)}\n${listLoseHomeStr}`);
+        sections.push(`[${formatK(payLoseHome)}] Đội Thua về: ${formatK(totalLoseHomeSub)}\n${listLoseHomeStr}`);
       }
 
       // 2. Đội Thắng nhậu
       if (nWin > 0) {
-        sections.push(`${formatK(payWin)}. Đội Thắng nhậu (${nWin}). Tổng: ${formatK(totalWinSub)}\n${listWinStr}`);
+        sections.push(`[${formatK(payWin)}] Đội Thắng nhậu: ${formatK(totalWinSub)}\n${listWinStr}`);
       }
 
       // 3. Đội Thua nhậu
       if (nLoseEat > 0) {
-        sections.push(`${formatK(payLoseEat)}. Đội Thua nhậu (${nLoseEat}). Tổng: ${formatK(totalLoseEatSub)}\n${listLoseEatStr}`);
+        sections.push(`[${formatK(payLoseEat)}] Đội Thua nhậu: ${formatK(totalLoseEatSub)}\n${listLoseEatStr}`);
       }
 
       const summary = sections.length > 0
