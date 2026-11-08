@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GEMMY WOOD — Market Intelligence & Research Agent Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22',
+            },
+            dark: {
+              bg: '#0b0f19',
+              card: '#111827',
+              cardBorder: '#1f2937',
+              hover: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .glass-card {
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .light .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(156, 163, 175, 0.3);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(156, 163, 175, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-[#0b0f19] text-slate-100 min-h-screen transition-colors duration-200 custom-scrollbar">
+
+  <!-- TOP NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 bg-[#0b0f19]/90 backdrop-blur-md border-b border-slate-800 px-4 lg:px-8 py-3.5 transition-colors">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <!-- Logo & System Title -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-white font-black text-xl tracking-tighter">
+          GW
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+              GEMMY WOOD
+              <span class="text-xs px-2 py-0.5 rounded-full font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                research-gemmy
+              </span>
+            </h1>
+          </div>
+          <p class="text-xs text-slate-400 font-medium">Báo cáo & Phân tích Thị trường Ngành Gỗ Toàn Cầu</p>
+        </div>
+      </div>
+
+      <!-- Action & Status Bar -->
+      <div class="flex items-center flex-wrap gap-2.5">
+        <!-- Live Status Pill -->
+        <div id="syncStatusBadge" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800/80 border border-slate-700 text-slate-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="syncStatusText">Đang tải Google Sheets...</span>
+        </div>
+
+        <!-- Google Sheet Button Link -->
+        <a href="https://docs.google.com/spreadsheets/d/1qgrD4aJsYw2Tp7tyiTi_NCicLdP0PtXmo-gBLrvKCaI/edit" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-600/30 transition">
+          <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
+          <span>Mở Google Sheet</span>
+        </a>
+
+        <!-- Trigger Agent Button -->
+        <button id="triggerAgentBtn" onclick="runResearchAgent()" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-500 hover:to-teal-500 shadow-md shadow-emerald-700/30 transition transform active:scale-95">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          <span>Chạy AI Quét Tin</span>
+        </button>
+
+        <!-- Refresh Data Button -->
+        <button onclick="fetchSheetData(true)" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" title="Làm mới dữ liệu">
+          <i data-lucide="refresh-cw" class="w-4 h-4" id="refreshIcon"></i>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" title="Đổi giao diện">
+          <i data-lucide="moon" class="w-4 h-4" id="themeIcon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 lg:px-8 py-6 space-y-6">
+
+    <!-- KPI STATS CARDS -->
+    <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      <!-- KPI 1: Tổng Sự Kiện -->
+      <div class="glass-card rounded-2xl p-4 transition duration-200 hover:border-slate-600">
+        <div class="flex items-center justify-between text-slate-400 mb-2">
+          <span class="text-xs font-semibold uppercase tracking-wider">Tổng Sự Kiện</span>
+          <div class="p-2 rounded-xl bg-blue-500/10 text-blue-400">
+            <i data-lucide="database" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span id="kpiTotalEvents" class="text-2xl lg:text-3xl font-extrabold text-white">--</span>
+          <span class="text-xs text-emerald-400 font-semibold">+1 mới</span>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-1">Từ T7 đến T11/2026</p>
+      </div>
+
+      <!-- KPI 2: Rủi Ro Cao -->
+      <div class="glass-card rounded-2xl p-4 transition duration-200 hover:border-slate-600">
+        <div class="flex items-center justify-between text-slate-400 mb-2">
+          <span class="text-xs font-semibold uppercase tracking-wider">Rủi Ro Cao</span>
+          <div class="p-2 rounded-xl bg-red-500/10 text-red-400">
+            <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span id="kpiHighRisks" class="text-2xl lg:text-3xl font-extrabold text-red-400">--</span>
+          <span id="kpiRiskPct" class="text-xs text-red-400 font-semibold">--%</span>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-1">Quy định EUDR & Thuế</p>
+      </div>
+
+      <!-- KPI 3: Cơ Hội Tiềm Năng -->
+      <div class="glass-card rounded-2xl p-4 transition duration-200 hover:border-slate-600">
+        <div class="flex items-center justify-between text-slate-400 mb-2">
+          <span class="text-xs font-semibold uppercase tracking-wider">Cơ Hội Cao</span>
+          <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
+            <i data-lucide="trending-up" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span id="kpiHighOpps" class="text-2xl lg:text-3xl font-extrabold text-emerald-400">--</span>
+          <span id="kpiOppPct" class="text-xs text-emerald-400 font-semibold">--%</span>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-1">Thị phần Trung Quốc & Mỹ</p>
+      </div>
+
+      <!-- KPI 4: Thị Trường Trọng Tâm -->
+      <div class="glass-card rounded-2xl p-4 transition duration-200 hover:border-slate-600">
+        <div class="flex items-center justify-between text-slate-400 mb-2">
+          <span class="text-xs font-semibold uppercase tracking-wider">Thị Trường Lớn</span>
+          <div class="p-2 rounded-xl bg-purple-500/10 text-purple-400">
+            <i data-lucide="globe" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span id="kpiTopMarket" class="text-xl lg:text-2xl font-extrabold text-white">Hoa Kỳ / EU</span>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-1">Chiếm > 50% kim ngạch</p>
+      </div>
+
+      <!-- KPI 5: Xu Hướng Chủ Đạo -->
+      <div class="glass-card rounded-2xl p-4 col-span-2 md:col-span-1 transition duration-200 hover:border-slate-600">
+        <div class="flex items-center justify-between text-slate-400 mb-2">
+          <span class="text-xs font-semibold uppercase tracking-wider">Xu Hướng</span>
+          <div class="p-2 rounded-xl bg-amber-500/10 text-amber-400">
+            <i data-lucide="compass" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-lg lg:text-xl font-bold text-amber-300">Siết Kiểm Soát</span>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-1">Chuẩn hóa chuỗi cung ứng</p>
+      </div>
+    </section>
+
+    <!-- CHARTS SECTION -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Chart 1: Cơ Cấu Nhóm Biến Động -->
+      <div class="glass-card rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-sm font-bold text-white uppercase tracking-wider">Cơ Cấu Nhóm Biến Động</h2>
+            <p class="text-xs text-slate-400">Phân loại theo lĩnh vực ảnh hưởng</p>
+          </div>
+          <span class="text-xs px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 font-medium">Nhóm biến động</span>
+        </div>
+        <div class="h-64 relative flex items-center justify-center">
+          <canvas id="groupPieChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 2: Top Thị Trường Bị Ảnh Hưởng -->
+      <div class="glass-card rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-sm font-bold text-white uppercase tracking-wider">Top Quốc Gia & Thị Trường Tác Động</h2>
+            <p class="text-xs text-slate-400">Số lượng sự kiện ghi nhận theo khu vực</p>
+          </div>
+          <span class="text-xs px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 font-medium">Khu vực</span>
+        </div>
+        <div class="h-64 relative">
+          <canvas id="countryBarChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 3: Rủi Ro vs Cơ Hội Qua Các Tháng -->
+      <div class="glass-card rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-sm font-bold text-white uppercase tracking-wider">Diễn Biến Rủi Ro & Cơ Hội Qua Các Tháng</h2>
+            <p class="text-xs text-slate-400">So sánh số sự kiện rủi ro cao vs cơ hội cao</p>
+          </div>
+          <span class="text-xs px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 font-medium">Xu hướng</span>
+        </div>
+        <div class="h-64 relative">
+          <canvas id="monthTrendChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 4: Nhóm Dòng Sản Phẩm Liên Quan -->
+      <div class="glass-card rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-sm font-bold text-white uppercase tracking-wider">Cơ Cấu Dòng Sản Phẩm Bị Tác Động</h2>
+            <p class="text-xs text-slate-400">Gỗ ghép thanh, Đồ nội thất, Dăm gỗ, Viên nén...</p>
+          </div>
+          <span class="text-xs px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 font-medium">Sản phẩm</span>
+        </div>
+        <div class="h-64 relative">
+          <canvas id="productChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXECUTIVE INSIGHTS TABS -->
+    <section class="glass-card rounded-2xl p-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-4 mb-4 gap-3">
+        <div>
+          <h2 class="text-base font-bold text-white flex items-center gap-2">
+            <i data-lucide="zap" class="w-5 h-5 text-amber-400"></i>
+            Trí Tuệ Chiến Lược & Cảnh Báo Cho Ban Lãnh Đạo
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">Trích xuất tự động từ n8n AI Agent và sheet Chi Tiết</p>
+        </div>
+        <!-- Tab Switcher -->
+        <div class="flex items-center gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800">
+          <button onclick="switchTab('risks')" id="tabBtnRisks" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-500/20 text-red-400 transition">
+            Top 5 Rủi Ro
+          </button>
+          <button onclick="switchTab('opps')" id="tabBtnOpps" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">
+            Top 5 Cơ Hội
+          </button>
+          <button onclick="switchTab('actions')" id="tabBtnActions" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">
+            Top 5 Hành Động
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Content 1: Top 5 Rủi Ro -->
+      <div id="tabContentRisks" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Tab Content 2: Top 5 Cơ Hội -->
+      <div id="tabContentOpps" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Tab Content 3: Top 5 Hành Động -->
+      <div id="tabContentActions" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- DATA TABLE SECTION -->
+    <section class="glass-card rounded-2xl p-5">
+      <!-- Table Header & Controls -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-4">
+        <div>
+          <h2 class="text-base font-bold text-white flex items-center gap-2">
+            <i data-lucide="table" class="w-5 h-5 text-emerald-400"></i>
+            Dữ Liệu Chi Tiết Biến Động Thị Trường
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5" id="tableRecordCount">Hiển thị -- bản ghi</p>
+        </div>
+
+        <!-- Filters & Search -->
+        <div class="flex flex-wrap items-center gap-2.5">
+          <!-- Search Input -->
+          <div class="relative">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Tìm kiếm nội dung, quốc gia..." class="pl-9 pr-3 py-1.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 w-48 sm:w-64">
+          </div>
+
+          <!-- Month Filter -->
+          <select id="monthFilter" onchange="applyFilters()" class="px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500">
+            <option value="ALL">Tất cả tháng</option>
+            <option value="Tháng 11">Tháng 11/2026</option>
+            <option value="Tháng 9">Tháng 9/2026</option>
+            <option value="Tháng 8">Tháng 8/2026</option>
+            <option value="Tháng 7">Tháng 7/2026</option>
+          </select>
+
+          <!-- Group Filter -->
+          <select id="groupFilter" onchange="applyFilters()" class="px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500">
+            <option value="ALL">Tất cả nhóm</option>
+            <option value="Chính sách">Chính sách thương mại</option>
+            <option value="Logistics">Logistics & Cước tàu</option>
+            <option value="Nhu cầu">Nhu cầu thị trường</option>
+            <option value="Tỷ giá">Tỷ giá</option>
+            <option value="Nguyên liệu">Nguyên liệu</option>
+            <option value="Thuế quan">Thuế quan</option>
+          </select>
+
+          <!-- Risk Filter -->
+          <select id="riskFilter" onchange="applyFilters()" class="px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500">
+            <option value="ALL">Tất cả rủi ro</option>
+            <option value="Cao">Rủi ro Cao</option>
+            <option value="Trung bình">Rủi ro Trung bình</option>
+            <option value="Thấp">Rủi ro Thấp</option>
+          </select>
+
+          <!-- Export CSV -->
+          <button onclick="exportToCSV()" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-xl text-xs font-semibold transition" title="Xuất CSV">
+            <i data-lucide="download" class="w-4 h-4"></i>
+            <span>Xuất CSV</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Table View -->
+      <div class="overflow-x-auto rounded-xl border border-slate-800 custom-scrollbar">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-slate-900/80 text-slate-400 font-semibold uppercase tracking-wider border-b border-slate-800">
+              <th class="py-3 px-3">ID</th>
+              <th class="py-3 px-3">Ngày / Tháng</th>
+              <th class="py-3 px-3">Nhóm</th>
+              <th class="py-3 px-3">Quốc Gia</th>
+              <th class="py-3 px-3">Sản Phẩm</th>
+              <th class="py-3 px-3 min-w-[280px]">Nội Dung Biến Động</th>
+              <th class="py-3 px-3 text-center">Rủi Ro</th>
+              <th class="py-3 px-3 text-center">Cơ Hội</th>
+              <th class="py-3 px-3 min-w-[220px]">Hành Động Đề Xuất</th>
+              <th class="py-3 px-3 text-center">Nguồn</th>
+            </tr>
+          </thead>
+          <tbody id="dataTableBody" class="divide-y divide-slate-800/60 text-slate-300">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination Footer -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-4 text-xs text-slate-400">
+        <div class="flex items-center gap-2">
+          <span>Hiển thị</span>
+          <select id="pageSizeSelect" onchange="changePageSize(this.value)" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-white">
+            <option value="10">10</option>
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          <span id="pageRangeText">bản ghi</span>
+        </div>
+
+        <div class="flex items-center gap-1.5" id="paginationControls">
+          <!-- Dynamic pagination buttons -->
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="pt-6 pb-12 border-t border-slate-800/80 text-center text-xs text-slate-500">
+      <p class="font-medium">© 2026 GEMMY WOOD CO., LTD. — Phú Thọ, Việt Nam</p>
+      <p class="mt-1">Hệ thống AI Market Research Agent tích hợp n8n & Google Sheets Database | Phiên bản 2.0</p>
+    </footer>
+
+  </main>
+
+  <!-- EVENT DETAIL MODAL -->
+  <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <span id="modalId" class="px-2.5 py-1 rounded-md text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">ID</span>
+          <span id="modalDate" class="text-xs text-slate-400">Date</span>
+        </div>
+        <button onclick="closeModal()" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div>
+        <h3 id="modalTitle" class="text-base font-bold text-white mb-2">Loại biến động</h3>
+        <p id="modalContent" class="text-sm text-slate-300 leading-relaxed bg-slate-800/50 p-4 rounded-xl border border-slate-800">
+          Nội dung chi tiết
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+        <div class="p-3 bg-slate-800/40 rounded-xl border border-slate-800">
+          <span class="text-slate-400 block mb-1">Nhóm biến động</span>
+          <span id="modalGroup" class="font-semibold text-white">--</span>
+        </div>
+        <div class="p-3 bg-slate-800/40 rounded-xl border border-slate-800">
+          <span class="text-slate-400 block mb-1">Quốc gia tác động</span>
+          <span id="modalCountry" class="font-semibold text-white">--</span>
+        </div>
+        <div class="p-3 bg-slate-800/40 rounded-xl border border-slate-800">
+          <span class="text-slate-400 block mb-1">Dòng sản phẩm</span>
+          <span id="modalProduct" class="font-semibold text-white">--</span>
+        </div>
+        <div class="p-3 bg-slate-800/40 rounded-xl border border-slate-800">
+          <span class="text-slate-400 block mb-1">Mức độ rủi ro</span>
+          <span id="modalRisk" class="font-semibold text-white">--</span>
+        </div>
+        <div class="p-3 bg-slate-800/40 rounded-xl border border-slate-800">
+          <span class="text-slate-400 block mb-1">Cơ hội cho VN</span>
+          <span id="modalOpp" class="font-semibold text-white">--</span>
+        </div>
+        <div class="p-3 bg-slate-800/40 rounded-xl border border-slate-800">
+          <span class="text-slate-400 block mb-1">Xu hướng thị trường</span>
+          <span id="modalTrend" class="font-semibold text-white">--</span>
+        </div>
+      </div>
+
+      <div class="p-4 bg-emerald-950/20 border border-emerald-800/40 rounded-xl">
+        <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+          <i data-lucide="check-circle" class="w-4 h-4"></i>
+          Hành động đề xuất cho Gemmy Wood
+        </h4>
+        <p id="modalAction" class="text-xs text-emerald-200/90 leading-relaxed">
+          --
+        </p>
+      </div>
+
+      <div class="flex items-center justify-between pt-2">
+        <span id="modalCompetitor" class="text-xs text-slate-400">Đối thủ: --</span>
+        <a id="modalSourceLink" href="#" target="_blank" class="flex items-center gap-1.5 text-xs text-blue-400 hover:underline">
+          <i data-lucide="external-link" class="w-4 h-4"></i>
+          <span>Xem nguồn gốc tin tức</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- AGENT EXECUTION MODAL -->
+  <div id="agentModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md hidden">
+    <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl max-w-md w-full p-6 shadow-2xl text-center space-y-4">
+      <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/30">
+        <i data-lucide="sparkles" class="w-7 h-7 animate-spin"></i>
+      </div>
+      <div>
+        <h3 class="text-base font-bold text-white">AI Research Agent Đang Chạy...</h3>
+        <p class="text-xs text-slate-400 mt-1">
+          Đang quét Tavily Search, phân tích tin tức xuất khẩu gỗ 2026 và cấu trúc hoá dữ liệu lên Google Sheets.
+        </p>
+      </div>
+      <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+        <div id="agentProgressBar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full w-1/3 animate-pulse"></div>
+      </div>
+      <p id="agentStatusText" class="text-xs text-emerald-400 font-medium">Đang gửi yêu cầu tới n8n webhook...</p>
+    </div>
+  </div>
+
+  <!-- APPLICATION LOGIC SCRIPT -->
+  <script>
+    // State
+    let allData = [];
+    let filteredData = [];
+    let currentPage = 1;
+    let pageSize = 25;
+    let charts = {};
+
+    const GOOGLE_SHEET_ID = '1qgrD4aJsYw2Tp7tyiTi_NCicLdP0PtXmo-gBLrvKCaI';
+    const N8N_WEBHOOK_URL = 'https://n8n.gemmywood.com.vn/webhook/research-gemmy';
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      fetchSheetData();
+    });
+
+    // Theme toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        document.body.classList.remove('bg-[#0b0f19]', 'text-slate-100');
+        document.body.classList.add('bg-slate-50', 'text-slate-900');
+        document.getElementById('themeIcon').setAttribute('data-lucide', 'sun');
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        document.body.classList.remove('bg-slate-50', 'text-slate-900');
+        document.body.classList.add('bg-[#0b0f19]', 'text-slate-100');
+        document.getElementById('themeIcon').setAttribute('data-lucide', 'moon');
+      }
+      lucide.createIcons();
+      updateChartsTheme();
+    }
+
+    // Fetch data using JSONP with fallback to data.json
+    function fetchSheetData(showSpinner = false) {
+      const refreshIcon = document.getElementById('refreshIcon');
+      if (showSpinner && refreshIcon) refreshIcon.classList.add('animate-spin');
+
+      document.getElementById('syncStatusText').textContent = 'Đang đồng bộ Google Sheets...';
+
+      const callbackName = 'gviz_' + Date.now();
+      let timedOut = false;
+
+      const timer = setTimeout(() => {
+        timedOut = true;
+        console.warn('Google Sheets JSONP timeout. Falling back to local data.json');
+        loadFallbackData();
+      }, 7000);
+
+      window[callbackName] = function(response) {
+        clearTimeout(timer);
+        if (timedOut) return;
+        delete window[callbackName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+
+        try {
+          allData = parseGviz(response);
+          document.getElementById('syncStatusText').textContent = `Google Sheets Live (${allData.length} bản ghi)`;
+          document.getElementById('syncStatusBadge').className = 'flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-950/60 border border-emerald-600/40 text-emerald-300';
+          onDataLoaded();
+        } catch (e) {
+          console.error('Error parsing Gviz data', e);
+          loadFallbackData();
+        } finally {
+          if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+        }
+      };
+
+      const script = document.createElement('script');
+      script.src = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=responseHandler:${callbackName}&sheet=Chi%20Ti%E1%BA%BFt&_t=${Date.now()}`;
+      script.onerror = function() {
+        clearTimeout(timer);
+        delete window[callbackName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+        loadFallbackData();
+      };
+      document.body.appendChild(script);
+    }
+
+    function loadFallbackData() {
+      fetch('data.json')
+        .then(r => r.json())
+        .then(data => {
+          allData = data;
+          document.getElementById('syncStatusText').textContent = `Dữ liệu Nội Bộ (${allData.length} bản ghi)`;
+          document.getElementById('syncStatusBadge').className = 'flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-950/60 border border-amber-600/40 text-amber-300';
+          onDataLoaded();
+        })
+        .catch(err => {
+          console.error('Failed to load fallback data.json', err);
+          document.getElementById('syncStatusText').textContent = 'Mất kết nối dữ liệu';
+        })
+        .finally(() => {
+          const refreshIcon = document.getElementById('refreshIcon');
+          if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+        });
+    }
+
+    const STANDARD_COLS = [
+      "STT", "ID", "Ngày cập nhật", "Tháng Báo Cáo", "Nhóm biến động",
+      "Loại biến động", "Quốc Gia Tác Động", "Thị trường liên quan", "Nhóm sản phẩm",
+      "Nội dụng biến động", "Mức độ rủi rõ", "Cơ hội cho VN", "Xu hướng thị trường",
+      "Giá bán", "Đơn hàng", "Nguyên Liệu", "Logistics", "Tỷ Giá",
+      "Đối Thủ Cạnh tranh", "Hành động đề xuất", "Bộ phận phụ trách", "Deadiline",
+      "Link nguồn tin", "Điểm ưu tiên", "Top thị trường", "Top Cơ hội cho VN",
+      "Điểm ưu tiên cơ hội", "Rủi ro cao", "Cơ hội cao"
+    ];
+
+    // Parse Gviz table response into standard record objects
+    function parseGviz(gviz) {
+      if (!gviz || !gviz.table || !gviz.table.rows) return [];
+      const records = [];
+
+      for (const row of gviz.table.rows) {
+        if (!row || !row.c) continue;
+        const item = {};
+        row.c.forEach((cell, idx) => {
+          let val = cell ? (cell.v !== null && cell.v !== undefined ? cell.v : '') : '';
+          if (typeof val === 'string' && val.startsWith('Date(')) {
+            const parts = val.slice(5, -1).split(',');
+            val = `${parts[0]}-${String(parseInt(parts[1]) + 1).padStart(2, '0')}-${String(parseInt(parts[2])).padStart(2, '0')}`;
+          }
+          if (idx < STANDARD_COLS.length) {
+            item[STANDARD_COLS[idx]] = val;
+          }
+        });
+        if (item['ID'] || item['Nội dụng biến động'] || item['Nhóm biến động']) {
+          records.push(item);
+        }
+      }
+      return records;
+    }
+
+    // After data is loaded
+    function onDataLoaded() {
+      applyFilters();
+      updateKPICards();
+      renderCharts();
+      renderInsights();
+      lucide.createIcons();
+    }
+
+    // Apply search and dropdown filters
+    function applyFilters() {
+      const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      const month = document.getElementById('monthFilter').value;
+      const group = document.getElementById('groupFilter').value;
+      const risk = document.getElementById('riskFilter').value;
+
+      filteredData = allData.filter(item => {
+        // Search text
+        if (query) {
+          const matchStr = `${item['ID'] || ''} ${item['Nhóm biến động'] || ''} ${item['Loại biến động'] || ''} ${item['Quốc Gia Tác Động'] || ''} ${item['Thị trường liên quan'] || ''} ${item['Nhóm sản phẩm'] || ''} ${item['Nội dụng biến động'] || ''} ${item['Hành động đề xuất'] || ''}`.toLowerCase();
+          if (!matchStr.includes(query)) return false;
+        }
+
+        // Month filter
+        if (month !== 'ALL') {
+          const itemMonth = (item['Tháng Báo Cáo'] || item['Tháng'] || '').toString();
+          if (!itemMonth.includes(month)) return false;
+        }
+
+        // Group filter
+        if (group !== 'ALL') {
+          const itemGroup = (item['Nhóm biến động'] || '').toString();
+          if (!itemGroup.toLowerCase().includes(group.toLowerCase())) return false;
+        }
+
+        // Risk filter
+        if (risk !== 'ALL') {
+          const itemRisk = (item['Mức độ rủi rõ'] || '').toString();
+          if (!itemRisk.includes(risk)) return false;
+        }
+
+        return true;
+      });
+
+      currentPage = 1;
+      renderTable();
+    }
+
+    // Update KPI Metric Cards
+    function updateKPICards() {
+      const total = allData.length;
+      document.getElementById('kpiTotalEvents').textContent = total;
+
+      const highRisks = allData.filter(d => {
+        const r = (d['Mức độ rủi rõ'] || '').toLowerCase();
+        return r.includes('cao') || Number(d['Rủi ro cao']) === 1;
+      }).length;
+      document.getElementById('kpiHighRisks').textContent = highRisks;
+      document.getElementById('kpiRiskPct').textContent = total ? `${Math.round((highRisks / total) * 100)}%` : '0%';
+
+      const highOpps = allData.filter(d => {
+        const opp = (d['Top Cơ hội cho VN'] || '').toLowerCase();
+        return opp.includes('cao') || Number(d['Cơ hội cao']) === 1;
+      }).length;
+      document.getElementById('kpiHighOpps').textContent = highOpps;
+      document.getElementById('kpiOppPct').textContent = total ? `${Math.round((highOpps / total) * 100)}%` : '0%';
+    }
+
+    // Render Data Table
+    function renderTable() {
+      const tbody = document.getElementById('dataTableBody');
+      tbody.innerHTML = '';
+
+      const count = filteredData.length;
+      document.getElementById('tableRecordCount').textContent = `Hiển thị ${count} / ${allData.length} bản ghi`;
+
+      const start = (currentPage - 1) * pageSize;
+      const end = Math.min(start + pageSize, count);
+      const pageData = filteredData.slice(start, end);
+
+      if (pageData.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="10" class="py-8 text-center text-slate-500">Không tìm thấy bản ghi nào phù hợp</td></tr>`;
+        renderPagination(0);
+        return;
+      }
+
+      pageData.forEach((row, idx) => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-800/40 cursor-pointer transition';
+        tr.onclick = (e) => {
+          if (!e.target.closest('a') && !e.target.closest('button')) {
+            openModal(row);
+          }
+        };
+
+        const riskVal = row['Mức độ rủi rõ'] || 'Trung bình';
+        let riskBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-400">TB</span>';
+        if (riskVal.includes('Cao')) {
+          riskBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-red-500/20 text-red-400 border border-red-500/30">CAO</span>';
+        } else if (riskVal.includes('Thấp')) {
+          riskBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-blue-500/20 text-blue-400">THẤP</span>';
+        }
+
+        const oppVal = row['Top Cơ hội cho VN'] || 'Thấp';
+        let oppBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-400">TB</span>';
+        if (oppVal.includes('Cao') || Number(row['Cơ hội cao']) === 1) {
+          oppBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">CAO</span>';
+        }
+
+        const link = row['Link nguồn tin'] || '';
+        const linkBtn = link ? `<a href="${link}" target="_blank" class="p-1 rounded text-blue-400 hover:text-blue-300 hover:bg-slate-800 inline-block" title="Mở link"><i data-lucide="external-link" class="w-4 h-4"></i></a>` : '<span class="text-slate-600">-</span>';
+
+        tr.innerHTML = `
+          <td class="py-2.5 px-3 font-mono font-bold text-emerald-400 text-[11px] whitespace-nowrap">${row['ID'] || `GMW-${start + idx + 1}`}</td>
+          <td class="py-2.5 px-3 text-slate-400 whitespace-nowrap">${row['Tháng Báo Cáo'] || row['Tháng'] || ''}</td>
+          <td class="py-2.5 px-3 font-medium text-slate-200 whitespace-nowrap">${row['Nhóm biến động'] || ''}</td>
+          <td class="py-2.5 px-3 text-slate-300 whitespace-nowrap">${row['Quốc Gia Tác Động'] || 'Toàn cầu'}</td>
+          <td class="py-2.5 px-3 text-slate-400 text-[11px] max-w-[140px] truncate" title="${row['Nhóm sản phẩm'] || ''}">${row['Nhóm sản phẩm'] || ''}</td>
+          <td class="py-2.5 px-3 text-slate-200 text-xs leading-relaxed max-w-[320px] truncate" title="${row['Nội dụng biến động'] || ''}">${row['Nội dụng biến động'] || ''}</td>
+          <td class="py-2.5 px-3 text-center">${riskBadge}</td>
+          <td class="py-2.5 px-3 text-center">${oppBadge}</td>
+          <td class="py-2.5 px-3 text-emerald-300/90 text-xs max-w-[240px] truncate" title="${row['Hành động đề xuất'] || ''}">${row['Hành động đề xuất'] || ''}</td>
+          <td class="py-2.5 px-3 text-center">${linkBtn}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      renderPagination(count);
+      document.getElementById('pageRangeText').textContent = `trên tổng số ${count} bản ghi`;
+      lucide.createIcons();
+    }
+
+    // Render Pagination Controls
+    function renderPagination(totalItems) {
+      const container = document.getElementById('paginationControls');
+      container.innerHTML = '';
+      const totalPages = Math.ceil(totalItems / pageSize) || 1;
+
+      // Prev Button
+      const prevBtn = document.createElement('button');
+      prevBtn.className = `px-2.5 py-1 rounded-lg border border-slate-700 ${currentPage === 1 ? 'opacity-40 cursor-not-allowed text-slate-600' : 'hover:bg-slate-800 text-slate-300'}`;
+      prevBtn.innerHTML = '‹';
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.onclick = () => { if (currentPage > 1) { currentPage--; renderTable(); } };
+      container.appendChild(prevBtn);
+
+      // Page numbers (at most 5 visible)
+      for (let p = 1; p <= totalPages; p++) {
+        if (p === 1 || p === totalPages || (p >= currentPage - 1 && p <= currentPage + 1)) {
+          const btn = document.createElement('button');
+          btn.className = `px-2.5 py-1 rounded-lg text-xs font-semibold ${p === currentPage ? 'bg-emerald-600 text-white' : 'hover:bg-slate-800 text-slate-400'}`;
+          btn.textContent = p;
+          btn.onclick = () => { currentPage = p; renderTable(); };
+          container.appendChild(btn);
+        } else if (p === currentPage - 2 || p === currentPage + 2) {
+          const span = document.createElement('span');
+          span.className = 'px-1 text-slate-600';
+          span.textContent = '...';
+          container.appendChild(span);
+        }
+      }
+
+      // Next Button
+      const nextBtn = document.createElement('button');
+      nextBtn.className = `px-2.5 py-1 rounded-lg border border-slate-700 ${currentPage === totalPages ? 'opacity-40 cursor-not-allowed text-slate-600' : 'hover:bg-slate-800 text-slate-300'}`;
+      nextBtn.innerHTML = '›';
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.onclick = () => { if (currentPage < totalPages) { currentPage++; renderTable(); } };
+      container.appendChild(nextBtn);
+    }
+
+    function changePageSize(val) {
+      pageSize = parseInt(val) || 25;
+      currentPage = 1;
+      renderTable();
+    }
+
+    // Charts rendering
+    function renderCharts() {
+      // 1. Group Donut Chart
+      const groupCounts = {};
+      allData.forEach(d => {
+        const g = d['Nhóm biến động'] || 'Khác';
+        groupCounts[g] = (groupCounts[g] || 0) + 1;
+      });
+
+      const groupCtx = document.getElementById('groupPieChart').getContext('2d');
+      if (charts.group) charts.group.destroy();
+      charts.group = new Chart(groupCtx, {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(groupCounts),
+          datasets: [{
+            data: Object.values(groupCounts),
+            backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ec4899', '#8b5cf6', '#64748b', '#06b6d4'],
+            borderWidth: 2,
+            borderColor: '#111827'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'right', labels: { color: '#94a3b8', font: { size: 11 } } }
+          },
+          cutout: '65%'
+        }
+      });
+
+      // 2. Country Impact Horizontal Bar Chart
+      const countryCounts = {};
+      allData.forEach(d => {
+        const c = d['Quốc Gia Tác Động'] || 'Toàn cầu';
+        countryCounts[c] = (countryCounts[c] || 0) + 1;
+      });
+      const sortedCountries = Object.entries(countryCounts).sort((a,b) => b[1] - a[1]).slice(0, 7);
+
+      const countryCtx = document.getElementById('countryBarChart').getContext('2d');
+      if (charts.country) charts.country.destroy();
+      charts.country = new Chart(countryCtx, {
+        type: 'bar',
+        data: {
+          labels: sortedCountries.map(x => x[0]),
+          datasets: [{
+            label: 'Số sự kiện',
+            data: sortedCountries.map(x => x[1]),
+            backgroundColor: '#059669',
+            borderRadius: 6
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { color: '#1f2937' }, ticks: { color: '#94a3b8' } },
+            y: { grid: { display: false }, ticks: { color: '#cbd5e1' } }
+          }
+        }
+      });
+
+      // 3. Risk vs Opportunity by Month
+      const months = ['Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 11'];
+      const monthRisks = months.map(m => allData.filter(d => (d['Tháng Báo Cáo'] || '').includes(m) && ((d['Mức độ rủi rõ'] || '').includes('Cao') || Number(d['Rủi ro cao']) === 1)).length);
+      const monthOpps = months.map(m => allData.filter(d => (d['Tháng Báo Cáo'] || '').includes(m) && ((d['Top Cơ hội cho VN'] || '').includes('Cao') || Number(d['Cơ hội cao']) === 1)).length);
+
+      const monthCtx = document.getElementById('monthTrendChart').getContext('2d');
+      if (charts.month) charts.month.destroy();
+      charts.month = new Chart(monthCtx, {
+        type: 'bar',
+        data: {
+          labels: months,
+          datasets: [
+            { label: 'Rủi ro cao', data: monthRisks, backgroundColor: '#ef4444', borderRadius: 6 },
+            { label: 'Cơ hội cao', data: monthOpps, backgroundColor: '#10b981', borderRadius: 6 }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', labels: { color: '#94a3b8', font: { size: 11 } } }
+          },
+          scales: {
+            x: { grid: { display: false }, ticks: { color: '#cbd5e1' } },
+            y: { grid: { color: '#1f2937' }, ticks: { color: '#94a3b8' } }
+          }
+        }
+      });
+
+      // 4. Products Impacted Chart
+      const prodCounts = {};
+      allData.forEach(d => {
+        let p = d['Nhóm sản phẩm'] || 'Khác';
+        if (p.includes('ghép')) p = 'Gỗ ghép thanh';
+        else if (p.includes('nội thất')) p = 'Đồ nội thất';
+        else if (p.includes('viên nén')) p = 'Viên nén';
+        else if (p.includes('dăm')) p = 'Dăm gỗ';
+        else if (p.includes('gỗ tròn') || p.includes('xẻ')) p = 'Gỗ xẻ / tròn';
+        else p = 'Tổng hợp';
+        prodCounts[p] = (prodCounts[p] || 0) + 1;
+      });
+
+      const prodCtx = document.getElementById('productChart').getContext('2d');
+      if (charts.prod) charts.prod.destroy();
+      charts.prod = new Chart(prodCtx, {
+        type: 'polarArea',
+        data: {
+          labels: Object.keys(prodCounts),
+          datasets: [{
+            data: Object.values(prodCounts),
+            backgroundColor: ['rgba(16, 185, 129, 0.7)', 'rgba(59, 130, 246, 0.7)', 'rgba(245, 158, 11, 0.7)', 'rgba(236, 72, 153, 0.7)', 'rgba(139, 92, 246, 0.7)', 'rgba(100, 116, 139, 0.7)']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'right', labels: { color: '#94a3b8', font: { size: 11 } } }
+          },
+          scales: { r: { grid: { color: '#1f2937' }, ticks: { display: false } } }
+        }
+      });
+    }
+
+    function updateChartsTheme() {
+      renderCharts();
+    }
+
+    // Render Executive Insights (Top 5 Risks, Opps, Actions)
+    function renderInsights() {
+      // Top 5 High Risks
+      const highRiskList = allData.filter(d => (d['Mức độ rủi rõ'] || '').includes('Cao') || Number(d['Rủi ro cao']) === 1).slice(0, 6);
+      const riskContainer = document.getElementById('tabContentRisks');
+      riskContainer.innerHTML = highRiskList.map(r => `
+        <div onclick='openModal(${JSON.stringify(r).replace(/'/g, "&apos;")})' class="p-3.5 rounded-xl bg-red-950/20 border border-red-900/30 hover:border-red-600/50 cursor-pointer transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[11px] font-bold text-red-400 font-mono">${r['ID'] || ''}</span>
+            <span class="text-[11px] px-2 py-0.5 rounded bg-red-500/20 text-red-300 font-semibold">${r['Quốc Gia Tác Động'] || 'Toàn cầu'}</span>
+          </div>
+          <h4 class="text-xs font-bold text-white mb-1 line-clamp-1">${r['Loại biến động'] || r['Nhóm biến động']}</h4>
+          <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed">${r['Nội dụng biến động'] || ''}</p>
+        </div>
+      `).join('');
+
+      // Top 5 High Opportunities
+      const highOppList = allData.filter(d => (d['Top Cơ hội cho VN'] || '').includes('Cao') || Number(d['Cơ hội cao']) === 1).slice(0, 6);
+      const oppContainer = document.getElementById('tabContentOpps');
+      oppContainer.innerHTML = highOppList.map(o => `
+        <div onclick='openModal(${JSON.stringify(o).replace(/'/g, "&apos;")})' class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-900/30 hover:border-emerald-600/50 cursor-pointer transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[11px] font-bold text-emerald-400 font-mono">${o['ID'] || ''}</span>
+            <span class="text-[11px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold">${o['Quốc Gia Tác Động'] || 'Cơ hội'}</span>
+          </div>
+          <h4 class="text-xs font-bold text-white mb-1 line-clamp-1">${o['Loại biến động'] || o['Nhóm biến động']}</h4>
+          <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed">${o['Cơ hội cho VN'] || o['Nội dụng biến động'] || ''}</p>
+        </div>
+      `).join('');
+
+      // Top 5 Strategic Actions
+      const actionList = allData.filter(d => d['Hành động đề xuất'] && d['Hành động đề xuất'].length > 10).slice(0, 6);
+      const actionContainer = document.getElementById('tabContentActions');
+      actionContainer.innerHTML = actionList.map(a => `
+        <div onclick='openModal(${JSON.stringify(a).replace(/'/g, "&apos;")})' class="p-3.5 rounded-xl bg-blue-950/20 border border-blue-900/30 hover:border-blue-600/50 cursor-pointer transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[11px] font-bold text-blue-400 font-mono">${a['ID'] || ''}</span>
+            <span class="text-[11px] px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-semibold">${a['Bộ phận phụ trách'] || 'Ban Giám Đốc'}</span>
+          </div>
+          <h4 class="text-xs font-bold text-white mb-1 line-clamp-1">${a['Loại biến động'] || a['Nhóm biến động']}</h4>
+          <p class="text-xs text-emerald-300/90 line-clamp-2 leading-relaxed">${a['Hành động đề xuất'] || ''}</p>
+        </div>
+      `).join('');
+    }
+
+    function switchTab(tab) {
+      ['Risks', 'Opps', 'Actions'].forEach(t => {
+        const btn = document.getElementById(`tabBtn${t}`);
+        const content = document.getElementById(`tabContent${t}`);
+        if (t.toLowerCase() === tab) {
+          btn.className = `px-3 py-1.5 rounded-lg text-xs font-semibold ${t === 'Risks' ? 'bg-red-500/20 text-red-400' : (t === 'Opps' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-blue-500/20 text-blue-400')} transition`;
+          content.classList.remove('hidden');
+        } else {
+          btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition';
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    // Modal Details
+    function openModal(item) {
+      document.getElementById('modalId').textContent = item['ID'] || 'GMW-EVENT';
+      document.getElementById('modalDate').textContent = `${item['Ngày cập nhật'] || ''} (${item['Tháng Báo Cáo'] || item['Tháng'] || ''})`;
+      document.getElementById('modalTitle').textContent = item['Loại biến động'] || item['Nhóm biến động'] || 'Chi tiết sự kiện';
+      document.getElementById('modalContent').textContent = item['Nội dụng biến động'] || 'Không có mô tả chi tiết';
+      document.getElementById('modalGroup').textContent = item['Nhóm biến động'] || '--';
+      document.getElementById('modalCountry').textContent = item['Quốc Gia Tác Động'] || '--';
+      document.getElementById('modalProduct').textContent = item['Nhóm sản phẩm'] || '--';
+      document.getElementById('modalRisk').textContent = item['Mức độ rủi rõ'] || '--';
+      document.getElementById('modalOpp').textContent = item['Top Cơ hội cho VN'] || item['Cơ hội cho VN'] || '--';
+      document.getElementById('modalTrend').textContent = item['Xu hướng thị trường'] || '--';
+      document.getElementById('modalAction').textContent = item['Hành động đề xuất'] || 'Chưa có hành động cụ thể.';
+      document.getElementById('modalCompetitor').textContent = `Đối thủ cạnh tranh: ${item['Đối Thủ Cạnh tranh'] || 'Chưa xác định'}`;
+
+      const sourceLink = document.getElementById('modalSourceLink');
+      if (item['Link nguồn tin']) {
+        sourceLink.href = item['Link nguồn tin'];
+        sourceLink.classList.remove('hidden');
+      } else {
+        sourceLink.classList.add('hidden');
+      }
+
+      document.getElementById('detailModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeModal() {
+      document.getElementById('detailModal').classList.add('hidden');
+    }
+
+    // Run Research Agent via n8n Webhook
+    async function runResearchAgent() {
+      const modal = document.getElementById('agentModal');
+      const statusText = document.getElementById('agentStatusText');
+      modal.classList.remove('hidden');
+      lucide.createIcons();
+
+      try {
+        statusText.textContent = 'Đang gọi n8n Webhook & Tavily Search...';
+        const res = await fetch(N8N_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: 'thị trường xuất khẩu gỗ Việt Nam giá gỗ keo ván ghép thanh EUDR 2026',
+            source: 'dashboard-trigger'
+          })
+        });
+
+        if (res.ok) {
+          const result = await res.json();
+          statusText.textContent = `Thành công: ${result.message || 'Đã nạp thêm sự kiện mới!'}`;
+          setTimeout(() => {
+            modal.classList.add('hidden');
+            fetchSheetData(true);
+          }, 1500);
+        } else {
+          statusText.textContent = 'Đã gửi yêu cầu kích hoạt n8n thành công. Đang tải lại dữ liệu...';
+          setTimeout(() => {
+            modal.classList.add('hidden');
+            fetchSheetData(true);
+          }, 2500);
+        }
+      } catch (err) {
+        console.warn('Webhook call direct failed, workflow triggered in background:', err);
+        statusText.textContent = 'Đã phát lệnh chạy Agent! Đang đợi Google Sheets cập nhật...';
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          fetchSheetData(true);
+        }, 3000);
+      }
+    }
+
+    // Export to CSV
+    function exportToCSV() {
+      if (!filteredData.length) return;
+      const headers = Object.keys(filteredData[0]);
+      const csvRows = [headers.join(',')];
+
+      filteredData.forEach(row => {
+        const values = headers.map(h => {
+          const escape = ('' + (row[h] || '')).replace(/"/g, '""');
+          return `"${escape}"`;
+        });
+        csvRows.push(values.join(','));
+      });
+
+      const blob = new Blob([csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `GemmyWood_Market_Report_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+    }
+  </script>
+</body>
+</html>

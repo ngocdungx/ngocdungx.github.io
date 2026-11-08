@@ -18,6 +18,12 @@
 
   <!-- Mini Apps & Dự án -->
   <url>
+    <loc>https://ngocdungx.github.io/project/research-gemmy/index.html</loc>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://ngocdungx.github.io/project/share-bill.html</loc>
     <lastmod>2026-09-21</lastmod>
     <changefreq>monthly</changefreq>
