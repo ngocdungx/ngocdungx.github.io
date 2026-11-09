@@ -3023,6 +3023,30 @@ body.light-theme .contact__form-select option {
     transform: none;
 }
 
+.contact__submit-btn .btn-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contact__submit-btn .btn-spinner {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contact__submit-btn.is-loading .btn-text {
+    display: none !important;
+}
+
+.contact__submit-btn.is-loading .btn-spinner {
+    display: inline-flex !important;
+}
+
+.d-none {
+    display: none !important;
+}
+
 .spin-icon {
     animation: spinContactIcon 1s linear infinite;
     display: inline-block;

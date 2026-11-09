@@ -455,10 +455,11 @@ function initContactForm() {
 
     const submitBtn = document.getElementById('contact-submit-btn');
     const alertBox = document.getElementById('contact-alert');
-    const btnText = submitBtn?.querySelector('.btn-text');
-    const btnSpinner = submitBtn?.querySelector('.btn-spinner');
 
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwhoBwBvunUxUZmhGtQEicOOSiCHdMh6X06BGqI-KYLUm-tE7H8eBMtFgGdIH5SbXug/exec';
+
+    // Đảm bảo trạng thái ban đầu sạch sẽ
+    setLoading(false);
 
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -505,6 +506,9 @@ function initContactForm() {
         // Bật trạng thái Loading
         setLoading(true);
 
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 25000);
+
         try {
             const payload = {
                 action: 'contact',
@@ -520,9 +524,11 @@ function initContactForm() {
                 headers: {
                     'Content-Type': 'text/plain;charset=utf-8'
                 },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(payload),
+                signal: controller.signal
             });
 
+            clearTimeout(timeoutId);
             const result = await response.json();
 
             if (result && result.status === 'success') {
@@ -533,8 +539,13 @@ function initContactForm() {
                 showAlert('⚠️ ' + errMsg, 'error');
             }
         } catch (error) {
+            clearTimeout(timeoutId);
             console.error('Lỗi khi gửi form liên hệ:', error);
-            showAlert('⚠️ Không thể kết nối tới máy chủ gửi mail. Vui lòng kiểm tra kết nối mạng hoặc thử lại sau!', 'error');
+            if (error.name === 'AbortError') {
+                showAlert('⚠️ Quá thời gian phản hồi (timeout). Vui lòng thử lại hoặc nhắn tin trực tiếp qua Zalo / Email!', 'error');
+            } else {
+                showAlert('⚠️ Không thể kết nối tới máy chủ gửi mail. Vui lòng kiểm tra kết nối mạng hoặc thử lại sau!', 'error');
+            }
         } finally {
             setLoading(false);
         }
@@ -550,15 +561,10 @@ function initContactForm() {
     function setLoading(isLoading) {
         if (!submitBtn) return;
         submitBtn.disabled = isLoading;
-        if (btnText) btnText.style.display = isLoading ? 'none' : 'inline-flex';
-        if (btnSpinner) {
-            if (isLoading) {
-                btnSpinner.classList.remove('d-none');
-                btnSpinner.style.display = 'inline-flex';
-            } else {
-                btnSpinner.classList.add('d-none');
-                btnSpinner.style.display = 'none';
-            }
+        if (isLoading) {
+            submitBtn.classList.add('is-loading');
+        } else {
+            submitBtn.classList.remove('is-loading');
         }
     }
 }
