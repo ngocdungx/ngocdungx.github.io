@@ -729,9 +729,11 @@
     </div>
   </div>
 
-  <!-- ==================== APPLICATION SCRIPT ==================== -->
+    <!-- ==================== APPLICATION SCRIPT ==================== -->
   <script>
-    let allData = [];
+    const EMBEDDED_INITIAL_DATA = [{"STT": 1.0, "ID": "GMW-202610-001", "Ngày cập nhật": "2026-10-31", "Tháng Báo Cáo": "Tháng 10", "Nhóm biến động": "Thuế quan & Phòng vệ thương mại", "Loại biến động": "Mỹ áp thuế chống bán phá giá sơ bộ với đồ nội thất gỗ Việt Nam", "Quốc Gia Tác Động": "Mỹ (US)", "Thị trường liên quan": "Mỹ (US), Việt Nam", "Nhóm sản phẩm": "Đồ nội thất", "Nội dụng biến động": "DOC công bố mức thuế CVD sơ bộ với đồ nội thất gỗ nhập khẩu từ Việt Nam, mức áp dụng dao động 2-5% tùy doanh nghiệp. Các lô hàng xuất từ tháng này có thể bị truy thu nếu biên độ cuối cùng cao hơn.", "Mức độ rủi rõ": "Cao", "Cơ hội cho VN": "Doanh nghiệp có chứng từ minh bạch về nguồn gốc gỗ FSC và cơ cấu chi phí rõ ràng có thể được hưởng mức thuế thấp hơn; Gemmy Wood nên chuẩn bị hồ sơ chứng minh để tối ưu biên độ.", "Xu hướng thị trường": "Ngắn hạn áp lực thuế gia tăng; trung hạn buyer Mỹ có xu hướng đa dạng hóa nhà cung cấp nhưng vẫn ưu tiên nhà máy minh bạch.", "Giá bán": "Giá FOB có thể phải điều chỉnh giảm 1-3% để giữ tính cạnh tranh sau thuế; biên lợi nhuận chịu áp lực nếu không đàm phán lại.", "Đơn hàng": "Buyer Mỹ có thể chậm ký PO mới chờ kết luận cuối; một số đơn chuyển sang đặt thử nghiệm nhà cung cấp khác.", "Nguyên Liệu": "Không ảnh hưởng trực tiếp nguồn gỗ keo/FSC nhưng yêu cầu chứng từ truy xuất chặt hơn.", "Logistics": "Có thể phát sinh lô hàng gấp trước thời điểm áp thuế chính thức, gây tắc nghẽn cảng.", "Tỷ Giá": "USD mạnh hỗ trợ doanh thu xuất khẩu; VND mất giá nhẹ giúp bù đắp một phần chi phí thuế.", "Đối Thủ Cạnh tranh": "Trung Quốc, Malaysia, Indonesia, Mexico", "Hành động đề xuất": "Rà soát toàn bộ hồ sơ chứng từ xuất Mỹ, làm việc với luật sư thương mại để chuẩn bị kháng nghị; đàm phán điều khoản chia sẻ thuế với buyer.", "Bộ phận phụ trách": "Ban Giám Đốc / Kinh Doanh Quốc Tế", "Deadiline": "Hàng tháng", "Link nguồn tin": "https://www.trade.gov/wood-furniture-vietnam", "Điểm ưu tiên": 90.0, "Top thị trường": "Mỹ (US)", "Top Cơ hội cho VN": "Trung bình", "Điểm ưu tiên cơ hội": 70.0, "Rủi ro cao": 1.0, "Cơ hội cao": 0.0}, {"STT": 2.0, "ID": "GMW-202610-002", "Ngày cập nhật": "2026-10-31", "Tháng Báo Cáo": "Tháng 10", "Nhóm biến động": "Luật pháp & Tiêu chuẩn xanh", "Loại biến động": "EU siết quy định EUDR, yêu cầu định vị GPS lô gỗ", "Quốc Gia Tác Động": "EU (Châu Âu)", "Thị trường liên quan": "EU (Châu Âu), Việt Nam", "Nhóm sản phẩm": "Gỗ & Sản phẩm gỗ", "Nội dụng biến động": "Ủy ban châu Âu công bố hướng dẫn kỹ thuật mới cho EUDR, yêu cầu dữ liệu định vị GPS đến từng lô rừng trồng. Thời hạn tuân thủ với doanh nghiệp lớn bắt đầu từ cuối năm, doanh nghiệp nhỏ có thêm 6 tháng.", "Mức độ rủi rõ": "Cao", "Cơ hội cho VN": "Gemmy Wood đã có chứng nhận FSC® là lợi thế lớn; nên số hóa dữ liệu rừng trồng và xây dựng hệ thống truy xuất để đáp ứng EUDR sớm hơn đối thủ.", "Xu hướng thị trường": "EUDR trở thành tiêu chuẩn bắt buộc; doanh nghiệp không tuân thủ sẽ mất đơn hàng EU.", "Giá bán": "Chi phí tuân thủ tăng nhẹ (0,5-1%) nhưng có thể tăng giá bán nhờ định vị 'gỗ hợp pháp - bền vững'.", "Đơn hàng": "Buyer EU ưu tiên nhà cung cấp có chứng nhận EUDR-ready; PO có thể tăng cho Gemmy Wood nếu chứng minh tuân thủ sớm.", "Nguyên Liệu": "Yêu cầu mở rộng vùng trồng có chứng nhận FSC và dữ liệu GPS; chi phí chứng nhận tăng.", "Logistics": "Hồ sơ EUDR phải đi kèm lô hàng, có thể làm chậm thông quan nếu thiếu dữ liệu.", "Tỷ Giá": "EUR biến động ảnh hưởng giá trị đơn hàng; chi phí tuân thủ tính bằng EUR.", "Đối Thủ Cạnh tranh": "Trung Quốc, Indonesia, Brazil", "Hành động đề xuất": "Khẩn trương số hóa dữ liệu rừng trồng FSC, xây dựng module EUDR trong hệ thống ERP, đào tạo đội QA-FSC.", "Bộ phận phụ trách": "Thu Mua & QA-FSC / Ban Giám Đốc", "Deadiline": "Hàng tháng", "Link nguồn tin": "https://environment.ec.europa.eu/topics/forests/deforestation", "Điểm ưu tiên": 90.0, "Top thị trường": "EU (Châu Âu)", "Top Cơ hội cho VN": "Cao", "Điểm ưu tiên cơ hội": 90.0, "Rủi ro cao": 1.0, "Cơ hội cao": 1.0}, {"STT": 3.0, "ID": "GMW-202610-003", "Ngày cập nhật": "2026-10-31", "Tháng Báo Cáo": "Tháng 10", "Nhóm biến động": "Logistics & Chuỗi cung ứng", "Loại biến động": "Cước tàu container châu Á - châu Âu tăng do căng thẳng Biển Đỏ", "Quốc Gia Tác Động": "Toàn cầu", "Thị trường liên quan": "EU (Châu Âu), Mỹ (US), Anh & Canada, Việt Nam", "Nhóm sản phẩm": "Gỗ & Sản phẩm gỗ", "Nội dụng biến động": "Cước vận tải container từ châu Á đi châu Âu tăng 25-40% so với tháng trước do tàu phải đi vòng qua Mũi Hảo Vọng. Thời gian vận chuyển kéo dài thêm 10-14 ngày.", "Mức độ rủi rõ": "Cao", "Cơ hội cho VN": "Doanh nghiệp ký hợp đồng logistics dài hạn và đàm phán điều khoản Incoterms linh hoạt có thể giảm thiểu rủi ro; Gemmy Wood nên chuyển sang FOB để kiểm soát chi phí.", "Xu hướng thị trường": "Cước tàu duy trì cao trong ngắn hạn; trung hạn có thể hạ nhiệt nếu tình hình Biển Đỏ ổn định.", "Giá bán": "Chi phí logistics tăng ảnh hưởng biên lợi nhuận nếu bán CIF; giá FOB ít bị ảnh hưởng hơn.", "Đơn hàng": "Buyer có thể giãn đơn hoặc gộp lô để giảm chi phí vận chuyển.", "Nguyên Liệu": "Nguyên liệu nhập khẩu (keo, phụ liệu) có thể tăng giá do cước.", "Logistics": "Lịch tàu không ổn định, thời gian giao hàng kéo dài, rủi ro phụ phí phát sinh cao.", "Tỷ Giá": "USD mạnh làm chi phí cước (tính USD) tăng tương đối với VND.", "Đối Thủ Cạnh tranh": "Trung Quốc, Ấn Độ, Indonesia", "Hành động đề xuất": "Đàm phán hợp đồng logistics dài hạn, chuyển đổi Incoterms sang FOB, dự báo tồn kho đệm 4-6 tuần.", "Bộ phận phụ trách": "XNK & Logistics / Kinh Doanh Quốc Tế", "Deadiline": "Hàng tháng", "Link nguồn tin": "https://www.drewry.co.uk/wci", "Điểm ưu tiên": 90.0, "Top thị trường": "Toàn cầu", "Top Cơ hội cho VN": "Trung bình", "Điểm ưu tiên cơ hội": 70.0, "Rủi ro cao": 1.0, "Cơ hội cao": 0.0}, {"STT": 4.0, "ID": "GMW-202610-004", "Ngày cập nhật": "2026-10-31", "Tháng Báo Cáo": "Tháng 10", "Nhóm biến động": "Kinh tế & Nhu cầu thị trường", "Loại biến động": "Nhu cầu nội thất Mỹ phục hồi nhẹ nhờ lãi suất hạ", "Quốc Gia Tác Động": "Mỹ (US)", "Thị trường liên quan": "Mỹ (US), Việt Nam", "Nhóm sản phẩm": "Đồ nội thất", "Nội dụng biến động": "Doanh số bán lẻ nội thất Mỹ tăng 2,3% so với cùng kỳ nhờ Fed hạ lãi suất 0,25 điểm %. Niềm tin tiêu dùng cải thiện, nhu cầu nhà ở tăng nhẹ.", "Mức độ rủi rõ": "Thấp", "Cơ hội cho VN": "Đơn hàng nội thất xuất Mỹ có thể tăng trong quý tới; Gemmy Wood nên chuẩn bị năng lực sản xuất và đẩy mạnh chào hàng dòng sản phẩm mới.", "Xu hướng thị trường": "Nhu cầu phục hồi chậm nhưng ổn định trong 6-12 tháng tới.", "Giá bán": "Có thể tăng giá bán nhẹ 1-2% nhờ nhu cầu tốt hơn.", "Đơn hàng": "PO tăng dần, buyer đặt hàng trở lại với khối lượng lớn hơn.", "Nguyên Liệu": "Nhu cầu gỗ keo tăng, giá nguyên liệu có thể nhích lên.", "Logistics": "Lưu lượng hàng tăng có thể gây áp lực lên cước và lịch tàu.", "Tỷ Giá": "Fed hạ lãi suất làm USD yếu đi nhẹ, hỗ trợ xuất khẩu.", "Đối Thủ Cạnh tranh": "Trung Quốc, Mexico, Ấn Độ", "Hành động đề xuất": "Đẩy mạnh chào hàng, chuẩn bị tồn kho thành phẩm, đàm phán hợp đồng dài hạn với buyer Mỹ.", "Bộ phận phụ trách": "Kinh Doanh Quốc Tế / Ban Giám Đốc", "Deadiline": "Hàng tháng", "Link nguồn tin": "https://www.census.gov/retail", "Điểm ưu tiên": 70.0, "Top thị trường": "Mỹ (US)", "Top Cơ hội cho VN": "Cao", "Điểm ưu tiên cơ hội": 90.0, "Rủi ro cao": 0.0, "Cơ hội cao": 1.0}, {"STT": 5.0, "ID": "GMW-202610-005", "Ngày cập nhật": "2026-10-31", "Tháng Báo Cáo": "Tháng 10", "Nhóm biến động": "Kinh tế & Tài chính - Tỷ giá", "Loại biến động": "Fed hạ lãi suất, USD suy yếu, VND ổn định", "Quốc Gia Tác Động": "Toàn cầu", "Thị trường liên quan": "Mỹ (US), EU (Châu Âu), Việt Nam", "Nhóm sản phẩm": "Gỗ & Sản phẩm gỗ", "Nội dụng biến động": "Fed hạ lãi suất 0,25 điểm %, USD index giảm 1,2%. Tỷ giá USD/VND ổn định quanh 24.500-24.700, EUR/USD tăng nhẹ.", "Mức độ rủi rõ": "Trung bình", "Cơ hội cho VN": "VND ổn định giúp kiểm soát chi phí đầu vào; EUR mạnh hỗ trợ xuất khẩu sang EU.", "Xu hướng thị trường": "USD có thể tiếp tục yếu trong ngắn hạn; VND ổn định nhờ dự trữ ngoại hối tốt.", "Giá bán": "Giá FOB tính USD có thể giảm nhẹ về giá trị quy đổi VND; cần cân nhắc điều chỉnh giá.", "Đơn hàng": "Buyer EU có lợi thế tỷ giá, có thể tăng đơn hàng.", "Nguyên Liệu": "Chi phí nhập khẩu nguyên liệu tính USD giảm nhẹ.", "Logistics": "Cước tàu tính USD giảm tương đối.", "Tỷ Giá": "USD yếu làm giảm lợi thế tỷ giá; EUR mạnh hỗ trợ đơn hàng EU.", "Đối Thủ Cạnh tranh": "Trung Quốc, Ấn Độ", "Hành động đề xuất": "Cân nhắc chốt tỷ giá kỳ hạn với ngân hàng; đẩy mạnh bán hàng sang EU nhờ EUR mạnh.", "Bộ phận phụ trách": "Ban Giám Đốc / Kinh Doanh Quốc Tế", "Deadiline": "Hàng tháng", "Link nguồn tin": "https://www.federalreserve.gov", "Điểm ưu tiên": 70.0, "Top thị trường": "Toàn cầu", "Top Cơ hội cho VN": "Trung bình", "Điểm ưu tiên cơ hội": 70.0, "Rủi ro cao": 0.0, "Cơ hội cao": 0.0}, {"STT": 6.0, "ID": "GMW-202610-006", "Ngày cập nhật": "2026-10-31", "Tháng Báo Cáo": "Tháng 10", "Nhóm biến động": "Nguyên liệu & Sản xuất", "Loại biến động": "Giá gỗ keo nguyên liệu trong nước tăng nhẹ", "Quốc Gia Tác Động": "Việt Nam", "Thị trường liên quan": "Việt Nam, Mỹ (US), EU (Châu Âu)", "Nhóm sản phẩm": "Gỗ ghép thanh", "Nội dụng biến động": "Giá gỗ keo tròn nguyên liệu tại Phú Thọ và các tỉnh phía Bắc tăng 3-5% do nhu cầu xuất khẩu tăng và thời tiết mưa nhiều ảnh hưởng khai thác. Nguồn gỗ FSC khan hiếm hơn.", "Mức độ rủi rõ": "Trung bình cao", "Cơ hội cho VN": "Gemmy Wood có vùng nguyên liệu FSC ổn định là lợi thế; nên ký hợp đồng thu mua dài hạn để khóa giá.", "Xu hướng thị trường": "Giá gỗ keo có thể tiếp tục tăng trong quý tới do nhu cầu xuất khẩu.", "Giá bán": "Chi phí nguyên liệu tăng 3-5% ảnh hưởng biên lợi nhuận; cần đàm phán tăng giá FOB.", "Đơn hàng": "Có thể ảnh hưởng khả năng đáp ứng đơn hàng lớn nếu thiếu nguyên liệu.", "Nguyên Liệu": "Chi phí gỗ keo tăng, nguồn FSC khan hiếm; cần mở rộng vùng trồng.", "Logistics": "Vận chuyển nguyên liệu từ rừng về nhà máy có thể chậm do mưa.", "Tỷ Giá": "Chi phí nguyên liệu tính VND, ít chịu ảnh hưởng tỷ giá.", "Đối Thủ Cạnh tranh": "Các nhà máy gỗ ghép thanh trong nước", "Hành động đề xuất": "Ký hợp đồng thu mua gỗ keo FSC dài hạn, mở rộng vùng trồng, tối ưu định mức nguyên liệu.", "Bộ phận phụ trách": "Thu Mua & QA-FSC / Ban Giám Đốc", "Deadiline": "Hàng tháng", "Link nguồn tin": "https://www.vietnamwood.vn", "Điểm ưu tiên": 70.0, "Top thị trường": "Việt Nam", "Top Cơ hội cho VN": "Cao", "Điểm ưu tiên cơ hội": 90.0, "Rủi ro cao": 0.0, "Cơ hội cao": 1.0}, {"STT": 7.0, "ID": "GMW-202610-007", "Ngày cập nhật": "2026-10-31", "Tháng Báo Cáo": "Tháng 10", "Nhóm biến động": "Chính trị - Xã hội & Vĩ mô", "Loại biến động": "Chính phủ Nhật Bản đẩy mạnh nhập khẩu gỗ xây dựng", "Quốc Gia Tác Động": "Nhật Bản & Hàn Quốc", "Thị trường liên quan": "Nhật Bản & Hàn Quốc, Việt Nam", "Nhóm sản phẩm": "Gỗ ghép thanh", "Nội dụng biến động": "Nhật Bản công bố chương trình hỗ trợ nhập khẩu gỗ xây dựng bền vững, ưu đãi thuế cho sản phẩm có chứng nhận FSC/PEFC. Hàn Quốc cũng tăng nhập khẩu ván ghép thanh.", "Mức độ rủi rõ": "Thấp", "Cơ hội cho VN": "Gemmy Wood có chứng nhận FSC® là lợi thế lớn để mở rộng thị phần tại Nhật và Hàn Quốc.", "Xu hướng thị trường": "Nhu cầu gỗ xây dựng có chứng nhận tại Nhật - Hàn tăng trong trung hạn.", "Giá bán": "Có thể tăng giá bán nhờ ưu đãi thuế và định vị sản phẩm xanh.", "Đơn hàng": "PO từ Nhật - Hàn có thể tăng, đặc biệt dòng gỗ ghép thanh FSC.", "Nguyên Liệu": "Nhu cầu gỗ keo FSC tăng, cần đảm bảo nguồn cung.", "Logistics": "Tuyến Việt Nam - Nhật - Hàn ổn định, ít biến động.", "Tỷ Giá": "JPY và KRW biến động nhẹ, ít ảnh hưởng.", "Đối Thủ Cạnh tranh": "Trung Quốc, Indonesia, Malaysia", "Hành động đề xuất": "Đẩy mạnh xúc tiến thương mại tại Nhật - Hàn, chuẩn bị hồ sơ chứng nhận FSC/PEFC, phát triển sản phẩm gỗ ghép thanh cho xây dựng.", "Bộ phận phụ trách": "Kinh Doanh Quốc Tế / Thu Mua & QA-FSC", "Deadiline": "Hàng tháng", "Link nguồn tin": "https://www.maff.go.jp", "Điểm ưu tiên": 70.0, "Top thị trường": "Nhật Bản & Hàn Quốc", "Top Cơ hội cho VN": "Cao", "Điểm ưu tiên cơ hội": 90.0, "Rủi ro cao": 0.0, "Cơ hội cao": 1.0}, {"STT": 8.0, "ID": "GMW-202610-008", "Ngày cập nhật": "2026-10-31", "Tháng Báo Cáo": "Tháng 10", "Nhóm biến động": "Thuế quan & Phòng vệ thương mại", "Loại biến động": "Anh và Canada siết kiểm tra nguồn gốc gỗ nhập khẩu", "Quốc Gia Tác Động": "Anh & Canada", "Thị trường liên quan": "Anh & Canada, Việt Nam", "Nhóm sản phẩm": "Gỗ & Sản phẩm gỗ", "Nội dụng biến động": "Anh công bố tăng cường kiểm tra hồ sơ nguồn gốc gỗ theo Đạo luật Môi trường; Canada áp dụng quy định mới về khai báo gỗ nhập khẩu từ tháng tới.", "Mức độ rủi rõ": "Trung bình", "Cơ hội cho VN": "Doanh nghiệp có chứng nhận FSC và hồ sơ minh bạch sẽ được ưu tiên; Gemmy Wood nên chuẩn bị hồ sơ đầy đủ.", "Xu hướng thị trường": "Kiểm tra nguồn gốc gỗ ngày càng chặt tại Anh và Canada.", "Giá bán": "Chi phí tuân thủ tăng nhẹ, có thể tăng giá bán 0,5-1%.", "Đơn hàng": "Buyer Anh - Canada ưu tiên nhà cung cấp minh bạch; PO có thể tăng cho Gemmy Wood.", "Nguyên Liệu": "Yêu cầu chứng từ FSC đầy đủ, chi phí chứng nhận tăng.", "Logistics": "Thông quan có thể chậm nếu thiếu hồ sơ.", "Tỷ Giá": "GBP và CAD biến động nhẹ, ít ảnh hưởng.", "Đối Thủ Cạnh tranh": "Trung Quốc, Malaysia", "Hành động đề xuất": "Rà soát hồ sơ chứng từ xuất Anh - Canada, đảm bảo tuân thủ quy định mới.", "Bộ phận phụ trách": "Thu Mua & QA-FSC / XNK & Logistics", "Deadiline": "Hàng tháng", "Link nguồn tin": "https://www.gov.uk/wood-imports", "Điểm ưu tiên": 70.0, "Top thị trường": "Anh & Canada", "Top Cơ hội cho VN": "Cao", "Điểm ưu tiên cơ hội": 90.0, "Rủi ro cao": 0.0, "Cơ hội cao": 1.0}, {"STT": 9.0, "ID": "GMW-202610-009", "Ngày cập nhật": "2026-10-31", "Tháng Báo Cáo": "Tháng 10", "Nhóm biến động": "Kinh tế & Nhu cầu thị trường", "Loại biến động": "Thị trường Úc phục hồi nhờ giá nhà tăng", "Quốc Gia Tác Động": "Úc (Australia)", "Thị trường liên quan": "Úc (Australia), Việt Nam", "Nhóm sản phẩm": "Ván sàn", "Nội dụng biến động": "Giá nhà tại Úc tăng 3,5% trong quý, nhu cầu xây dựng và cải tạo nhà tăng. Nhập khẩu ván sàn và nội thất gỗ từ Việt Nam tăng 8% so với cùng kỳ.", "Mức độ rủi rõ": "Thấp", "Cơ hội cho VN": "Nhu cầu ván sàn và nội thất gỗ tại Úc tăng; Gemmy Wood nên đẩy mạnh chào hàng dòng ván sàn FSC.", "Xu hướng thị trường": "Nhu cầu tăng ổn định trong 6-12 tháng tới.", "Giá bán": "Có thể tăng giá bán 1-2% nhờ nhu cầu tốt.", "Đơn hàng": "PO từ Úc tăng, đặc biệt dòng ván sàn và nội thất.", "Nguyên Liệu": "Nhu cầu gỗ keo tăng, cần đảm bảo nguồn cung.", "Logistics": "Tuyến Việt Nam - Úc ổn định, cước tàu ít biến động.", "Tỷ Giá": "AUD biến động nhẹ, ít ảnh hưởng.", "Đối Thủ Cạnh tranh": "Trung Quốc, Indonesia, Malaysia", "Hành động đề xuất": "Đẩy mạnh xúc tiến tại Úc, phát triển dòng ván sàn FSC, đàm phán hợp đồng dài hạn.", "Bộ phận phụ trách": "Kinh Doanh Quốc Tế", "Deadiline": "Hàng tháng", "Link nguồn tin": "https://www.abs.gov.au", "Điểm ưu tiên": 70.0, "Top thị trường": "Úc (Australia)", "Top Cơ hội cho VN": "Cao", "Điểm ưu tiên cơ hội": 90.0, "Rủi ro cao": 0.0, "Cơ hội cao": 1.0}, {"STT": 10.0, "ID": "GMW-202610-010", "Ngày cập nhật": "2026-10-31", "Tháng Báo Cáo": "Tháng 10", "Nhóm biến động": "Luật pháp & Tiêu chuẩn xanh", "Loại biến động": "Trung Quốc siết chứng nhận gỗ hợp pháp, ảnh hưởng nguồn cung", "Quốc Gia Tác Động": "Trung Quốc", "Thị trường liên quan": "Trung Quốc, Toàn cầu", "Nhóm sản phẩm": "Gỗ & Sản phẩm gỗ", "Nội dụng biến động": "Trung Quốc áp dụng quy định mới yêu cầu chứng nhận gỗ hợp pháp với hàng nhập khẩu, ảnh hưởng đến nguồn cung gỗ nguyên liệu toàn cầu. Giá gỗ nhập khẩu vào Trung Quốc tăng 2-3%.", "Mức độ rủi rõ": "Trung bình", "Cơ hội cho VN": "Gemmy Wood có nguồn gỗ FSC trong nước là lợi thế; có thể tận dụng để chiếm thị phần khi Trung Quốc gặp khó.", "Xu hướng thị trường": "Nguồn cung gỗ toàn cầu thắt chặt, giá nguyên liệu có thể tăng.", "Giá bán": "Chi phí nguyên liệu tăng nhẹ, có thể tăng giá FOB 1-2%.", "Đơn hàng": "Buyer có thể chuyển đơn từ Trung Quốc sang Việt Nam.", "Nguyên Liệu": "Nguồn gỗ keo FSC trong nước là lợi thế; chi phí nguyên liệu nhập khẩu tăng.", "Logistics": "Dòng chảy thương mại gỗ có thể thay đổi, ảnh hưởng cước tàu.", "Tỷ Giá": "CNY biến động ảnh hưởng giá nguyên liệu nhập khẩu.", "Đối Thủ Cạnh tranh": "Trung Quốc", "Hành động đề xuất": "Tận dụng lợi thế nguồn gỗ FSC trong nước, đẩy mạnh chào hàng sang thị trường Mỹ - EU khi Trung Quốc gặp khó.", "Bộ phận phụ trách": "Ban Giám Đốc / Kinh Doanh Quốc Tế", "Deadiline": "Hàng tháng", "Link nguồn tin": "https://www.forestry.gov.cn", "Điểm ưu tiên": 70.0, "Top thị trường": "Trung Quốc", "Top Cơ hội cho VN": "Cao", "Điểm ưu tiên cơ hội": 90.0, "Rủi ro cao": 0.0, "Cơ hội cao": 1.0}];
+
+    let allData = Array.isArray(EMBEDDED_INITIAL_DATA) ? [...EMBEDDED_INITIAL_DATA] : [];
     let filteredData = [];
     let currentPage = 1;
     let pageSize = 100;
@@ -880,6 +882,11 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+
+      // Render ngay lập tức từ dữ liệu nhúng sẵn (Zero Latency)
+      onDataLoaded();
+
+      // Đồng thời chạy đồng bộ ngầm thời gian thực từ Google Sheets qua JSONP
       fetchSheetData();
 
       // Keyboard Shortcut listener (⌘K / Ctrl+K & Esc)
@@ -912,35 +919,61 @@
       renderAllVisualizations();
     }
 
-    /* ==================== DATA FETCHING & PARSING ==================== */
+    /* ==================== BULLETPROOF DATA ENGINE (JSONP + LOCAL) ==================== */
     function fetchSheetData(showSpinner = false) {
       const refreshIcon = document.getElementById('refreshIcon');
       if (showSpinner && refreshIcon) refreshIcon.classList.add('animate-spin');
 
-      const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:json`;
+      const callbackName = 'gviz_' + Date.now();
+      let timedOut = false;
 
-      fetch(url)
-        .then(res => res.text())
-        .then(txt => {
-          const match = txt.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);/);
-          if (match && match[1]) {
-            const json = JSON.parse(match[1]);
-            allData = parseGVizResponse(json);
-            onDataLoaded();
-          } else {
-            fallbackLocalData();
-          }
-        })
-        .catch(err => {
-          console.warn('Google Sheet fetch error, falling back to local data.json:', err);
+      // Timeout 6 giây
+      const timer = setTimeout(() => {
+        timedOut = true;
+        if (!allData || allData.length === 0) {
           fallbackLocalData();
-        })
-        .finally(() => {
+        }
+        if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+      }, 6000);
+
+      window[callbackName] = function(response) {
+        clearTimeout(timer);
+        if (timedOut) return;
+        delete window[callbackName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+
+        try {
+          const parsed = parseGviz(response);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            allData = parsed;
+            onDataLoaded();
+          }
+        } catch (e) {
+          console.warn('Lỗi phân tích Google Sheet GViz:', e);
+          if (!allData || allData.length === 0) fallbackLocalData();
+        } finally {
           if (refreshIcon) refreshIcon.classList.remove('animate-spin');
-        });
+        }
+      };
+
+      const script = document.createElement('script');
+      script.src = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=responseHandler:${callbackName}&sheet=Chi%20Ti%E1%BA%BFt&_t=${Date.now()}`;
+      script.onerror = function() {
+        clearTimeout(timer);
+        delete window[callbackName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+        if (!allData || allData.length === 0) fallbackLocalData();
+        if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+      };
+      document.body.appendChild(script);
     }
 
     function fallbackLocalData() {
+      if (Array.isArray(EMBEDDED_INITIAL_DATA) && EMBEDDED_INITIAL_DATA.length > 0) {
+        allData = [...EMBEDDED_INITIAL_DATA];
+        onDataLoaded();
+        return;
+      }
       fetch('data.json')
         .then(res => res.json())
         .then(data => {
@@ -948,27 +981,31 @@
           onDataLoaded();
         })
         .catch(err => {
-          console.error('Không thể nạp dữ liệu data.json:', err);
+          console.error('Không thể nạp data.json:', err);
         });
     }
 
-    function parseGVizResponse(json) {
-      const cols = json.table.cols.map(c => (c ? c.label : ''));
-      const rows = json.table.rows;
-      return rows.map((r, rowIdx) => {
+    function parseGviz(gviz) {
+      if (!gviz || !gviz.table || !gviz.table.rows) return [];
+      const records = [];
+      for (const row of gviz.table.rows) {
+        if (!row || !row.c) continue;
         const item = {};
-        STANDARD_COLS.forEach((colName, cIdx) => {
-          const cell = r.c ? r.c[cIdx] : null;
-          let val = cell ? cell.v : '';
-          if (cell && cell.f && (colName === 'Ngày cập nhật' || colName.includes('Ngày'))) {
-            val = cell.f;
+        row.c.forEach((cell, idx) => {
+          let val = cell ? (cell.v !== null && cell.v !== undefined ? cell.v : '') : '';
+          if (typeof val === 'string' && val.startsWith('Date(')) {
+            const parts = val.slice(5, -1).split(',');
+            val = `${parts[0]}-${String(parseInt(parts[1]) + 1).padStart(2, '0')}-${String(parseInt(parts[2])).padStart(2, '0')}`;
           }
-          if (val === null || val === undefined) val = '';
-          item[colName] = val;
+          if (idx < STANDARD_COLS.length) {
+            item[STANDARD_COLS[idx]] = val;
+          }
         });
-        if (!item.STT) item.STT = rowIdx + 1;
-        return item;
-      });
+        if (item['ID'] && item['ID'] !== 'ID' && item['Nội dụng biến động']) {
+          records.push(item);
+        }
+      }
+      return records;
     }
 
     function onDataLoaded() {
@@ -979,6 +1016,41 @@
 
       renderRecentMonthTabs();
       applyFilters();
+    }
+
+    /* ==================== SMART MATCHING HELPERS ==================== */
+    function matchMarket(item, key) {
+      if (key === 'ALL') return true;
+      const t = `${item['Quốc Gia Tác Động'] || ''} ${item['Thị trường liên quan'] || ''} ${item['Top thị trường'] || ''}`.toLowerCase();
+      if (key === 'Mỹ') return t.includes('mỹ') || t.includes('hoa kỳ') || t.includes('us');
+      if (key === 'EU') return t.includes('eu') || t.includes('châu âu') || t.includes('đức') || t.includes('pháp') || t.includes('hà lan');
+      if (key === 'Úc') return t.includes('úc') || t.includes('australia');
+      if (key === 'Việt Nam') return t.includes('việt nam') || t.includes('nội địa');
+      if (key === 'Nhật') return t.includes('nhật') || t.includes('hàn');
+      if (key === 'Anh') return t.includes('anh') || t.includes('canada') || t.includes('uk');
+      if (key === 'Trung Quốc') return t.includes('trung quốc') || t.includes('china');
+      return t.includes(key.toLowerCase());
+    }
+
+    function matchPillar(item, key) {
+      if (key === 'ALL') return true;
+      const p = (item['Nhóm biến động'] || '').toLowerCase();
+      if (key === 'Kinh tế') return p.includes('kinh tế') || p.includes('tỷ giá') || p.includes('lãi suất');
+      if (key === 'Thuế quan') return p.includes('thuế') || p.includes('phòng vệ') || p.includes('pvtm');
+      if (key === 'Luật pháp') return p.includes('luật') || p.includes('tiêu chuẩn') || p.includes('eudr') || p.includes('fsc');
+      if (key === 'Logistics') return p.includes('logistics') || p.includes('vận tải') || p.includes('biển đỏ') || p.includes('tàu');
+      if (key === 'Nguyên liệu') return p.includes('nguyên liệu') || p.includes('sản xuất') || p.includes('gỗ keo');
+      return p.includes(key.toLowerCase());
+    }
+
+    function matchRisk(item, key) {
+      if (key === 'ALL') return true;
+      const r = (item['Mức độ rủi rõ'] || '').toLowerCase();
+      const isHigh = r.includes('cao') || item['Rủi ro cao'] == 1.0;
+      if (key === 'Cao') return isHigh;
+      if (key === 'Trung bình') return r.includes('trung bình') || (!isHigh && !r.includes('thấp'));
+      if (key === 'Thấp') return r.includes('thấp');
+      return true;
     }
 
     /* ==================== FILTERING & STATE CONTROLLERS ==================== */
@@ -1025,7 +1097,6 @@
     }
 
     function filterHighOpportunity() {
-      // Filter for items with High Opportunity
       activeRisk = 'ALL';
       const rFilter = document.getElementById('riskFilter');
       if (rFilter) rFilter.value = 'ALL';
@@ -1078,24 +1149,13 @@
         }
 
         // Filter Market
-        if (activeMarket !== 'ALL') {
-          const marketRel = (item['Thị trường liên quan'] || '') + ' ' + (item['Quốc Gia Tác Động'] || '');
-          if (!marketRel.toLowerCase().includes(activeMarket.toLowerCase())) return false;
-        }
+        if (!matchMarket(item, activeMarket)) return false;
 
         // Filter Pillar
-        if (activePillar !== 'ALL') {
-          const pillarStr = item['Nhóm biến động'] || '';
-          if (!pillarStr.toLowerCase().includes(activePillar.toLowerCase())) return false;
-        }
+        if (!matchPillar(item, activePillar)) return false;
 
         // Filter Risk
-        if (activeRisk !== 'ALL') {
-          const r = (item['Mức độ rủi rõ'] || '').trim();
-          if (activeRisk === 'Cao' && !r.includes('Cao')) return false;
-          if (activeRisk === 'Trung bình' && !r.includes('Trung bình')) return false;
-          if (activeRisk === 'Thấp' && !r.includes('Thấp')) return false;
-        }
+        if (!matchRisk(item, activeRisk)) return false;
 
         // Filter Search Term
         if (searchVal) {
@@ -1124,8 +1184,8 @@
       filteredData.forEach(d => {
         const r = (d['Mức độ rủi rõ'] || '').toLowerCase();
         const o = (d['Top Cơ hội cho VN'] || '').toLowerCase();
-        if (r.includes('cao')) highRisk++;
-        if (o.includes('cao')) highOpp++;
+        if (r.includes('cao') || d['Rủi ro cao'] == 1.0) highRisk++;
+        if (o.includes('cao') || d['Cơ hội cao'] == 1.0) highOpp++;
         if (d['Hành động đề xuất']) actionReady++;
       });
 
@@ -1190,11 +1250,7 @@
       }
 
       container.innerHTML = COUNTRY_PROFILES.map(c => {
-        const count = filteredData.filter(d => {
-          const rel = (d['Thị trường liên quan'] || '') + ' ' + (d['Quốc Gia Tác Động'] || '');
-          return rel.toLowerCase().includes(c.key.toLowerCase());
-        }).length;
-
+        const count = filteredData.filter(d => matchMarket(d, c.key)).length;
         const isSelected = activeMarket === c.key;
 
         return `
@@ -1228,7 +1284,7 @@
       renderTimelineTrend();
     }
 
-    // 1. MA TRẬN RỦI RO & CƠ HỘI 2x2 (Strategic Scatter Quadrant)
+    // 1. MA TRẬN RỦI RO & CƠ HỘI 2x2 (Strategic Scatter Quadrant with Smart Jitter)
     function renderStrategicMatrix() {
       const canvas = document.getElementById('strategicMatrixChart');
       if (!canvas) return;
@@ -1239,16 +1295,22 @@
       const textColor = isDark ? '#94a3b8' : '#64748b';
       const gridColor = isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
 
-      // Process Scatter data
-      const scatterPoints = filteredData.map(d => {
-        const oppScore = parseFloat(d['Điểm ưu tiên cơ hội']) || 50;
-        const riskScore = parseFloat(d['Điểm ưu tiên']) || 50;
-        const isHighRisk = (d['Mức độ rủi rõ'] || '').includes('Cao');
-        const isHighOpp = (d['Top Cơ hội cho VN'] || '').includes('Cao');
+      // Process Scatter data with deterministic jitter to prevent overlapping bubbles
+      const scatterPoints = filteredData.map((d, idx) => {
+        let oppScore = parseFloat(d['Điểm ưu tiên cơ hội']) || 50;
+        let riskScore = parseFloat(d['Điểm ưu tiên']) || 50;
+        const isHighRisk = (d['Mức độ rủi rõ'] || '').includes('Cao') || d['Rủi ro cao'] == 1.0;
+        const isHighOpp = (d['Top Cơ hội cho VN'] || '').includes('Cao') || d['Cơ hội cao'] == 1.0;
+
+        // Jitter nhỏ +/- 1.8 điểm để các điểm không trùng khít nhau
+        const jitterX = ((idx % 3) - 1) * 1.8;
+        const jitterY = (((idx * 2) % 3) - 1) * 1.8;
 
         return {
-          x: oppScore,
-          y: riskScore,
+          x: Math.max(5, Math.min(95, oppScore + jitterX)),
+          y: Math.max(5, Math.min(95, riskScore + jitterY)),
+          rawOpp: oppScore,
+          rawRisk: riskScore,
           raw: d,
           isHighRisk,
           isHighOpp
@@ -1269,9 +1331,9 @@
               if (p.isHighOpp) return '#10b981';  // High Opp (Emerald)
               return isDark ? '#64748b' : '#94a3b8'; // Neutral Slate
             },
-            pointRadius: 6,
-            pointHoverRadius: 9,
-            pointBorderWidth: 1,
+            pointRadius: 7,
+            pointHoverRadius: 10,
+            pointBorderWidth: 1.5,
             pointBorderColor: '#ffffff'
           }]
         },
@@ -1297,7 +1359,7 @@
                   const p = item.raw;
                   return [
                     `Thị trường: ${p.raw['Top thị trường'] || p.raw['Quốc Gia Tác Động'] || 'Toàn cầu'}`,
-                    `Điểm Cơ Hội: ${p.x}/100 • Điểm Rủi Ro: ${p.y}/100`,
+                    `Điểm Cơ Hội: ${p.rawOpp}/100 • Điểm Rủi Ro: ${p.rawRisk}/100`,
                     `👉 Bấm chuột để mở Drawer xem chi tiết 360°`
                   ];
                 }
@@ -1357,7 +1419,7 @@
       let oppScores = [0, 0, 0, 0, 0];
 
       filteredData.forEach(d => {
-        const isHigh = (d['Mức độ rủi rõ'] || '').includes('Cao');
+        const isHigh = (d['Mức độ rủi rõ'] || '').includes('Cao') || d['Rủi ro cao'] == 1.0;
         if (d['Đơn hàng']) isHigh ? riskScores[0]++ : oppScores[0]++;
         if (d['Giá bán']) isHigh ? riskScores[1]++ : oppScores[1]++;
         if (d['Nguyên Liệu']) isHigh ? riskScores[2]++ : oppScores[2]++;
@@ -1421,7 +1483,7 @@
       const months = ['Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10'];
 
       const totalCounts = months.map(m => allData.filter(d => d['Tháng Báo Cáo'] === m).length);
-      const riskCounts = months.map(m => allData.filter(d => d['Tháng Báo Cáo'] === m && (d['Mức độ rủi rõ'] || '').includes('Cao')).length);
+      const riskCounts = months.map(m => allData.filter(d => d['Tháng Báo Cáo'] === m && ((d['Mức độ rủi rõ'] || '').includes('Cao') || d['Rủi ro cao'] == 1.0)).length);
 
       charts.timeline = new Chart(ctx, {
         type: 'line',
@@ -1512,8 +1574,8 @@
       }
 
       tbody.innerHTML = pageData.map(d => {
-        const isHighRisk = (d['Mức độ rủi rõ'] || '').includes('Cao');
-        const isHighOpp = (d['Top Cơ hội cho VN'] || '').includes('Cao');
+        const isHighRisk = (d['Mức độ rủi rõ'] || '').includes('Cao') || d['Rủi ro cao'] == 1.0;
+        const isHighOpp = (d['Top Cơ hội cho VN'] || '').includes('Cao') || d['Cơ hội cao'] == 1.0;
 
         return `
           <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 cursor-pointer transition" onclick="openDrawerById('${d.ID}')">
@@ -1703,7 +1765,6 @@
       let matches = [];
 
       if (!term) {
-        // Show 6 most important / high risk items
         matches = allData.slice(0, 8);
       } else {
         matches = allData.filter(d => {
@@ -1745,7 +1806,6 @@
 
     /* ==================== EXPORT UTILITIES ==================== */
     function exportExecutivePDF() {
-      // Clean view and trigger system print / save as PDF
       window.print();
     }
 
