@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GEMMY WOOD — Market Intelligence & Research Agent Dashboard</title>
+  <title>GEMMY WOOD — Trung Tâm Phân Tích Chiến Lược & Tác Động Thị Trường Gỗ Toàn Cầu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Chart.js CDN -->
@@ -20,25 +20,6 @@
         extend: {
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-          },
-          colors: {
-            brand: {
-              50: '#ecfdf5',
-              100: '#d1fae5',
-              400: '#34d399',
-              500: '#10b981',
-              600: '#059669',
-              700: '#047857',
-              800: '#065f46',
-              900: '#064e3b',
-              950: '#022c22',
-            },
-            dark: {
-              bg: '#0b0f19',
-              card: '#111827',
-              cardBorder: '#1f2937',
-              hover: '#1e293b'
-            }
           }
         }
       }
@@ -47,432 +28,586 @@
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .glass-card {
-      background: rgba(17, 24, 39, 0.85);
+      background: rgba(15, 23, 42, 0.88);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.12);
     }
-    .light .glass-card {
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(0, 0, 0, 0.08);
+    html.light body {
+      background-color: #f1f5f9;
+      color: #0f172a;
     }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
+    html.light .glass-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(156, 163, 175, 0.3);
-      border-radius: 9999px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background: rgba(156, 163, 175, 0.5);
-    }
+    html.light .text-white { color: #0f172a !important; }
+    html.light .text-slate-200 { color: #1e293b !important; }
+    html.light .text-slate-300 { color: #334155 !important; }
+    html.light .text-slate-400 { color: #64748b !important; }
+    html.light .bg-slate-900, html.light .bg-slate-900\/80, html.light .bg-slate-900\/60 { background-color: #f8fafc !important; }
+    html.light .bg-slate-800, html.light .bg-slate-800\/50, html.light .bg-slate-800\/40 { background-color: #f1f5f9 !important; }
+    html.light .border-slate-800, html.light .border-slate-700 { border-color: #cbd5e1 !important; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 9999px; }
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   </style>
 </head>
-<body class="bg-[#0b0f19] text-slate-100 min-h-screen transition-colors duration-200 custom-scrollbar">
+<body class="bg-[#070b14] text-slate-100 min-h-screen transition-colors duration-200 custom-scrollbar">
 
   <!-- TOP NAVIGATION HEADER -->
-  <header class="sticky top-0 z-40 bg-[#0b0f19]/90 backdrop-blur-md border-b border-slate-800 px-4 lg:px-8 py-3.5 transition-colors">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-      <!-- Logo & System Title -->
+  <header class="sticky top-0 z-40 bg-[#070b14]/95 backdrop-blur-md border-b border-slate-800 px-4 lg:px-8 py-3 transition-colors">
+    <div class="max-w-[1440px] mx-auto flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+      <!-- Brand & Title -->
       <div class="flex items-center gap-3.5">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-white font-black text-xl tracking-tighter">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-white font-extrabold text-lg tracking-tight shrink-0">
           GW
         </div>
         <div>
-          <div class="flex items-center gap-2">
-            <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
-              GEMMY WOOD
-              <span class="text-xs px-2 py-0.5 rounded-full font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                research-gemmy
-              </span>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="text-base sm:text-lg font-extrabold tracking-tight text-white">
+              GEMMY WOOD — HỆ THỐNG PHÂN TÍCH THỊ TRƯỜNG & TÁC ĐỘNG SXKD ĐỒ GỖ
             </h1>
+            <span class="text-[11px] px-2.5 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              research-gemmy v3.0
+            </span>
           </div>
-          <p class="text-xs text-slate-400 font-medium">Báo cáo & Phân tích Thị trường Ngành Gỗ Toàn Cầu</p>
+          <p class="text-xs text-slate-400">
+            Giám sát Kinh tế • Chính trị - Xã hội • Thuế quan • Luật pháp (EUDR / ILPA / FSC) tại Việt Nam, Mỹ, Úc, EU & Các quốc gia phát triển
+          </p>
         </div>
       </div>
 
-      <!-- Action & Status Bar -->
-      <div class="flex items-center flex-wrap gap-2.5">
-        <!-- Live Status Pill -->
-        <div id="syncStatusBadge" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800/80 border border-slate-700 text-slate-300">
+      <!-- Actions & Live Sync -->
+      <div class="flex items-center flex-wrap gap-2">
+        <div id="syncStatusBadge" class="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 border border-slate-700 text-slate-300">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span id="syncStatusText">Đang tải Google Sheets...</span>
+          <span id="syncStatusText">Đang kết nối Google Sheets...</span>
         </div>
 
-        <!-- Google Sheet Button Link -->
-        <a href="https://docs.google.com/spreadsheets/d/1qgrD4aJsYw2Tp7tyiTi_NCicLdP0PtXmo-gBLrvKCaI/edit" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-600/30 transition">
+        <a href="https://docs.google.com/spreadsheets/d/1qgrD4aJsYw2Tp7tyiTi_NCicLdP0PtXmo-gBLrvKCaI/edit" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 transition">
           <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
-          <span>Mở Google Sheet</span>
+          <span>Dữ liệu Google Sheet</span>
         </a>
 
-        <!-- Trigger Agent Button -->
-        <button id="triggerAgentBtn" onclick="runResearchAgent()" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-500 hover:to-teal-500 shadow-md shadow-emerald-700/30 transition transform active:scale-95">
+        <button onclick="runResearchAgent()" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-500 hover:to-teal-500 shadow-md shadow-emerald-900/40 transition active:scale-95">
           <i data-lucide="sparkles" class="w-4 h-4"></i>
-          <span>Chạy AI Quét Tin</span>
+          <span>Quét Tin AI Mới</span>
         </button>
 
-        <!-- Refresh Data Button -->
-        <button onclick="fetchSheetData(true)" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" title="Làm mới dữ liệu">
+        <button onclick="fetchSheetData(true)" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 transition" title="Làm mới dữ liệu">
           <i data-lucide="refresh-cw" class="w-4 h-4" id="refreshIcon"></i>
         </button>
 
-        <!-- Theme Toggle -->
-        <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" title="Đổi giao diện">
+        <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 transition" title="Chuyển chế độ Sáng / Tối">
           <i data-lucide="moon" class="w-4 h-4" id="themeIcon"></i>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- MAIN CONTAINER -->
-  <main class="max-w-7xl mx-auto px-4 lg:px-8 py-6 space-y-6">
+  <!-- MAIN CONTENT -->
+  <main class="max-w-[1440px] mx-auto px-4 lg:px-8 py-6 space-y-6">
 
-    <!-- KPI STATS CARDS -->
-    <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-      <!-- KPI 1: Tổng Sự Kiện -->
-      <div class="glass-card rounded-2xl p-4 transition duration-200 hover:border-slate-600">
-        <div class="flex items-center justify-between text-slate-400 mb-2">
-          <span class="text-xs font-semibold uppercase tracking-wider">Tổng Sự Kiện</span>
-          <div class="p-2 rounded-xl bg-blue-500/10 text-blue-400">
-            <i data-lucide="database" class="w-4 h-4"></i>
-          </div>
-        </div>
-        <div class="flex items-baseline gap-2">
-          <span id="kpiTotalEvents" class="text-2xl lg:text-3xl font-extrabold text-white">--</span>
-          <span class="text-xs text-emerald-400 font-semibold">+1 mới</span>
-        </div>
-        <p class="text-[11px] text-slate-400 mt-1">Từ T7 đến T11/2026</p>
-      </div>
-
-      <!-- KPI 2: Rủi Ro Cao -->
-      <div class="glass-card rounded-2xl p-4 transition duration-200 hover:border-slate-600">
-        <div class="flex items-center justify-between text-slate-400 mb-2">
-          <span class="text-xs font-semibold uppercase tracking-wider">Rủi Ro Cao</span>
-          <div class="p-2 rounded-xl bg-red-500/10 text-red-400">
-            <i data-lucide="alert-triangle" class="w-4 h-4"></i>
-          </div>
-        </div>
-        <div class="flex items-baseline gap-2">
-          <span id="kpiHighRisks" class="text-2xl lg:text-3xl font-extrabold text-red-400">--</span>
-          <span id="kpiRiskPct" class="text-xs text-red-400 font-semibold">--%</span>
-        </div>
-        <p class="text-[11px] text-slate-400 mt-1">Quy định EUDR & Thuế</p>
-      </div>
-
-      <!-- KPI 3: Cơ Hội Tiềm Năng -->
-      <div class="glass-card rounded-2xl p-4 transition duration-200 hover:border-slate-600">
-        <div class="flex items-center justify-between text-slate-400 mb-2">
-          <span class="text-xs font-semibold uppercase tracking-wider">Cơ Hội Cao</span>
-          <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
-            <i data-lucide="trending-up" class="w-4 h-4"></i>
-          </div>
-        </div>
-        <div class="flex items-baseline gap-2">
-          <span id="kpiHighOpps" class="text-2xl lg:text-3xl font-extrabold text-emerald-400">--</span>
-          <span id="kpiOppPct" class="text-xs text-emerald-400 font-semibold">--%</span>
-        </div>
-        <p class="text-[11px] text-slate-400 mt-1">Thị phần Trung Quốc & Mỹ</p>
-      </div>
-
-      <!-- KPI 4: Thị Trường Trọng Tâm -->
-      <div class="glass-card rounded-2xl p-4 transition duration-200 hover:border-slate-600">
-        <div class="flex items-center justify-between text-slate-400 mb-2">
-          <span class="text-xs font-semibold uppercase tracking-wider">Thị Trường Lớn</span>
-          <div class="p-2 rounded-xl bg-purple-500/10 text-purple-400">
-            <i data-lucide="globe" class="w-4 h-4"></i>
-          </div>
-        </div>
-        <div class="flex items-baseline gap-2">
-          <span id="kpiTopMarket" class="text-xl lg:text-2xl font-extrabold text-white">Hoa Kỳ / EU</span>
-        </div>
-        <p class="text-[11px] text-slate-400 mt-1">Chiếm > 50% kim ngạch</p>
-      </div>
-
-      <!-- KPI 5: Xu Hướng Chủ Đạo -->
-      <div class="glass-card rounded-2xl p-4 col-span-2 md:col-span-1 transition duration-200 hover:border-slate-600">
-        <div class="flex items-center justify-between text-slate-400 mb-2">
-          <span class="text-xs font-semibold uppercase tracking-wider">Xu Hướng</span>
-          <div class="p-2 rounded-xl bg-amber-500/10 text-amber-400">
-            <i data-lucide="compass" class="w-4 h-4"></i>
-          </div>
-        </div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-lg lg:text-xl font-bold text-amber-300">Siết Kiểm Soát</span>
-        </div>
-        <p class="text-[11px] text-slate-400 mt-1">Chuẩn hóa chuỗi cung ứng</p>
-      </div>
-    </section>
-
-    <!-- CHARTS SECTION -->
-    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <!-- Chart 1: Cơ Cấu Nhóm Biến Động -->
-      <div class="glass-card rounded-2xl p-5">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h2 class="text-sm font-bold text-white uppercase tracking-wider">Cơ Cấu Nhóm Biến Động</h2>
-            <p class="text-xs text-slate-400">Phân loại theo lĩnh vực ảnh hưởng</p>
-          </div>
-          <span class="text-xs px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 font-medium">Nhóm biến động</span>
-        </div>
-        <div class="h-64 relative flex items-center justify-center">
-          <canvas id="groupPieChart"></canvas>
-        </div>
-      </div>
-
-      <!-- Chart 2: Top Thị Trường Bị Ảnh Hưởng -->
-      <div class="glass-card rounded-2xl p-5">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h2 class="text-sm font-bold text-white uppercase tracking-wider">Top Quốc Gia & Thị Trường Tác Động</h2>
-            <p class="text-xs text-slate-400">Số lượng sự kiện ghi nhận theo khu vực</p>
-          </div>
-          <span class="text-xs px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 font-medium">Khu vực</span>
-        </div>
-        <div class="h-64 relative">
-          <canvas id="countryBarChart"></canvas>
-        </div>
-      </div>
-
-      <!-- Chart 3: Rủi Ro vs Cơ Hội Qua Các Tháng -->
-      <div class="glass-card rounded-2xl p-5">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h2 class="text-sm font-bold text-white uppercase tracking-wider">Diễn Biến Rủi Ro & Cơ Hội Qua Các Tháng</h2>
-            <p class="text-xs text-slate-400">So sánh số sự kiện rủi ro cao vs cơ hội cao</p>
-          </div>
-          <span class="text-xs px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 font-medium">Xu hướng</span>
-        </div>
-        <div class="h-64 relative">
-          <canvas id="monthTrendChart"></canvas>
-        </div>
-      </div>
-
-      <!-- Chart 4: Nhóm Dòng Sản Phẩm Liên Quan -->
-      <div class="glass-card rounded-2xl p-5">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h2 class="text-sm font-bold text-white uppercase tracking-wider">Cơ Cấu Dòng Sản Phẩm Bị Tác Động</h2>
-            <p class="text-xs text-slate-400">Gỗ ghép thanh, Đồ nội thất, Dăm gỗ, Viên nén...</p>
-          </div>
-          <span class="text-xs px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 font-medium">Sản phẩm</span>
-        </div>
-        <div class="h-64 relative">
-          <canvas id="productChart"></canvas>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXECUTIVE INSIGHTS TABS -->
-    <section class="glass-card rounded-2xl p-5">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-4 mb-4 gap-3">
-        <div>
-          <h2 class="text-base font-bold text-white flex items-center gap-2">
-            <i data-lucide="zap" class="w-5 h-5 text-amber-400"></i>
-            Trí Tuệ Chiến Lược & Cảnh Báo Cho Ban Lãnh Đạo
+    <!-- SECTION 1: QUICK MARKET SELECTOR BAR (CHỌN THỊ TRƯỜNG TRỌNG ĐIỂM) -->
+    <section class="glass-card rounded-2xl p-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="globe-2" class="w-4 h-4 text-emerald-400"></i>
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-300">
+            Lọc Nhanh Theo Thị Trường Xuất Khẩu & Sản Xuất Trọng Điểm:
           </h2>
-          <p class="text-xs text-slate-400 mt-0.5">Trích xuất tự động từ n8n AI Agent và sheet Chi Tiết</p>
         </div>
-        <!-- Tab Switcher -->
-        <div class="flex items-center gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800">
-          <button onclick="switchTab('risks')" id="tabBtnRisks" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-500/20 text-red-400 transition">
-            Top 5 Rủi Ro
-          </button>
-          <button onclick="switchTab('opps')" id="tabBtnOpps" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">
-            Top 5 Cơ Hội
-          </button>
-          <button onclick="switchTab('actions')" id="tabBtnActions" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">
-            Top 5 Hành Động
-          </button>
-        </div>
+        <span id="activeMarketHint" class="text-xs text-emerald-400 font-semibold">Đang xem: Toàn bộ thị trường quốc tế & nội địa</span>
       </div>
-
-      <!-- Tab Content 1: Top 5 Rủi Ro -->
-      <div id="tabContentRisks" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        <!-- Rendered dynamically -->
-      </div>
-
-      <!-- Tab Content 2: Top 5 Cơ Hội -->
-      <div id="tabContentOpps" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        <!-- Rendered dynamically -->
-      </div>
-
-      <!-- Tab Content 3: Top 5 Hành Động -->
-      <div id="tabContentActions" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        <!-- Rendered dynamically -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2" id="marketPillsContainer">
+        <!-- Rendered dynamically via JS -->
       </div>
     </section>
 
-    <!-- DATA TABLE SECTION -->
+    <!-- SECTION 2: 5 MACRO PILLARS & KPI OVERVIEW (5 TRỤ CỘT VĨ MÔ: KINH TẾ, CHÍNH TRỊ, THUẾ, LUẬT, CHUỖI CUNG ỨNG) -->
+    <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
+      <!-- Total Events & High Risk/Opp -->
+      <div onclick="selectPillarFilter('ALL')" id="pillarCard_ALL" class="glass-card rounded-2xl p-4 cursor-pointer border-2 border-emerald-500/60 transition hover:border-emerald-400">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-[11px] font-bold uppercase text-emerald-400">Tổng Quan Sự Kiện</span>
+          <i data-lucide="layers" class="w-4 h-4 text-emerald-400"></i>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span id="kpiTotal" class="text-2xl font-extrabold text-white">--</span>
+          <span class="text-xs text-slate-400">biến động</span>
+        </div>
+        <div class="flex items-center gap-2 mt-2 text-[11px]">
+          <span class="px-1.5 py-0.5 rounded bg-red-500/20 text-red-400 font-semibold" id="kpiRiskCount">-- Rủi ro cao</span>
+          <span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold" id="kpiOppCount">-- Cơ hội cao</span>
+        </div>
+      </div>
+
+      <!-- Pillar 1: Kinh tế & Tỷ giá -->
+      <div onclick="selectPillarFilter('Kinh tế')" id="pillarCard_Kinh tế" class="glass-card rounded-2xl p-4 cursor-pointer transition hover:border-blue-500/50">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-[11px] font-bold uppercase text-blue-400">1. Kinh Tế & Tỷ Giá</span>
+          <i data-lucide="trending-up" class="w-4 h-4 text-blue-400"></i>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span id="kpiEconomy" class="text-2xl font-extrabold text-white">--</span>
+          <span class="text-xs text-slate-400">sự kiện</span>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-2 line-clamp-1">Lãi suất FED/RBA, BĐS, USD/VND</p>
+      </div>
+
+      <!-- Pillar 2: Thuế quan & PVTM -->
+      <div onclick="selectPillarFilter('Thuế quan')" id="pillarCard_Thuế quan" class="glass-card rounded-2xl p-4 cursor-pointer transition hover:border-amber-500/50">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-[11px] font-bold uppercase text-amber-400">2. Thuế Quan & PVTM</span>
+          <i data-lucide="shield-alert" class="w-4 h-4 text-amber-400"></i>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span id="kpiTariff" class="text-2xl font-extrabold text-white">--</span>
+          <span class="text-xs text-slate-400">sự kiện</span>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-2 line-clamp-1">Thuế đối ứng Mỹ, AD/CVD, C/O</p>
+      </div>
+
+      <!-- Pillar 3: Luật pháp & Tiêu chuẩn -->
+      <div onclick="selectPillarFilter('Luật pháp')" id="pillarCard_Luật pháp" class="glass-card rounded-2xl p-4 cursor-pointer transition hover:border-purple-500/50">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-[11px] font-bold uppercase text-purple-400">3. Luật & Tiêu Chuẩn</span>
+          <i data-lucide="scale" class="w-4 h-4 text-purple-400"></i>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span id="kpiLaw" class="text-2xl font-extrabold text-white">--</span>
+          <span class="text-xs text-slate-400">sự kiện</span>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-2 line-clamp-1">EUDR (EU), ILPA (Úc), Lacey, FSC</p>
+      </div>
+
+      <!-- Pillar 4: Chính trị - Xã hội & Logistics -->
+      <div onclick="selectPillarFilter('Logistics')" id="pillarCard_Logistics" class="glass-card rounded-2xl p-4 cursor-pointer transition hover:border-rose-500/50">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-[11px] font-bold uppercase text-rose-400">4. Địa Chính Trị & Tàu</span>
+          <i data-lucide="ship" class="w-4 h-4 text-rose-400"></i>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span id="kpiLogistics" class="text-2xl font-extrabold text-white">--</span>
+          <span class="text-xs text-slate-400">sự kiện</span>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-2 line-clamp-1">Biển Đỏ, Cước cont, Cảng biển</p>
+      </div>
+
+      <!-- Pillar 5: Nguyên liệu & Sản xuất -->
+      <div onclick="selectPillarFilter('Nguyên liệu')" id="pillarCard_Nguyên liệu" class="glass-card rounded-2xl p-4 cursor-pointer transition hover:border-teal-500/50">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-[11px] font-bold uppercase text-teal-400">5. Nguyên Liệu & SX</span>
+          <i data-lucide="trees" class="w-4 h-4 text-teal-400"></i>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span id="kpiMaterial" class="text-2xl font-extrabold text-white">--</span>
+          <span class="text-xs text-slate-400">sự kiện</span>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-2 line-clamp-1">Gỗ keo FSC Phú Thọ, Phôi gỗ</p>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ĐÁNH GIÁ TÁC ĐỘNG ĐẾN 5 MẮT XÍCH HOẠT ĐỘNG SXKD CỦA GEMMY WOOD -->
     <section class="glass-card rounded-2xl p-5">
-      <!-- Table Header & Controls -->
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 pb-4 mb-4 border-b border-slate-800">
         <div>
-          <h2 class="text-base font-bold text-white flex items-center gap-2">
-            <i data-lucide="table" class="w-5 h-5 text-emerald-400"></i>
-            Dữ Liệu Chi Tiết Biến Động Thị Trường
+          <h2 class="text-sm sm:text-base font-extrabold text-white flex items-center gap-2">
+            <i data-lucide="activity" class="w-5 h-5 text-emerald-400"></i>
+            ĐÁNH GIÁ TÁC ĐỘNG TRỰC TIẾP ĐẾN CHUỖI SẢN XUẤT - KINH DOANH - XUẤT KHẨU ĐỒ GỖ
           </h2>
-          <p class="text-xs text-slate-400 mt-0.5" id="tableRecordCount">Hiển thị -- bản ghi</p>
+          <p class="text-xs text-slate-400 mt-0.5">
+            Phân tích mức độ ảnh hưởng của Kinh tế, Chính trị, Thuế quan & Luật pháp lên 5 mắt xích vận hành cốt lõi
+          </p>
+        </div>
+        <span class="text-xs px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">
+          Chuỗi giá trị Gemmy Wood
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4" id="businessImpactChains">
+        <!-- Chain 1: Nguyên liệu -->
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-extrabold text-teal-400 uppercase">① Nguyên Liệu & Rừng</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400">Cầu tăng +6-10%</span>
+            </div>
+            <p class="text-xs text-slate-200 font-semibold mb-1">Gỗ keo / Bạch đàn FSC® & Gỗ nhập</p>
+            <p class="text-xs text-slate-400 leading-relaxed" id="chainTextMaterial">
+              Cạnh tranh thu mua gỗ rừng trồng có chứng chỉ FSC và dữ liệu tọa độ GPS phục vụ EUDR (EU) & ILPA (Úc). Tuyệt đối không dùng phôi gỗ rủi ro lẩn tránh thuế.
+            </p>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-slate-800/80 text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
+            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 shrink-0"></i>
+            <span>Dự trữ phôi sấy 45-60 ngày; mở rộng rừng FSC Phú Thọ</span>
+          </div>
         </div>
 
-        <!-- Filters & Search -->
-        <div class="flex flex-wrap items-center gap-2.5">
-          <!-- Search Input -->
+        <!-- Chain 2: Sản xuất & Tuân thủ Luật -->
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-extrabold text-purple-400 uppercase">② Luật Pháp & Kỹ Thuật</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400">Bắt buộc 100%</span>
+            </div>
+            <p class="text-xs text-slate-200 font-semibold mb-1">EUDR • Úc ILPA • Mỹ Lacey/TSCA</p>
+            <p class="text-xs text-slate-400 leading-relaxed" id="chainTextLaw">
+              EU yêu cầu tọa độ Polygon (EUDR); Úc áp dụng luật ILPA kiểm định sợi gỗ; Mỹ kiểm tra TSCA Title VI & quy trình biến đổi cơ bản tại nhà máy.
+            </p>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-slate-800/80 text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
+            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 shrink-0"></i>
+            <span>Chuẩn hóa bộ hồ sơ DDS & FSC-CoC cho từng lô hàng</span>
+          </div>
+        </div>
+
+        <!-- Chain 3: Logistics & Cảng biển -->
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-extrabold text-rose-400 uppercase">③ Logistics & Cước Tàu</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400">Biến động cao</span>
+            </div>
+            <p class="text-xs text-slate-200 font-semibold mb-1">Tuyến Mỹ, EU, Úc & Đông Á</p>
+            <p class="text-xs text-slate-400 leading-relaxed" id="chainTextLogistics">
+              Tuyến Mỹ & EU chịu áp lực cước container và thời gian vòng qua mũi Hảo Vọng (+10-14 ngày). Tuyến đi Úc (14-18 ngày) và Nhật/Hàn (5-8 ngày) ổn định hơn.
+            </p>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-slate-800/80 text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
+            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 shrink-0"></i>
+            <span>Ưu tiên bán giá FOB; book tàu trước 3 tuần mùa cao điểm</span>
+          </div>
+        </div>
+
+        <!-- Chain 4: Đơn hàng & Thị trường -->
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-extrabold text-blue-400 uppercase">④ Đơn Hàng Xuất Khẩu</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400">Phục hồi chọn lọc</span>
+            </div>
+            <p class="text-xs text-slate-200 font-semibold mb-1">Dịch chuyển PO về nhà máy chuẩn</p>
+            <p class="text-xs text-slate-400 leading-relaxed" id="chainTextOrder">
+              Mỹ hạ lãi suất kích cầu nhà ở; Úc đẩy mạnh gói 1,2 triệu nhà ở mới (thuế 0% AANZFTA); Buyer EU gom đơn vào các nhà máy đã sẵn sàng chứng chỉ FSC.
+            </p>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-slate-800/80 text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
+            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 shrink-0"></i>
+            <span>Đẩy mạnh dòng ván ghép thanh DIY, mặt bàn bếp & nội thất RTA</span>
+          </div>
+        </div>
+
+        <!-- Chain 5: Giá bán, Thuế & Tỷ giá -->
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-extrabold text-amber-400 uppercase">⑤ Giá Bán, Thuế & Tỷ Giá</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400">Biên LN phân hóa</span>
+            </div>
+            <p class="text-xs text-slate-200 font-semibold mb-1">Áp lực Thuế Mỹ vs Premium FSC</p>
+            <p class="text-xs text-slate-400 leading-relaxed" id="chainTextPrice">
+              Tại Mỹ có áp lực chia sẻ chi phí thuế đối ứng (3-5%), nhưng hàng đạt chuẩn FSC/EUDR đi EU, Úc, Anh giữ được giá bán cao (+5-8%). Tỷ giá USD cao hỗ trợ quy đổi.
+            </p>
+          </div>
+          <div class="mt-3 pt-2.5 border-t border-slate-800/80 text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
+            <i data-lucide="check-circle-2" class="w-3.5 h-3.5 shrink-0"></i>
+            <span>Báo giá linh hoạt theo tỷ giá; tận dụng thuế 0% CPTPP/UKVFTA</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: BỨC TRANH CHIẾN LƯỢC TỪNG THỊ TRƯỜNG TRỌNG ĐIỂM (VIỆT NAM, MỸ, ÚC, EU, NHẬT/HÀN, ANH/CANADA) -->
+    <section class="space-y-3">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-sm sm:text-base font-extrabold text-white flex items-center gap-2">
+            <i data-lucide="map" class="w-5 h-5 text-emerald-400"></i>
+            HỒ SƠ ĐÁNH GIÁ CÁC THỊ TRƯỜNG QUỐC TẾ & NỘI ĐỊA TRỌNG ĐIỂM
+          </h2>
+          <p class="text-xs text-slate-400">Bấm vào từng quốc gia để lọc chuyên sâu các biến động Kinh tế, Chính trị, Thuế quan & Luật pháp của thị trường đó</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="countryStrategicGrid">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- SECTION 5: CHARTS ANALYTICS GRID (4 BIỂU ĐỒ KHOA HỌC) -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <!-- Chart 1: So sánh Rủi ro & Cơ hội theo Thị trường -->
+      <div class="glass-card rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h3 class="text-sm font-bold text-white uppercase">1. Tương Quan Rủi Ro & Cơ Hội Theo Thị Trường</h3>
+            <p class="text-xs text-slate-400">So sánh số sự kiện rủi ro cao và cơ hội cao tại Mỹ, EU, Úc, VN, Nhật/Hàn...</p>
+          </div>
+        </div>
+        <div class="h-64 relative">
+          <canvas id="marketCompareChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 2: Cơ cấu theo Trụ cột Vĩ mô -->
+      <div class="glass-card rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h3 class="text-sm font-bold text-white uppercase">2. Phân Bổ Theo Trụ Cột Vĩ Mô & Pháp Lý</h3>
+            <p class="text-xs text-slate-400">Tỷ trọng biến động Kinh tế, Thuế quan, Luật pháp, Logistics, Nguyên liệu</p>
+          </div>
+        </div>
+        <div class="h-64 relative">
+          <canvas id="pillarDonutChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 3: Diễn biến biến động qua các tháng -->
+      <div class="glass-card rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h3 class="text-sm font-bold text-white uppercase">3. Xu Hướng Biến Động Qua Các Tháng (T5 – T11)</h3>
+            <p class="text-xs text-slate-400">Theo dõi mật độ rủi ro và cơ hội thị trường theo thời gian</p>
+          </div>
+        </div>
+        <div class="h-64 relative">
+          <canvas id="monthlyTimelineChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 4: Phân bổ theo Dòng sản phẩm -->
+      <div class="glass-card rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h3 class="text-sm font-bold text-white uppercase">4. Mức Độ Chịu Tác Động Theo Nhóm Sản Phẩm Gỗ</h3>
+            <p class="text-xs text-slate-400">Gỗ ghép thanh, Đồ nội thất, Ván sàn, Dăm gỗ & Viên nén</p>
+          </div>
+        </div>
+        <div class="h-64 relative">
+          <canvas id="productBarChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: BẢNG MA TRẬN PHÂN TÍCH CHI TIẾT & TÁC ĐỘNG SXKD -->
+    <section class="glass-card rounded-2xl p-5" id="tableSection">
+      <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-4 pb-4 mb-4 border-b border-slate-800">
+        <div>
+          <h2 class="text-base font-extrabold text-white flex items-center gap-2">
+            <i data-lucide="table-2" class="w-5 h-5 text-emerald-400"></i>
+            MA TRẬN DỮ LIỆU PHÂN TÍCH TÁC ĐỘNG THỊ TRƯỜNG & KHUYẾN NGHỊ HÀNH ĐỘNG
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5" id="tableRecordSummary">
+            Đang hiển thị -- bản ghi (Bấm vào từng dòng để xem Báo cáo phân tích 360° toàn diện 5 mắt xích SXKD)
+          </p>
+        </div>
+
+        <!-- Filters Toolbar -->
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- Search Box -->
           <div class="relative">
             <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
-            <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Tìm kiếm nội dung, quốc gia..." class="pl-9 pr-3 py-1.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 w-48 sm:w-64">
+            <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Tìm EUDR, ILPA, thuế Mỹ, giá gỗ..." class="pl-9 pr-3 py-1.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 w-52 sm:w-64">
           </div>
 
-          <!-- Month Filter -->
+          <!-- Market Select -->
+          <select id="marketFilter" onchange="onDropdownMarketChange(this.value)" class="px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500">
+            <option value="ALL">🌐 Tất cả thị trường</option>
+            <option value="Mỹ">🇺🇸 Hoa Kỳ (US)</option>
+            <option value="EU">🇪🇺 Liên minh Châu Âu (EU)</option>
+            <option value="Úc">🇦🇺 Úc (Australia)</option>
+            <option value="Việt Nam">🇻🇳 Việt Nam (SX & Nội địa)</option>
+            <option value="Nhật">🇯🇵🇰🇷 Nhật Bản & Hàn Quốc</option>
+            <option value="Anh">🇬🇧🇨🇦 Anh & Canada</option>
+            <option value="Trung Quốc">🇨🇳 Trung Quốc</option>
+          </select>
+
+          <!-- Pillar Select -->
+          <select id="pillarFilter" onchange="onDropdownPillarChange(this.value)" class="px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500">
+            <option value="ALL">📌 Tất cả trụ cột vĩ mô</option>
+            <option value="Kinh tế">📊 Kinh tế & Tỷ giá - Nhu cầu</option>
+            <option value="Thuế quan">🛡️ Thuế quan & Phòng vệ TM</option>
+            <option value="Luật pháp">⚖️ Luật pháp & Tiêu chuẩn xanh</option>
+            <option value="Logistics">🚢 Logistics & Địa chính trị</option>
+            <option value="Nguyên liệu">🌲 Nguyên liệu & Sản xuất</option>
+          </select>
+
+          <!-- Month Select -->
           <select id="monthFilter" onchange="applyFilters()" class="px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500">
-            <option value="ALL">Tất cả tháng</option>
+            <option value="ALL">📅 Tất cả tháng</option>
             <option value="Tháng 11">Tháng 11/2026</option>
+            <option value="Tháng 10">Tháng 10/2026</option>
             <option value="Tháng 9">Tháng 9/2026</option>
             <option value="Tháng 8">Tháng 8/2026</option>
             <option value="Tháng 7">Tháng 7/2026</option>
+            <option value="Tháng 6">Tháng 6/2026</option>
+            <option value="Tháng 5">Tháng 5/2026</option>
           </select>
 
-          <!-- Group Filter -->
-          <select id="groupFilter" onchange="applyFilters()" class="px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500">
-            <option value="ALL">Tất cả nhóm</option>
-            <option value="Chính sách">Chính sách thương mại</option>
-            <option value="Logistics">Logistics & Cước tàu</option>
-            <option value="Nhu cầu">Nhu cầu thị trường</option>
-            <option value="Tỷ giá">Tỷ giá</option>
-            <option value="Nguyên liệu">Nguyên liệu</option>
-            <option value="Thuế quan">Thuế quan</option>
-          </select>
-
-          <!-- Risk Filter -->
+          <!-- Risk Select -->
           <select id="riskFilter" onchange="applyFilters()" class="px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500">
-            <option value="ALL">Tất cả rủi ro</option>
-            <option value="Cao">Rủi ro Cao</option>
-            <option value="Trung bình">Rủi ro Trung bình</option>
-            <option value="Thấp">Rủi ro Thấp</option>
+            <option value="ALL">⚡ Mọi mức rủi ro</option>
+            <option value="Cao">🔴 Rủi ro Cao</option>
+            <option value="Trung bình">🟡 Rủi ro Trung bình</option>
+            <option value="Thấp">🟢 Rủi ro Thấp</option>
           </select>
+
+          <!-- Reset Filter -->
+          <button onclick="resetAllFilters()" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-xl text-xs font-semibold transition" title="Xóa bộ lọc">
+            Đặt lại
+          </button>
 
           <!-- Export CSV -->
-          <button onclick="exportToCSV()" class="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-xl text-xs font-semibold transition" title="Xuất CSV">
-            <i data-lucide="download" class="w-4 h-4"></i>
+          <button onclick="exportToCSV()" class="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 rounded-xl text-xs font-bold transition">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
             <span>Xuất CSV</span>
           </button>
         </div>
       </div>
 
-      <!-- Table View -->
+      <!-- Structured Table -->
       <div class="overflow-x-auto rounded-xl border border-slate-800 custom-scrollbar">
         <table class="w-full text-left text-xs border-collapse">
           <thead>
-            <tr class="bg-slate-900/80 text-slate-400 font-semibold uppercase tracking-wider border-b border-slate-800">
-              <th class="py-3 px-3">ID</th>
-              <th class="py-3 px-3">Ngày / Tháng</th>
-              <th class="py-3 px-3">Nhóm</th>
-              <th class="py-3 px-3">Quốc Gia</th>
-              <th class="py-3 px-3">Sản Phẩm</th>
-              <th class="py-3 px-3 min-w-[280px]">Nội Dung Biến Động</th>
-              <th class="py-3 px-3 text-center">Rủi Ro</th>
-              <th class="py-3 px-3 text-center">Cơ Hội</th>
-              <th class="py-3 px-3 min-w-[220px]">Hành Động Đề Xuất</th>
-              <th class="py-3 px-3 text-center">Nguồn</th>
+            <tr class="bg-slate-900/95 text-slate-400 font-bold uppercase tracking-wider border-b border-slate-800 text-[11px]">
+              <th class="py-3.5 px-3 w-28">Mã / Tháng</th>
+              <th class="py-3.5 px-3 w-40">Thị Trường Đích</th>
+              <th class="py-3.5 px-3 w-48">Trụ Cột & Sự Kiện</th>
+              <th class="py-3.5 px-3 min-w-[290px]">Diễn Biến Kinh Tế / Chính Trị / Luật / Thuế</th>
+              <th class="py-3.5 px-3 min-w-[250px]">Tác Động Trực Tiếp Đến SXKD</th>
+              <th class="py-3.5 px-3 text-center w-28">Rủi Ro / Cơ Hội</th>
+              <th class="py-3.5 px-3 min-w-[250px]">Hành Động Khuyến Nghị (Gemmy Wood)</th>
             </tr>
           </thead>
-          <tbody id="dataTableBody" class="divide-y divide-slate-800/60 text-slate-300">
-            <!-- Rendered dynamically -->
+          <tbody id="dataTableBody" class="divide-y divide-slate-800/70 text-slate-200">
+            <!-- Populated by JS -->
           </tbody>
         </table>
       </div>
 
-      <!-- Pagination Footer -->
+      <!-- Pagination -->
       <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-4 text-xs text-slate-400">
         <div class="flex items-center gap-2">
           <span>Hiển thị</span>
           <select id="pageSizeSelect" onchange="changePageSize(this.value)" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-white">
-            <option value="10">10</option>
+            <option value="15">15</option>
             <option value="25" selected>25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
+            <option value="60">Tất cả (60)</option>
           </select>
           <span id="pageRangeText">bản ghi</span>
         </div>
-
-        <div class="flex items-center gap-1.5" id="paginationControls">
-          <!-- Dynamic pagination buttons -->
-        </div>
+        <div class="flex items-center gap-1.5" id="paginationControls"></div>
       </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="pt-6 pb-12 border-t border-slate-800/80 text-center text-xs text-slate-500">
-      <p class="font-medium">© 2026 GEMMY WOOD CO., LTD. — Phú Thọ, Việt Nam</p>
-      <p class="mt-1">Hệ thống AI Market Research Agent tích hợp n8n & Google Sheets Database | Phiên bản 2.0</p>
+    <footer class="pt-6 pb-10 border-t border-slate-800/80 text-center text-xs text-slate-500">
+      <p class="font-semibold text-slate-400">© 2026 GEMMY WOOD CO., LTD. — Phú Thọ, Việt Nam | Hệ Thống Trí Tuệ Thị Trường Ngành Gỗ Xuất Khẩu</p>
+      <p class="mt-1">Tích hợp tự động hóa n8n (`research-gemmy`) & Cơ sở dữ liệu Google Sheets chuẩn hóa 29 trường dữ liệu</p>
     </footer>
 
   </main>
 
-  <!-- EVENT DETAIL MODAL -->
-  <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden">
-    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div class="flex items-center gap-2">
-          <span id="modalId" class="px-2.5 py-1 rounded-md text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">ID</span>
-          <span id="modalDate" class="text-xs text-slate-400">Date</span>
+  <!-- 360 EXECUTIVE DETAIL MODAL -->
+  <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm hidden">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full p-6 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto custom-scrollbar">
+      <div class="flex items-start justify-between border-b border-slate-800 pb-3.5 gap-4">
+        <div>
+          <div class="flex items-center gap-2 flex-wrap mb-1.5">
+            <span id="modalId" class="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">ID</span>
+            <span id="modalPillarBadge" class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-blue-500/20 text-blue-400">Nhóm</span>
+            <span id="modalDate" class="text-xs text-slate-400">Ngày</span>
+          </div>
+          <h3 id="modalTitle" class="text-lg font-extrabold text-white">Loại biến động</h3>
         </div>
-        <button onclick="closeModal()" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
+        <button onclick="closeModal()" class="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <div>
-        <h3 id="modalTitle" class="text-base font-bold text-white mb-2">Loại biến động</h3>
-        <p id="modalContent" class="text-sm text-slate-300 leading-relaxed bg-slate-800/50 p-4 rounded-xl border border-slate-800">
-          Nội dung chi tiết
-        </p>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
-        <div class="p-3 bg-slate-800/40 rounded-xl border border-slate-800">
-          <span class="text-slate-400 block mb-1">Nhóm biến động</span>
-          <span id="modalGroup" class="font-semibold text-white">--</span>
+      <!-- Market & Scope Row -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+        <div class="p-3 bg-slate-800/50 rounded-xl border border-slate-800">
+          <span class="text-slate-400 block mb-0.5">Quốc gia khởi phát</span>
+          <span id="modalCountry" class="font-bold text-white">--</span>
         </div>
-        <div class="p-3 bg-slate-800/40 rounded-xl border border-slate-800">
-          <span class="text-slate-400 block mb-1">Quốc gia tác động</span>
-          <span id="modalCountry" class="font-semibold text-white">--</span>
+        <div class="p-3 bg-slate-800/50 rounded-xl border border-slate-800">
+          <span class="text-slate-400 block mb-0.5">Thị trường ảnh hưởng</span>
+          <span id="modalMarkets" class="font-bold text-emerald-400">--</span>
         </div>
-        <div class="p-3 bg-slate-800/40 rounded-xl border border-slate-800">
-          <span class="text-slate-400 block mb-1">Dòng sản phẩm</span>
-          <span id="modalProduct" class="font-semibold text-white">--</span>
+        <div class="p-3 bg-slate-800/50 rounded-xl border border-slate-800">
+          <span class="text-slate-400 block mb-0.5">Dòng sản phẩm</span>
+          <span id="modalProduct" class="font-bold text-white">--</span>
         </div>
-        <div class="p-3 bg-slate-800/40 rounded-xl border border-slate-800">
-          <span class="text-slate-400 block mb-1">Mức độ rủi ro</span>
-          <span id="modalRisk" class="font-semibold text-white">--</span>
-        </div>
-        <div class="p-3 bg-slate-800/40 rounded-xl border border-slate-800">
-          <span class="text-slate-400 block mb-1">Cơ hội cho VN</span>
-          <span id="modalOpp" class="font-semibold text-white">--</span>
-        </div>
-        <div class="p-3 bg-slate-800/40 rounded-xl border border-slate-800">
-          <span class="text-slate-400 block mb-1">Xu hướng thị trường</span>
-          <span id="modalTrend" class="font-semibold text-white">--</span>
+        <div class="p-3 bg-slate-800/50 rounded-xl border border-slate-800">
+          <span class="text-slate-400 block mb-0.5">Mức rủi ro / Cơ hội</span>
+          <span id="modalRiskOpp" class="font-bold text-white">--</span>
         </div>
       </div>
 
-      <div class="p-4 bg-emerald-950/20 border border-emerald-800/40 rounded-xl">
-        <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-          <i data-lucide="check-circle" class="w-4 h-4"></i>
-          Hành động đề xuất cho Gemmy Wood
+      <!-- Macro Event Detail -->
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Diễn biến chi tiết & Xu hướng thị trường</h4>
+        <div class="p-4 rounded-xl bg-slate-800/40 border border-slate-800 space-y-2">
+          <p id="modalContent" class="text-sm text-slate-200 leading-relaxed"></p>
+          <p id="modalTrend" class="text-xs text-amber-300 font-medium pt-2 border-t border-slate-800/80"></p>
+        </div>
+      </div>
+
+      <!-- 5 Operational Impact Links -->
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+          <i data-lucide="cpu" class="w-4 h-4"></i>
+          Đánh giá tác động vào 5 mắt xích hoạt động SXKD đồ gỗ
         </h4>
-        <p id="modalAction" class="text-xs text-emerald-200/90 leading-relaxed">
-          --
-        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+          <div class="p-3 rounded-xl bg-slate-800/40 border border-slate-800">
+            <span class="font-bold text-blue-400 block mb-1">📦 1. Tác động Đơn hàng & Sức mua:</span>
+            <span id="modalImpactOrder" class="text-slate-300">--</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-800/40 border border-slate-800">
+            <span class="font-bold text-amber-400 block mb-1">💵 2. Tác động Giá bán & Biên lợi nhuận:</span>
+            <span id="modalImpactPrice" class="text-slate-300">--</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-800/40 border border-slate-800">
+            <span class="font-bold text-teal-400 block mb-1">🌲 3. Tác động Nguyên liệu & Sản xuất:</span>
+            <span id="modalImpactMaterial" class="text-slate-300">--</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-800/40 border border-slate-800">
+            <span class="font-bold text-rose-400 block mb-1">🚢 4. Tác động Logistics & Vận tải:</span>
+            <span id="modalImpactLogistics" class="text-slate-300">--</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-800/40 border border-slate-800 sm:col-span-2">
+            <span class="font-bold text-purple-400 block mb-1">💱 5. Tác động Tỷ giá & Tài chính:</span>
+            <span id="modalImpactFx" class="text-slate-300">--</span>
+          </div>
+        </div>
       </div>
 
-      <div class="flex items-center justify-between pt-2">
-        <span id="modalCompetitor" class="text-xs text-slate-400">Đối thủ: --</span>
-        <a id="modalSourceLink" href="#" target="_blank" class="flex items-center gap-1.5 text-xs text-blue-400 hover:underline">
-          <i data-lucide="external-link" class="w-4 h-4"></i>
-          <span>Xem nguồn gốc tin tức</span>
+      <!-- Opportunity & Action Recommendation -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="p-4 rounded-xl bg-blue-950/25 border border-blue-800/40">
+          <h4 class="text-xs font-bold text-blue-400 uppercase mb-1">Cơ hội cho Gỗ Việt Nam & Gemmy Wood</h4>
+          <p id="modalOppText" class="text-xs text-slate-200 leading-relaxed">--</p>
+        </div>
+        <div class="p-4 rounded-xl bg-emerald-950/30 border border-emerald-700/40">
+          <h4 class="text-xs font-bold text-emerald-400 uppercase mb-1">Khuyến nghị hành động (Ban Giám Đốc)</h4>
+          <p id="modalActionText" class="text-xs text-emerald-200 leading-relaxed font-medium">--</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800 text-xs text-slate-400">
+        <div>
+          <span id="modalCompetitor">Đối thủ cạnh tranh: --</span> •
+          <span id="modalDept" class="text-slate-300 font-semibold">Phụ trách: --</span>
+        </div>
+        <a id="modalSourceLink" href="#" target="_blank" class="flex items-center gap-1 text-blue-400 hover:underline font-semibold">
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          <span>Nguồn tham chiếu</span>
         </a>
       </div>
     </div>
@@ -485,61 +620,138 @@
         <i data-lucide="sparkles" class="w-7 h-7 animate-spin"></i>
       </div>
       <div>
-        <h3 class="text-base font-bold text-white">AI Research Agent Đang Chạy...</h3>
+        <h3 class="text-base font-bold text-white">AI Agent `research-gemmy` Đang Quét Tin...</h3>
         <p class="text-xs text-slate-400 mt-1">
-          Đang quét Tavily Search, phân tích tin tức xuất khẩu gỗ 2026 và cấu trúc hoá dữ liệu lên Google Sheets.
+          Đang thu thập biến động Kinh tế, Chính trị, Thuế quan & Luật pháp (EUDR, ILPA, AD/CVD) tại Việt Nam, Mỹ, Úc, EU và đồng bộ vào Google Sheets.
         </p>
       </div>
       <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-        <div id="agentProgressBar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full w-1/3 animate-pulse"></div>
+        <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full w-2/3 animate-pulse"></div>
       </div>
-      <p id="agentStatusText" class="text-xs text-emerald-400 font-medium">Đang gửi yêu cầu tới n8n webhook...</p>
+      <p id="agentStatusText" class="text-xs text-emerald-400 font-semibold">Đang kết nối n8n Webhook...</p>
     </div>
   </div>
 
-  <!-- APPLICATION LOGIC SCRIPT -->
+  <!-- APPLICATION SCRIPT -->
   <script>
-    // State
     let allData = [];
     let filteredData = [];
     let currentPage = 1;
     let pageSize = 25;
+    let activeMarket = 'ALL';
+    let activePillar = 'ALL';
     let charts = {};
 
     const GOOGLE_SHEET_ID = '1qgrD4aJsYw2Tp7tyiTi_NCicLdP0PtXmo-gBLrvKCaI';
     const N8N_WEBHOOK_URL = 'https://n8n.gemmywood.com.vn/webhook/research-gemmy';
 
-    // Initialize
+    const STANDARD_COLS = [
+      "STT", "ID", "Ngày cập nhật", "Tháng Báo Cáo", "Nhóm biến động",
+      "Loại biến động", "Quốc Gia Tác Động", "Thị trường liên quan", "Nhóm sản phẩm",
+      "Nội dụng biến động", "Mức độ rủi rõ", "Cơ hội cho VN", "Xu hướng thị trường",
+      "Giá bán", "Đơn hàng", "Nguyên Liệu", "Logistics", "Tỷ Giá",
+      "Đối Thủ Cạnh tranh", "Hành động đề xuất", "Bộ phận phụ trách", "Deadiline",
+      "Link nguồn tin", "Điểm ưu tiên", "Top thị trường", "Top Cơ hội cho VN",
+      "Điểm ưu tiên cơ hội", "Rủi ro cao", "Cơ hội cao"
+    ];
+
+    const MARKET_CONFIG = [
+      { key: 'ALL', label: 'Toàn Cầu', flag: '🌐', sub: 'Tất cả thị trường' },
+      { key: 'Mỹ', label: 'Hoa Kỳ (US)', flag: '🇺🇸', sub: 'Thuế & Đơn hàng' },
+      { key: 'EU', label: 'Châu Âu (EU)', flag: '🇪🇺', sub: 'Luật EUDR & FSC' },
+      { key: 'Úc', label: 'Úc (Australia)', flag: '🇦🇺', sub: 'Luật ILPA & Thuế 0%' },
+      { key: 'Việt Nam', label: 'Việt Nam', flag: '🇻🇳', sub: 'Nguyên liệu & SX' },
+      { key: 'Nhật', label: 'Nhật & Hàn', flag: '🇯🇵', sub: 'Chuẩn JAS & Viên nén' },
+      { key: 'Anh', label: 'Anh & Canada', flag: '🇬🇧', sub: 'UKTR & CPTPP' },
+      { key: 'Trung Quốc', label: 'Trung Quốc', flag: '🇨🇳', sub: 'Cạnh tranh & XNK' }
+    ];
+
+    const COUNTRY_PROFILES = [
+      {
+        key: 'Mỹ',
+        flag: '🇺🇸',
+        name: 'Hoa Kỳ (US) — Thị Trường Xuất Khẩu Số 1 (~50% Thị Phần)',
+        lawTariff: 'Áp lực thuế đối ứng thương mại, điều tra phòng vệ thương mại (AD/CVD) và kiểm tra gắt gao nguồn gốc xuất xứ (CBP) chống chuyển tải bất hợp pháp.',
+        macroEcon: 'FED hạ lãi suất giúp lãi suất vay mua nhà (Mortgage) hạ nhiệt, kích thích nhu cầu mua sắm đồ gỗ nội thất gia đình và tủ bếp phục hồi.',
+        impact: 'Đơn hàng lớn nhưng áp lực cạnh tranh giá và rủi ro pháp lý thuế quan cao nhất.',
+        action: 'Lưu trữ 100% hồ sơ sản xuất thực chất tại Phú Thọ (gỗ keo nội địa, quy trình xẻ-sấy-ghép) và tuân thủ chuẩn keo TSCA Title VI.',
+        badgeColor: 'red'
+      },
+      {
+        key: 'EU',
+        flag: '🇪🇺',
+        name: 'Liên Minh Châu Âu (EU) — Tâm Điểm Luật Chống Phá Rừng EUDR',
+        lawTariff: 'Quy định EUDR bắt buộc truy xuất nguồn gốc gỗ tới tọa độ địa lý (Polygon/GPS) của lô rừng trồng và cam kết không gây mất rừng sau 31/12/2020.',
+        macroEcon: 'Lạm phát châu Âu hạ nhiệt, nhu cầu đồ gỗ ngoại thất (Outdoor), ván ghép thanh DIY tại Đức, Pháp, Hà Lan, Bắc Âu tăng trở lại.',
+        impact: 'Sàng lọc mạnh: Nhà cung ứng thiếu FSC/EUDR bị loại; nhà máy đạt chuẩn giữ được giá bán cộng thưởng (+5-7%).',
+        action: 'Hoàn thiện bản đồ số Polygon vùng nguyên liệu gỗ keo FSC tại Phú Thọ để cấp mã DDS cho khách hàng EU.',
+        badgeColor: 'purple'
+      },
+      {
+        key: 'Úc',
+        flag: '🇦🇺',
+        name: 'Úc (Australia) — Luật Gỗ Hợp Pháp ILPA & Ưu Đãi Thuế 0%',
+        lawTariff: 'Đạo luật Illegal Logging Prohibition Amendment (ILPA) mới siết kiểm tra nguồn gốc và áp dụng công nghệ định danh gỗ; miễn thuế 0% theo AANZFTA & CPTPP.',
+        macroEcon: 'Chính phủ Úc triển khai gói National Housing Accord (xây 1,2 triệu nhà ở mới), thúc đẩy mạnh nhu cầu ván ghép thanh làm mặt bếp (Benchtop), kệ DIY và nội thất.',
+        impact: 'Thị trường biên lợi nhuận tốt, tuyến vận tải biển gần (14-18 ngày), rủi ro thuế quan thấp.',
+        action: 'Đẩy mạnh chào dòng ván ghép thanh gỗ keo phủ dầu (Oiled Acacia Worktop) kèm bộ hồ sơ FSC & ILPA Due Diligence cho hệ thống bán lẻ Úc.',
+        badgeColor: 'emerald'
+      },
+      {
+        key: 'Việt Nam',
+        flag: '🇻🇳',
+        name: 'Việt Nam — Trung Tâm Sản Xuất, Nguyên Liệu & Vĩ Mô Nội Địa',
+        lawTariff: 'Siết quản lý bảng kê lâm sản, hoàn thuế GTGT, kiểm soát xuất xứ C/O và nâng chuẩn PCCC, môi trường tại các nhà máy chế biến gỗ.',
+        macroEcon: 'Tỷ giá USD/VND neo cao hỗ trợ doanh thu xuất khẩu; cạnh tranh thu mua gỗ keo rừng trồng có chứng chỉ FSC tại miền Bắc khiến giá gỗ nguyên liệu tăng 6-10%.',
+        impact: 'Quyết định trực tiếp đến giá thành sản xuất (COGS), tiến độ giao hàng và tính hợp pháp của nguyên liệu đầu vào.',
+        action: 'Chủ động dự trữ phôi gỗ keo sấy đủ 45-60 ngày sản xuất; ký hợp đồng liên kết dài hạn với các lâm trường FSC tại Phú Thọ - Tuyên Quang.',
+        badgeColor: 'teal'
+      },
+      {
+        key: 'Nhật',
+        flag: '🇯🇵🇰🇷',
+        name: 'Nhật Bản & Hàn Quốc — Thị Trường Tiêu Chuẩn Kỹ Thuật Cao',
+        lawTariff: 'Yêu cầu nghiêm ngặt về độ phát thải Formaldehyde (chuẩn F☆☆☆☆ tại Nhật, KS tại Hàn) và chứng nhận gỗ bền vững (Clean Wood Act).',
+        macroEcon: 'Chiếm >15% kim ngạch XK gỗ Việt Nam; nhu cầu ổn định quanh năm đối với ván ghép thanh, đồ gỗ nội thất nhỏ gọn và viên nén sinh khối.',
+        impact: 'Đơn hàng lặp lại (Repeat orders) rất bền vững, cước tàu thấp (5-8 ngày), song đồng JPY/KRW yếu khiến khách đàm phán giá kỹ.',
+        action: 'Kiểm soát chặt độ ẩm gỗ sấy (8-10%), chất lượng keo F☆☆☆☆ và độ chính xác cơ khí để giữ vững tệp khách hàng Nhật - Hàn.',
+        badgeColor: 'blue'
+      },
+      {
+        key: 'Anh',
+        flag: '🇬🇧🇨🇦',
+        name: 'Anh, Canada & Khối G7 — Đa Dạng Hóa Thị Trường Xuất Khẩu',
+        lawTariff: 'Vương quốc Anh thực thi UK Timber Regulation (UKTR); hưởng ưu đãi thuế quan từ hiệp định UKVFTA (Anh) và CPTPP (Canada).',
+        macroEcon: 'Các nhà nhập khẩu Anh và Canada đẩy mạnh đa dạng hóa nguồn cung ngoài Trung Quốc, ưa chuộng mặt bàn gỗ tự nhiên (Solid Wood Worktops) và nội thất FSC.',
+        impact: 'Giúp Gemmy Wood giảm phụ thuộc vào một thị trường duy nhất và tối ưu công suất nhà máy quanh năm.',
+        action: 'Mở rộng chào hàng ván ghép thanh gỗ keo FSC chuẩn chống ẩm D3/D4 cho các nhà phân phối tại Anh và bờ Tây Canada.',
+        badgeColor: 'amber'
+      }
+    ];
+
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
       fetchSheetData();
     });
 
-    // Theme toggle
     function toggleTheme() {
       const html = document.documentElement;
       if (html.classList.contains('dark')) {
         html.classList.remove('dark');
         html.classList.add('light');
-        document.body.classList.remove('bg-[#0b0f19]', 'text-slate-100');
-        document.body.classList.add('bg-slate-50', 'text-slate-900');
         document.getElementById('themeIcon').setAttribute('data-lucide', 'sun');
       } else {
         html.classList.remove('light');
         html.classList.add('dark');
-        document.body.classList.remove('bg-slate-50', 'text-slate-900');
-        document.body.classList.add('bg-[#0b0f19]', 'text-slate-100');
         document.getElementById('themeIcon').setAttribute('data-lucide', 'moon');
       }
       lucide.createIcons();
-      updateChartsTheme();
+      renderCharts();
     }
 
-    // Fetch data using JSONP with fallback to data.json
     function fetchSheetData(showSpinner = false) {
       const refreshIcon = document.getElementById('refreshIcon');
       if (showSpinner && refreshIcon) refreshIcon.classList.add('animate-spin');
-
       document.getElementById('syncStatusText').textContent = 'Đang đồng bộ Google Sheets...';
 
       const callbackName = 'gviz_' + Date.now();
@@ -547,9 +759,8 @@
 
       const timer = setTimeout(() => {
         timedOut = true;
-        console.warn('Google Sheets JSONP timeout. Falling back to local data.json');
         loadFallbackData();
-      }, 7000);
+      }, 6500);
 
       window[callbackName] = function(response) {
         clearTimeout(timer);
@@ -558,12 +769,17 @@
         if (script.parentNode) script.parentNode.removeChild(script);
 
         try {
-          allData = parseGviz(response);
-          document.getElementById('syncStatusText').textContent = `Google Sheets Live (${allData.length} bản ghi)`;
-          document.getElementById('syncStatusBadge').className = 'flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-950/60 border border-emerald-600/40 text-emerald-300';
-          onDataLoaded();
+          const parsed = parseGviz(response);
+          if (parsed.length > 0) {
+            allData = parsed;
+            document.getElementById('syncStatusText').textContent = `Google Sheets Live (${allData.length} sự kiện)`;
+            document.getElementById('syncStatusBadge').className = 'flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-300';
+            onDataLoaded();
+          } else {
+            loadFallbackData();
+          }
         } catch (e) {
-          console.error('Error parsing Gviz data', e);
+          console.error(e);
           loadFallbackData();
         } finally {
           if (refreshIcon) refreshIcon.classList.remove('animate-spin');
@@ -586,35 +802,20 @@
         .then(r => r.json())
         .then(data => {
           allData = data;
-          document.getElementById('syncStatusText').textContent = `Dữ liệu Nội Bộ (${allData.length} bản ghi)`;
-          document.getElementById('syncStatusBadge').className = 'flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-950/60 border border-amber-600/40 text-amber-300';
+          document.getElementById('syncStatusText').textContent = `Dữ liệu Chuẩn Hóa (${allData.length} sự kiện)`;
+          document.getElementById('syncStatusBadge').className = 'flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-950/60 border border-emerald-500/40 text-emerald-300';
           onDataLoaded();
         })
-        .catch(err => {
-          console.error('Failed to load fallback data.json', err);
-          document.getElementById('syncStatusText').textContent = 'Mất kết nối dữ liệu';
-        })
+        .catch(err => console.error('Fallback error:', err))
         .finally(() => {
           const refreshIcon = document.getElementById('refreshIcon');
           if (refreshIcon) refreshIcon.classList.remove('animate-spin');
         });
     }
 
-    const STANDARD_COLS = [
-      "STT", "ID", "Ngày cập nhật", "Tháng Báo Cáo", "Nhóm biến động",
-      "Loại biến động", "Quốc Gia Tác Động", "Thị trường liên quan", "Nhóm sản phẩm",
-      "Nội dụng biến động", "Mức độ rủi rõ", "Cơ hội cho VN", "Xu hướng thị trường",
-      "Giá bán", "Đơn hàng", "Nguyên Liệu", "Logistics", "Tỷ Giá",
-      "Đối Thủ Cạnh tranh", "Hành động đề xuất", "Bộ phận phụ trách", "Deadiline",
-      "Link nguồn tin", "Điểm ưu tiên", "Top thị trường", "Top Cơ hội cho VN",
-      "Điểm ưu tiên cơ hội", "Rủi ro cao", "Cơ hội cao"
-    ];
-
-    // Parse Gviz table response into standard record objects
     function parseGviz(gviz) {
       if (!gviz || !gviz.table || !gviz.table.rows) return [];
       const records = [];
-
       for (const row of gviz.table.rows) {
         if (!row || !row.c) continue;
         const item = {};
@@ -628,182 +829,361 @@
             item[STANDARD_COLS[idx]] = val;
           }
         });
-        if (item['ID'] || item['Nội dụng biến động'] || item['Nhóm biến động']) {
+        if (item['ID'] && item['ID'] !== 'ID' && item['Nội dụng biến động']) {
           records.push(item);
         }
       }
       return records;
     }
 
-    // After data is loaded
+    function matchMarketRecord(item, marketKey) {
+      if (marketKey === 'ALL') return true;
+      const text = `${item['Quốc Gia Tác Động'] || ''} ${item['Thị trường liên quan'] || ''}`.toLowerCase();
+      if (marketKey === 'Mỹ') return text.includes('mỹ') || text.includes('hoa kỳ') || text.includes('us');
+      if (marketKey === 'EU') return text.includes('eu') || text.includes('châu âu') || text.includes('đức') || text.includes('hà lan');
+      if (marketKey === 'Úc') return text.includes('úc') || text.includes('australia');
+      if (marketKey === 'Việt Nam') return text.includes('việt nam') || text.includes('nội địa');
+      if (marketKey === 'Nhật') return text.includes('nhật') || text.includes('hàn');
+      if (marketKey === 'Anh') return text.includes('anh') || text.includes('canada') || text.includes('uk');
+      if (marketKey === 'Trung Quốc') return text.includes('trung quốc');
+      return true;
+    }
+
+    function matchPillarRecord(item, pillarKey) {
+      if (pillarKey === 'ALL') return true;
+      const p = (item['Nhóm biến động'] || '').toLowerCase();
+      if (pillarKey === 'Kinh tế') return p.includes('kinh tế') || p.includes('tỷ giá') || p.includes('nhu cầu') || p.includes('lãi suất');
+      if (pillarKey === 'Thuế quan') return p.includes('thuế') || p.includes('phòng vệ');
+      if (pillarKey === 'Luật pháp') return p.includes('luật') || p.includes('tiêu chuẩn');
+      if (pillarKey === 'Logistics') return p.includes('logistics') || p.includes('chính trị') || p.includes('chuỗi cung ứng');
+      if (pillarKey === 'Nguyên liệu') return p.includes('nguyên liệu') || p.includes('sản xuất');
+      return true;
+    }
+
     function onDataLoaded() {
+      renderMarketPills();
+      renderCountryProfiles();
       applyFilters();
-      updateKPICards();
-      renderCharts();
-      renderInsights();
       lucide.createIcons();
     }
 
-    // Apply search and dropdown filters
+    function renderMarketPills() {
+      const container = document.getElementById('marketPillsContainer');
+      container.innerHTML = MARKET_CONFIG.map(m => {
+        const count = allData.filter(d => matchMarketRecord(d, m.key)).length;
+        const isActive = activeMarket === m.key;
+        return `
+          <button onclick="selectMarketFilter('${m.key}')" class="flex items-center justify-between p-2.5 rounded-xl border text-left transition ${
+            isActive
+              ? 'bg-emerald-600/25 border-emerald-500 text-white shadow-sm shadow-emerald-950'
+              : 'bg-slate-900/70 border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-slate-800/60'
+          }">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="text-lg shrink-0">${m.flag}</span>
+              <div class="truncate">
+                <div class="text-xs font-bold truncate">${m.label}</div>
+                <div class="text-[10px] text-slate-400 truncate">${m.sub}</div>
+              </div>
+            </div>
+            <span class="px-1.5 py-0.5 rounded-md text-[11px] font-extrabold ${
+              isActive ? 'bg-emerald-500 text-slate-950' : 'bg-slate-800 text-slate-400'
+            }">${count}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderCountryProfiles() {
+      const container = document.getElementById('countryStrategicGrid');
+      container.innerHTML = COUNTRY_PROFILES.map(c => {
+        const records = allData.filter(d => matchMarketRecord(d, c.key));
+        const highRisks = records.filter(d => (d['Mức độ rủi rõ'] || '').includes('Cao') || Number(d['Rủi ro cao']) === 1).length;
+        const highOpps = records.filter(d => (d['Top Cơ hội cho VN'] || '').includes('Cao') || Number(d['Cơ hội cao']) === 1).length;
+        const isSelected = activeMarket === c.key;
+
+        return `
+          <div onclick="selectMarketFilter('${c.key}')" class="glass-card rounded-2xl p-4 cursor-pointer transition hover:border-emerald-500/50 flex flex-col justify-between ${
+            isSelected ? 'ring-2 ring-emerald-500' : ''
+          }">
+            <div class="space-y-2.5">
+              <div class="flex items-start justify-between gap-2 border-b border-slate-800 pb-2.5">
+                <div class="flex items-center gap-2">
+                  <span class="text-2xl">${c.flag}</span>
+                  <h3 class="text-xs sm:text-sm font-extrabold text-white leading-snug">${c.name}</h3>
+                </div>
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-slate-800 text-emerald-400 shrink-0">${records.length} tin</span>
+              </div>
+
+              <div class="space-y-1.5 text-xs">
+                <div>
+                  <span class="font-bold text-amber-400">⚖️ Thuế quan & Luật pháp:</span>
+                  <span class="text-slate-300 leading-relaxed"> ${c.lawTariff}</span>
+                </div>
+                <div>
+                  <span class="font-bold text-blue-400">📊 Kinh tế & Sức mua:</span>
+                  <span class="text-slate-300 leading-relaxed"> ${c.macroEcon}</span>
+                </div>
+                <div>
+                  <span class="font-bold text-purple-400">🏭 Tác động SXKD:</span>
+                  <span class="text-slate-300 leading-relaxed"> ${c.impact}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3 pt-2.5 border-t border-slate-800/80 space-y-2">
+              <div class="p-2.5 rounded-xl bg-emerald-950/25 border border-emerald-800/30 text-[11px] text-emerald-300 font-medium">
+                <strong class="text-emerald-400">🎯 Đối sách Gemmy Wood:</strong> ${c.action}
+              </div>
+              <div class="flex items-center justify-between text-[11px]">
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded bg-red-500/15 text-red-400 font-bold">🔴 ${highRisks} Cảnh báo rủi ro</span>
+                  <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 font-bold">🟢 ${highOpps} Cơ hội lớn</span>
+                </div>
+                <span class="text-emerald-400 font-bold hover:underline">Lọc chi tiết →</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function selectMarketFilter(mKey) {
+      activeMarket = (activeMarket === mKey && mKey !== 'ALL') ? 'ALL' : mKey;
+      document.getElementById('marketFilter').value = activeMarket;
+      const mObj = MARKET_CONFIG.find(m => m.key === activeMarket);
+      document.getElementById('activeMarketHint').textContent = `Đang xem: ${mObj ? mObj.flag + ' ' + mObj.label : 'Toàn bộ thị trường'}`;
+      renderMarketPills();
+      renderCountryProfiles();
+      applyFilters();
+    }
+
+    function onDropdownMarketChange(val) {
+      activeMarket = val;
+      const mObj = MARKET_CONFIG.find(m => m.key === activeMarket);
+      document.getElementById('activeMarketHint').textContent = `Đang xem: ${mObj ? mObj.flag + ' ' + mObj.label : 'Toàn bộ thị trường'}`;
+      renderMarketPills();
+      renderCountryProfiles();
+      applyFilters();
+    }
+
+    function selectPillarFilter(pKey) {
+      activePillar = (activePillar === pKey && pKey !== 'ALL') ? 'ALL' : pKey;
+      document.getElementById('pillarFilter').value = activePillar;
+      ['ALL', 'Kinh tế', 'Thuế quan', 'Luật pháp', 'Logistics', 'Nguyên liệu'].forEach(k => {
+        const el = document.getElementById(`pillarCard_${k}`);
+        if (!el) return;
+        if (k === activePillar) {
+          el.classList.add('border-2', 'border-emerald-500');
+        } else {
+          el.classList.remove('border-2', 'border-emerald-500');
+        }
+      });
+      applyFilters();
+    }
+
+    function onDropdownPillarChange(val) {
+      selectPillarFilter(val);
+    }
+
+    function resetAllFilters() {
+      activeMarket = 'ALL';
+      activePillar = 'ALL';
+      document.getElementById('searchInput').value = '';
+      document.getElementById('marketFilter').value = 'ALL';
+      document.getElementById('pillarFilter').value = 'ALL';
+      document.getElementById('monthFilter').value = 'ALL';
+      document.getElementById('riskFilter').value = 'ALL';
+      document.getElementById('activeMarketHint').textContent = 'Đang xem: Toàn bộ thị trường quốc tế & nội địa';
+      renderMarketPills();
+      renderCountryProfiles();
+      selectPillarFilter('ALL');
+    }
+
     function applyFilters() {
       const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
       const month = document.getElementById('monthFilter').value;
-      const group = document.getElementById('groupFilter').value;
       const risk = document.getElementById('riskFilter').value;
 
-      filteredData = allData.filter(item => {
-        // Search text
+      // Update Pillar KPI numbers based on activeMarket
+      const marketScoped = allData.filter(d => matchMarketRecord(d, activeMarket));
+      document.getElementById('kpiTotal').textContent = marketScoped.length;
+      const rCount = marketScoped.filter(d => (d['Mức độ rủi rõ'] || '').includes('Cao') || Number(d['Rủi ro cao']) === 1).length;
+      const oCount = marketScoped.filter(d => (d['Top Cơ hội cho VN'] || '').includes('Cao') || Number(d['Cơ hội cao']) === 1).length;
+      document.getElementById('kpiRiskCount').textContent = `${rCount} Rủi ro cao`;
+      document.getElementById('kpiOppCount').textContent = `${oCount} Cơ hội cao`;
+
+      document.getElementById('kpiEconomy').textContent = marketScoped.filter(d => matchPillarRecord(d, 'Kinh tế')).length;
+      document.getElementById('kpiTariff').textContent = marketScoped.filter(d => matchPillarRecord(d, 'Thuế quan')).length;
+      document.getElementById('kpiLaw').textContent = marketScoped.filter(d => matchPillarRecord(d, 'Luật pháp')).length;
+      document.getElementById('kpiLogistics').textContent = marketScoped.filter(d => matchPillarRecord(d, 'Logistics')).length;
+      document.getElementById('kpiMaterial').textContent = marketScoped.filter(d => matchPillarRecord(d, 'Nguyên liệu')).length;
+
+      filteredData = marketScoped.filter(item => {
+        if (!matchPillarRecord(item, activePillar)) return false;
+
         if (query) {
-          const matchStr = `${item['ID'] || ''} ${item['Nhóm biến động'] || ''} ${item['Loại biến động'] || ''} ${item['Quốc Gia Tác Động'] || ''} ${item['Thị trường liên quan'] || ''} ${item['Nhóm sản phẩm'] || ''} ${item['Nội dụng biến động'] || ''} ${item['Hành động đề xuất'] || ''}`.toLowerCase();
-          if (!matchStr.includes(query)) return false;
+          const hay = `${item['ID']} ${item['Nhóm biến động']} ${item['Loại biến động']} ${item['Quốc Gia Tác Động']} ${item['Thị trường liên quan']} ${item['Nhóm sản phẩm']} ${item['Nội dụng biến động']} ${item['Hành động đề xuất']} ${item['Giá bán']} ${item['Đơn hàng']} ${item['Nguyên Liệu']}`.toLowerCase();
+          if (!hay.includes(query)) return false;
         }
 
-        // Month filter
         if (month !== 'ALL') {
-          const itemMonth = (item['Tháng Báo Cáo'] || item['Tháng'] || '').toString();
-          if (!itemMonth.includes(month)) return false;
+          if (!(item['Tháng Báo Cáo'] || '').includes(month)) return false;
         }
 
-        // Group filter
-        if (group !== 'ALL') {
-          const itemGroup = (item['Nhóm biến động'] || '').toString();
-          if (!itemGroup.toLowerCase().includes(group.toLowerCase())) return false;
-        }
-
-        // Risk filter
         if (risk !== 'ALL') {
-          const itemRisk = (item['Mức độ rủi rõ'] || '').toString();
-          if (!itemRisk.includes(risk)) return false;
+          if (!(item['Mức độ rủi rõ'] || '').includes(risk)) return false;
         }
 
         return true;
       });
 
+      // Sort newest month first
+      filteredData.sort((a, b) => {
+        const da = a['Ngày cập nhật'] || '';
+        const db = b['Ngày cập nhật'] || '';
+        return db.localeCompare(da);
+      });
+
       currentPage = 1;
       renderTable();
+      renderCharts();
     }
 
-    // Update KPI Metric Cards
-    function updateKPICards() {
-      const total = allData.length;
-      document.getElementById('kpiTotalEvents').textContent = total;
-
-      const highRisks = allData.filter(d => {
-        const r = (d['Mức độ rủi rõ'] || '').toLowerCase();
-        return r.includes('cao') || Number(d['Rủi ro cao']) === 1;
-      }).length;
-      document.getElementById('kpiHighRisks').textContent = highRisks;
-      document.getElementById('kpiRiskPct').textContent = total ? `${Math.round((highRisks / total) * 100)}%` : '0%';
-
-      const highOpps = allData.filter(d => {
-        const opp = (d['Top Cơ hội cho VN'] || '').toLowerCase();
-        return opp.includes('cao') || Number(d['Cơ hội cao']) === 1;
-      }).length;
-      document.getElementById('kpiHighOpps').textContent = highOpps;
-      document.getElementById('kpiOppPct').textContent = total ? `${Math.round((highOpps / total) * 100)}%` : '0%';
+    function getPillarBadge(pillar) {
+      const p = (pillar || '').toLowerCase();
+      if (p.includes('luật') || p.includes('tiêu chuẩn')) {
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">⚖️ ${pillar}</span>`;
+      }
+      if (p.includes('thuế') || p.includes('phòng vệ')) {
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">🛡️ ${pillar}</span>`;
+      }
+      if (p.includes('logistics') || p.includes('chuỗi')) {
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">🚢 ${pillar}</span>`;
+      }
+      if (p.includes('chính trị')) {
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold bg-red-500/20 text-red-300 border border-red-500/30">🏛️ ${pillar}</span>`;
+      }
+      if (p.includes('nguyên liệu') || p.includes('sản xuất')) {
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">🌲 ${pillar}</span>`;
+      }
+      return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">📊 ${pillar}</span>`;
     }
 
-    // Render Data Table
+    function getCountryFlag(country) {
+      const c = (country || '').toLowerCase();
+      if (c.includes('mỹ') || c.includes('hoa kỳ')) return '🇺🇸';
+      if (c.includes('eu') || c.includes('châu âu')) return '🇪🇺';
+      if (c.includes('úc') || c.includes('australia')) return '🇦🇺';
+      if (c.includes('việt nam')) return '🇻🇳';
+      if (c.includes('nhật') || c.includes('hàn')) return '🇯🇵🇰🇷';
+      if (c.includes('anh') || c.includes('canada')) return '🇬🇧🇨🇦';
+      if (c.includes('trung quốc')) return '🇨🇳';
+      return '🌐';
+    }
+
     function renderTable() {
       const tbody = document.getElementById('dataTableBody');
       tbody.innerHTML = '';
 
       const count = filteredData.length;
-      document.getElementById('tableRecordCount').textContent = `Hiển thị ${count} / ${allData.length} bản ghi`;
+      document.getElementById('tableRecordSummary').textContent = `Hiển thị ${count} / ${allData.length} sự kiện (Bấm vào bất kỳ dòng nào để xem Báo cáo 360° chi tiết 5 mắt xích SXKD)`;
 
       const start = (currentPage - 1) * pageSize;
       const end = Math.min(start + pageSize, count);
       const pageData = filteredData.slice(start, end);
 
       if (pageData.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="10" class="py-8 text-center text-slate-500">Không tìm thấy bản ghi nào phù hợp</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" class="py-10 text-center text-slate-400">Không tìm thấy sự kiện nào khớp với bộ lọc hiện tại. Bấm "Đặt lại" để xem toàn bộ.</td></tr>`;
         renderPagination(0);
         return;
       }
 
-      pageData.forEach((row, idx) => {
+      pageData.forEach(row => {
         const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-800/40 cursor-pointer transition';
+        tr.className = 'hover:bg-slate-800/50 cursor-pointer transition align-top';
         tr.onclick = (e) => {
-          if (!e.target.closest('a') && !e.target.closest('button')) {
-            openModal(row);
-          }
+          if (!e.target.closest('a')) openModal(row);
         };
 
         const riskVal = row['Mức độ rủi rõ'] || 'Trung bình';
-        let riskBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-400">TB</span>';
+        let riskBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">Rủi ro: ${riskVal}</span>`;
         if (riskVal.includes('Cao')) {
-          riskBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-red-500/20 text-red-400 border border-red-500/30">CAO</span>';
+          riskBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-red-500/20 text-red-400 border border-red-500/30">🔴 Rủi ro: ${riskVal}</span>`;
         } else if (riskVal.includes('Thấp')) {
-          riskBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-blue-500/20 text-blue-400">THẤP</span>';
+          riskBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-300">🟢 Rủi ro: Thấp</span>`;
         }
 
-        const oppVal = row['Top Cơ hội cho VN'] || 'Thấp';
-        let oppBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-400">TB</span>';
+        const oppVal = row['Top Cơ hội cho VN'] || 'Trung bình';
+        let oppBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-400">Cơ hội: ${oppVal}</span>`;
         if (oppVal.includes('Cao') || Number(row['Cơ hội cao']) === 1) {
-          oppBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">CAO</span>';
+          oppBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">✨ Cơ hội: Cao</span>`;
         }
 
-        const link = row['Link nguồn tin'] || '';
-        const linkBtn = link ? `<a href="${link}" target="_blank" class="p-1 rounded text-blue-400 hover:text-blue-300 hover:bg-slate-800 inline-block" title="Mở link"><i data-lucide="external-link" class="w-4 h-4"></i></a>` : '<span class="text-slate-600">-</span>';
+        const flag = getCountryFlag(row['Quốc Gia Tác Động']);
 
         tr.innerHTML = `
-          <td class="py-2.5 px-3 font-mono font-bold text-emerald-400 text-[11px] whitespace-nowrap">${row['ID'] || `GMW-${start + idx + 1}`}</td>
-          <td class="py-2.5 px-3 text-slate-400 whitespace-nowrap">${row['Tháng Báo Cáo'] || row['Tháng'] || ''}</td>
-          <td class="py-2.5 px-3 font-medium text-slate-200 whitespace-nowrap">${row['Nhóm biến động'] || ''}</td>
-          <td class="py-2.5 px-3 text-slate-300 whitespace-nowrap">${row['Quốc Gia Tác Động'] || 'Toàn cầu'}</td>
-          <td class="py-2.5 px-3 text-slate-400 text-[11px] max-w-[140px] truncate" title="${row['Nhóm sản phẩm'] || ''}">${row['Nhóm sản phẩm'] || ''}</td>
-          <td class="py-2.5 px-3 text-slate-200 text-xs leading-relaxed max-w-[320px] truncate" title="${row['Nội dụng biến động'] || ''}">${row['Nội dụng biến động'] || ''}</td>
-          <td class="py-2.5 px-3 text-center">${riskBadge}</td>
-          <td class="py-2.5 px-3 text-center">${oppBadge}</td>
-          <td class="py-2.5 px-3 text-emerald-300/90 text-xs max-w-[240px] truncate" title="${row['Hành động đề xuất'] || ''}">${row['Hành động đề xuất'] || ''}</td>
-          <td class="py-2.5 px-3 text-center">${linkBtn}</td>
+          <td class="py-3.5 px-3 whitespace-nowrap">
+            <div class="font-mono font-bold text-emerald-400 text-xs">${row['ID'] || ''}</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">${row['Tháng Báo Cáo'] || ''}</div>
+            <div class="text-[10px] text-slate-500">${row['Ngày cập nhật'] || ''}</div>
+          </td>
+          <td class="py-3.5 px-3">
+            <div class="font-bold text-white flex items-center gap-1.5">
+              <span>${flag}</span>
+              <span>${row['Quốc Gia Tác Động'] || 'Toàn cầu'}</span>
+            </div>
+            <div class="text-[11px] text-slate-400 mt-1 line-clamp-2">Đích: ${row['Thị trường liên quan'] || ''}</div>
+            <div class="text-[10px] text-emerald-400/90 font-medium mt-1">SP: ${row['Nhóm sản phẩm'] || ''}</div>
+          </td>
+          <td class="py-3.5 px-3">
+            <div class="mb-1.5">${getPillarBadge(row['Nhóm biến động'])}</div>
+            <div class="font-bold text-white text-xs leading-snug">${row['Loại biến động'] || ''}</div>
+          </td>
+          <td class="py-3.5 px-3">
+            <p class="text-slate-200 text-xs leading-relaxed line-clamp-3">${row['Nội dụng biến động'] || ''}</p>
+            <p class="text-[11px] text-blue-400 mt-1 line-clamp-1"><strong>Cơ hội:</strong> ${row['Cơ hội cho VN'] || ''}</p>
+          </td>
+          <td class="py-3.5 px-3 space-y-1 text-[11px]">
+            <div class="text-slate-300 line-clamp-1"><strong class="text-blue-400">Đơn hàng:</strong> ${row['Đơn hàng'] || ''}</div>
+            <div class="text-slate-300 line-clamp-1"><strong class="text-amber-400">Giá bán:</strong> ${row['Giá bán'] || ''}</div>
+            <div class="text-slate-300 line-clamp-1"><strong class="text-teal-400">Nguyên liệu:</strong> ${row['Nguyên Liệu'] || ''}</div>
+          </td>
+          <td class="py-3.5 px-3 text-center">
+            <div class="flex flex-col items-center gap-1.5">
+              ${riskBadge}
+              ${oppBadge}
+            </div>
+          </td>
+          <td class="py-3.5 px-3">
+            <p class="text-emerald-300 text-xs leading-relaxed line-clamp-3 font-medium">${row['Hành động đề xuất'] || ''}</p>
+            <div class="text-[10px] text-slate-400 mt-1">Phụ trách: ${row['Bộ phận phụ trách'] || 'Ban Giám Đốc'}</div>
+          </td>
         `;
         tbody.appendChild(tr);
       });
 
       renderPagination(count);
-      document.getElementById('pageRangeText').textContent = `trên tổng số ${count} bản ghi`;
+      document.getElementById('pageRangeText').textContent = `trên tổng ${count} bản ghi`;
       lucide.createIcons();
     }
 
-    // Render Pagination Controls
     function renderPagination(totalItems) {
       const container = document.getElementById('paginationControls');
       container.innerHTML = '';
       const totalPages = Math.ceil(totalItems / pageSize) || 1;
 
-      // Prev Button
-      const prevBtn = document.createElement('button');
-      prevBtn.className = `px-2.5 py-1 rounded-lg border border-slate-700 ${currentPage === 1 ? 'opacity-40 cursor-not-allowed text-slate-600' : 'hover:bg-slate-800 text-slate-300'}`;
-      prevBtn.innerHTML = '‹';
-      prevBtn.disabled = currentPage === 1;
-      prevBtn.onclick = () => { if (currentPage > 1) { currentPage--; renderTable(); } };
-      container.appendChild(prevBtn);
-
-      // Page numbers (at most 5 visible)
       for (let p = 1; p <= totalPages; p++) {
-        if (p === 1 || p === totalPages || (p >= currentPage - 1 && p <= currentPage + 1)) {
-          const btn = document.createElement('button');
-          btn.className = `px-2.5 py-1 rounded-lg text-xs font-semibold ${p === currentPage ? 'bg-emerald-600 text-white' : 'hover:bg-slate-800 text-slate-400'}`;
-          btn.textContent = p;
-          btn.onclick = () => { currentPage = p; renderTable(); };
-          container.appendChild(btn);
-        } else if (p === currentPage - 2 || p === currentPage + 2) {
-          const span = document.createElement('span');
-          span.className = 'px-1 text-slate-600';
-          span.textContent = '...';
-          container.appendChild(span);
-        }
+        const btn = document.createElement('button');
+        btn.className = `px-3 py-1 rounded-lg text-xs font-bold transition ${
+          p === currentPage ? 'bg-emerald-600 text-white' : 'bg-slate-900 border border-slate-700 text-slate-400 hover:text-white'
+        }`;
+        btn.textContent = p;
+        btn.onclick = () => {
+          currentPage = p;
+          renderTable();
+        };
+        container.appendChild(btn);
       }
-
-      // Next Button
-      const nextBtn = document.createElement('button');
-      nextBtn.className = `px-2.5 py-1 rounded-lg border border-slate-700 ${currentPage === totalPages ? 'opacity-40 cursor-not-allowed text-slate-600' : 'hover:bg-slate-800 text-slate-300'}`;
-      nextBtn.innerHTML = '›';
-      nextBtn.disabled = currentPage === totalPages;
-      nextBtn.onclick = () => { if (currentPage < totalPages) { currentPage++; renderTable(); } };
-      container.appendChild(nextBtn);
     }
 
     function changePageSize(val) {
@@ -812,56 +1192,136 @@
       renderTable();
     }
 
-    // Charts rendering
     function renderCharts() {
-      // 1. Group Donut Chart
-      const groupCounts = {};
-      allData.forEach(d => {
-        const g = d['Nhóm biến động'] || 'Khác';
-        groupCounts[g] = (groupCounts[g] || 0) + 1;
+      const isLight = document.documentElement.classList.contains('light');
+      const textColor = isLight ? '#475569' : '#94a3b8';
+      const gridColor = isLight ? '#e2e8f0' : '#1e293b';
+
+      // 1. Market Risk vs Opportunity Chart
+      const mKeys = ['Mỹ', 'EU', 'Úc', 'Việt Nam', 'Nhật', 'Anh', 'Trung Quốc'];
+      const mLabels = ['Mỹ (US)', 'EU', 'Úc (AU)', 'Việt Nam', 'Nhật & Hàn', 'Anh & CA', 'Trung Quốc'];
+      const mRisks = mKeys.map(k => allData.filter(d => matchMarketRecord(d, k) && ((d['Mức độ rủi rõ'] || '').includes('Cao') || Number(d['Rủi ro cao']) === 1)).length);
+      const mOpps = mKeys.map(k => allData.filter(d => matchMarketRecord(d, k) && ((d['Top Cơ hội cho VN'] || '').includes('Cao') || Number(d['Cơ hội cao']) === 1)).length);
+
+      const ctx1 = document.getElementById('marketCompareChart').getContext('2d');
+      if (charts.c1) charts.c1.destroy();
+      charts.c1 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+          labels: mLabels,
+          datasets: [
+            { label: 'Sự kiện Rủi ro cao', data: mRisks, backgroundColor: '#ef4444', borderRadius: 5 },
+            { label: 'Sự kiện Cơ hội cao', data: mOpps, backgroundColor: '#10b981', borderRadius: 5 }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'top', labels: { color: textColor, font: { size: 11 } } } },
+          scales: {
+            x: { grid: { display: false }, ticks: { color: textColor, font: { size: 11 } } },
+            y: { grid: { color: gridColor }, ticks: { color: textColor, stepSize: 2 } }
+          }
+        }
       });
 
-      const groupCtx = document.getElementById('groupPieChart').getContext('2d');
-      if (charts.group) charts.group.destroy();
-      charts.group = new Chart(groupCtx, {
+      // 2. Pillar Donut Chart
+      const pillarCounts = {};
+      filteredData.forEach(d => {
+        const p = d['Nhóm biến động'] || 'Khác';
+        pillarCounts[p] = (pillarCounts[p] || 0) + 1;
+      });
+      const ctx2 = document.getElementById('pillarDonutChart').getContext('2d');
+      if (charts.c2) charts.c2.destroy();
+      charts.c2 = new Chart(ctx2, {
         type: 'doughnut',
         data: {
-          labels: Object.keys(groupCounts),
+          labels: Object.keys(pillarCounts),
           datasets: [{
-            data: Object.values(groupCounts),
-            backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ec4899', '#8b5cf6', '#64748b', '#06b6d4'],
+            data: Object.values(pillarCounts),
+            backgroundColor: ['#3b82f6', '#f59e0b', '#a855f7', '#f43f5e', '#14b8a6', '#10b981', '#64748b'],
             borderWidth: 2,
-            borderColor: '#111827'
+            borderColor: isLight ? '#ffffff' : '#0f172a'
           }]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          cutout: '62%',
           plugins: {
-            legend: { position: 'right', labels: { color: '#94a3b8', font: { size: 11 } } }
-          },
-          cutout: '65%'
+            legend: { position: 'right', labels: { color: textColor, font: { size: 11 }, boxWidth: 12 } }
+          }
         }
       });
 
-      // 2. Country Impact Horizontal Bar Chart
-      const countryCounts = {};
-      allData.forEach(d => {
-        const c = d['Quốc Gia Tác Động'] || 'Toàn cầu';
-        countryCounts[c] = (countryCounts[c] || 0) + 1;
-      });
-      const sortedCountries = Object.entries(countryCounts).sort((a,b) => b[1] - a[1]).slice(0, 7);
+      // 3. Monthly Timeline Chart
+      const months = ['Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11'];
+      const mTotal = months.map(m => filteredData.filter(d => (d['Tháng Báo Cáo'] || '') === m).length);
+      const mHighRisk = months.map(m => filteredData.filter(d => (d['Tháng Báo Cáo'] || '') === m && ((d['Mức độ rủi rõ'] || '').includes('Cao') || Number(d['Rủi ro cao']) === 1)).length);
 
-      const countryCtx = document.getElementById('countryBarChart').getContext('2d');
-      if (charts.country) charts.country.destroy();
-      charts.country = new Chart(countryCtx, {
+      const ctx3 = document.getElementById('monthlyTimelineChart').getContext('2d');
+      if (charts.c3) charts.c3.destroy();
+      charts.c3 = new Chart(ctx3, {
+        type: 'line',
+        data: {
+          labels: months,
+          datasets: [
+            {
+              label: 'Tổng biến động ghi nhận',
+              data: mTotal,
+              borderColor: '#3b82f6',
+              backgroundColor: 'rgba(59, 130, 246, 0.15)',
+              fill: true,
+              tension: 0.35
+            },
+            {
+              label: 'Cảnh báo Rủi ro cao',
+              data: mHighRisk,
+              borderColor: '#f43f5e',
+              backgroundColor: 'rgba(244, 63, 94, 0.1)',
+              fill: true,
+              tension: 0.35
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'top', labels: { color: textColor, font: { size: 11 } } } },
+          scales: {
+            x: { grid: { display: false }, ticks: { color: textColor } },
+            y: { grid: { color: gridColor }, ticks: { color: textColor, stepSize: 2 } }
+          }
+        }
+      });
+
+      // 4. Product Group Horizontal Bar Chart
+      const prodGroups = {
+        'Đồ nội thất gỗ (Indoor/Outdoor)': 0,
+        'Ván ghép thanh & Phôi gỗ': 0,
+        'Gỗ & Sản phẩm gỗ tổng hợp': 0,
+        'Viên nén & Dăm gỗ sinh khối': 0,
+        'Gỗ nguyên liệu rừng trồng': 0
+      };
+      filteredData.forEach(d => {
+        const p = (d['Nhóm sản phẩm'] || '').toLowerCase();
+        if (p.includes('ghép') || p.includes('ván')) prodGroups['Ván ghép thanh & Phôi gỗ']++;
+        else if (p.includes('nội thất') || p.includes('bàn') || p.includes('ghế') || p.includes('tủ')) prodGroups['Đồ nội thất gỗ (Indoor/Outdoor)']++;
+        else if (p.includes('viên nén') || p.includes('dăm') || p.includes('sinh khối')) prodGroups['Viên nén & Dăm gỗ sinh khối']++;
+        else if (p.includes('nguyên liệu') || p.includes('gỗ tròn') || p.includes('xẻ')) prodGroups['Gỗ nguyên liệu rừng trồng']++;
+        else prodGroups['Gỗ & Sản phẩm gỗ tổng hợp']++;
+      });
+
+      const ctx4 = document.getElementById('productBarChart').getContext('2d');
+      if (charts.c4) charts.c4.destroy();
+      charts.c4 = new Chart(ctx4, {
         type: 'bar',
         data: {
-          labels: sortedCountries.map(x => x[0]),
+          labels: Object.keys(prodGroups),
           datasets: [{
-            label: 'Số sự kiện',
-            data: sortedCountries.map(x => x[1]),
-            backgroundColor: '#059669',
+            label: 'Số sự kiện tác động',
+            data: Object.values(prodGroups),
+            backgroundColor: ['#10b981', '#3b82f6', '#8b5cf6', '#f59e0b', '#14b8a6'],
             borderRadius: 6
           }]
         },
@@ -871,160 +1331,42 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
           scales: {
-            x: { grid: { color: '#1f2937' }, ticks: { color: '#94a3b8' } },
-            y: { grid: { display: false }, ticks: { color: '#cbd5e1' } }
+            x: { grid: { color: gridColor }, ticks: { color: textColor } },
+            y: { grid: { display: false }, ticks: { color: textColor, font: { size: 11 } } }
           }
         }
       });
-
-      // 3. Risk vs Opportunity by Month
-      const months = ['Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 11'];
-      const monthRisks = months.map(m => allData.filter(d => (d['Tháng Báo Cáo'] || '').includes(m) && ((d['Mức độ rủi rõ'] || '').includes('Cao') || Number(d['Rủi ro cao']) === 1)).length);
-      const monthOpps = months.map(m => allData.filter(d => (d['Tháng Báo Cáo'] || '').includes(m) && ((d['Top Cơ hội cho VN'] || '').includes('Cao') || Number(d['Cơ hội cao']) === 1)).length);
-
-      const monthCtx = document.getElementById('monthTrendChart').getContext('2d');
-      if (charts.month) charts.month.destroy();
-      charts.month = new Chart(monthCtx, {
-        type: 'bar',
-        data: {
-          labels: months,
-          datasets: [
-            { label: 'Rủi ro cao', data: monthRisks, backgroundColor: '#ef4444', borderRadius: 6 },
-            { label: 'Cơ hội cao', data: monthOpps, backgroundColor: '#10b981', borderRadius: 6 }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { position: 'top', labels: { color: '#94a3b8', font: { size: 11 } } }
-          },
-          scales: {
-            x: { grid: { display: false }, ticks: { color: '#cbd5e1' } },
-            y: { grid: { color: '#1f2937' }, ticks: { color: '#94a3b8' } }
-          }
-        }
-      });
-
-      // 4. Products Impacted Chart
-      const prodCounts = {};
-      allData.forEach(d => {
-        let p = d['Nhóm sản phẩm'] || 'Khác';
-        if (p.includes('ghép')) p = 'Gỗ ghép thanh';
-        else if (p.includes('nội thất')) p = 'Đồ nội thất';
-        else if (p.includes('viên nén')) p = 'Viên nén';
-        else if (p.includes('dăm')) p = 'Dăm gỗ';
-        else if (p.includes('gỗ tròn') || p.includes('xẻ')) p = 'Gỗ xẻ / tròn';
-        else p = 'Tổng hợp';
-        prodCounts[p] = (prodCounts[p] || 0) + 1;
-      });
-
-      const prodCtx = document.getElementById('productChart').getContext('2d');
-      if (charts.prod) charts.prod.destroy();
-      charts.prod = new Chart(prodCtx, {
-        type: 'polarArea',
-        data: {
-          labels: Object.keys(prodCounts),
-          datasets: [{
-            data: Object.values(prodCounts),
-            backgroundColor: ['rgba(16, 185, 129, 0.7)', 'rgba(59, 130, 246, 0.7)', 'rgba(245, 158, 11, 0.7)', 'rgba(236, 72, 153, 0.7)', 'rgba(139, 92, 246, 0.7)', 'rgba(100, 116, 139, 0.7)']
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { position: 'right', labels: { color: '#94a3b8', font: { size: 11 } } }
-          },
-          scales: { r: { grid: { color: '#1f2937' }, ticks: { display: false } } }
-        }
-      });
     }
 
-    function updateChartsTheme() {
-      renderCharts();
-    }
-
-    // Render Executive Insights (Top 5 Risks, Opps, Actions)
-    function renderInsights() {
-      // Top 5 High Risks
-      const highRiskList = allData.filter(d => (d['Mức độ rủi rõ'] || '').includes('Cao') || Number(d['Rủi ro cao']) === 1).slice(0, 6);
-      const riskContainer = document.getElementById('tabContentRisks');
-      riskContainer.innerHTML = highRiskList.map(r => `
-        <div onclick='openModal(${JSON.stringify(r).replace(/'/g, "&apos;")})' class="p-3.5 rounded-xl bg-red-950/20 border border-red-900/30 hover:border-red-600/50 cursor-pointer transition">
-          <div class="flex items-center justify-between mb-1.5">
-            <span class="text-[11px] font-bold text-red-400 font-mono">${r['ID'] || ''}</span>
-            <span class="text-[11px] px-2 py-0.5 rounded bg-red-500/20 text-red-300 font-semibold">${r['Quốc Gia Tác Động'] || 'Toàn cầu'}</span>
-          </div>
-          <h4 class="text-xs font-bold text-white mb-1 line-clamp-1">${r['Loại biến động'] || r['Nhóm biến động']}</h4>
-          <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed">${r['Nội dụng biến động'] || ''}</p>
-        </div>
-      `).join('');
-
-      // Top 5 High Opportunities
-      const highOppList = allData.filter(d => (d['Top Cơ hội cho VN'] || '').includes('Cao') || Number(d['Cơ hội cao']) === 1).slice(0, 6);
-      const oppContainer = document.getElementById('tabContentOpps');
-      oppContainer.innerHTML = highOppList.map(o => `
-        <div onclick='openModal(${JSON.stringify(o).replace(/'/g, "&apos;")})' class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-900/30 hover:border-emerald-600/50 cursor-pointer transition">
-          <div class="flex items-center justify-between mb-1.5">
-            <span class="text-[11px] font-bold text-emerald-400 font-mono">${o['ID'] || ''}</span>
-            <span class="text-[11px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold">${o['Quốc Gia Tác Động'] || 'Cơ hội'}</span>
-          </div>
-          <h4 class="text-xs font-bold text-white mb-1 line-clamp-1">${o['Loại biến động'] || o['Nhóm biến động']}</h4>
-          <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed">${o['Cơ hội cho VN'] || o['Nội dụng biến động'] || ''}</p>
-        </div>
-      `).join('');
-
-      // Top 5 Strategic Actions
-      const actionList = allData.filter(d => d['Hành động đề xuất'] && d['Hành động đề xuất'].length > 10).slice(0, 6);
-      const actionContainer = document.getElementById('tabContentActions');
-      actionContainer.innerHTML = actionList.map(a => `
-        <div onclick='openModal(${JSON.stringify(a).replace(/'/g, "&apos;")})' class="p-3.5 rounded-xl bg-blue-950/20 border border-blue-900/30 hover:border-blue-600/50 cursor-pointer transition">
-          <div class="flex items-center justify-between mb-1.5">
-            <span class="text-[11px] font-bold text-blue-400 font-mono">${a['ID'] || ''}</span>
-            <span class="text-[11px] px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-semibold">${a['Bộ phận phụ trách'] || 'Ban Giám Đốc'}</span>
-          </div>
-          <h4 class="text-xs font-bold text-white mb-1 line-clamp-1">${a['Loại biến động'] || a['Nhóm biến động']}</h4>
-          <p class="text-xs text-emerald-300/90 line-clamp-2 leading-relaxed">${a['Hành động đề xuất'] || ''}</p>
-        </div>
-      `).join('');
-    }
-
-    function switchTab(tab) {
-      ['Risks', 'Opps', 'Actions'].forEach(t => {
-        const btn = document.getElementById(`tabBtn${t}`);
-        const content = document.getElementById(`tabContent${t}`);
-        if (t.toLowerCase() === tab) {
-          btn.className = `px-3 py-1.5 rounded-lg text-xs font-semibold ${t === 'Risks' ? 'bg-red-500/20 text-red-400' : (t === 'Opps' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-blue-500/20 text-blue-400')} transition`;
-          content.classList.remove('hidden');
-        } else {
-          btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition';
-          content.classList.add('hidden');
-        }
-      });
-    }
-
-    // Modal Details
     function openModal(item) {
-      document.getElementById('modalId').textContent = item['ID'] || 'GMW-EVENT';
-      document.getElementById('modalDate').textContent = `${item['Ngày cập nhật'] || ''} (${item['Tháng Báo Cáo'] || item['Tháng'] || ''})`;
-      document.getElementById('modalTitle').textContent = item['Loại biến động'] || item['Nhóm biến động'] || 'Chi tiết sự kiện';
-      document.getElementById('modalContent').textContent = item['Nội dụng biến động'] || 'Không có mô tả chi tiết';
-      document.getElementById('modalGroup').textContent = item['Nhóm biến động'] || '--';
-      document.getElementById('modalCountry').textContent = item['Quốc Gia Tác Động'] || '--';
-      document.getElementById('modalProduct').textContent = item['Nhóm sản phẩm'] || '--';
-      document.getElementById('modalRisk').textContent = item['Mức độ rủi rõ'] || '--';
-      document.getElementById('modalOpp').textContent = item['Top Cơ hội cho VN'] || item['Cơ hội cho VN'] || '--';
-      document.getElementById('modalTrend').textContent = item['Xu hướng thị trường'] || '--';
-      document.getElementById('modalAction').textContent = item['Hành động đề xuất'] || 'Chưa có hành động cụ thể.';
-      document.getElementById('modalCompetitor').textContent = `Đối thủ cạnh tranh: ${item['Đối Thủ Cạnh tranh'] || 'Chưa xác định'}`;
+      document.getElementById('modalId').textContent = item['ID'] || '';
+      document.getElementById('modalPillarBadge').textContent = item['Nhóm biến động'] || '';
+      document.getElementById('modalDate').textContent = `${item['Ngày cập nhật'] || ''} (${item['Tháng Báo Cáo'] || ''})`;
+      document.getElementById('modalTitle').textContent = item['Loại biến động'] || item['Nhóm biến động'] || '';
+      document.getElementById('modalCountry').textContent = `${getCountryFlag(item['Quốc Gia Tác Động'])} ${item['Quốc Gia Tác Động'] || ''}`;
+      document.getElementById('modalMarkets').textContent = item['Thị trường liên quan'] || '';
+      document.getElementById('modalProduct').textContent = item['Nhóm sản phẩm'] || '';
+      document.getElementById('modalRiskOpp').textContent = `Rủi ro: ${item['Mức độ rủi rõ'] || 'TB'} | Cơ hội: ${item['Top Cơ hội cho VN'] || 'TB'}`;
+      document.getElementById('modalContent').textContent = item['Nội dụng biến động'] || '';
+      document.getElementById('modalTrend').textContent = `📈 Xu hướng thị trường: ${item['Xu hướng thị trường'] || ''}`;
 
-      const sourceLink = document.getElementById('modalSourceLink');
-      if (item['Link nguồn tin']) {
-        sourceLink.href = item['Link nguồn tin'];
-        sourceLink.classList.remove('hidden');
+      document.getElementById('modalImpactOrder').textContent = item['Đơn hàng'] || 'Đang theo dõi';
+      document.getElementById('modalImpactPrice').textContent = item['Giá bán'] || 'Đang theo dõi';
+      document.getElementById('modalImpactMaterial').textContent = item['Nguyên Liệu'] || 'Đang theo dõi';
+      document.getElementById('modalImpactLogistics').textContent = item['Logistics'] || 'Đang theo dõi';
+      document.getElementById('modalImpactFx').textContent = item['Tỷ Giá'] || 'Đang theo dõi';
+
+      document.getElementById('modalOppText').textContent = item['Cơ hội cho VN'] || '';
+      document.getElementById('modalActionText').textContent = item['Hành động đề xuất'] || '';
+      document.getElementById('modalCompetitor').textContent = `Đối thủ cạnh tranh: ${item['Đối Thủ Cạnh tranh'] || ''}`;
+      document.getElementById('modalDept').textContent = `Bộ phận phụ trách: ${item['Bộ phận phụ trách'] || 'Ban Giám Đốc'}`;
+
+      const linkEl = document.getElementById('modalSourceLink');
+      if (item['Link nguồn tin'] && String(item['Link nguồn tin']).startsWith('http')) {
+        linkEl.href = item['Link nguồn tin'];
+        linkEl.classList.remove('hidden');
       } else {
-        sourceLink.classList.add('hidden');
+        linkEl.classList.add('hidden');
       }
 
       document.getElementById('detailModal').classList.remove('hidden');
@@ -1035,7 +1377,6 @@
       document.getElementById('detailModal').classList.add('hidden');
     }
 
-    // Run Research Agent via n8n Webhook
     async function runResearchAgent() {
       const modal = document.getElementById('agentModal');
       const statusText = document.getElementById('agentStatusText');
@@ -1043,59 +1384,43 @@
       lucide.createIcons();
 
       try {
-        statusText.textContent = 'Đang gọi n8n Webhook & Tavily Search...';
+        statusText.textContent = 'Đang kích hoạt n8n Agent quét tin tức Mỹ, EU, Úc, Việt Nam...';
         const res = await fetch(N8N_WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            query: 'thị trường xuất khẩu gỗ Việt Nam giá gỗ keo ván ghép thanh EUDR 2026',
-            source: 'dashboard-trigger'
+            query: 'thị trường xuất khẩu gỗ Việt Nam Mỹ EU Úc Australia EUDR ILPA thuế quan giá gỗ 2026',
+            source: 'dashboard-v3'
           })
         });
-
         if (res.ok) {
           const result = await res.json();
-          statusText.textContent = `Thành công: ${result.message || 'Đã nạp thêm sự kiện mới!'}`;
-          setTimeout(() => {
-            modal.classList.add('hidden');
-            fetchSheetData(true);
-          }, 1500);
+          statusText.textContent = result.message || 'Đã cập nhật sự kiện mới vào Google Sheets!';
         } else {
-          statusText.textContent = 'Đã gửi yêu cầu kích hoạt n8n thành công. Đang tải lại dữ liệu...';
-          setTimeout(() => {
-            modal.classList.add('hidden');
-            fetchSheetData(true);
-          }, 2500);
+          statusText.textContent = 'Đã gửi lệnh chạy Agent thành công!';
         }
-      } catch (err) {
-        console.warn('Webhook call direct failed, workflow triggered in background:', err);
-        statusText.textContent = 'Đã phát lệnh chạy Agent! Đang đợi Google Sheets cập nhật...';
+      } catch (e) {
+        statusText.textContent = 'Agent đang xử lý dữ liệu và ghi vào Google Sheets...';
+      } finally {
         setTimeout(() => {
           modal.classList.add('hidden');
           fetchSheetData(true);
-        }, 3000);
+        }, 2200);
       }
     }
 
-    // Export to CSV
     function exportToCSV() {
       if (!filteredData.length) return;
-      const headers = Object.keys(filteredData[0]);
-      const csvRows = [headers.join(',')];
-
+      const csvRows = [STANDARD_COLS.join(',')];
       filteredData.forEach(row => {
-        const values = headers.map(h => {
-          const escape = ('' + (row[h] || '')).replace(/"/g, '""');
-          return `"${escape}"`;
-        });
-        csvRows.push(values.join(','));
+        const vals = STANDARD_COLS.map(c => `"${String(row[c] ?? '').replace(/"/g, '""')}"`);
+        csvRows.push(vals.join(','));
       });
-
-      const blob = new Blob([csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+      const blob = new Blob(['\uFEFF' + csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `GemmyWood_Market_Report_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.download = `GemmyWood_BaoCaoThiTruong_${new Date().toISOString().slice(0, 10)}.csv`;
       a.click();
     }
   </script>
