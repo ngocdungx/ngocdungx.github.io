@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kho Lưu Trữ File</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      color: #333;
+      background: linear-gradient(160deg, #fce4ec 0%, #f8bbd0 15%, #e8eaf6 35%, #e0f7fa 55%, #f3e5f5 75%, #e8f5e9 100%);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    /* Floating blobs */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .blob-1 {
+      width: 320px;
+      height: 320px;
+      background: #f8bbd0;
+      top: -80px;
+      left: -60px;
+      opacity: 0.45;
+    }
+
+    .blob-2 {
+      width: 250px;
+      height: 250px;
+      background: #90caf9;
+      top: -40px;
+      right: -50px;
+      opacity: 0.5;
+    }
+
+    .blob-3 {
+      width: 200px;
+      height: 200px;
+      background: #a5d6a7;
+      bottom: 40px;
+      left: 10%;
+      opacity: 0.35;
+    }
+
+    .blob-4 {
+      width: 140px;
+      height: 140px;
+      background: #ffcc80;
+      bottom: -30px;
+      left: 45%;
+      opacity: 0.55;
+    }
+
+    .blob-5 {
+      width: 180px;
+      height: 180px;
+      background: #b39ddb;
+      bottom: 10%;
+      right: 5%;
+      opacity: 0.3;
+    }
+
+    .blob-6 {
+      width: 100px;
+      height: 100px;
+      background: #1565c0;
+      top: 60px;
+      right: 15%;
+      opacity: 0.55;
+      filter: blur(40px);
+      border-radius: 50%;
+    }
+
+    /* Floating circles */
+    .circle-deco {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .circle-1 {
+      width: 90px;
+      height: 90px;
+      top: 8%;
+      left: 12%;
+      animation: floatUp 8s ease-in-out infinite;
+    }
+
+    .circle-2 {
+      width: 50px;
+      height: 50px;
+      top: 15%;
+      left: 25%;
+      animation: floatUp 6s ease-in-out infinite 1s;
+    }
+
+    .circle-3 {
+      width: 35px;
+      height: 35px;
+      bottom: 20%;
+      right: 18%;
+      animation: floatUp 7s ease-in-out infinite 2s;
+    }
+
+    @keyframes floatUp {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-18px);
+      }
+    }
+
+    /* Glass container */
+    .glass-container {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0%, rgba(248, 187, 208, 0.2) 40%, rgba(255, 255, 255, 0.45) 100%);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      padding: 36px;
+      width: 100%;
+      max-width: 920px;
+      margin: 24px 16px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Upload card */
+    .upload-card {
+      background: rgba(255, 255, 255, 0.65);
+      border: 2px dashed rgba(0, 0, 0, 0.08);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 24px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .upload-card.dragover {
+      border-color: #1976d2;
+      background: rgba(25, 118, 210, 0.04);
+    }
+
+    /* Primary button - matches the blue pill in the image */
+    .btn-primary-pill {
+      background: #1565c0;
+      border: none;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 50px;
+      width: 100%;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 4px 16px rgba(21, 101, 192, 0.3);
+    }
+
+    .btn-primary-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(21, 101, 192, 0.4);
+    }
+
+    .btn-primary-pill:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary-pill:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Action buttons */
+    .btn-action {
+      border: none;
+      min-width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .action-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+    }
+
+    .btn-dl {
+      background: rgba(21, 101, 192, 0.1);
+      color: #1565c0;
+    }
+
+    .btn-dl:hover {
+      background: #1565c0;
+      color: #fff;
+    }
+
+    .btn-del {
+      background: rgba(255, 152, 0, 0.1);
+      color: #f57c00;
+    }
+
+    .btn-del:hover {
+      background: #f57c00;
+      color: #fff;
+    }
+
+    /* No inner scroll - page scrolls naturally */
+    .file-list-wrap {
+      overflow: visible;
+    }
+
+    /* Table (desktop) */
+    .table-glass {
+      border-collapse: separate;
+      border-spacing: 0 8px;
+      width: 100%;
+    }
+
+    .table-glass thead th {
+      border: none;
+      color: #667;
+      font-weight: 600;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      padding: 12px 16px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(21, 101, 192, 0.08), rgba(30, 136, 229, 0.12));
+    }
+
+    .table-glass thead th:first-child {
+      border-radius: 12px 0 0 12px;
+    }
+
+    .table-glass thead th:last-child {
+      border-radius: 0 12px 12px 0;
+    }
+
+    .table-glass tbody tr {
+      background: rgba(255, 255, 255, 0.75);
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s;
+      border-radius: 12px;
+    }
+
+    .table-glass tbody tr:hover {
+      background: rgba(21, 101, 192, 0.05);
+    }
+
+    .table-glass td {
+      border: none;
+      padding: 10px 14px;
+      vertical-align: middle;
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    .table-glass td:first-child {
+      border-radius: 12px 0 0 12px;
+      text-align: left;
+    }
+
+    .table-glass td:last-child {
+      border-radius: 0 12px 12px 0;
+    }
+
+    .table-glass td:only-child {
+      border-radius: 12px;
+    }
+
+    .filename-cell {
+      white-space: normal;
+      word-break: break-word;
+      max-width: 300px;
+      font-weight: 600;
+      color: #333;
+      font-size: 0.88rem;
+    }
+
+    /* Mobile cards - compact */
+    .file-card {
+      background: rgba(255, 255, 255, 0.75);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.03);
+      display: none;
+    }
+
+    .file-card-name {
+      font-weight: 600;
+      font-size: 0.84rem;
+      color: #333;
+      word-break: break-word;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .file-card-meta {
+      display: flex;
+      gap: 14px;
+      font-size: 0.74rem;
+      color: #999;
+      margin-bottom: 8px;
+    }
+
+    .file-card-actions {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
+
+    /* Responsive */
+    @media(max-width:640px) {
+      body {
+        align-items: flex-start;
+      }
+
+      .glass-container {
+        margin: 10px 8px;
+        padding: 22px 16px;
+        border-radius: 22px;
+      }
+
+      .upload-card {
+        padding: 20px 14px;
+      }
+
+      .page-title {
+        font-size: 1.1rem !important;
+      }
+
+      .desktop-table {
+        display: none !important;
+      }
+
+      .file-card {
+        display: block !important;
+      }
+
+      .mobile-cards {
+        display: block !important;
+      }
+
+      .blob {
+        opacity: 0.3;
+      }
+    }
+
+    @media(min-width:641px) {
+      .mobile-cards {
+        display: none !important;
+      }
+    }
+
+    /* Misc */
+    .section-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 0 4px;
+      position: relative;
+    }
+
+    .section-header .btn-refresh {
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .badge-count {
+      background: #1565c0;
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-left: 8px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #bbb;
+    }
+
+    .empty-state i {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      display: block;
+      opacity: 0.4;
+    }
+
+    .footer-text {
+      text-align: center;
+      margin-top: 8px;
+      margin-bottom: 0;
+      color: #aaa;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      line-height: 1;
+    }
+
+    .footer-text a {
+      color: #1565c0;
+      font-size: 1rem;
+      transition: opacity 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+    }
+
+    .footer-text a:hover {
+      opacity: 0.7;
+    }
+
+    .file-input-wrapper input[type="file"] {
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      animation: fadeUp 0.5s ease forwards;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Decorative blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+  <div class="blob blob-5"></div>
+  <div class="blob blob-6"></div>
+  <div class="circle-deco circle-1"></div>
+  <div class="circle-deco circle-2"></div>
+  <div class="circle-deco circle-3"></div>
+
+  <div class="glass-container fade-up">
+    <div class="text-center mb-4">
+      <h3 class="page-title" style="font-weight:800;color:#333;margin:0;">
+        <i class="bi bi-cloud-check-fill" style="color:#1565c0;"></i> XFILE - LƯU TRỮ TÀI LIỆU
+      </h3>
+    </div>
+
+    <!-- UPLOAD -->
+    <div class="upload-card" id="dropZone">
+      <label class="form-label fw-semibold" style="font-size:0.78rem;letter-spacing:0.5px;color:#999;">TẢI LÊN FILE MỚI
+        (<50MB)< /label>
+          <div class="d-flex gap-2 align-items-center flex-wrap">
+            <div class="file-input-wrapper" style="flex:1;min-width:0;">
+              <input type="file" id="fileInput" class="form-control" multiple>
+            </div>
+            <button onclick="handleUploadBatch()" class="btn-primary-pill" id="btnUpload"
+              style="width:auto;white-space:nowrap;padding:12px 20px;">
+              <i class="bi bi-cloud-upload me-1"></i>TẢI LÊN
+            </button>
+          </div>
+          <div id="progressContainer" class="mt-3" style="display:none;">
+            <div class="d-flex justify-content-between small mb-2">
+              <span id="progressText" class="fw-bold">Đang tải...</span>
+              <span id="currentFileName" class="text-secondary fst-italic text-truncate" style="max-width:50%;"></span>
+            </div>
+            <div class="progress" style="height:5px;border-radius:10px;background:rgba(0,0,0,0.04);">
+              <div id="progressBar" class="progress-bar" role="progressbar"
+                style="width:0%;background:#1565c0;transition:width 0.3s;border-radius:10px;"></div>
+            </div>
+          </div>
+          <div id="status" class="mt-3"></div>
+    </div>
+
+    <!-- FILE LIST -->
+    <div class="section-header">
+      <h6 class="m-0 fw-bold" style="font-size:1rem;letter-spacing:0.5px;color:#666;">
+        DANH SÁCH FILE <span id="fileCount" class="badge-count" style="display:none;">0</span>
+      </h6>
+      <button onclick="loadFiles()" class="btn btn-light btn-sm shadow-sm fw-bold rounded-pill px-3 btn-refresh"
+        style="font-size:0.78rem;color:#1565c0;">
+        <i class="bi bi-arrow-clockwise"></i> Làm mới
+      </button>
+    </div>
+
+    <div class="file-list-wrap">
+      <table class="table table-glass desktop-table">
+        <thead>
+          <tr>
+            <th>Tên File</th>
+            <th style="width:90px;text-align:center;">Size</th>
+            <th style="width:100px;text-align:center;">Ngày</th>
+            <th style="width:110px;text-align:center;">Action</th>
+          </tr>
+        </thead>
+        <tbody id="fileTableBody"></tbody>
+      </table>
+      <div class="mobile-cards" id="fileCardContainer"></div>
+    </div>
+
+    <div class="footer-text">Một dự án của DungX <a href="https://www.facebook.com/tangocdungx" target="_blank"
+        title="Facebook"><i class="bi bi-facebook"></i></a></div>
+  </div>
+
+  <script>
+    // --- CẤU HÌNH API ---
+    // Dán URL Web App bạn nhận được sau khi Deploy Google Apps Script vào đây:
+    const API_URL = "https://script.google.com/macros/s/AKfycbwhoBwBvunUxUZmhGtQEicOOSiCHdMh6X06BGqI-KYLUm-tE7H8eBMtFgGdIH5SbXug/exec";
+
+    window.onload = function () {
+      loadFiles();
+      setupDragDrop();
+    };
+
+    function checkConfig() {
+      if (!API_URL || API_URL.includes("DÁN_URL")) {
+        return false;
+      }
+      return true;
+    }
+
+    function setupDragDrop() {
+      var dz = document.getElementById('dropZone');
+      ['dragenter', 'dragover'].forEach(function (ev) {
+        dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.add('dragover'); });
+      });
+      ['dragleave', 'drop'].forEach(function (ev) {
+        dz.addEventListener(ev, function (e) { e.preventDefault(); dz.classList.remove('dragover'); });
+      });
+      dz.addEventListener('drop', function (e) {
+        if (e.dataTransfer.files.length > 0) document.getElementById('fileInput').files = e.dataTransfer.files;
+      });
+    }
+
+    async function handleUploadBatch() {
+      if (!checkConfig()) {
+        alert("Chưa cấu hình API_URL! Vui lòng mở file index.html và dán link Web App của Google Apps Script.");
+        return;
+      }
+      var fileInput = document.getElementById('fileInput');
+      var files = fileInput.files;
+      if (files.length === 0) { alert("Chưa chọn file!"); return; }
+      var btn = document.getElementById('btnUpload');
+      var pc = document.getElementById('progressContainer');
+      var pb = document.getElementById('progressBar');
+      var pt = document.getElementById('progressText');
+      var cf = document.getElementById('currentFileName');
+      var st = document.getElementById('status');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Đang tải...';
+      pc.style.display = 'block'; st.innerHTML = "";
+      var total = files.length, ok = 0, fail = 0, failed = [];
+      for (var i = 0; i < total; i++) {
+        cf.innerText = files[i].name;
+        try {
+          await uploadSingleFilePromise(files[i]);
+          ok++;
+        } catch (err) {
+          fail++;
+          failed.push(files[i].name + " (" + err + ")");
+        }
+        pb.style.width = Math.round(((i + 1) / total) * 100) + "%";
+        pt.innerText = 'Hoàn thành ' + (i + 1) + '/' + total;
+      }
+      btn.disabled = false;
+      btn.innerHTML = '<i class="bi bi-cloud-upload me-1"></i>TẢI LÊN';
+      cf.innerText = ""; pc.style.display = 'none'; pb.style.width = "0%"; fileInput.value = "";
+      loadFiles();
+      if (fail === 0) {
+        st.innerHTML = '<div class="alert alert-success border-0 shadow-sm rounded-3 py-2 px-3" style="font-size:0.88rem;">✅ Đã tải lên ' + ok + ' file thành công!</div>';
+        setTimeout(function () { st.innerHTML = ""; }, 4000);
+      } else {
+        var el = failed.map(function (n) { return '<li>' + n + '</li>'; }).join('');
+        st.innerHTML = '<div class="alert alert-warning border-0 shadow-sm rounded-3 py-2 px-3" style="font-size:0.88rem;">⚠️ Lỗi ' + fail + ' file:<ul class="mt-2 mb-0 text-danger small">' + el + '</ul></div>';
+      }
+    }
+
+    function uploadSingleFilePromise(file) {
+      return new Promise(function (resolve, reject) {
+        if (file.size > 50 * 1024 * 1024) { reject("File '" + file.name + "' vượt quá 50MB"); return; }
+        var r = new FileReader();
+        r.onerror = function () { reject("Không thể đọc file: " + file.name); };
+        r.onload = async function () {
+          try {
+            var payload = {
+              action: "upload",
+              data: r.result,
+              name: file.name,
+              type: file.type || "application/octet-stream"
+            };
+            // Dùng text/plain để tránh CORS preflight OPTIONS request bị chặn trên GAS
+            var response = await fetch(API_URL, {
+              method: "POST",
+              headers: { "Content-Type": "text/plain;charset=utf-8" },
+              body: JSON.stringify(payload)
+            });
+            var res = await response.json();
+            if (res.status === "success") {
+              resolve(res.data);
+            } else {
+              reject(res.message || "Lỗi tải file lên Drive");
+            }
+          } catch (err) {
+            reject(err.message || "Lỗi kết nối");
+          }
+        };
+        r.readAsDataURL(file);
+      });
+    }
+
+    async function loadFiles() {
+      var tb = document.getElementById('fileTableBody');
+      var cc = document.getElementById('fileCardContainer');
+      var cb = document.getElementById('fileCount');
+
+      if (!checkConfig()) {
+        var notice = '<div class="alert alert-warning border-0 shadow-sm rounded-3 p-3 text-start m-2">' +
+          '<div class="fw-bold mb-1"><i class="bi bi-exclamation-triangle-fill me-1 text-warning"></i> Chưa liên kết API Google Apps Script</div>' +
+          '<div class="small text-muted">Vui lòng Deploy Google Apps Script dưới dạng Web App và dán URL vào biến <code>API_URL</code> trong file <code>index.html</code>.</div>' +
+          '</div>';
+        tb.innerHTML = '<tr><td colspan="4">' + notice + '</td></tr>';
+        cc.innerHTML = notice;
+        cb.style.display = 'none';
+        return;
+      }
+
+      tb.innerHTML = '<tr><td colspan="4" class="text-center p-4"><div class="spinner-border text-primary"></div></td></tr>';
+      cc.innerHTML = '<div class="text-center p-4"><div class="spinner-border text-primary"></div></div>';
+
+      try {
+        var response = await fetch(API_URL + "?action=list");
+        var res = await response.json();
+
+        if (res.status !== "success") {
+          throw new Error(res.message || "Không thể tải danh sách");
+        }
+
+        var files = res.data || [];
+        var th = "", ch = "", cnt = 0;
+        if (files.length === 0) {
+          var em = '<div class="empty-state"><i class="bi bi-inbox"></i>Chưa có file nào</div>';
+          tb.innerHTML = '<tr><td colspan="4">' + em + '</td></tr>';
+          cc.innerHTML = em;
+          cb.style.display = 'none';
+        } else {
+          files.forEach(function (f) {
+            if (f.isTrashed) return;
+            cnt++;
+            var dateDisplay = f.date ? f.date.split(' ')[0] : '';
+            th += '<tr><td class="filename-cell ps-4"><i class="bi bi-file-earmark-text-fill me-2" style="color:#1565c0;"></i>' + f.name + '</td>'
+              + '<td class="text-muted small">' + f.size + '</td>'
+              + '<td class="text-muted small">' + dateDisplay + '</td>'
+              + '<td><div class="action-group">'
+              + '<a href="' + f.url + '" target="_blank" class="btn-action btn-dl" title="Tải"><i class="bi bi-download"></i></a>'
+              + '<button onclick="deleteOneFile(\'' + f.id + '\',this)" class="btn-action btn-del" title="Xóa"><i class="bi bi-trash"></i></button>'
+              + '</div></td></tr>';
+            ch += '<div class="file-card">'
+              + '<div class="file-card-name"><i class="bi bi-file-earmark-text-fill" style="color:#1565c0;flex-shrink:0;margin-top:2px;"></i><span>' + f.name + '</span></div>'
+              + '<div class="file-card-meta"><span><i class="bi bi-hdd me-1"></i>' + f.size + '</span><span><i class="bi bi-calendar3 me-1"></i>' + dateDisplay + '</span></div>'
+              + '<div class="file-card-actions">'
+              + '<a href="' + f.url + '" target="_blank" class="btn-action btn-dl"><i class="bi bi-download me-1"></i>Tải</a>'
+              + '<button onclick="deleteOneFile(\'' + f.id + '\',this)" class="btn-action btn-del"><i class="bi bi-trash me-1"></i>Xóa</button>'
+              + '</div></div>';
+          });
+          tb.innerHTML = th;
+          cc.innerHTML = ch;
+          cb.textContent = cnt;
+          cb.style.display = cnt > 0 ? 'inline' : 'none';
+        }
+      } catch (err) {
+        var errHtml = '<div class="alert alert-danger border-0 shadow-sm rounded-3 p-3 text-start m-2">' +
+          '<div class="fw-bold mb-1"><i class="bi bi-x-circle-fill me-1 text-danger"></i> Lỗi kết nối Google Drive</div>' +
+          '<div class="small">' + err.message + '</div>' +
+          '</div>';
+        tb.innerHTML = '<tr><td colspan="4">' + errHtml + '</td></tr>';
+        cc.innerHTML = errHtml;
+        cb.style.display = 'none';
+      }
+    }
+
+    async function deleteOneFile(id, el) {
+      if (!confirm("Xác nhận xóa?")) return;
+      var origHtml = "";
+      if (el) {
+        origHtml = el.innerHTML;
+        el.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+        el.disabled = true;
+      }
+      try {
+        var payload = {
+          action: "delete",
+          fileId: id
+        };
+        var response = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+        var res = await response.json();
+        if (res.status === "success") {
+          loadFiles();
+        } else {
+          alert("Lỗi xóa file: " + (res.message || "Không thể xóa"));
+          if (el) { el.innerHTML = origHtml; el.disabled = false; }
+        }
+      } catch (err) {
+        alert("Lỗi kết nối: " + err.message);
+        if (el) { el.innerHTML = origHtml; el.disabled = false; }
+      }
+    }
+  </script>
+</body>
+
+</html>
