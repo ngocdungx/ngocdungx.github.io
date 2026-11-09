@@ -75,7 +75,9 @@
           <!-- FAR LEFT: Month Selector Dropdown ("Xem tháng khác" when active month is in top 3) -->
           <select id="monthSelectDropdown" onchange="onMonthDropdownChange(this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm shrink-0 cursor-pointer">
             <option value="OTHER_PLACEHOLDER" selected>📅 Xem tháng khác</option>
-            <option value="ALL">Tất cả kỳ (Lũy kế)</option>
+            <option value="1Y">1 năm</option>
+            <option value="6M">6 tháng</option>
+            <option value="3M">3 tháng</option>
             <option value="Tháng 10">10/2026</option>
             <option value="Tháng 9">09/2026</option>
             <option value="Tháng 8">08/2026</option>
@@ -235,16 +237,17 @@
     </section>
 
     <!-- SECTION 2: CHARTS ANALYTICS (3 CLEAN COLUMNS) -->
-    <section class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+    <!-- SECTION 2: CHARTS & INTELLIGENCE VISUALIZATION (2x2 GRID, 4 ADVANCED CHARTS) -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
       <!-- Chart 1: Monthly Timeline Trend -->
       <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
         <div class="mb-3">
           <h2 class="text-sm font-extrabold uppercase tracking-wide text-slate-900 dark:text-white">
             1. Diễn Biến Biến Động Qua Các Tháng
           </h2>
-          <p class="text-xs text-slate-500 mt-0.5">Số lượng sự kiện, rủi ro cao và cơ hội cao từ Tháng 5 đến Tháng 10</p>
+          <p class="text-xs text-slate-500 mt-0.5">Xu hướng tổng số lượng sự kiện, rủi ro cao và cơ hội cao qua các kỳ</p>
         </div>
-        <div class="h-60 relative">
+        <div class="h-64 sm:h-72 relative">
           <canvas id="monthlyTimelineChart"></canvas>
         </div>
       </div>
@@ -257,20 +260,33 @@
           </h2>
           <p class="text-xs text-slate-500 mt-0.5">Phân bổ tại Hoa Kỳ, Châu Âu, Úc, Việt Nam, Nhật/Hàn, Anh/Canada</p>
         </div>
-        <div class="h-60 relative">
+        <div class="h-64 sm:h-72 relative">
           <canvas id="marketCompareChart"></canvas>
         </div>
       </div>
 
-      <!-- Chart 3: Pillar Breakdown -->
+      <!-- Chart 3: Operational Value Chain Radar (NEW) -->
       <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
         <div class="mb-3">
           <h2 class="text-sm font-extrabold uppercase tracking-wide text-slate-900 dark:text-white">
-            3. Phân Bổ Theo Trụ Cột Vĩ Mô & Pháp Lý
+            3. Đánh Giá Tác Động Vào 5 Mắt Xích Vận Hành SXKD
           </h2>
-          <p class="text-xs text-slate-500 mt-0.5">Tỷ trọng Kinh tế, Thuế quan, Luật pháp, Logistics, Nguyên liệu</p>
+          <p class="text-xs text-slate-500 mt-0.5">Radar so sánh áp lực rủi ro vs tiềm năng cơ hội (Đơn hàng, Giá bán, Nguyên liệu, Logistics, Tỷ giá)</p>
         </div>
-        <div class="h-60 relative">
+        <div class="h-64 sm:h-72 relative flex items-center justify-center">
+          <canvas id="operationsRadarChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 4: Pillar Breakdown -->
+      <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+        <div class="mb-3">
+          <h2 class="text-sm font-extrabold uppercase tracking-wide text-slate-900 dark:text-white">
+            4. Phân Bổ Trọng Tâm Biến Động Theo Trụ Cột Vĩ Mô
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">Tỷ trọng các nhóm: Kinh tế, Thuế quan, Tiêu chuẩn EUDR/Luật, Logistics, Nguyên liệu</p>
+        </div>
+        <div class="h-64 sm:h-72 relative flex items-center justify-center">
           <canvas id="pillarDonutChart"></canvas>
         </div>
       </div>
@@ -314,7 +330,7 @@
           <select id="pageSizeSelect" onchange="changePageSize(this.value)" class="bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-1.5 font-semibold text-slate-800 dark:text-slate-200 shadow-sm">
             <option value="15">15 sự kiện / trang</option>
             <option value="30">30 sự kiện / trang</option>
-            <option value="100" selected>Tất cả theo tháng</option>
+            <option value="100" selected>Tất cả theo kỳ</option>
           </select>
         </div>
       </div>
@@ -480,13 +496,30 @@
     ];
 
     const MONTH_METADATA = {
-      'ALL': {
-        title: 'TỔNG HỢP LŨY KẾ 6 THÁNG (THÁNG 5 – THÁNG 10/2026)',
+      '1Y': {
+        title: 'TỔNG HỢP 1 NĂM (THÁNG 5 – THÁNG 10/2026)',
         highlights: [
           'Hoa Kỳ: Chuyển từ ứng phó rủi ro thuế đối ứng sang tận dụng chu kỳ FED hạ lãi suất kích cầu nhà ở, song hải quan CBP siết rất chặt hồ sơ xuất xứ.',
           'Châu Âu: Luật EUDR bước vào giai đoạn thực thi khai báo tọa độ Polygon, tạo lợi thế lớn cho các nhà cung ứng có nguồn gỗ keo FSC như Gemmy Wood.',
           'Úc: Thị trường tăng trưởng bứt phá nhờ chương trình 1,2 triệu nhà ở mới và thuế ưu đãi 0% AANZFTA, đi kèm đạo luật gỗ hợp pháp ILPA mới.',
           'Việt Nam & G7: Giá gỗ keo FSC miền Bắc tăng 6–10% dịp cuối năm; đơn hàng ván ghép thanh đi Nhật, Hàn, Anh, Canada duy trì ổn định quanh năm.'
+        ]
+      },
+      '6M': {
+        title: 'TỔNG HỢP 6 THÁNG GẦN NHẤT',
+        highlights: [
+          'Hoa Kỳ: FED cắt giảm lãi suất thúc đẩy thị trường nhà ở, nhưng hải quan siết điều tra xuất xứ tủ gỗ và ván ép.',
+          'Châu Âu: Bước vào lộ trình bắt buộc khai báo tọa độ địa lý Polygon trên cổng EUDR Traces NT.',
+          'Úc: Gói 1,2 triệu nhà ở mới và thuế ưu đãi 0% theo AANZFTA thúc đẩy đơn hàng mặt bàn gỗ keo.',
+          'Nguyên liệu: Giá phôi gỗ keo sấy miền Bắc giữ xu hướng tăng 6–10% phục vụ các đơn hàng vụ Đông – Xuân.'
+        ]
+      },
+      '3M': {
+        title: 'TỔNG HỢP 3 THÁNG GẦN NHẤT',
+        highlights: [
+          'Hoa Kỳ: Lãi suất vay mua nhà hạ về ~6,1% giúp các nhà nhập khẩu tự tin đặt hàng trở lại cho mùa cuối năm.',
+          'Úc: Thực thi Đạo luật ILPA kiểm định sợi gỗ nghiêm ngặt đối với sản phẩm gỗ tự nhiên nhập khẩu.',
+          'Nguyên liệu: Cạnh tranh thu mua gỗ keo FSC tăng nhiệt tại Phú Thọ & Tuyên Quang, nhà máy cần dự trữ 45–60 ngày.'
         ]
       },
       'Tháng 10': {
@@ -703,8 +736,15 @@
     }
 
     function matchMonthRecord(item, monthKey) {
-      if (monthKey === 'ALL') return true;
-      return (item['Tháng Báo Cáo'] || '').trim() === monthKey;
+      if (!monthKey || monthKey === 'ALL' || monthKey === '1Y') return true;
+      const m = (item['Tháng Báo Cáo'] || '').trim();
+      if (monthKey === '3M') {
+        return ['Tháng 10', 'Tháng 9', 'Tháng 8'].includes(m);
+      }
+      if (monthKey === '6M') {
+        return ['Tháng 10', 'Tháng 9', 'Tháng 8', 'Tháng 7', 'Tháng 6', 'Tháng 5'].includes(m);
+      }
+      return m === monthKey;
     }
 
     function matchMarketRecord(item, marketKey) {
@@ -882,13 +922,21 @@
 
       // Summary label
       const filterParts = [];
-      if (activeMonth !== 'ALL') filterParts.push(activeMonth + '/2026');
+      if (activeMonth === '1Y') {
+        filterParts.push('Thời gian: 1 năm');
+      } else if (activeMonth === '6M') {
+        filterParts.push('Thời gian: 6 tháng');
+      } else if (activeMonth === '3M') {
+        filterParts.push('Thời gian: 3 tháng');
+      } else if (activeMonth && activeMonth !== 'ALL') {
+        filterParts.push(activeMonth + '/2026');
+      }
       if (activeMarket !== 'ALL') filterParts.push(`Thị trường: ${activeMarket}`);
       if (activePillar !== 'ALL') filterParts.push(`Trụ cột: ${activePillar}`);
       if (activeRisk !== 'ALL') filterParts.push(`Rủi ro: ${activeRisk}`);
       document.getElementById('activeFilterSummaryText').textContent = filterParts.length
         ? `Đang lọc: ${filterParts.join(' • ')}`
-        : 'Đang hiển thị: Toàn bộ dữ liệu (T5 – T10/2026)';
+        : 'Đang hiển thị: Toàn bộ dữ liệu (1 năm)';
 
       // Highlight active KPI Pillar Card
       ['ALL', 'Kinh tế', 'Thuế quan', 'Luật pháp', 'Logistics', 'Nguyên liệu'].forEach(k => {
@@ -1179,6 +1227,53 @@
       renderTable();
     }
 
+    function getOperationalLinkScores(dataList) {
+      const links = [
+        { key: 'order', label: '📦 Đơn hàng' },
+        { key: 'price', label: '💵 Giá bán' },
+        { key: 'material', label: '🌲 Nguyên liệu' },
+        { key: 'logistics', label: '🚢 Logistics' },
+        { key: 'fx', label: '💱 Tỷ giá' }
+      ];
+
+      const riskScores = [0, 0, 0, 0, 0];
+      const oppScores = [0, 0, 0, 0, 0];
+
+      dataList.forEach(r => {
+        const isRisk = (r['Mức độ rủi rõ'] || '').includes('Cao') || Number(r['Rủi ro cao']) === 1;
+        const isOpp = (r['Top Cơ hội cho VN'] || '').includes('Cao') || Number(r['Cơ hội cao']) === 1;
+        const txt = `${r['Nhóm biến động'] || ''} ${r['Loại biến động'] || ''} ${r['Nội dụng biến động'] || ''} ${r['Đơn hàng'] || ''} ${r['Giá bán'] || ''} ${r['Nguyên Liệu'] || ''} ${r['Logistics'] || ''} ${r['Tỷ Giá'] || ''}`.toLowerCase();
+
+        // 0: Đơn hàng
+        if (txt.includes('đơn hàng') || txt.includes('nhu cầu') || txt.includes('sức mua') || txt.includes('tiêu thụ')) {
+          if (isRisk) riskScores[0]++;
+          if (isOpp) oppScores[0]++;
+        }
+        // 1: Giá bán
+        if (txt.includes('giá bán') || txt.includes('thuế') || txt.includes('phòng vệ') || txt.includes('biên lợi nhuận') || txt.includes('biên gộp')) {
+          if (isRisk) riskScores[1]++;
+          if (isOpp) oppScores[1]++;
+        }
+        // 2: Nguyên liệu
+        if (txt.includes('nguyên liệu') || txt.includes('keo') || txt.includes('fsc') || txt.includes('phôi sấy') || txt.includes('rừng trồng') || txt.includes('eudr') || txt.includes('ilpa')) {
+          if (isRisk) riskScores[2]++;
+          if (isOpp) oppScores[2]++;
+        }
+        // 3: Logistics
+        if (txt.includes('logistics') || txt.includes('cước') || txt.includes('tàu biển') || txt.includes('container') || txt.includes('vận tải') || txt.includes('hảo vọng')) {
+          if (isRisk) riskScores[3]++;
+          if (isOpp) oppScores[3]++;
+        }
+        // 4: Tỷ giá
+        if (txt.includes('tỷ giá') || txt.includes('usd') || txt.includes('lãi suất') || txt.includes('fed') || txt.includes('jpy') || txt.includes('tài chính')) {
+          if (isRisk) riskScores[4]++;
+          if (isOpp) oppScores[4]++;
+        }
+      });
+
+      return { labels: links.map(l => l.label), riskScores, oppScores };
+    }
+
     function renderCharts() {
       const isDark = document.documentElement.classList.contains('dark');
       const textColor = isDark ? '#94a3b8' : '#475569';
@@ -1264,7 +1359,53 @@
         }
       });
 
-      // 3. Pillar Donut Chart
+      // 3. Operations Value Chain Radar Chart (NEW)
+      const radarData = getOperationalLinkScores(monthScoped);
+      const ctx4 = document.getElementById('operationsRadarChart').getContext('2d');
+      if (charts.c4) charts.c4.destroy();
+      charts.c4 = new Chart(ctx4, {
+        type: 'radar',
+        data: {
+          labels: radarData.labels,
+          datasets: [
+            {
+              label: 'Áp lực Rủi ro',
+              data: radarData.riskScores,
+              borderColor: '#dc2626',
+              backgroundColor: 'rgba(220, 38, 38, 0.18)',
+              borderWidth: 2,
+              pointBackgroundColor: '#dc2626',
+              pointRadius: 4
+            },
+            {
+              label: 'Dư địa Cơ hội',
+              data: radarData.oppScores,
+              borderColor: '#059669',
+              backgroundColor: 'rgba(5, 150, 105, 0.18)',
+              borderWidth: 2,
+              pointBackgroundColor: '#059669',
+              pointRadius: 4
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', labels: { color: textColor, font: { size: 11 }, boxWidth: 12 } }
+          },
+          scales: {
+            r: {
+              grid: { color: gridColor },
+              angleLines: { color: gridColor },
+              pointLabels: { color: textColor, font: { size: 11, weight: 'bold' } },
+              ticks: { display: false, stepSize: 2 }
+            }
+          }
+        }
+      });
+
+      // 4. Pillar Donut Chart
       const pillarCounts = {};
       filteredData.forEach(d => {
         const p = d['Nhóm biến động'] || 'Khác';
