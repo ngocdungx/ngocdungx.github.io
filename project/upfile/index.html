@@ -319,19 +319,42 @@
     }
 
     .filename-cell {
-      white-space: normal;
-      word-break: break-word;
-      max-width: 300px;
+      padding-left: 20px !important;
+      vertical-align: middle;
+      max-width: 380px;
+    }
+
+    .filename-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      white-space: nowrap;
+    }
+
+    .filename-wrap i {
+      flex-shrink: 0;
+      font-size: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+      margin: 0 !important;
+    }
+
+    .filename-wrap .fname {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       font-weight: 600;
-      color: #333;
-      font-size: 0.88rem;
+      color: #2c3e50;
+      font-size: 0.9rem;
     }
 
     /* Mobile cards - compact */
     .file-card {
       background: rgba(255, 255, 255, 0.75);
       border-radius: 16px;
-      padding: 18px;
+      padding: 16px 18px;
       margin-bottom: 12px;
       box-shadow: 0 1px 8px rgba(0, 0, 0, 0.03);
       display: none;
@@ -339,13 +362,29 @@
 
     .file-card-name {
       font-weight: 600;
-      font-size: 0.84rem;
-      color: #333;
-      word-break: break-word;
-      margin-bottom: 6px;
+      font-size: 0.88rem;
+      color: #2c3e50;
+      margin-bottom: 8px;
       display: flex;
-      align-items: flex-start;
-      gap: 6px;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .file-card-name i {
+      flex-shrink: 0;
+      font-size: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+      margin: 0 !important;
+    }
+
+    .file-card-name .fname {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .file-card-meta {
@@ -485,7 +524,7 @@
       background: rgba(255, 255, 255, 0.9);
       border: 1.5px solid rgba(21, 101, 192, 0.25);
       border-radius: 50px;
-      padding: 4px 16px 4px 5px;
+      padding: 0 16px 0 4px;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -493,6 +532,7 @@
       transition: all 0.25s ease;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
       user-select: none;
+      box-sizing: border-box;
     }
 
     .custom-file-picker:hover {
@@ -504,16 +544,29 @@
 
     .picker-btn {
       flex: 0 0 auto;
+      height: 38px;
       background: linear-gradient(135deg, #e3f2fd, #bbdefb);
       color: #1565c0;
       font-weight: 600;
       font-size: 0.88rem;
-      padding: 8px 18px;
-      border-radius: 40px;
+      padding: 0 18px;
+      border-radius: 50px;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
+      gap: 6px;
+      line-height: 1;
+      margin: 0;
       box-shadow: 0 1px 3px rgba(21, 101, 192, 0.15);
       transition: all 0.25s ease;
+    }
+
+    .picker-btn i {
+      font-size: 1.05rem;
+      line-height: 1;
+      margin: 0 !important;
+      display: inline-flex;
+      align-items: center;
     }
 
     .custom-file-picker:hover .picker-btn {
@@ -722,19 +775,28 @@
       var files = input.files;
 
       if (!files || files.length === 0) {
-        textEl.innerText = "Chưa có tệp nào được chọn (hoặc kéo thả vào đây)";
+        textEl.innerHTML = '<span class="text-muted">Chưa có tệp nào được chọn (hoặc kéo thả vào đây)</span>';
         textEl.classList.remove('has-files');
         if (clearBtn) clearBtn.classList.add('d-none');
       } else if (files.length === 1) {
         var sz = (files[0].size / 1024 / 1024).toFixed(2);
-        textEl.innerText = files[0].name + " (" + sz + " MB)";
+        var icon = getFileIcon(files[0].name);
+        textEl.innerHTML = '<span class="d-inline-flex align-items-center gap-2 text-truncate" style="max-width:100%;white-space:nowrap;">'
+          + icon
+          + '<span class="text-truncate fw-semibold" style="color:#1565c0;">' + files[0].name + '</span>'
+          + '<small class="text-muted flex-shrink-0 ms-1">(' + sz + ' MB)</small>'
+          + '</span>';
         textEl.classList.add('has-files');
         if (clearBtn) clearBtn.classList.remove('d-none');
       } else {
         var totalSize = 0;
         for (var i = 0; i < files.length; i++) totalSize += files[i].size;
         var totalSzMb = (totalSize / 1024 / 1024).toFixed(2);
-        textEl.innerText = "Đã chọn " + files.length + " tệp (" + totalSzMb + " MB)";
+        textEl.innerHTML = '<span class="d-inline-flex align-items-center gap-2 text-truncate" style="max-width:100%;white-space:nowrap;">'
+          + '<i class="bi bi-collection-fill text-primary"></i>'
+          + '<span class="text-truncate fw-semibold" style="color:#1565c0;">Đã chọn ' + files.length + ' tệp</span>'
+          + '<small class="text-muted flex-shrink-0 ms-1">(' + totalSzMb + ' MB)</small>'
+          + '</span>';
         textEl.classList.add('has-files');
         if (clearBtn) clearBtn.classList.remove('d-none');
       }
@@ -782,7 +844,10 @@
       pc.style.display = 'block'; st.innerHTML = "";
       var total = files.length, ok = 0, fail = 0, failed = [];
       for (var i = 0; i < total; i++) {
-        cf.innerText = files[i].name;
+        cf.innerHTML = '<span class="d-inline-flex align-items-center gap-1 text-truncate" style="max-width:100%;white-space:nowrap;">'
+          + getFileIcon(files[i].name)
+          + '<span class="text-truncate">' + files[i].name + '</span>'
+          + '</span>';
         try {
           await uploadSingleFilePromise(files[i]);
           ok++;
@@ -972,7 +1037,7 @@
             cnt++;
             var dateDisplay = formatDateTime(f.date);
             var iconHtml = getFileIcon(f.name);
-            th += '<tr><td class="filename-cell ps-4">' + iconHtml + '<span>' + f.name + '</span></td>'
+            th += '<tr><td class="filename-cell ps-4"><div class="filename-wrap">' + iconHtml + '<span class="fname" title="' + f.name + '">' + f.name + '</span></div></td>'
               + '<td class="text-muted small text-center">' + f.size + '</td>'
               + '<td class="text-muted small text-center" style="white-space:nowrap;font-size:0.83rem;"><i class="bi bi-clock me-1 text-primary"></i>' + dateDisplay + '</td>'
               + '<td><div class="action-group">'
@@ -980,7 +1045,7 @@
               + '<button onclick="deleteOneFile(\'' + f.id + '\',this)" class="btn-action btn-del" title="Xóa file"><i class="bi bi-trash"></i></button>'
               + '</div></td></tr>';
             ch += '<div class="file-card">'
-              + '<div class="file-card-name">' + iconHtml + '<span>' + f.name + '</span></div>'
+              + '<div class="file-card-name">' + iconHtml + '<span class="fname" title="' + f.name + '">' + f.name + '</span></div>'
               + '<div class="file-card-meta"><span><i class="bi bi-hdd me-1"></i>' + f.size + '</span><span><i class="bi bi-clock me-1"></i>' + dateDisplay + '</span></div>'
               + '<div class="file-card-actions">'
               + '<a href="' + f.url + '" target="_blank" class="btn-action btn-dl"><i class="bi bi-download me-1"></i>Tải</a>'
