@@ -130,3 +130,57 @@ function deleteFileFromDrive(fileId) {
     throw e.toString();
   }
 }
+
+// --- TÍNH NĂNG TỰ ĐỘNG DỌN DẸP FILE TẠM (CRON JOB HÀNG ĐÊM) ---
+// Tự động xóa file cũ hơn số ngày quy định để giải phóng dung lượng Google Drive
+const DAYS_TO_KEEP = 7; // Số ngày lưu trữ tối đa cho mỗi file tạm (Ví dụ: 7 ngày)
+
+/**
+ * Hàm quét và xóa các file đã hết hạn lưu trữ tạm
+ */
+function autoCleanupOldFiles() {
+  try {
+    var folder = DriveApp.getFolderById(FOLDER_ID);
+    var files = folder.getFiles();
+    var now = new Date().getTime();
+    var maxAgeMs = DAYS_TO_KEEP * 24 * 60 * 60 * 1000;
+    var deletedCount = 0;
+
+    while (files.hasNext()) {
+      var file = files.next();
+      var age = now - file.getDateCreated().getTime();
+      if (age > maxAgeMs) {
+        file.setTrashed(true);
+        deletedCount++;
+      }
+    }
+    console.log("Đã dọn dẹp " + deletedCount + " file cũ hơn " + DAYS_TO_KEEP + " ngày.");
+    return "Đã dọn dẹp " + deletedCount + " file.";
+  } catch (err) {
+    console.error("Lỗi dọn dẹp file: " + err.toString());
+  }
+}
+
+/**
+ * HƯỚNG DẪN: Chạy hàm này 1 lần duy nhất trong trình soạn thảo Google Apps Script
+ * để hệ thống tự động lên lịch chạy dọn dẹp vào lúc 0h - 1h sáng mỗi ngày.
+ */
+function setupDailyCleanupTrigger() {
+  // Xóa trigger cũ nếu đã tồn tại để tránh trùng lặp
+  var triggers = ScriptApp.getProjectTriggers();
+  for (var i = 0; i < triggers.length; i++) {
+    if (triggers[i].getHandlerFunction() === "autoCleanupOldFiles") {
+      ScriptApp.deleteTrigger(triggers[i]);
+    }
+  }
+
+  // Tạo lịch chạy tự động ngầm mỗi ngày vào khoảng 0h - 1h sáng
+  ScriptApp.newTrigger("autoCleanupOldFiles")
+    .timeBased()
+    .everyDays(1)
+    .atHour(0)
+    .create();
+
+  console.log("Đã thiết lập lịch tự động dọn dẹp file vào 0h hàng ngày thành công!");
+}
+
