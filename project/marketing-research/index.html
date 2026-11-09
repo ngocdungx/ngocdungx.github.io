@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GEMMY WOOD — Báo Cáo Thị Trường Ngành Gỗ Theo Tháng (marketing-research)</title>
+  <title>GEMMY WOOD — Báo Cáo Phân Tích Thị Trường Ngành Gỗ Xuất Khẩu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -26,80 +26,99 @@
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.25); border-radius: 9999px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.35); border-radius: 9999px; }
     .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-200 custom-scrollbar">
+<body class="bg-slate-100/70 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-200 custom-scrollbar">
 
-  <!-- ==================== 1. HEADER & UNIFIED CONTROL BAR ==================== -->
+  <!-- ==================== 1. TOP HEADER & BRAND ==================== -->
   <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
-    <div class="max-w-[1440px] mx-auto px-4 lg:px-8 py-3 space-y-3">
+    <div class="max-w-[1440px] mx-auto px-4 lg:px-8 py-3.5 space-y-3">
 
-      <!-- Top Row: Brand + Actions -->
+      <!-- Row 1: Brand & Actions -->
       <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-emerald-700 flex items-center justify-center text-white font-extrabold text-base tracking-tight shadow-sm shrink-0">
+        <!-- Logo & Title -->
+        <div class="flex items-center gap-3.5">
+          <div class="w-11 h-11 rounded-xl bg-emerald-700 flex items-center justify-center text-white font-extrabold text-lg tracking-tight shadow-md shadow-emerald-700/20 shrink-0">
             GW
           </div>
           <div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <h1 class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 dark:text-white">
+            <div class="flex items-center gap-2.5 flex-wrap">
+              <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
                 GEMMY WOOD — BÁO CÁO THỊ TRƯỜNG & TÁC ĐỘNG SXKD ĐỒ GỖ
               </h1>
-              <span class="text-[11px] px-2 py-0.5 rounded-md font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-800">
+              <span class="text-xs px-2.5 py-0.5 rounded-md font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-800">
                 marketing-research
               </span>
             </div>
-            <p class="text-xs text-slate-500 dark:text-slate-400">
-              Chu kỳ n8n: Chạy 07:00 ngày 05 hàng tháng tổng hợp tin tức tháng trước (Việt Nam • Mỹ • EU • Úc • Nhật/Hàn • Anh/Canada)
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+              Hệ thống Giám sát & Phân tích Tác động Kinh tế, Chính trị, Thuế quan, Luật pháp đến Chuỗi SXKD Đồ Gỗ Xuất Khẩu
             </p>
           </div>
         </div>
 
-        <div class="flex items-center flex-wrap gap-2">
-          <div id="syncStatusBadge" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <!-- Action Buttons -->
+        <div class="flex items-center flex-wrap gap-2.5">
+          <div id="syncStatusBadge" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
             <span id="syncStatusText">Đang kết nối Google Sheets...</span>
           </div>
 
-          <a href="https://docs.google.com/spreadsheets/d/1qgrD4aJsYw2Tp7tyiTi_NCicLdP0PtXmo-gBLrvKCaI/edit" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-            <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-emerald-600"></i>
+          <a href="https://docs.google.com/spreadsheets/d/1qgrD4aJsYw2Tp7tyiTi_NCicLdP0PtXmo-gBLrvKCaI/edit" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition">
+            <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-600"></i>
             <span>Mở Google Sheet</span>
           </a>
 
-          <button onclick="runResearchAgent()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm transition active:scale-95">
-            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-            <span>Quét Báo Cáo Tháng (n8n)</span>
+          <button onclick="runResearchAgent()" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm transition active:scale-95">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <span>Quét Báo Cáo Mới (n8n)</span>
           </button>
 
-          <button onclick="exportToCSV()" class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 transition" title="Xuất dữ liệu đang lọc ra CSV">
-            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+          <button onclick="exportToCSV()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition" title="Xuất dữ liệu đang lọc ra file CSV">
+            <i data-lucide="download" class="w-4 h-4"></i>
             <span class="hidden sm:inline">Xuất CSV</span>
           </button>
 
-          <button onclick="fetchSheetData(true)" class="p-1.5 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition" title="Tải lại dữ liệu từ Google Sheets">
+          <button onclick="fetchSheetData(true)" class="p-2 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition" title="Tải lại dữ liệu">
             <i data-lucide="refresh-cw" class="w-4 h-4" id="refreshIcon"></i>
           </button>
 
-          <button onclick="toggleTheme()" class="p-1.5 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition" title="Đổi giao diện Sáng / Tối">
+          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition" title="Chuyển chế độ Sáng / Tối">
             <i data-lucide="sun" class="w-4 h-4" id="themeIcon"></i>
           </button>
         </div>
       </div>
 
-      <!-- Unified Filter Bar: Month Tabs + Market + Pillar + Risk + Search (ONLY ONE PLACE IN THE ENTIRE DASHBOARD) -->
-      <div class="pt-2.5 border-t border-slate-200/80 dark:border-slate-800 flex flex-col xl:flex-row xl:items-center justify-between gap-2.5">
-        <!-- 1. Monthly Reporting Period Tabs -->
-        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 xl:pb-0 custom-scrollbar" id="monthTabContainer">
-          <!-- Populated by JS -->
+      <!-- Row 2: Clean Unified Control Bar (3 Recent Months + Dropdown + Market/Pillar/Risk Filters) -->
+      <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col xl:flex-row xl:items-center justify-between gap-3">
+
+        <!-- Left: 3 Recent Month Tabs + 1 Month Selector Dropdown -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500 mr-1 hidden sm:inline">Kỳ báo cáo:</span>
+
+          <!-- 3 Recent Month Tabs (Dynamic) -->
+          <div class="flex items-center gap-1.5" id="recentMonthTabs">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Single Month Selector Dropdown (All Months & Historical) -->
+          <select id="monthSelectDropdown" onchange="onMonthDropdownChange(this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm">
+            <option value="ALL">📅 Tất cả các tháng (Lũy kế)</option>
+            <option value="Tháng 10" selected>Tháng 10/2026 (Kỳ mới nhất)</option>
+            <option value="Tháng 9">Tháng 9/2026</option>
+            <option value="Tháng 8">Tháng 8/2026</option>
+            <option value="Tháng 7">Tháng 7/2026</option>
+            <option value="Tháng 6">Tháng 6/2026</option>
+            <option value="Tháng 5">Tháng 5/2026</option>
+          </select>
         </div>
 
-        <!-- 2. Market, Pillar, Risk & Search Controls -->
+        <!-- Right: Market, Pillar, Risk & Search Filters -->
         <div class="flex flex-wrap items-center gap-2">
           <!-- Market Filter -->
-          <select id="marketFilter" onchange="setFilterState('market', this.value)" class="px-2.5 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600">
+          <select id="marketFilter" onchange="setFilterState('market', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm">
             <option value="ALL">🌐 Tất cả thị trường</option>
             <option value="Mỹ">🇺🇸 Hoa Kỳ (US)</option>
             <option value="EU">🇪🇺 Liên minh Châu Âu (EU)</option>
@@ -110,213 +129,214 @@
             <option value="Trung Quốc">🇨🇳 Trung Quốc</option>
           </select>
 
-          <!-- Macro Pillar Filter -->
-          <select id="pillarFilter" onchange="setFilterState('pillar', this.value)" class="px-2.5 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600">
+          <!-- Pillar Filter -->
+          <select id="pillarFilter" onchange="setFilterState('pillar', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm">
             <option value="ALL">📌 Tất cả trụ cột vĩ mô</option>
             <option value="Kinh tế">📊 Kinh tế & Tỷ giá</option>
-            <option value="Thuế quan">🛡️ Thuế quan & Phòng vệ TM</option>
-            <option value="Luật pháp">⚖️ Luật pháp & Tiêu chuẩn (EUDR/ILPA)</option>
+            <option value="Thuế quan">🛡️ Thuế quan & Phòng vệ thương mại</option>
+            <option value="Luật pháp">⚖️ Luật pháp & Tiêu chuẩn xanh</option>
             <option value="Logistics">🚢 Logistics & Địa chính trị</option>
             <option value="Nguyên liệu">🌲 Nguyên liệu & Sản xuất</option>
           </select>
 
-          <!-- Risk Level Filter -->
-          <select id="riskFilter" onchange="setFilterState('risk', this.value)" class="px-2.5 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600">
+          <!-- Risk Filter -->
+          <select id="riskFilter" onchange="setFilterState('risk', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm">
             <option value="ALL">⚡ Mọi mức rủi ro</option>
-            <option value="Cao">🔴 Rủi ro Cao</option>
-            <option value="Trung bình">🟡 Rủi ro Trung bình</option>
-            <option value="Thấp">🟢 Rủi ro Thấp</option>
+            <option value="Cao">🔴 Rủi ro cao</option>
+            <option value="Trung bình">🟡 Rủi ro trung bình</option>
+            <option value="Thấp">🟢 Rủi ro thấp</option>
           </select>
 
-          <!-- Keyword Search -->
+          <!-- Search Input -->
           <div class="relative">
-            <i data-lucide="search" class="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-            <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Tìm EUDR, ILPA, thuế Mỹ, giá gỗ..." class="pl-8 pr-2.5 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-emerald-600 w-44 sm:w-52">
+            <i data-lucide="search" class="w-4 h-4 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Tìm EUDR, ILPA, thuế Mỹ..." class="pl-8 pr-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-emerald-600 w-44 sm:w-56 shadow-sm">
           </div>
 
-          <!-- Reset Button -->
-          <button onclick="resetAllFilters()" id="resetFilterBtn" class="hidden px-2.5 py-1.5 bg-rose-50 dark:bg-rose-950/50 hover:bg-rose-100 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 rounded-lg text-xs font-bold transition">
-            Xóa lọc
+          <!-- Reset Filter Button -->
+          <button onclick="resetAllFilters()" id="resetFilterBtn" class="hidden px-3 py-1.5 bg-rose-50 dark:bg-rose-950/50 hover:bg-rose-100 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 rounded-lg text-xs sm:text-sm font-bold transition">
+            Xóa bộ lọc
           </button>
         </div>
+
       </div>
 
     </div>
   </header>
 
-  <!-- ==================== MAIN CONTENT ==================== -->
+  <!-- ==================== MAIN CONTENT WRAPPER ==================== -->
   <main class="max-w-[1440px] mx-auto px-4 lg:px-8 py-6 space-y-6">
 
-    <!-- SECTION 1: EXECUTIVE KPI STRIP & PERIOD BRIEFING -->
+    <!-- SECTION 1: 6 MACRO KPI CARDS & EXECUTIVE DIGEST -->
     <section class="space-y-4">
-      <!-- 6 KPI Summary Cards -->
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-        <!-- Total Events -->
-        <div onclick="setFilterState('pillar', 'ALL')" id="kpiCard_ALL" class="bg-white dark:bg-slate-900 rounded-xl p-4 border-2 border-emerald-600 shadow-sm cursor-pointer transition">
-          <div class="flex items-center justify-between text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase">
+      <!-- 6 KPI Pillar Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
+        <!-- Card: Tổng Biến Động -->
+        <div onclick="setFilterState('pillar', 'ALL')" id="kpiCard_ALL" class="bg-white dark:bg-slate-900 rounded-2xl p-4 border-2 border-emerald-600 shadow-sm cursor-pointer transition">
+          <div class="flex items-center justify-between text-xs font-bold text-emerald-800 dark:text-emerald-400 uppercase tracking-wide">
             <span>Tổng Biến Động</span>
             <i data-lucide="layers" class="w-4 h-4"></i>
           </div>
-          <div class="flex items-baseline gap-1.5 mt-1">
-            <span id="kpiTotal" class="text-2xl font-extrabold text-slate-900 dark:text-white">--</span>
-            <span class="text-xs text-slate-500">sự kiện</span>
+          <div class="flex items-baseline gap-1.5 mt-2">
+            <span id="kpiTotal" class="text-3xl font-extrabold text-slate-900 dark:text-white">--</span>
+            <span class="text-xs sm:text-sm text-slate-500 font-semibold">sự kiện</span>
           </div>
-          <div class="flex items-center gap-1.5 mt-2 text-[11px] font-bold">
-            <span class="px-1.5 py-0.5 rounded bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/60 dark:text-red-300 dark:border-red-800" id="kpiRiskCount">-- RR cao</span>
-            <span class="px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800" id="kpiOppCount">-- CH cao</span>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-1.5 mt-2.5 text-xs font-bold">
+            <span class="px-2 py-0.5 rounded bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/60 dark:text-red-300 dark:border-red-800" id="kpiRiskCount">-- Rủi ro cao</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800" id="kpiOppCount">-- Cơ hội cao</span>
           </div>
         </div>
 
-        <!-- Pillar 1: Kinh tế -->
-        <div onclick="setFilterState('pillar', 'Kinh tế')" id="kpiCard_Kinh tế" class="bg-white dark:bg-slate-900 rounded-xl p-4 border border-slate-200 dark:border-slate-800 hover:border-blue-500 shadow-sm cursor-pointer transition">
-          <div class="flex items-center justify-between text-xs font-bold text-blue-700 dark:text-blue-400 uppercase">
+        <!-- Card: 1. Kinh Tế -->
+        <div onclick="setFilterState('pillar', 'Kinh tế')" id="kpiCard_Kinh tế" class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:border-blue-500 shadow-sm cursor-pointer transition">
+          <div class="flex items-center justify-between text-xs font-bold text-blue-800 dark:text-blue-400 uppercase tracking-wide">
             <span>1. Kinh Tế & Tỷ Giá</span>
             <i data-lucide="trending-up" class="w-4 h-4"></i>
           </div>
-          <div class="flex items-baseline gap-1.5 mt-1">
-            <span id="kpiEconomy" class="text-2xl font-extrabold text-slate-900 dark:text-white">--</span>
-            <span class="text-xs text-slate-500">sự kiện</span>
+          <div class="flex items-baseline gap-1.5 mt-2">
+            <span id="kpiEconomy" class="text-3xl font-extrabold text-slate-900 dark:text-white">--</span>
+            <span class="text-xs sm:text-sm text-slate-500 font-semibold">sự kiện</span>
           </div>
-          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-2 truncate">Lãi suất FED/RBA, BĐS, USD/VND</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2.5 truncate font-medium">Lãi suất FED/RBA, BĐS, USD/VND</p>
         </div>
 
-        <!-- Pillar 2: Thuế quan -->
-        <div onclick="setFilterState('pillar', 'Thuế quan')" id="kpiCard_Thuế quan" class="bg-white dark:bg-slate-900 rounded-xl p-4 border border-slate-200 dark:border-slate-800 hover:border-amber-500 shadow-sm cursor-pointer transition">
-          <div class="flex items-center justify-between text-xs font-bold text-amber-700 dark:text-amber-400 uppercase">
+        <!-- Card: 2. Thuế Quan -->
+        <div onclick="setFilterState('pillar', 'Thuế quan')" id="kpiCard_Thuế quan" class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:border-amber-500 shadow-sm cursor-pointer transition">
+          <div class="flex items-center justify-between text-xs font-bold text-amber-800 dark:text-amber-400 uppercase tracking-wide">
             <span>2. Thuế Quan & PVTM</span>
             <i data-lucide="shield-alert" class="w-4 h-4"></i>
           </div>
-          <div class="flex items-baseline gap-1.5 mt-1">
-            <span id="kpiTariff" class="text-2xl font-extrabold text-slate-900 dark:text-white">--</span>
-            <span class="text-xs text-slate-500">sự kiện</span>
+          <div class="flex items-baseline gap-1.5 mt-2">
+            <span id="kpiTariff" class="text-3xl font-extrabold text-slate-900 dark:text-white">--</span>
+            <span class="text-xs sm:text-sm text-slate-500 font-semibold">sự kiện</span>
           </div>
-          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-2 truncate">Thuế đối ứng Mỹ, AD/CVD, C/O</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2.5 truncate font-medium">Thuế đối ứng Mỹ, AD/CVD, C/O</p>
         </div>
 
-        <!-- Pillar 3: Luật pháp -->
-        <div onclick="setFilterState('pillar', 'Luật pháp')" id="kpiCard_Luật pháp" class="bg-white dark:bg-slate-900 rounded-xl p-4 border border-slate-200 dark:border-slate-800 hover:border-purple-500 shadow-sm cursor-pointer transition">
-          <div class="flex items-center justify-between text-xs font-bold text-purple-700 dark:text-purple-400 uppercase">
+        <!-- Card: 3. Luật Pháp -->
+        <div onclick="setFilterState('pillar', 'Luật pháp')" id="kpiCard_Luật pháp" class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:border-purple-500 shadow-sm cursor-pointer transition">
+          <div class="flex items-center justify-between text-xs font-bold text-purple-800 dark:text-purple-400 uppercase tracking-wide">
             <span>3. Luật & Tiêu Chuẩn</span>
             <i data-lucide="scale" class="w-4 h-4"></i>
           </div>
-          <div class="flex items-baseline gap-1.5 mt-1">
-            <span id="kpiLaw" class="text-2xl font-extrabold text-slate-900 dark:text-white">--</span>
-            <span class="text-xs text-slate-500">sự kiện</span>
+          <div class="flex items-baseline gap-1.5 mt-2">
+            <span id="kpiLaw" class="text-3xl font-extrabold text-slate-900 dark:text-white">--</span>
+            <span class="text-xs sm:text-sm text-slate-500 font-semibold">sự kiện</span>
           </div>
-          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-2 truncate">EUDR (EU), ILPA (Úc), Lacey, FSC</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2.5 truncate font-medium">EUDR (EU), ILPA (Úc), Lacey, FSC</p>
         </div>
 
-        <!-- Pillar 4: Logistics & Chính trị -->
-        <div onclick="setFilterState('pillar', 'Logistics')" id="kpiCard_Logistics" class="bg-white dark:bg-slate-900 rounded-xl p-4 border border-slate-200 dark:border-slate-800 hover:border-rose-500 shadow-sm cursor-pointer transition">
-          <div class="flex items-center justify-between text-xs font-bold text-rose-700 dark:text-rose-400 uppercase">
+        <!-- Card: 4. Logistics & Chính Trị -->
+        <div onclick="setFilterState('pillar', 'Logistics')" id="kpiCard_Logistics" class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:border-rose-500 shadow-sm cursor-pointer transition">
+          <div class="flex items-center justify-between text-xs font-bold text-rose-800 dark:text-rose-400 uppercase tracking-wide">
             <span>4. Địa Chính Trị & Tàu</span>
             <i data-lucide="ship" class="w-4 h-4"></i>
           </div>
-          <div class="flex items-baseline gap-1.5 mt-1">
-            <span id="kpiLogistics" class="text-2xl font-extrabold text-slate-900 dark:text-white">--</span>
-            <span class="text-xs text-slate-500">sự kiện</span>
+          <div class="flex items-baseline gap-1.5 mt-2">
+            <span id="kpiLogistics" class="text-3xl font-extrabold text-slate-900 dark:text-white">--</span>
+            <span class="text-xs sm:text-sm text-slate-500 font-semibold">sự kiện</span>
           </div>
-          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-2 truncate">Biển Đỏ, Cước cont, Cảng biển</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2.5 truncate font-medium">Biển Đỏ, Cước container, Cảng biển</p>
         </div>
 
-        <!-- Pillar 5: Nguyên liệu & SX -->
-        <div onclick="setFilterState('pillar', 'Nguyên liệu')" id="kpiCard_Nguyên liệu" class="bg-white dark:bg-slate-900 rounded-xl p-4 border border-slate-200 dark:border-slate-800 hover:border-teal-500 shadow-sm cursor-pointer transition">
-          <div class="flex items-center justify-between text-xs font-bold text-teal-700 dark:text-teal-400 uppercase">
+        <!-- Card: 5. Nguyên Liệu & Sản Xuất -->
+        <div onclick="setFilterState('pillar', 'Nguyên liệu')" id="kpiCard_Nguyên liệu" class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:border-teal-500 shadow-sm cursor-pointer transition">
+          <div class="flex items-center justify-between text-xs font-bold text-teal-800 dark:text-teal-400 uppercase tracking-wide">
             <span>5. Nguyên Liệu & SX</span>
             <i data-lucide="trees" class="w-4 h-4"></i>
           </div>
-          <div class="flex items-baseline gap-1.5 mt-1">
-            <span id="kpiMaterial" class="text-2xl font-extrabold text-slate-900 dark:text-white">--</span>
-            <span class="text-xs text-slate-500">sự kiện</span>
+          <div class="flex items-baseline gap-1.5 mt-2">
+            <span id="kpiMaterial" class="text-3xl font-extrabold text-slate-900 dark:text-white">--</span>
+            <span class="text-xs sm:text-sm text-slate-500 font-semibold">sự kiện</span>
           </div>
-          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-2 truncate">Gỗ keo FSC Phú Thọ, Phôi gỗ</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2.5 truncate font-medium">Gỗ keo FSC Phú Thọ, Phôi gỗ sấy</p>
         </div>
       </div>
 
-      <!-- Monthly Executive Summary Box (Single dynamic digest for the active month/filter) -->
-      <div id="monthlyDigestBox" class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm">
-        <!-- Populated dynamically by JS -->
+      <!-- Executive Digest Box (Tiêu điểm điều hành của tháng đang chọn) -->
+      <div id="monthlyDigestBox" class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+        <!-- Rendered dynamically by JS -->
       </div>
     </section>
 
-    <!-- SECTION 2: ANALYTICS CHARTS (3 CLEAN CHARTS IN 1 ROW) -->
-    <section class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-      <!-- Chart 1: Monthly Trend -->
-      <div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm">
+    <!-- SECTION 2: CHARTS ANALYTICS (3 CLEAN COLUMNS) -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <!-- Chart 1: Monthly Timeline Trend -->
+      <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
         <div class="mb-3">
-          <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-800 dark:text-slate-200">
-            1. Diễn Biến Theo Kỳ Báo Cáo Tháng (T5 – T10)
+          <h2 class="text-sm font-extrabold uppercase tracking-wide text-slate-900 dark:text-white">
+            1. Diễn Biến Biến Động Qua Các Tháng
           </h2>
-          <p class="text-[11px] text-slate-500">Số lượng biến động, rủi ro cao & cơ hội cao qua từng tháng</p>
+          <p class="text-xs text-slate-500 mt-0.5">Số lượng sự kiện, rủi ro cao và cơ hội cao từ Tháng 5 đến Tháng 10</p>
         </div>
-        <div class="h-56 relative">
+        <div class="h-60 relative">
           <canvas id="monthlyTimelineChart"></canvas>
         </div>
       </div>
 
-      <!-- Chart 2: Market Comparison -->
-      <div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm">
+      <!-- Chart 2: Market Risk & Opportunity Comparison -->
+      <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
         <div class="mb-3">
-          <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-800 dark:text-slate-200">
-            2. So Sánh Rủi Ro & Cơ Hội Theo Thị Trường
+          <h2 class="text-sm font-extrabold uppercase tracking-wide text-slate-900 dark:text-white">
+            2. Tương Quan Rủi Ro & Cơ Hội Theo Thị Trường
           </h2>
-          <p class="text-[11px] text-slate-500">Phân bổ tại Mỹ, EU, Úc, Việt Nam, Nhật/Hàn, Anh/Canada</p>
+          <p class="text-xs text-slate-500 mt-0.5">Phân bổ tại Mỹ, EU, Úc, Việt Nam, Nhật/Hàn, Anh/Canada</p>
         </div>
-        <div class="h-56 relative">
+        <div class="h-60 relative">
           <canvas id="marketCompareChart"></canvas>
         </div>
       </div>
 
       <!-- Chart 3: Pillar Breakdown -->
-      <div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
         <div class="mb-3">
-          <h2 class="text-xs font-extrabold uppercase tracking-wider text-slate-800 dark:text-slate-200">
-            3. Tỷ Trọng Theo Trụ Cột Vĩ Mô & Pháp Lý
+          <h2 class="text-sm font-extrabold uppercase tracking-wide text-slate-900 dark:text-white">
+            3. Phân Bổ Theo Trụ Cột Vĩ Mô & Pháp Lý
           </h2>
-          <p class="text-[11px] text-slate-500">Cơ cấu Kinh tế, Thuế quan, Luật pháp, Logistics, Nguyên liệu</p>
+          <p class="text-xs text-slate-500 mt-0.5">Tỷ trọng Kinh tế, Thuế quan, Luật pháp, Logistics, Nguyên liệu</p>
         </div>
-        <div class="h-56 relative">
+        <div class="h-60 relative">
           <canvas id="pillarDonutChart"></canvas>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 3: STRATEGIC MARKET OVERVIEW (6 KEY MARKETS — CONCISE CARDS) -->
-    <section class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
+    <!-- SECTION 3: STRATEGIC MARKET PROFILES (6 KEY MARKETS) -->
+    <section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-slate-100 dark:border-slate-800">
         <div>
-          <h2 class="text-sm font-extrabold text-slate-900 dark:text-white uppercase flex items-center gap-2">
-            <i data-lucide="globe-2" class="w-4 h-4 text-emerald-600"></i>
-            Tóm Tắt Chính Sách & Định Hướng Chiến Lược Tại 6 Thị Trường Trọng Điểm
+          <h2 class="text-base font-extrabold text-slate-900 dark:text-white uppercase flex items-center gap-2">
+            <i data-lucide="globe-2" class="w-5 h-5 text-emerald-700"></i>
+            Hồ Sơ Đánh Giá Chiến Lược Tại 6 Thị Trường Trọng Điểm
           </h2>
-          <p class="text-xs text-slate-500">Bấm vào thẻ quốc gia bất kỳ để lọc nhanh dữ liệu của thị trường đó</p>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Bấm vào bất kỳ thẻ quốc gia nào bên dưới để lọc nhanh các biến động của thị trường đó</p>
         </div>
-        <span id="activeFilterSummaryText" class="text-xs font-bold text-emerald-700 dark:text-emerald-400">
+        <span id="activeFilterSummaryText" class="text-xs sm:text-sm font-bold text-emerald-800 dark:text-emerald-400">
           Đang hiển thị: Toàn bộ thị trường
         </span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5" id="countryStrategicGrid">
-        <!-- Populated by JS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="countryStrategicGrid">
+        <!-- Rendered dynamically by JS -->
       </div>
     </section>
 
-    <!-- SECTION 4: DETAILED MONTHLY TABLE (NO DUPLICATE FILTER CONTROLS) -->
-    <section class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm" id="tableSection">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-3 border-b border-slate-200 dark:border-slate-800">
+    <!-- SECTION 4: DETAILED MONTHLY MATRIX TABLE -->
+    <section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4" id="tableSection">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-slate-100 dark:border-slate-800">
         <div>
-          <h2 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white uppercase flex items-center gap-2">
-            <i data-lucide="table-2" class="w-4 h-4 text-emerald-600"></i>
-            BẢNG DỮ LIỆU CHI TIẾT PHÂN NHÓM THEO KỲ BÁO CÁO THÁNG
+          <h2 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white uppercase flex items-center gap-2">
+            <i data-lucide="table-2" class="w-5 h-5 text-emerald-700"></i>
+            MA TRẬN DỮ LIỆU PHÂN NHÓM THEO TỪNG KỲ BÁO CÁO THÁNG
           </h2>
-          <p class="text-xs text-slate-500 mt-0.5" id="tableRecordSummary">
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5" id="tableRecordSummary">
             Đang tải dữ liệu...
           </p>
         </div>
 
-        <div class="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
-          <span>Hiển thị:</span>
-          <select id="pageSizeSelect" onchange="changePageSize(this.value)" class="bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-2.5 py-1 font-semibold text-slate-800 dark:text-slate-200">
+        <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+          <span class="font-medium">Hiển thị:</span>
+          <select id="pageSizeSelect" onchange="changePageSize(this.value)" class="bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-1.5 font-semibold text-slate-800 dark:text-slate-200 shadow-sm">
             <option value="15">15 sự kiện / trang</option>
             <option value="30">30 sự kiện / trang</option>
             <option value="100" selected>Tất cả theo tháng</option>
@@ -325,35 +345,35 @@
       </div>
 
       <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800 custom-scrollbar">
-        <table class="w-full text-left text-xs border-collapse">
+        <table class="w-full text-left text-sm border-collapse">
           <thead>
-            <tr class="bg-slate-100 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-700 text-[11px]">
-              <th class="py-3 px-3 w-28">Mã / Ngày</th>
-              <th class="py-3 px-3 w-40">Thị Trường & SP</th>
-              <th class="py-3 px-3 w-48">Trụ Cột & Sự Kiện</th>
-              <th class="py-3 px-3 min-w-[280px]">Diễn Biến Vĩ Mô / Pháp Lý & Cơ Hội</th>
-              <th class="py-3 px-3 min-w-[250px]">Tác Động SXKD (Đơn Hàng • Giá • Gỗ)</th>
-              <th class="py-3 px-3 text-center w-28">Đánh Giá</th>
-              <th class="py-3 px-3 min-w-[240px]">Khuyến Nghị Hành Động</th>
+            <tr class="bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-700 text-xs">
+              <th class="py-3.5 px-3.5 w-32">Mã & Kỳ Tháng</th>
+              <th class="py-3.5 px-3.5 w-44">Thị Trường & SP</th>
+              <th class="py-3.5 px-3.5 w-52">Trụ Cột & Sự Kiện</th>
+              <th class="py-3.5 px-3.5 min-w-[300px]">Diễn Biến Vĩ Mô / Pháp Lý & Cơ Hội</th>
+              <th class="py-3.5 px-3.5 min-w-[270px]">Tác Động SXKD (Đơn Hàng • Giá • Gỗ)</th>
+              <th class="py-3.5 px-3.5 text-center w-36">Đánh Giá</th>
+              <th class="py-3.5 px-3.5 min-w-[260px]">Khuyến Nghị Hành Động (Gemmy Wood)</th>
             </tr>
           </thead>
-          <tbody id="dataTableBody" class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-800 dark:text-slate-200">
+          <tbody id="dataTableBody" class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-800 dark:text-slate-200 text-sm">
             <!-- Populated by JS -->
           </tbody>
         </table>
       </div>
 
       <!-- Pagination -->
-      <div class="flex items-center justify-between mt-3 text-xs text-slate-500">
+      <div class="flex items-center justify-between pt-2 text-xs sm:text-sm text-slate-500">
         <span id="pageRangeText"></span>
-        <div class="flex items-center gap-1" id="paginationControls"></div>
+        <div class="flex items-center gap-1.5" id="paginationControls"></div>
       </div>
     </section>
 
     <!-- FOOTER -->
     <footer class="pt-4 pb-8 text-center text-xs text-slate-500 border-t border-slate-200 dark:border-slate-800">
-      <p class="font-semibold text-slate-700 dark:text-slate-300">© 2026 GEMMY WOOD CO., LTD. — Phú Thọ, Việt Nam | Hệ Thống Báo Cáo Thị Trường Ngành Gỗ Xuất Khẩu (`marketing-research`)</p>
-      <p class="mt-0.5">Đồng bộ tự động từ Google Sheets (29 trường chuẩn) & n8n Workflow chạy ngày 05 hàng tháng</p>
+      <p class="font-semibold text-slate-700 dark:text-slate-300">© 2026 GEMMY WOOD CO., LTD. — Phú Thọ, Việt Nam | Hệ Thống Trí Tuệ Thị Trường Ngành Gỗ Xuất Khẩu (`marketing-research`)</p>
+      <p class="mt-0.5">Dữ liệu chuẩn hóa 29 trường • Cập nhật định kỳ hàng tháng phục vụ Ban Lãnh Đạo & Kinh Doanh Quốc Tế</p>
     </footer>
 
   </main>
@@ -361,121 +381,121 @@
   <!-- ==================== 360 DETAIL MODAL ==================== -->
   <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl max-w-3xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
-      <div class="flex items-start justify-between border-b border-slate-200 dark:border-slate-800 pb-3 gap-4">
+      <div class="flex items-start justify-between border-b border-slate-200 dark:border-slate-800 pb-3.5 gap-4">
         <div>
-          <div class="flex items-center gap-2 flex-wrap mb-1">
-            <span id="modalId" class="px-2 py-0.5 rounded text-xs font-mono font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-800">ID</span>
-            <span id="modalPillarBadge" class="px-2 py-0.5 rounded text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950 dark:text-blue-300">Nhóm</span>
-            <span id="modalDate" class="text-xs text-slate-500">Kỳ báo cáo</span>
+          <div class="flex items-center gap-2 flex-wrap mb-1.5">
+            <span id="modalId" class="px-2.5 py-0.5 rounded text-xs font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-800">ID</span>
+            <span id="modalPillarBadge" class="px-2.5 py-0.5 rounded text-xs font-bold bg-blue-50 text-blue-800 border border-blue-200 dark:bg-blue-950 dark:text-blue-300">Nhóm</span>
+            <span id="modalDate" class="text-xs sm:text-sm text-slate-500 font-semibold">Kỳ báo cáo</span>
           </div>
           <h3 id="modalTitle" class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">Loại biến động</h3>
         </div>
-        <button onclick="closeModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <button onclick="closeModal()" class="p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
-        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/60 rounded-lg border border-slate-200 dark:border-slate-800">
-          <span class="text-slate-500 block mb-0.5">Quốc gia khởi phát</span>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs sm:text-sm">
+        <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-800">
+          <span class="text-slate-500 block mb-0.5 text-xs font-medium">Quốc gia khởi phát</span>
           <span id="modalCountry" class="font-bold text-slate-900 dark:text-white">--</span>
         </div>
-        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/60 rounded-lg border border-slate-200 dark:border-slate-800">
-          <span class="text-slate-500 block mb-0.5">Thị trường ảnh hưởng</span>
-          <span id="modalMarkets" class="font-bold text-emerald-700 dark:text-emerald-400">--</span>
+        <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-800">
+          <span class="text-slate-500 block mb-0.5 text-xs font-medium">Thị trường ảnh hưởng</span>
+          <span id="modalMarkets" class="font-bold text-emerald-800 dark:text-emerald-400">--</span>
         </div>
-        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/60 rounded-lg border border-slate-200 dark:border-slate-800">
-          <span class="text-slate-500 block mb-0.5">Nhóm sản phẩm</span>
+        <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-800">
+          <span class="text-slate-500 block mb-0.5 text-xs font-medium">Nhóm sản phẩm</span>
           <span id="modalProduct" class="font-bold text-slate-900 dark:text-white">--</span>
         </div>
-        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/60 rounded-lg border border-slate-200 dark:border-slate-800">
-          <span class="text-slate-500 block mb-0.5">Mức rủi ro / Cơ hội</span>
+        <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-800">
+          <span class="text-slate-500 block mb-0.5 text-xs font-medium">Mức rủi ro / Cơ hội</span>
           <span id="modalRiskOpp" class="font-bold text-slate-900 dark:text-white">--</span>
         </div>
       </div>
 
-      <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 space-y-1.5">
-        <div class="text-[11px] font-bold uppercase text-slate-500">Nội dung diễn biến & Xu hướng thị trường</div>
-        <p id="modalContent" class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed"></p>
-        <p id="modalTrend" class="text-xs text-amber-700 dark:text-amber-300 font-semibold pt-1.5 border-t border-slate-200 dark:border-slate-700"></p>
+      <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 space-y-2">
+        <div class="text-xs font-bold uppercase text-slate-500">Nội dung diễn biến & Xu hướng thị trường</div>
+        <p id="modalContent" class="text-sm text-slate-800 dark:text-slate-200 leading-relaxed"></p>
+        <p id="modalTrend" class="text-xs sm:text-sm text-amber-800 dark:text-amber-300 font-semibold pt-2 border-t border-slate-200 dark:border-slate-700"></p>
       </div>
 
-      <div class="space-y-2">
-        <div class="text-[11px] font-bold uppercase text-emerald-700 dark:text-emerald-400">
+      <div class="space-y-2.5">
+        <div class="text-xs font-bold uppercase text-emerald-800 dark:text-emerald-400">
           Phân tích tác động vào 5 mắt xích vận hành SXKD đồ gỗ
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
-          <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
-            <span class="font-bold text-blue-700 dark:text-blue-400 block mb-0.5">📦 1. Đơn hàng & Sức mua:</span>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
+            <span class="font-bold text-blue-800 dark:text-blue-400 block mb-1">📦 1. Đơn hàng & Sức mua:</span>
             <span id="modalImpactOrder" class="text-slate-700 dark:text-slate-300">--</span>
           </div>
-          <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
-            <span class="font-bold text-amber-700 dark:text-amber-400 block mb-0.5">💵 2. Giá bán & Biên lợi nhuận:</span>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
+            <span class="font-bold text-amber-800 dark:text-amber-400 block mb-1">💵 2. Giá bán & Biên lợi nhuận:</span>
             <span id="modalImpactPrice" class="text-slate-700 dark:text-slate-300">--</span>
           </div>
-          <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
-            <span class="font-bold text-teal-700 dark:text-teal-400 block mb-0.5">🌲 3. Nguyên liệu & Sản xuất:</span>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
+            <span class="font-bold text-teal-800 dark:text-teal-400 block mb-1">🌲 3. Nguyên liệu & Sản xuất:</span>
             <span id="modalImpactMaterial" class="text-slate-700 dark:text-slate-300">--</span>
           </div>
-          <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
-            <span class="font-bold text-rose-700 dark:text-rose-400 block mb-0.5">🚢 4. Logistics & Vận tải:</span>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
+            <span class="font-bold text-rose-800 dark:text-rose-400 block mb-1">🚢 4. Logistics & Vận tải:</span>
             <span id="modalImpactLogistics" class="text-slate-700 dark:text-slate-300">--</span>
           </div>
-          <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 sm:col-span-2">
-            <span class="font-bold text-purple-700 dark:text-purple-400 block mb-0.5">💱 5. Tỷ giá & Tài chính:</span>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 sm:col-span-2">
+            <span class="font-bold text-purple-800 dark:text-purple-400 block mb-1">💱 5. Tỷ giá & Tài chính:</span>
             <span id="modalImpactFx" class="text-slate-700 dark:text-slate-300">--</span>
           </div>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div class="p-3.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/50">
-          <div class="text-[11px] font-bold text-blue-700 dark:text-blue-400 uppercase mb-1">Cơ hội cho Gỗ Việt Nam</div>
-          <p id="modalOppText" class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">--</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+        <div class="p-4 rounded-xl bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/50">
+          <div class="text-xs font-bold text-blue-800 dark:text-blue-400 uppercase mb-1">Cơ hội cho Gỗ Việt Nam</div>
+          <p id="modalOppText" class="text-sm text-slate-800 dark:text-slate-200 leading-relaxed">--</p>
         </div>
-        <div class="p-3.5 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50">
-          <div class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 uppercase mb-1">Hành động đề xuất (Gemmy Wood)</div>
-          <p id="modalActionText" class="text-xs text-emerald-900 dark:text-emerald-200 leading-relaxed font-semibold">--</p>
+        <div class="p-4 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50">
+          <div class="text-xs font-bold text-emerald-800 dark:text-emerald-400 uppercase mb-1">Hành động đề xuất (Gemmy Wood)</div>
+          <p id="modalActionText" class="text-sm text-emerald-950 dark:text-emerald-200 leading-relaxed font-semibold">--</p>
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-500">
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-500">
         <div>
           <span id="modalCompetitor">Đối thủ: --</span> •
           <span id="modalDept" class="text-slate-800 dark:text-slate-200 font-semibold">Phụ trách: --</span> •
           <span id="modalDeadline">Hạn: --</span>
         </div>
         <a id="modalSourceLink" href="#" target="_blank" class="flex items-center gap-1 text-emerald-700 dark:text-emerald-400 hover:underline font-bold">
-          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          <i data-lucide="external-link" class="w-4 h-4"></i>
           <span>Nguồn tham chiếu</span>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- AGENT MODAL -->
+  <!-- AGENT EXECUTION MODAL -->
   <div id="agentModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl text-center space-y-4">
       <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 flex items-center justify-center mx-auto border border-emerald-200 dark:border-emerald-800">
         <i data-lucide="sparkles" class="w-6 h-6 animate-spin"></i>
       </div>
       <div>
-        <h3 class="text-base font-bold text-slate-900 dark:text-white">AI Agent `marketing-research` Đang Chạy...</h3>
-        <p class="text-xs text-slate-500 mt-1">
-          Đang tổng hợp tin tức Kinh tế, Chính trị, Thuế quan & Luật pháp của kỳ báo cáo tháng và cập nhật vào Google Sheets.
+        <h3 class="text-base font-bold text-slate-900 dark:text-white">AI Agent `marketing-research` Đang Quét Tin...</h3>
+        <p class="text-sm text-slate-500 mt-1">
+          Hệ thống đang thu thập các biến động vĩ mô và pháp lý của kỳ báo cáo tháng và đồng bộ vào Google Sheets.
         </p>
       </div>
-      <p id="agentStatusText" class="text-xs text-emerald-700 dark:text-emerald-400 font-bold">Đang kết nối n8n Webhook...</p>
+      <p id="agentStatusText" class="text-xs sm:text-sm text-emerald-700 dark:text-emerald-400 font-bold">Đang kết nối n8n Webhook...</p>
     </div>
   </div>
 
-  <!-- ==================== APPLICATION LOGIC ==================== -->
+  <!-- ==================== APPLICATION SCRIPT ==================== -->
   <script>
     let allData = [];
     let filteredData = [];
     let currentPage = 1;
     let pageSize = 100;
-    let activeMonth = 'ALL';
+    let activeMonth = 'Tháng 10'; // Default to the newest month
     let activeMarket = 'ALL';
     let activePillar = 'ALL';
     let activeRisk = 'ALL';
@@ -483,6 +503,9 @@
 
     const GOOGLE_SHEET_ID = '1qgrD4aJsYw2Tp7tyiTi_NCicLdP0PtXmo-gBLrvKCaI';
     const N8N_WEBHOOK_URL = 'https://n8n.gemmywood.com.vn/webhook/marketing-research';
+
+    // 3 Most Recent Months for Quick Tabs
+    const RECENT_MONTHS = ['Tháng 10', 'Tháng 9', 'Tháng 8'];
 
     const STANDARD_COLS = [
       "STT", "ID", "Ngày cập nhật", "Tháng Báo Cáo", "Nhóm biến động",
@@ -494,132 +517,111 @@
       "Điểm ưu tiên cơ hội", "Rủi ro cao", "Cơ hội cao"
     ];
 
-    const MONTH_CONFIG = [
-      {
-        key: 'ALL',
-        shortLabel: 'Tất cả (T5–T10)',
-        runDate: 'Cập nhật ngày 05 hàng tháng',
-        summaryTitle: 'TỔNG HỢP LŨY KẾ 6 THÁNG (THÁNG 5 – THÁNG 10/2026)',
+    const MONTH_METADATA = {
+      'ALL': {
+        title: 'TỔNG HỢP LŨY KẾ 6 THÁNG (THÁNG 5 – THÁNG 10/2026)',
         highlights: [
-          '🇺🇸 Hoa Kỳ (US): Chuyển từ giai đoạn ứng phó thuế đối ứng (T5–T7) sang tận dụng chu kỳ FED hạ lãi suất kích cầu nhà ở (T9–T10), đồng thời tuân thủ nghiêm ngặt kiểm tra xuất xứ CBP.',
-          '🇪🇺 Châu Âu (EU): Quy định chống phá rừng EUDR vận hành cổng khai báo tọa độ Polygon (T10), tạo lợi thế cạnh tranh lớn cho nguồn gỗ keo FSC Phú Thọ.',
-          '🇦🇺 Úc (Australia): Tăng trưởng mạnh trong T10 nhờ chương trình 1,2 triệu nhà ở mới và ưu đãi thuế 0% AANZFTA, song hành cùng luật gỗ hợp pháp ILPA mới.',
-          '🇻🇳 Việt Nam & G7: Giá gỗ keo nguyên liệu FSC miền Bắc tăng +6–10% dịp cuối năm; thị trường Nhật, Hàn, Anh, Canada duy trì đơn hàng ván ghép thanh ổn định.'
+          '🇺🇸 Hoa Kỳ: Chuyển từ ứng phó rủi ro thuế đối ứng sang tận dụng chu kỳ FED hạ lãi suất kích cầu nhà ở, song hải quan CBP siết rất chặt hồ sơ xuất xứ.',
+          '🇪🇺 Châu Âu: Luật EUDR bước vào giai đoạn thực thi khai báo tọa độ Polygon, tạo lợi thế lớn cho các nhà cung ứng có nguồn gỗ keo FSC như Gemmy Wood.',
+          '🇦🇺 Úc: Thị trường tăng trưởng bứt phá nhờ chương trình 1,2 triệu nhà ở mới và thuế ưu đãi 0% AANZFTA, đi kèm đạo luật gỗ hợp pháp ILPA mới.',
+          '🇻🇳 Việt Nam & G7: Giá gỗ keo FSC miền Bắc tăng 6–10% dịp cuối năm; đơn hàng ván ghép thanh đi Nhật, Hàn, Anh, Canada duy trì ổn định quanh năm.'
         ]
       },
-      {
-        key: 'Tháng 10',
-        shortLabel: 'Tháng 10 ★',
-        runDate: 'Tổng hợp: 05/11/2026',
-        summaryTitle: 'KỲ BÁO CÁO THÁNG 10/2026 (CHẠY WORKFLOW N8N NGÀY 05/11/2026)',
+      'Tháng 10': {
+        title: 'KỲ BÁO CÁO THÁNG 10/2026',
         highlights: [
-          '🇦🇺 Úc (Australia): Thực thi đạo luật ILPA kiểm định nguồn gốc gỗ & triển khai gói 1,2 triệu nhà ở mới (National Housing Accord) — cơ hội lớn cho mặt bàn bếp gỗ keo thuế 0%.',
-          '🇪🇺 Châu Âu (EU): Hệ thống EUDR Traces NT yêu cầu đính kèm tọa độ địa lý Polygon vùng trồng keo Phú Thọ cho các lô hàng xuất bến từ quý IV.',
-          '🇺🇸 Hoa Kỳ (US): Lãi suất vay mua nhà giảm về ~6,1% giúp phục hồi đơn hàng tủ bếp & nội thất; DOC/CBP siết kiểm tra thực địa chống chuyển tải bất hợp pháp.',
-          '🇻🇳 Việt Nam & G7: Cạnh tranh thu mua gỗ keo FSC miền Bắc làm giá phôi tăng 6–10%; Anh (UKTR) và Nhật/Hàn (F☆☆☆☆) tăng đặt hàng vụ Đông – Xuân.'
+          '🇦🇺 Úc thực thi Đạo luật ILPA kiểm định sợi gỗ & triển khai gói 1,2 triệu nhà ở mới — cơ hội bứt phá cho mặt bàn bếp gỗ keo phủ dầu thuế 0%.',
+          '🇪🇺 Cổng thông tin EUDR Traces NT yêu cầu tọa độ Polygon vùng rừng trồng cho các lô hàng xuất khẩu phục vụ mùa đơn hàng mới.',
+          '🇺🇸 Mỹ giảm lãi suất vay mua nhà về ~6,1% kích thích nhu cầu đồ gỗ nội thất gia đình & tủ bếp; DOC/CBP kiểm tra chặt chuyển tải bất hợp pháp.',
+          '🇻🇳 Cạnh tranh thu mua gỗ keo FSC tại Phú Thọ & Tuyên Quang khiến giá phôi sấy tăng 6–10%; Nhật, Hàn, Anh tăng đơn hàng vụ Đông – Xuân.'
         ]
       },
-      {
-        key: 'Tháng 9',
-        shortLabel: 'Tháng 9',
-        runDate: 'Tổng hợp: 05/10/2026',
-        summaryTitle: 'KỲ BÁO CÁO THÁNG 9/2026 (CHẠY WORKFLOW N8N NGÀY 05/10/2026)',
+      'Tháng 9': {
+        title: 'KỲ BÁO CÁO THÁNG 9/2026',
         highlights: [
-          '🇺🇸 FED khởi động chu kỳ hạ lãi suất giúp các hệ thống bán lẻ nội thất Mỹ tự tin đặt hàng trở lại (Re-stocking) cho mùa lễ hội.',
-          '🇪🇺 Các nhà mua hàng châu Âu rà soát chuỗi hành trình sản phẩm FSC-CoC để chuẩn bị cho thời điểm áp dụng EUDR.',
-          '🚢 Cước vận tải biển hạ nhiệt nhẹ so với đỉnh mùa hè nhưng thời gian tàu vòng qua Mũi Hảo Vọng vẫn kéo dài thêm 10–14 ngày.'
+          '🇺🇸 FED khởi động chu kỳ cắt giảm lãi suất giúp các chuỗi bán lẻ nội thất Mỹ tự tin đặt hàng trở lại cho mùa mua sắm cuối năm.',
+          '🇪🇺 Khách hàng châu Âu bắt đầu yêu cầu các nhà máy Việt Nam chuẩn bị sẵn sàng chuỗi hành trình sản phẩm FSC-CoC theo chuẩn EUDR.',
+          '🚢 Cước tàu biển có xu hướng ổn định nhẹ nhưng thời gian hành trình vòng qua Mũi Hảo Vọng vẫn kéo dài thêm 10–14 ngày.'
         ]
       },
-      {
-        key: 'Tháng 8',
-        shortLabel: 'Tháng 8',
-        runDate: 'Tổng hợp: 05/09/2026',
-        summaryTitle: 'KỲ BÁO CÁO THÁNG 8/2026 (CHẠY WORKFLOW N8N NGÀY 05/09/2026)',
+      'Tháng 8': {
+        title: 'KỲ BÁO CÁO THÁNG 8/2026',
         highlights: [
-          '🛡️ Mỹ tăng cường điều tra phòng vệ thương mại (AD/CVD) đối với tủ gỗ và ván công nghiệp, đòi hỏi hồ sơ truy xuất gỗ nội địa minh bạch 100%.',
-          '🌲 Mưa bão cuối mùa hè tại miền Bắc làm gián đoạn khai thác gỗ keo ngắn hạn tại Phú Thọ – Tuyên Quang, cần dự trữ phôi sấy an toàn.',
-          '💱 Tỷ giá USD/VND duy trì ở mức cao hỗ trợ tích cực cho doanh thu quy đổi từ các hợp đồng xuất khẩu FOB.'
+          '🛡️ Hoa Kỳ mở rộng điều tra phòng vệ thương mại chống lẩn tránh thuế với sản phẩm tủ gỗ và ván ép, yêu cầu minh bạch 100% hồ sơ xuất xứ.',
+          '🌲 Mưa bão miền Bắc ảnh hưởng khai thác rừng trồng ngắn hạn tại Phú Thọ; nhà máy cần duy trì lượng phôi sấy dự trữ an toàn 45–60 ngày.',
+          '💱 Tỷ giá USD/VND neo ở vùng cao tiếp tục hỗ trợ tích cực cho biên lợi nhuận quy đổi của các hợp đồng xuất khẩu FOB.'
         ]
       },
-      {
-        key: 'Tháng 7',
-        shortLabel: 'Tháng 7',
-        runDate: 'Tổng hợp: 05/08/2026',
-        summaryTitle: 'KỲ BÁO CÁO THÁNG 7/2026 (CHẠY WORKFLOW N8N NGÀY 05/08/2026)',
+      'Tháng 7': {
+        title: 'KỲ BÁO CÁO THÁNG 7/2026',
         highlights: [
-          '⚖️ Khách hàng Mỹ & EU siết chặt các điều khoản hợp đồng về chia sẻ rủi ro thuế quan và tiêu chuẩn phát thải keo TSCA Title VI / CARB-P2.',
-          '🚢 Áp lực thiếu vỏ container rỗng cục bộ trên các tuyến đi bờ Đông nước Mỹ và Bắc Âu.'
+          '⚖️ Các nhà nhập khẩu Mỹ và EU đàm phán lại điều khoản chia sẻ chi phí thuế và siết chặt kiểm tra độ phát thải keo TSCA Title VI / CARB-P2.',
+          '🚢 Tuyến vận chuyển container sang Bắc Mỹ và châu Âu chịu áp lực thiếu vỏ container rỗng cục bộ vào mùa cao điểm.'
         ]
       },
-      {
-        key: 'Tháng 6',
-        shortLabel: 'Tháng 6',
-        runDate: 'Tổng hợp: 05/07/2026',
-        summaryTitle: 'KỲ BÁO CÁO THÁNG 6/2026 (CHẠY WORKFLOW N8N NGÀY 05/07/2026)',
+      'Tháng 6': {
+        title: 'KỲ BÁO CÁO THÁNG 6/2026',
         highlights: [
-          '📊 Phân khúc ván ghép thanh DIY cải tạo nhà cửa giữ nhịp đơn hàng tốt tại Bắc Mỹ và châu Âu bất chấp lạm phát.',
-          '🇻🇳 Cơ quan chức năng siết chặt kiểm tra bảng kê lâm sản hợp pháp và hồ sơ hoàn thuế GTGT ngành gỗ.'
+          '📊 Sức mua phân khúc ván ghép thanh tự làm (DIY) tại châu Âu và Bắc Mỹ giữ nhịp tốt hơn phân khúc đồ nội thất hoàn thiện cao cấp.',
+          '🇻🇳 Cơ quan thuế và kiểm lâm tăng cường rà soát bảng kê lâm sản hợp pháp và điều kiện hoàn thuế giá trị gia tăng đối với gỗ rừng trồng.'
         ]
       },
-      {
-        key: 'Tháng 5',
-        shortLabel: 'Tháng 5',
-        runDate: 'Tổng hợp: 05/06/2026',
-        summaryTitle: 'KỲ BÁO CÁO THÁNG 5/2026 (CHẠY WORKFLOW N8N NGÀY 05/06/2026)',
+      'Tháng 5': {
+        title: 'KỲ BÁO CÁO THÁNG 5/2026',
         highlights: [
-          '🌐 Thiết lập hệ thống cảnh báo sớm rủi ro thuế đối ứng thương mại và chuẩn bị vùng nguyên liệu gỗ keo FSC cho kế hoạch sản xuất nửa cuối năm.'
+          '🌐 Khởi động hệ thống cảnh báo sớm rủi ro thuế quan thị trường Mỹ và rà soát nguồn cung gỗ keo nguyên liệu FSC phục vụ kế hoạch nửa cuối năm.'
         ]
       }
-    ];
+    };
 
     const COUNTRY_PROFILES = [
       {
         key: 'Mỹ',
         flag: '🇺🇸',
         name: 'Hoa Kỳ (US) — ~50% Kim Ngạch XK',
-        policy: 'Giám sát thuế đối ứng, điều tra AD/CVD tủ bếp & kiểm tra xuất xứ CBP.',
-        demand: 'Lãi suất vay mua nhà giảm kích thích nhu cầu nội thất & ván ghép DIY.',
-        strategy: 'Lưu trữ 100% hồ sơ sản xuất thực chất tại Phú Thọ & chuẩn keo TSCA Title VI.'
+        policy: 'Giám sát thuế đối ứng, điều tra phòng vệ thương mại AD/CVD & kiểm tra xuất xứ CBP.',
+        demand: 'Lãi suất vay mua nhà hạ nhiệt kích thích nhu cầu đồ gỗ nội thất gia đình & tủ bếp.',
+        strategy: 'Lưu trữ 100% hồ sơ sản xuất thực chất tại Phú Thọ & đạt chuẩn phát thải TSCA Title VI.'
       },
       {
         key: 'EU',
         flag: '🇪🇺',
         name: 'Châu Âu (EU) — Trọng Tâm EUDR',
-        policy: 'Bắt buộc khai báo tọa độ địa lý Polygon vùng trồng rừng trên cổng EUDR.',
-        demand: 'Nhu cầu đồ gỗ ngoại thất (Outdoor) & mặt bàn gỗ FSC phục hồi tại Đức, Pháp, Bắc Âu.',
-        strategy: 'Cung cấp trọn bộ mã DDS & chứng chỉ FSC-CoC để giữ mức giá cộng thưởng (+5–7%).'
+        policy: 'Bắt buộc khai báo tọa độ địa lý Polygon vùng trồng rừng trên cổng thông tin EUDR.',
+        demand: 'Nhu cầu đồ gỗ ngoại thất (Outdoor) & mặt bàn gỗ tự nhiên FSC phục hồi tại Đức, Pháp, Bắc Âu.',
+        strategy: 'Cung cấp đầy đủ mã số DDS & chứng chỉ FSC-CoC để giữ giá bán cộng thưởng (+5–7%).'
       },
       {
         key: 'Úc',
         flag: '🇦🇺',
         name: 'Úc (Australia) — Luật ILPA & Thuế 0%',
-        policy: 'Luật gỗ hợp pháp ILPA mới kiểm định sợi gỗ; miễn thuế 0% theo AANZFTA.',
-        demand: 'Gói xây dựng 1,2 triệu nhà ở mới thúc đẩy mạnh đơn hàng mặt bàn bếp (Worktop).',
-        strategy: 'Đẩy mạnh chào ván ghép thanh gỗ keo phủ dầu kèm hồ sơ FSC & ILPA Due Diligence.'
+        policy: 'Đạo luật gỗ hợp pháp ILPA mới siết kiểm định sợi gỗ; được hưởng thuế 0% theo AANZFTA.',
+        demand: 'Chương trình xây 1,2 triệu nhà ở mới thúc đẩy mạnh đơn hàng mặt bàn bếp (Worktop) gỗ keo.',
+        strategy: 'Đẩy mạnh chào hàng ván ghép thanh gỗ keo phủ dầu kèm bộ hồ sơ FSC & ILPA Due Diligence.'
       },
       {
         key: 'Việt Nam',
         flag: '🇻🇳',
         name: 'Việt Nam — Trung Tâm Sản Xuất',
-        policy: 'Siết quản lý bảng kê lâm sản, truy xuất nguồn gốc C/O, PCCC & hoàn thuế GTGT.',
-        demand: 'Cạnh tranh thu mua gỗ keo FSC nguyên liệu tại miền Bắc tăng +6–10% dịp cuối năm.',
-        strategy: 'Dự trữ phôi gỗ keo sấy 45–60 ngày; liên kết dài hạn với các lâm trường FSC Phú Thọ.'
+        policy: 'Siết quản lý bảng kê lâm sản, truy xuất nguồn gốc C/O, an toàn PCCC & hoàn thuế GTGT.',
+        demand: 'Cạnh tranh thu mua gỗ keo FSC tại miền Bắc làm giá nguyên liệu tăng 6–10% cuối năm.',
+        strategy: 'Dự trữ phôi gỗ keo sấy 45–60 ngày; liên kết bao tiêu dài hạn với các lâm trường FSC Phú Thọ.'
       },
       {
         key: 'Nhật',
         flag: '🇯🇵🇰🇷',
         name: 'Nhật Bản & Hàn Quốc — Chuẩn Kỹ Thuật',
-        policy: 'Yêu cầu nghiêm ngặt chuẩn phát thải Formaldehyde F☆☆☆☆ (Nhật) & Clean Wood Act.',
-        demand: 'Đơn hàng ván ghép thanh, nội thất nhỏ gọn & viên nén ổn định quanh năm.',
-        strategy: 'Kiểm soát chặt độ ẩm gỗ sấy (8–10%) và độ chính xác cơ khí để giữ khách hàng lâu dài.'
+        policy: 'Tiêu chuẩn phát thải Formaldehyde F☆☆☆☆ nghiêm ngặt tại Nhật & Đạo luật Clean Wood Act.',
+        demand: 'Đơn hàng ván ghép thanh, nội thất nhỏ gọn và viên nén sinh khối ổn định quanh năm.',
+        strategy: 'Kiểm soát chặt chẽ độ ẩm gỗ sấy (8–10%) và độ chính xác cơ khí để giữ khách hàng truyền thống.'
       },
       {
         key: 'Anh',
         flag: '🇬🇧🇨🇦',
         name: 'Anh & Canada — Đa Dạng Hóa G7',
-        policy: 'Tuân thủ UK Timber Regulation (UKTR); hưởng ưu đãi thuế từ UKVFTA & CPTPP.',
-        demand: 'Tăng nhập khẩu mặt bàn gỗ tự nhiên (Solid Wood Worktops) thay thế nguồn Trung Quốc.',
-        strategy: 'Mở rộng chào hàng ván ghép thanh keo FSC chuẩn keo D3/D4 cho các nhà phân phối lớn.'
+        policy: 'Tuân thủ UK Timber Regulation (UKTR); hưởng ưu đãi thuế quan từ UKVFTA và CPTPP.',
+        demand: 'Tăng nhập khẩu mặt bàn gỗ tự nhiên (Solid Wood Worktops) thay thế nguồn cung từ Trung Quốc.',
+        strategy: 'Mở rộng chào hàng ván ghép thanh gỗ keo FSC chuẩn keo chống ẩm D3/D4 cho các nhà phân phối lớn.'
       }
     ];
 
@@ -764,12 +766,39 @@
     }
 
     function onDataLoaded() {
+      renderRecentMonthTabs();
       applyFilters();
+    }
+
+    // Render the 3 Recent Month Tabs
+    function renderRecentMonthTabs() {
+      const container = document.getElementById('recentMonthTabs');
+      container.innerHTML = RECENT_MONTHS.map(m => {
+        const isActive = activeMonth === m;
+        const count = allData.filter(d => matchMonthRecord(d, m) && matchMarketRecord(d, activeMarket)).length;
+        return `
+          <button onclick="setFilterState('month', '${m}')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 border shadow-sm ${
+            isActive
+              ? 'bg-emerald-700 text-white border-emerald-700'
+              : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700'
+          }">
+            <span>${m}/2026</span>
+            <span class="px-1.5 py-0.2 rounded text-xs ${
+              isActive ? 'bg-emerald-900/60 text-emerald-100' : 'bg-slate-100 dark:bg-slate-900 text-slate-500'
+            }">${count}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function onMonthDropdownChange(val) {
+      setFilterState('month', val);
     }
 
     function setFilterState(type, val) {
       if (type === 'month') {
         activeMonth = val;
+        document.getElementById('monthSelectDropdown').value = activeMonth;
       } else if (type === 'market') {
         activeMarket = (activeMarket === val && val !== 'ALL' && document.getElementById('marketFilter').value !== val) ? 'ALL' : val;
         document.getElementById('marketFilter').value = activeMarket;
@@ -790,10 +819,11 @@
     }
 
     function resetAllFilters() {
-      activeMonth = 'ALL';
+      activeMonth = 'Tháng 10';
       activeMarket = 'ALL';
       activePillar = 'ALL';
       activeRisk = 'ALL';
+      document.getElementById('monthSelectDropdown').value = 'Tháng 10';
       document.getElementById('marketFilter').value = 'ALL';
       document.getElementById('pillarFilter').value = 'ALL';
       document.getElementById('riskFilter').value = 'ALL';
@@ -801,45 +831,27 @@
       applyFilters();
     }
 
-    function renderMonthTabs() {
-      const container = document.getElementById('monthTabContainer');
-      container.innerHTML = MONTH_CONFIG.map(m => {
-        const count = allData.filter(d => matchMonthRecord(d, m.key) && matchMarketRecord(d, activeMarket)).length;
-        const isActive = activeMonth === m.key;
-        return `
-          <button onclick="setFilterState('month', '${m.key}')" class="px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition flex items-center gap-1.5 border ${
-            isActive
-              ? 'bg-emerald-700 text-white border-emerald-700 shadow-sm'
-              : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
-          }">
-            <span>${m.shortLabel}</span>
-            <span class="px-1.5 py-0.2 rounded text-[10px] ${
-              isActive ? 'bg-emerald-900/60 text-emerald-100' : 'bg-white dark:bg-slate-900 text-slate-500'
-            }">${count}</span>
-          </button>
-        `;
-      }).join('');
-    }
-
     function renderMonthlyDigest() {
       const box = document.getElementById('monthlyDigestBox');
-      const mObj = MONTH_CONFIG.find(m => m.key === activeMonth) || MONTH_CONFIG[0];
+      const meta = MONTH_METADATA[activeMonth] || MONTH_METADATA['Tháng 10'];
 
       box.innerHTML = `
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-3 border-b border-slate-100 dark:border-slate-800">
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
-              📅 ${mObj.shortLabel.replace(' ★', '')}
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-3.5 border-b border-slate-100 dark:border-slate-800">
+          <div class="flex items-center gap-2.5 flex-wrap">
+            <span class="px-3 py-1 rounded-md text-xs sm:text-sm font-extrabold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+              📅 ${meta.title}
             </span>
-            <h2 class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white uppercase">
-              ${mObj.summaryTitle}
-            </h2>
+            <span class="text-xs sm:text-sm font-bold text-slate-500">
+              Tiêu Điểm Điều Hành & Phân Tích Xu Hướng Cốt Lõi
+            </span>
           </div>
-          <span class="text-xs font-semibold text-slate-500">${mObj.runDate}</span>
+          <span class="text-xs font-semibold text-emerald-800 dark:text-emerald-400">
+            Dữ liệu đã chuẩn hóa 100%
+          </span>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs">
-          ${mObj.highlights.map(h => `
-            <div class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 leading-relaxed">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm">
+          ${meta.highlights.map(h => `
+            <div class="p-3 rounded-xl bg-slate-50/80 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 leading-relaxed font-medium">
               ${h}
             </div>
           `).join('')}
@@ -858,33 +870,33 @@
         const isSelected = activeMarket === c.key;
 
         return `
-          <div onclick="toggleCountryCardFilter('${c.key}')" class="rounded-xl p-4 cursor-pointer transition border flex flex-col justify-between ${
+          <div onclick="toggleCountryCardFilter('${c.key}')" class="rounded-2xl p-4 sm:p-5 cursor-pointer transition border flex flex-col justify-between ${
             isSelected
-              ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-2 border-emerald-600 shadow-sm'
+              ? 'bg-emerald-50/60 dark:bg-emerald-950/20 border-2 border-emerald-600 shadow-sm'
               : 'bg-slate-50/70 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 hover:border-emerald-500'
           }">
-            <div class="space-y-2">
-              <div class="flex items-center justify-between gap-2 pb-2 border-b border-slate-200 dark:border-slate-700/80">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between gap-2 pb-2.5 border-b border-slate-200 dark:border-slate-700/80">
                 <div class="flex items-center gap-2">
-                  <span class="text-xl">${c.flag}</span>
-                  <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white">${c.name}</h3>
+                  <span class="text-2xl">${c.flag}</span>
+                  <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${c.name}</h3>
                 </div>
-                <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 shrink-0">${records.length} sự kiện</span>
+                <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 shrink-0">${records.length} sự kiện</span>
               </div>
 
-              <div class="space-y-1 text-xs text-slate-600 dark:text-slate-300">
+              <div class="space-y-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
                 <div><strong class="text-slate-900 dark:text-white">• Luật & Thuế:</strong> ${c.policy}</div>
                 <div><strong class="text-slate-900 dark:text-white">• Kinh tế & Cầu:</strong> ${c.demand}</div>
-                <div class="text-emerald-800 dark:text-emerald-300 font-medium pt-0.5"><strong>→ Đối sách:</strong> ${c.strategy}</div>
+                <div class="text-emerald-800 dark:text-emerald-300 font-semibold pt-1"><strong>→ Đối sách:</strong> ${c.strategy}</div>
               </div>
             </div>
 
-            <div class="flex items-center justify-between mt-3 pt-2 border-t border-slate-200/80 dark:border-slate-700/80 text-[11px] font-bold">
-              <div class="flex items-center gap-2">
-                <span class="text-red-600 dark:text-red-400">🔴 ${highRisks} Rủi ro cao</span>
-                <span class="text-emerald-700 dark:text-emerald-400">🟢 ${highOpps} Cơ hội lớn</span>
+            <div class="flex items-center justify-between mt-3.5 pt-2.5 border-t border-slate-200/80 dark:border-slate-700/80 text-xs sm:text-sm font-bold">
+              <div class="flex items-center gap-2.5">
+                <span class="text-red-700 dark:text-red-400">🔴 ${highRisks} Rủi ro cao</span>
+                <span class="text-emerald-800 dark:text-emerald-400">🟢 ${highOpps} Cơ hội cao</span>
               </div>
-              <span class="text-emerald-700 dark:text-emerald-400">${isSelected ? 'Đang lọc ✓' : 'Bấm để lọc →'}</span>
+              <span class="text-emerald-700 dark:text-emerald-400 font-extrabold">${isSelected ? 'Đang lọc ✓' : 'Bấm để lọc →'}</span>
             </div>
           </div>
         `;
@@ -895,12 +907,12 @@
       const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
 
       // Show/Hide Reset button
-      const hasActiveFilter = activeMonth !== 'ALL' || activeMarket !== 'ALL' || activePillar !== 'ALL' || activeRisk !== 'ALL' || query !== '';
+      const hasActiveFilter = activeMonth !== 'Tháng 10' || activeMarket !== 'ALL' || activePillar !== 'ALL' || activeRisk !== 'ALL' || query !== '';
       document.getElementById('resetFilterBtn').classList.toggle('hidden', !hasActiveFilter);
 
-      // Update Active Filter Summary text
+      // Summary label
       const filterParts = [];
-      if (activeMonth !== 'ALL') filterParts.push(activeMonth);
+      if (activeMonth !== 'ALL') filterParts.push(activeMonth + '/2026');
       if (activeMarket !== 'ALL') filterParts.push(`Thị trường: ${activeMarket}`);
       if (activePillar !== 'ALL') filterParts.push(`Trụ cột: ${activePillar}`);
       if (activeRisk !== 'ALL') filterParts.push(`Rủi ro: ${activeRisk}`);
@@ -913,9 +925,9 @@
         const card = document.getElementById(`kpiCard_${k}`);
         if (!card) return;
         if (k === activePillar) {
-          card.className = 'bg-emerald-50/40 dark:bg-emerald-950/30 rounded-xl p-4 border-2 border-emerald-600 shadow-sm cursor-pointer transition';
+          card.className = 'bg-emerald-50/50 dark:bg-emerald-950/30 rounded-2xl p-4 border-2 border-emerald-600 shadow-sm cursor-pointer transition';
         } else {
-          card.className = 'bg-white dark:bg-slate-900 rounded-xl p-4 border border-slate-200 dark:border-slate-800 hover:border-emerald-500 shadow-sm cursor-pointer transition';
+          card.className = 'bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:border-emerald-500 shadow-sm cursor-pointer transition';
         }
       });
 
@@ -924,8 +936,8 @@
       document.getElementById('kpiTotal').textContent = scoped.length;
       const rCount = scoped.filter(d => (d['Mức độ rủi rõ'] || '').includes('Cao') || Number(d['Rủi ro cao']) === 1).length;
       const oCount = scoped.filter(d => (d['Top Cơ hội cho VN'] || '').includes('Cao') || Number(d['Cơ hội cao']) === 1).length;
-      document.getElementById('kpiRiskCount').textContent = `${rCount} RR cao`;
-      document.getElementById('kpiOppCount').textContent = `${oCount} CH cao`;
+      document.getElementById('kpiRiskCount').textContent = `${rCount} Rủi ro cao`;
+      document.getElementById('kpiOppCount').textContent = `${oCount} Cơ hội cao`;
 
       document.getElementById('kpiEconomy').textContent = scoped.filter(d => matchPillarRecord(d, 'Kinh tế')).length;
       document.getElementById('kpiTariff').textContent = scoped.filter(d => matchPillarRecord(d, 'Thuế quan')).length;
@@ -944,7 +956,7 @@
         return true;
       });
 
-      // Sort by reporting month descending (Tháng 10 -> Tháng 5), then by ID
+      // Sort newest month first, then by ID
       filteredData.sort((a, b) => {
         const ma = getMonthOrder(a['Tháng Báo Cáo']);
         const mb = getMonthOrder(b['Tháng Báo Cáo']);
@@ -953,7 +965,7 @@
       });
 
       currentPage = 1;
-      renderMonthTabs();
+      renderRecentMonthTabs();
       renderMonthlyDigest();
       renderCountryProfiles();
       renderTable();
@@ -964,18 +976,18 @@
     function getPillarBadge(pillar) {
       const p = (pillar || '').toLowerCase();
       if (p.includes('luật') || p.includes('tiêu chuẩn')) {
-        return `<span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-purple-50 text-purple-700 border border-purple-200 dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-800">⚖️ ${pillar}</span>`;
+        return `<span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-purple-50 text-purple-700 border border-purple-200 dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-800">⚖️ ${pillar}</span>`;
       }
       if (p.includes('thuế') || p.includes('phòng vệ')) {
-        return `<span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800">🛡️ ${pillar}</span>`;
+        return `<span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800">🛡️ ${pillar}</span>`;
       }
       if (p.includes('logistics') || p.includes('chuỗi') || p.includes('chính trị')) {
-        return `<span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800">🚢 ${pillar}</span>`;
+        return `<span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800">🚢 ${pillar}</span>`;
       }
       if (p.includes('nguyên liệu') || p.includes('sản xuất')) {
-        return `<span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-teal-50 text-teal-700 border border-teal-200 dark:bg-teal-950/60 dark:text-teal-300 dark:border-teal-800">🌲 ${pillar}</span>`;
+        return `<span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-teal-50 text-teal-700 border border-teal-200 dark:bg-teal-950/60 dark:text-teal-300 dark:border-teal-800">🌲 ${pillar}</span>`;
       }
-      return `<span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800">📊 ${pillar}</span>`;
+      return `<span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800">📊 ${pillar}</span>`;
     }
 
     function getCountryFlag(country) {
@@ -995,14 +1007,14 @@
       tbody.innerHTML = '';
 
       const count = filteredData.length;
-      document.getElementById('tableRecordSummary').textContent = `Hiển thị ${count} / ${allData.length} sự kiện (Bấm vào dòng bất kỳ để mở Phiếu Phân Tích 360° đầy đủ 29 trường dữ liệu)`;
+      document.getElementById('tableRecordSummary').textContent = `Hiển thị ${count} / ${allData.length} sự kiện (Bấm vào từng dòng để mở Phiếu Phân Tích 360° toàn diện)`;
 
       const start = (currentPage - 1) * pageSize;
       const end = Math.min(start + pageSize, count);
       const pageData = filteredData.slice(start, end);
 
       if (pageData.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="py-10 text-center text-slate-500">Không có sự kiện nào khớp với điều kiện lọc. Bấm "Xóa lọc" ở thanh trên cùng để xem lại toàn bộ.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" class="py-12 text-center text-slate-500 font-medium">Không có sự kiện nào khớp với điều kiện lọc. Bấm "Xóa bộ lọc" ở thanh trên cùng để xem lại toàn bộ.</td></tr>`;
         renderPagination(0);
         return;
       }
@@ -1012,10 +1024,9 @@
       pageData.forEach(row => {
         const rowMonth = row['Tháng Báo Cáo'] || 'Khác';
 
-        // Monthly Section Divider
+        // Monthly Divider Row (Clean, no n8n workflow text)
         if (rowMonth !== lastMonth) {
           lastMonth = rowMonth;
-          const mMeta = MONTH_CONFIG.find(m => m.key === rowMonth);
           const monthGroupRows = filteredData.filter(r => (r['Tháng Báo Cáo'] || '') === rowMonth);
           const mRisks = monthGroupRows.filter(r => (r['Mức độ rủi rõ'] || '').includes('Cao') || Number(r['Rủi ro cao']) === 1).length;
           const mOpps = monthGroupRows.filter(r => (r['Top Cơ hội cho VN'] || '').includes('Cao') || Number(r['Cơ hội cao']) === 1).length;
@@ -1023,17 +1034,17 @@
           const headerTr = document.createElement('tr');
           headerTr.className = 'bg-emerald-50/90 dark:bg-emerald-950/40 border-y border-emerald-200 dark:border-emerald-800/60';
           headerTr.innerHTML = `
-            <td colspan="7" class="py-2.5 px-4">
+            <td colspan="7" class="py-3 px-4">
               <div class="flex flex-wrap items-center justify-between gap-2">
-                <div class="flex items-center gap-2">
-                  <span class="px-2.5 py-0.5 rounded text-xs font-extrabold bg-emerald-700 text-white">
+                <div class="flex items-center gap-2.5">
+                  <span class="px-3 py-1 rounded text-xs font-extrabold bg-emerald-700 text-white tracking-wide">
                     📅 KỲ BÁO CÁO ${rowMonth.toUpperCase()}/2026
                   </span>
-                  <span class="text-xs font-bold text-emerald-900 dark:text-emerald-300">
-                    ${mMeta ? `(${mMeta.runDate})` : ''} — ${monthGroupRows.length} sự kiện
+                  <span class="text-xs sm:text-sm font-bold text-emerald-900 dark:text-emerald-300">
+                    Tổng hợp ${monthGroupRows.length} sự kiện thị trường
                   </span>
                 </div>
-                <div class="flex items-center gap-2 text-[11px] font-bold">
+                <div class="flex items-center gap-2.5 text-xs sm:text-sm font-bold">
                   <span class="text-red-700 dark:text-red-300">🔴 ${mRisks} Rủi ro cao</span>
                   <span class="text-slate-400">•</span>
                   <span class="text-emerald-800 dark:text-emerald-300">🟢 ${mOpps} Cơ hội cao</span>
@@ -1051,57 +1062,57 @@
         };
 
         const riskVal = row['Mức độ rủi rõ'] || 'Trung bình';
-        let riskBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-950 dark:text-amber-300">RR: ${riskVal}</span>`;
+        let riskBadge = `<span class="px-2.5 py-1 rounded text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-950 dark:text-amber-300 whitespace-nowrap">Rủi ro: ${riskVal}</span>`;
         if (riskVal.includes('Cao')) {
-          riskBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-red-50 text-red-700 border border-red-200 dark:bg-red-950 dark:text-red-300">🔴 RR: Cao</span>`;
+          riskBadge = `<span class="px-2.5 py-1 rounded text-xs font-bold bg-red-50 text-red-700 border border-red-200 dark:bg-red-950 dark:text-red-300 whitespace-nowrap">🔴 Rủi ro cao</span>`;
         } else if (riskVal.includes('Thấp')) {
-          riskBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300">🟢 RR: Thấp</span>`;
+          riskBadge = `<span class="px-2.5 py-1 rounded text-xs font-bold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 whitespace-nowrap">🟢 Rủi ro thấp</span>`;
         }
 
         const oppVal = row['Top Cơ hội cho VN'] || 'Trung bình';
-        let oppBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">CH: ${oppVal}</span>`;
+        let oppBadge = `<span class="px-2.5 py-1 rounded text-xs font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400 whitespace-nowrap">Cơ hội: ${oppVal}</span>`;
         if (oppVal.includes('Cao') || Number(row['Cơ hội cao']) === 1) {
-          oppBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300">✨ CH: Cao</span>`;
+          oppBadge = `<span class="px-2.5 py-1 rounded text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300 whitespace-nowrap">✨ Cơ hội cao</span>`;
         }
 
         const flag = getCountryFlag(row['Quốc Gia Tác Động']);
 
         tr.innerHTML = `
-          <td class="py-3 px-3 whitespace-nowrap">
-            <div class="font-mono font-bold text-emerald-700 dark:text-emerald-400 text-xs">${row['ID'] || ''}</div>
-            <div class="text-[11px] font-semibold text-slate-700 dark:text-slate-300 mt-0.5">${row['Tháng Báo Cáo'] || ''}/2026</div>
-            <div class="text-[10px] text-slate-400">${row['Ngày cập nhật'] || ''}</div>
+          <td class="py-4 px-3.5 whitespace-nowrap">
+            <div class="font-mono font-bold text-emerald-800 dark:text-emerald-400 text-xs">${row['ID'] || ''}</div>
+            <div class="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">${row['Tháng Báo Cáo'] || ''}/2026</div>
+            <div class="text-[11px] text-slate-400 mt-0.5">${row['Ngày cập nhật'] || ''}</div>
           </td>
-          <td class="py-3 px-3">
-            <div class="font-bold text-slate-900 dark:text-white flex items-center gap-1">
+          <td class="py-4 px-3.5">
+            <div class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 text-sm">
               <span>${flag}</span>
               <span>${row['Quốc Gia Tác Động'] || 'Toàn cầu'}</span>
             </div>
-            <div class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">Đích: ${row['Thị trường liên quan'] || ''}</div>
-            <div class="text-[11px] text-emerald-700 dark:text-emerald-400 font-semibold mt-0.5 line-clamp-1">${row['Nhóm sản phẩm'] || ''}</div>
+            <div class="text-xs text-slate-500 mt-1 line-clamp-1">Đích: ${row['Thị trường liên quan'] || ''}</div>
+            <div class="text-xs text-emerald-800 dark:text-emerald-400 font-semibold mt-0.5 line-clamp-1">${row['Nhóm sản phẩm'] || ''}</div>
           </td>
-          <td class="py-3 px-3">
-            <div class="mb-1">${getPillarBadge(row['Nhóm biến động'])}</div>
+          <td class="py-4 px-3.5">
+            <div class="mb-1.5">${getPillarBadge(row['Nhóm biến động'])}</div>
             <div class="font-bold text-slate-900 dark:text-white text-xs leading-snug">${row['Loại biến động'] || ''}</div>
           </td>
-          <td class="py-3 px-3">
-            <p class="text-slate-700 dark:text-slate-200 text-xs leading-relaxed line-clamp-2">${row['Nội dụng biến động'] || ''}</p>
-            <p class="text-[11px] text-blue-700 dark:text-blue-400 mt-1 line-clamp-1"><strong>Cơ hội:</strong> ${row['Cơ hội cho VN'] || ''}</p>
+          <td class="py-4 px-3.5">
+            <p class="text-slate-700 dark:text-slate-200 text-sm leading-relaxed line-clamp-3">${row['Nội dụng biến động'] || ''}</p>
+            <p class="text-xs text-blue-700 dark:text-blue-400 font-medium mt-1.5 line-clamp-1"><strong>Cơ hội:</strong> ${row['Cơ hội cho VN'] || ''}</p>
           </td>
-          <td class="py-3 px-3 space-y-1 text-[11px] text-slate-600 dark:text-slate-300">
+          <td class="py-4 px-3.5 space-y-1 text-xs text-slate-600 dark:text-slate-300">
             <div class="line-clamp-1"><strong class="text-slate-900 dark:text-white">Đơn hàng:</strong> ${row['Đơn hàng'] || ''}</div>
             <div class="line-clamp-1"><strong class="text-slate-900 dark:text-white">Giá bán:</strong> ${row['Giá bán'] || ''}</div>
             <div class="line-clamp-1"><strong class="text-slate-900 dark:text-white">Nguyên liệu:</strong> ${row['Nguyên Liệu'] || ''}</div>
           </td>
-          <td class="py-3 px-3 text-center">
-            <div class="flex flex-col items-center gap-1">
+          <td class="py-4 px-3.5 text-center">
+            <div class="flex flex-col items-center gap-1.5">
               ${riskBadge}
               ${oppBadge}
             </div>
           </td>
-          <td class="py-3 px-3">
-            <p class="text-emerald-800 dark:text-emerald-300 text-xs leading-relaxed line-clamp-2 font-semibold">${row['Hành động đề xuất'] || ''}</p>
-            <div class="text-[10px] text-slate-500 mt-1">Phụ trách: ${row['Bộ phận phụ trách'] || 'Ban Giám Đốc'}</div>
+          <td class="py-4 px-3.5">
+            <p class="text-emerald-900 dark:text-emerald-300 text-sm leading-relaxed line-clamp-3 font-semibold">${row['Hành động đề xuất'] || ''}</p>
+            <div class="text-xs text-slate-500 mt-1.5">Phụ trách: ${row['Bộ phận phụ trách'] || 'Ban Giám Đốc'}</div>
           </td>
         `;
         tbody.appendChild(tr);
@@ -1119,10 +1130,10 @@
 
       for (let p = 1; p <= totalPages; p++) {
         const btn = document.createElement('button');
-        btn.className = `px-2.5 py-1 rounded text-xs font-bold transition ${
+        btn.className = `px-3 py-1.5 rounded-lg text-xs font-bold transition ${
           p === currentPage
-            ? 'bg-emerald-700 text-white'
-            : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200'
+            ? 'bg-emerald-700 text-white shadow-sm'
+            : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100'
         }`;
         btn.textContent = p;
         btn.onclick = () => {
@@ -1156,7 +1167,7 @@
       charts.c1 = new Chart(ctx1, {
         type: 'bar',
         data: {
-          labels: ['T5', 'T6', 'T7', 'T8', 'T9', 'T10/26'],
+          labels: ['Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10'],
           datasets: [
             {
               type: 'line',
@@ -1164,7 +1175,7 @@
               data: mTotal,
               borderColor: '#0284c7',
               backgroundColor: 'rgba(2, 132, 199, 0.1)',
-              borderWidth: 2,
+              borderWidth: 2.5,
               tension: 0.3,
               fill: true
             },
@@ -1187,7 +1198,7 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { position: 'top', labels: { color: textColor, font: { size: 11 }, boxWidth: 10 } } },
+          plugins: { legend: { position: 'top', labels: { color: textColor, font: { size: 11 }, boxWidth: 12 } } },
           scales: {
             x: { grid: { display: false }, ticks: { color: textColor, font: { size: 11 } } },
             y: { grid: { color: gridColor }, ticks: { color: textColor, stepSize: 3 } }
@@ -1198,7 +1209,7 @@
       // 2. Market Comparison Chart
       const monthScoped = allData.filter(d => matchMonthRecord(d, activeMonth));
       const mKeys = ['Mỹ', 'EU', 'Úc', 'Việt Nam', 'Nhật', 'Anh'];
-      const mLabels = ['Mỹ', 'EU', 'Úc', 'Việt Nam', 'Nhật/Hàn', 'Anh/CA'];
+      const mLabels = ['Mỹ (US)', 'EU', 'Úc (AU)', 'Việt Nam', 'Nhật/Hàn', 'Anh/CA'];
       const mRisks = mKeys.map(k => monthScoped.filter(d => matchMarketRecord(d, k) && ((d['Mức độ rủi rõ'] || '').includes('Cao') || Number(d['Rủi ro cao']) === 1)).length);
       const mOpps = mKeys.map(k => monthScoped.filter(d => matchMarketRecord(d, k) && ((d['Top Cơ hội cho VN'] || '').includes('Cao') || Number(d['Cơ hội cao']) === 1)).length);
 
@@ -1209,14 +1220,14 @@
         data: {
           labels: mLabels,
           datasets: [
-            { label: 'Rủi ro cao', data: mRisks, backgroundColor: '#dc2626', borderRadius: 4 },
-            { label: 'Cơ hội cao', data: mOpps, backgroundColor: '#059669', borderRadius: 4 }
+            { label: 'Rủi ro cao', data: mRisks, backgroundColor: '#dc2626', borderRadius: 5 },
+            { label: 'Cơ hội cao', data: mOpps, backgroundColor: '#059669', borderRadius: 5 }
           ]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { position: 'top', labels: { color: textColor, font: { size: 11 }, boxWidth: 10 } } },
+          plugins: { legend: { position: 'top', labels: { color: textColor, font: { size: 11 }, boxWidth: 12 } } },
           scales: {
             x: { grid: { display: false }, ticks: { color: textColor, font: { size: 11 } } },
             y: { grid: { color: gridColor }, ticks: { color: textColor, stepSize: 2 } }
@@ -1248,7 +1259,7 @@
           maintainAspectRatio: false,
           cutout: '60%',
           plugins: {
-            legend: { position: 'right', labels: { color: textColor, font: { size: 10 }, boxWidth: 10 } }
+            legend: { position: 'right', labels: { color: textColor, font: { size: 11 }, boxWidth: 12 } }
           }
         }
       });
@@ -1257,12 +1268,12 @@
     function openModal(item) {
       document.getElementById('modalId').textContent = item['ID'] || '';
       document.getElementById('modalPillarBadge').textContent = item['Nhóm biến động'] || '';
-      document.getElementById('modalDate').textContent = `Kỳ ${item['Tháng Báo Cáo'] || ''}/2026 (Tổng hợp: ${item['Ngày cập nhật'] || ''})`;
+      document.getElementById('modalDate').textContent = `Kỳ ${item['Tháng Báo Cáo'] || ''}/2026 (Cập nhật: ${item['Ngày cập nhật'] || ''})`;
       document.getElementById('modalTitle').textContent = item['Loại biến động'] || item['Nhóm biến động'] || '';
       document.getElementById('modalCountry').textContent = `${getCountryFlag(item['Quốc Gia Tác Động'])} ${item['Quốc Gia Tác Động'] || ''}`;
       document.getElementById('modalMarkets').textContent = item['Thị trường liên quan'] || '';
       document.getElementById('modalProduct').textContent = item['Nhóm sản phẩm'] || '';
-      document.getElementById('modalRiskOpp').textContent = `Rủi ro: ${item['Mức độ rủi rõ'] || 'TB'} | Cơ hội: ${item['Top Cơ hội cho VN'] || 'TB'}`;
+      document.getElementById('modalRiskOpp').textContent = `Rủi ro: ${item['Mức độ rủi rõ'] || 'Trung bình'} | Cơ hội: ${item['Top Cơ hội cho VN'] || 'Trung bình'}`;
       document.getElementById('modalContent').textContent = item['Nội dụng biến động'] || '';
       document.getElementById('modalTrend').textContent = `📈 Xu hướng thị trường: ${item['Xu hướng thị trường'] || ''}`;
 
