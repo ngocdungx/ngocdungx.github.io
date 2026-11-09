@@ -22,58 +22,149 @@
       }
     }
   </script>
-  <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f8fafc;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(254, 215, 226, 0.75) 0px, transparent 55%),
+        radial-gradient(at 100% 0%, rgba(224, 242, 254, 0.8) 0px, transparent 50%),
+        radial-gradient(at 50% 25%, rgba(243, 232, 255, 0.6) 0px, transparent 50%),
+        radial-gradient(at 0% 60%, rgba(209, 250, 229, 0.5) 0px, transparent 50%),
+        radial-gradient(at 100% 85%, rgba(254, 243, 199, 0.45) 0px, transparent 50%);
+      background-attachment: fixed;
+      background-size: cover;
+      min-height: 100vh;
+    }
+    .dark body {
+      background-color: #0b1120;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(244, 63, 94, 0.14) 0px, transparent 55%),
+        radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.14) 0px, transparent 50%),
+        radial-gradient(at 50% 25%, rgba(168, 85, 247, 0.12) 0px, transparent 50%),
+        radial-gradient(at 0% 60%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+        radial-gradient(at 100% 85%, rgba(245, 158, 11, 0.08) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+
     .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.35); border-radius: 9999px; }
+
+    /* ================= GLARE GLASSMORPHISM DESIGN SYSTEM ================= */
+    .glare-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .dark .glare-card {
+      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    }
+    .glare-card:hover {
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.07);
+    }
+
+    .glare-header {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+    }
+    .dark .glare-header {
+      background: rgba(15, 23, 42, 0.88);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+    }
+
+    .glare-control {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+      transition: all 0.2s ease;
+    }
+    .dark .glare-control {
+      background: rgba(30, 41, 59, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+    .glare-control:focus {
+      border-color: #059669;
+      box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
+    }
+
+    .glare-subcard {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+    }
+    .dark .glare-subcard {
+      background: rgba(30, 41, 59, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .glare-kpi-active {
+      border-color: #059669 !important;
+      box-shadow: 0 0 0 2px #059669, 0 20px 40px -15px rgba(5, 150, 105, 0.25) !important;
+    }
   </style>
 </head>
-<body class="bg-slate-100/70 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-200 custom-scrollbar">
+<body class="text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-200 custom-scrollbar">
 
   <!-- ==================== 1. TOP HEADER & UNIFIED CONTROL BAR ==================== -->
-  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
-    <div class="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-2.5">
+  <!-- ==================== 1. TOP HEADER & UNIFIED CONTROL BAR ==================== -->
+    <!-- ==================== 1. TOP HEADER & UNIFIED CONTROL BAR ==================== -->
+  <header class="sticky top-0 z-40 glare-header">
+    <div class="w-full max-w-[1800px] mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 space-y-2 sm:space-y-2.5">
 
-      <!-- Row 1: Company Logo, Professional Title & Actions -->
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+      <!-- Row 1: Company Logo, Professional Title & Actions (Compact on Mobile) -->
+      <div class="flex items-center justify-between gap-2.5">
         <!-- Logo & Title -->
-        <div class="flex items-center gap-3.5 sm:gap-4">
-          <img src="logo.png" alt="GEMMY WOOD Logo" class="h-9 sm:h-11 w-auto object-contain shrink-0" />
-          <div class="border-l border-slate-200 dark:border-slate-700 pl-3.5 sm:pl-4">
-            <h1 class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 dark:text-white uppercase">
+        <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+          <img src="logo.png" alt="GEMMY WOOD Logo" class="h-[26px] sm:h-[32px] w-auto object-contain shrink-0" />
+          <div class="border-l border-slate-300/80 dark:border-slate-700/80 pl-2.5 sm:pl-3.5 min-w-0">
+            <h1 class="text-xs sm:text-base font-black tracking-tight text-slate-900 dark:text-white uppercase leading-tight truncate sm:whitespace-normal">
               BÁO CÁO THỊ TRƯỜNG GỖ XUẤT KHẨU
             </h1>
-            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+            <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium hidden sm:block">
               Hệ thống Giám sát & Phân tích Tác động Kinh tế, Chính trị, Thuế quan, Luật pháp ảnh hưởng tới việc xuất khẩu B2B
             </p>
           </div>
         </div>
 
-        <!-- Top Right Actions: Export CSV, Refresh, Theme Toggle (Clean & Streamlined) -->
-        <div class="flex items-center gap-2">
-          <button onclick="exportToCSV()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm transition active:scale-95" title="Xuất toàn bộ dữ liệu đang lọc ra file CSV">
-            <i data-lucide="download" class="w-4 h-4"></i>
-            <span>Xuất CSV</span>
+        <!-- Top Right Actions: Export CSV, Refresh, Theme Toggle -->
+        <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <button onclick="exportToCSV()" class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-sm transition active:scale-95" title="Xuất toàn bộ dữ liệu đang lọc ra file CSV">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            <span class="hidden sm:inline">Xuất CSV</span>
           </button>
 
-          <button onclick="fetchSheetData(true)" class="p-2 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition" title="Làm mới dữ liệu từ Google Sheets">
-            <i data-lucide="refresh-cw" class="w-4 h-4" id="refreshIcon"></i>
+          <button onclick="fetchSheetData(true)" class="p-1.5 sm:p-2 rounded-xl glare-control text-slate-700 dark:text-slate-300 hover:text-emerald-600 transition" title="Làm mới dữ liệu từ Google Sheets">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5 sm:w-4 sm:h-4" id="refreshIcon"></i>
           </button>
 
-          <button onclick="toggleTheme()" class="p-2 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition" title="Chuyển chế độ Sáng / Tối">
-            <i data-lucide="sun" class="w-4 h-4" id="themeIcon"></i>
+          <button onclick="toggleTheme()" class="p-1.5 sm:p-2 rounded-xl glare-control text-slate-700 dark:text-slate-300 hover:text-amber-500 transition" title="Chuyển chế độ Sáng / Tối">
+            <i data-lucide="sun" class="w-3.5 h-3.5 sm:w-4 sm:h-4" id="themeIcon"></i>
           </button>
         </div>
       </div>
 
-      <!-- Row 2: Clean Unified Control Bar (Time Controls at FAR LEFT -> Filters & Search on the Right) -->
-      <div class="pt-2.5 border-t border-slate-200 dark:border-slate-800 flex flex-col xl:flex-row xl:items-center justify-between gap-3">
+      <!-- Row 2: Unified Control Bar (Mobile-friendly Grid/Scroll) -->
+      <div class="pt-2 border-t border-slate-200/60 dark:border-slate-800/60 flex flex-col xl:flex-row xl:items-center justify-between gap-2.5">
 
-        <!-- Left: Time Controls (Month Dropdown at FAR LEFT, adjacent to 3 Recent Month Tabs) -->
-        <div class="flex items-center gap-2 flex-nowrap overflow-x-auto pb-1 xl:pb-0 custom-scrollbar shrink-0">
-          <!-- FAR LEFT: Month Selector Dropdown ("Xem tháng khác" when active month is in top 3) -->
-          <select id="monthSelectDropdown" onchange="onMonthDropdownChange(this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm shrink-0 cursor-pointer">
+        <!-- Left: Time Controls (Month Dropdown + 3 Recent Tabs) -->
+        <div class="flex items-center gap-1.5 sm:gap-2 flex-nowrap overflow-x-auto pb-1 xl:pb-0 custom-scrollbar shrink-0 w-full xl:w-auto">
+          <!-- FAR LEFT: Month Selector Dropdown -->
+          <select id="monthSelectDropdown" onchange="onMonthDropdownChange(this.value)" class="px-2.5 sm:px-3 py-1.5 glare-control rounded-xl text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm shrink-0 cursor-pointer">
             <option value="OTHER_PLACEHOLDER" selected>📅 Xem tháng khác</option>
             <option value="1Y">1 năm</option>
             <option value="6M">6 tháng</option>
@@ -86,16 +177,16 @@
             <option value="Tháng 5">05/2026</option>
           </select>
 
-          <!-- 3 Recent Month Tabs (Label 10/2026, 09/2026, 08/2026) -->
+          <!-- 3 Recent Month Tabs -->
           <div class="flex items-center gap-1.5 flex-nowrap shrink-0" id="recentMonthTabs">
             <!-- Populated by JS -->
           </div>
         </div>
 
-        <!-- Right: Market, Pillar, Risk Filters, Search & Reset -->
-        <div class="flex items-center gap-2 flex-wrap xl:flex-nowrap">
+        <!-- Right: Market, Pillar, Risk Filters, Search & Reset (Responsive Grid on Mobile) -->
+        <div class="grid grid-cols-2 sm:flex sm:items-center gap-1.5 sm:gap-2 w-full xl:w-auto">
           <!-- Market Filter -->
-          <select id="marketFilter" onchange="setFilterState('market', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm cursor-pointer">
+          <select id="marketFilter" onchange="setFilterState('market', this.value)" class="w-full sm:w-auto px-2 sm:px-3 py-1.5 glare-control rounded-xl text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm cursor-pointer">
             <option value="ALL">Tất cả thị trường</option>
             <option value="Mỹ">Hoa Kỳ (US)</option>
             <option value="EU">Liên minh Châu Âu (EU)</option>
@@ -107,17 +198,17 @@
           </select>
 
           <!-- Pillar Filter -->
-          <select id="pillarFilter" onchange="setFilterState('pillar', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm cursor-pointer">
+          <select id="pillarFilter" onchange="setFilterState('pillar', this.value)" class="w-full sm:w-auto px-2 sm:px-3 py-1.5 glare-control rounded-xl text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm cursor-pointer">
             <option value="ALL">Tất cả trụ cột vĩ mô</option>
             <option value="Kinh tế">Kinh tế & Tỷ giá</option>
-            <option value="Thuế quan">Thuế quan & Phòng vệ TM</option>
-            <option value="Luật pháp">Luật pháp & Tiêu chuẩn xanh</option>
+            <option value="Thuế quan">Thuế quan & PVTM</option>
+            <option value="Luật pháp">Luật pháp & Tiêu chuẩn</option>
             <option value="Logistics">Logistics & Địa chính trị</option>
             <option value="Nguyên liệu">Nguyên liệu & Sản xuất</option>
           </select>
 
           <!-- Risk Filter -->
-          <select id="riskFilter" onchange="setFilterState('risk', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm cursor-pointer">
+          <select id="riskFilter" onchange="setFilterState('risk', this.value)" class="w-full sm:w-auto px-2 sm:px-3 py-1.5 glare-control rounded-xl text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm cursor-pointer">
             <option value="ALL">Mọi mức rủi ro</option>
             <option value="Cao">Rủi ro cao</option>
             <option value="Trung bình">Rủi ro trung bình</option>
@@ -125,13 +216,13 @@
           </select>
 
           <!-- Search Input -->
-          <div class="relative">
-            <i data-lucide="search" class="w-4 h-4 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-            <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Tìm kiếm sự kiện, EUDR, ILPA..." class="pl-8 pr-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-emerald-600 w-48 sm:w-56 shadow-sm">
+          <div class="relative w-full sm:w-48 xl:w-52">
+            <i data-lucide="search" class="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Tìm kiếm sự kiện, EUDR..." class="w-full pl-8 pr-2.5 py-1.5 glare-control rounded-xl text-xs sm:text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-emerald-600 shadow-sm">
           </div>
 
           <!-- Reset Filter Button -->
-          <button onclick="resetAllFilters()" id="resetFilterBtn" class="hidden px-2.5 py-1.5 bg-rose-50 dark:bg-rose-950/50 hover:bg-rose-100 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 rounded-lg text-xs sm:text-sm font-bold transition whitespace-nowrap">
+          <button onclick="resetAllFilters()" id="resetFilterBtn" class="hidden col-span-2 sm:col-auto px-2.5 py-1.5 bg-rose-50/90 dark:bg-rose-950/50 hover:bg-rose-100 text-rose-700 dark:text-rose-300 border border-rose-200/80 dark:border-rose-800 rounded-xl text-xs sm:text-sm font-bold transition text-center whitespace-nowrap">
             Xóa lọc
           </button>
         </div>
@@ -142,96 +233,136 @@
   </header>
 
   <!-- ==================== MAIN CONTENT WRAPPER (EXPANDED WIDTH) ==================== -->
-  <main class="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+  <main class="w-full max-w-[1800px] mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6">
 
     <!-- SECTION 1: 6 MACRO KPI CARDS & EXECUTIVE DIGEST -->
     <section class="space-y-4">
-      <!-- 6 KPI Pillar Cards -->
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
+      <!-- 6 KPI Pillar Cards (GLARE Style: Removed 'Vĩ mô 1-5', Mobile Optimized) -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3.5">
         <!-- Card: Tổng Biến Động -->
-        <div onclick="setFilterState('pillar', 'ALL')" id="kpiCard_ALL" class="bg-white dark:bg-slate-900 rounded-2xl p-4 border-2 border-emerald-600 shadow-sm cursor-pointer transition">
-          <div class="flex items-center justify-between text-xs font-bold text-emerald-800 dark:text-emerald-400 uppercase tracking-wide">
-            <span>Tổng Biến Động</span>
-            <i data-lucide="layers" class="w-4 h-4"></i>
+        <div onclick="setFilterState('pillar', 'ALL')" id="kpiCard_ALL" class="glare-card p-3 sm:p-5 cursor-pointer transition relative group flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2 sm:mb-3">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-md shadow-emerald-500/25">
+                <i data-lucide="layers" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+              </div>
+              <span class="px-1.5 sm:px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-extrabold bg-emerald-100/80 text-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/60 uppercase tracking-wide">
+                TỔNG QUAN
+              </span>
+            </div>
+            <div class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              TỔNG BIẾN ĐỘNG
+            </div>
+            <div class="flex items-baseline gap-1 mt-0.5 sm:mt-1">
+              <span id="kpiTotal" class="text-xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">--</span>
+              <span class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-semibold">sự kiện</span>
+            </div>
           </div>
-          <div class="flex items-baseline gap-1.5 mt-2">
-            <span id="kpiTotal" class="text-3xl font-extrabold text-slate-900 dark:text-white">--</span>
-            <span class="text-xs sm:text-sm text-slate-500 font-semibold">sự kiện</span>
-          </div>
-          <div class="flex flex-col sm:flex-row sm:items-center gap-1.5 mt-2.5 text-xs font-bold">
-            <span class="px-2 py-0.5 rounded bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/60 dark:text-red-300 dark:border-red-800" id="kpiRiskCount">-- Rủi ro cao</span>
-            <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800" id="kpiOppCount">-- Cơ hội cao</span>
+          <div class="flex flex-col gap-1 mt-2.5 sm:mt-3 pt-2 sm:pt-3 border-t border-slate-200/60 dark:border-slate-800/60 text-[10px] sm:text-xs font-bold">
+            <span class="px-1.5 py-0.5 rounded-lg bg-rose-50/80 text-rose-700 border border-rose-200/80 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800 text-center" id="kpiRiskCount">-- Rủi ro cao</span>
+            <span class="px-1.5 py-0.5 rounded-lg bg-emerald-50/80 text-emerald-700 border border-emerald-200/80 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800 text-center" id="kpiOppCount">-- Cơ hội cao</span>
           </div>
         </div>
 
-        <!-- Card: 1. Kinh Tế -->
-        <div onclick="setFilterState('pillar', 'Kinh tế')" id="kpiCard_Kinh tế" class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:border-blue-500 shadow-sm cursor-pointer transition">
-          <div class="flex items-center justify-between text-xs font-bold text-blue-800 dark:text-blue-400 uppercase tracking-wide">
-            <span>1. Kinh Tế & Tỷ Giá</span>
-            <i data-lucide="trending-up" class="w-4 h-4"></i>
+        <!-- Card: Kinh Tế -->
+        <div onclick="setFilterState('pillar', 'Kinh tế')" id="kpiCard_Kinh tế" class="glare-card p-3 sm:p-5 cursor-pointer transition relative group flex flex-col justify-between hover:scale-[1.02]">
+          <div>
+            <div class="flex items-center justify-between mb-2 sm:mb-3">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/25">
+                <i data-lucide="trending-up" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+              </div>
+            </div>
+            <div class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              KINH TẾ & TỶ GIÁ
+            </div>
+            <div class="flex items-baseline gap-1 mt-0.5 sm:mt-1">
+              <span id="kpiEconomy" class="text-xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">--</span>
+              <span class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-semibold">sự kiện</span>
+            </div>
           </div>
-          <div class="flex items-baseline gap-1.5 mt-2">
-            <span id="kpiEconomy" class="text-3xl font-extrabold text-slate-900 dark:text-white">--</span>
-            <span class="text-xs sm:text-sm text-slate-500 font-semibold">sự kiện</span>
-          </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2.5 truncate font-medium">Lãi suất FED/RBA, BĐS, USD/VND</p>
+          <p class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-slate-200/60 dark:border-slate-800/60 truncate font-medium">Lãi suất, BĐS, USD/VND</p>
         </div>
 
-        <!-- Card: 2. Thuế Quan -->
-        <div onclick="setFilterState('pillar', 'Thuế quan')" id="kpiCard_Thuế quan" class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:border-amber-500 shadow-sm cursor-pointer transition">
-          <div class="flex items-center justify-between text-xs font-bold text-amber-800 dark:text-amber-400 uppercase tracking-wide">
-            <span>2. Thuế Quan & PVTM</span>
-            <i data-lucide="shield-alert" class="w-4 h-4"></i>
+        <!-- Card: Thuế Quan -->
+        <div onclick="setFilterState('pillar', 'Thuế quan')" id="kpiCard_Thuế quan" class="glare-card p-3 sm:p-5 cursor-pointer transition relative group flex flex-col justify-between hover:scale-[1.02]">
+          <div>
+            <div class="flex items-center justify-between mb-2 sm:mb-3">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white shadow-md shadow-amber-500/25">
+                <i data-lucide="shield-alert" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+              </div>
+            </div>
+            <div class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              THUẾ QUAN & PVTM
+            </div>
+            <div class="flex items-baseline gap-1 mt-0.5 sm:mt-1">
+              <span id="kpiTariff" class="text-xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">--</span>
+              <span class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-semibold">sự kiện</span>
+            </div>
           </div>
-          <div class="flex items-baseline gap-1.5 mt-2">
-            <span id="kpiTariff" class="text-3xl font-extrabold text-slate-900 dark:text-white">--</span>
-            <span class="text-xs sm:text-sm text-slate-500 font-semibold">sự kiện</span>
-          </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2.5 truncate font-medium">Thuế đối ứng Mỹ, AD/CVD, C/O</p>
+          <p class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-slate-200/60 dark:border-slate-800/60 truncate font-medium">Thuế đối ứng, AD/CVD, C/O</p>
         </div>
 
-        <!-- Card: 3. Luật Pháp -->
-        <div onclick="setFilterState('pillar', 'Luật pháp')" id="kpiCard_Luật pháp" class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:border-purple-500 shadow-sm cursor-pointer transition">
-          <div class="flex items-center justify-between text-xs font-bold text-purple-800 dark:text-purple-400 uppercase tracking-wide">
-            <span>3. Luật & Tiêu Chuẩn</span>
-            <i data-lucide="scale" class="w-4 h-4"></i>
+        <!-- Card: Luật Pháp -->
+        <div onclick="setFilterState('pillar', 'Luật pháp')" id="kpiCard_Luật pháp" class="glare-card p-3 sm:p-5 cursor-pointer transition relative group flex flex-col justify-between hover:scale-[1.02]">
+          <div>
+            <div class="flex items-center justify-between mb-2 sm:mb-3">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-white shadow-md shadow-purple-500/25">
+                <i data-lucide="scale" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+              </div>
+            </div>
+            <div class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              LUẬT & TIÊU CHUẨN
+            </div>
+            <div class="flex items-baseline gap-1 mt-0.5 sm:mt-1">
+              <span id="kpiLaw" class="text-xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">--</span>
+              <span class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-semibold">sự kiện</span>
+            </div>
           </div>
-          <div class="flex items-baseline gap-1.5 mt-2">
-            <span id="kpiLaw" class="text-3xl font-extrabold text-slate-900 dark:text-white">--</span>
-            <span class="text-xs sm:text-sm text-slate-500 font-semibold">sự kiện</span>
-          </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2.5 truncate font-medium">EUDR (EU), ILPA (Úc), Lacey, FSC</p>
+          <p class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-slate-200/60 dark:border-slate-800/60 truncate font-medium">EUDR, ILPA, Lacey, FSC</p>
         </div>
 
-        <!-- Card: 4. Logistics & Chính Trị -->
-        <div onclick="setFilterState('pillar', 'Logistics')" id="kpiCard_Logistics" class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:border-rose-500 shadow-sm cursor-pointer transition">
-          <div class="flex items-center justify-between text-xs font-bold text-rose-800 dark:text-rose-400 uppercase tracking-wide">
-            <span>4. Địa Chính Trị & Tàu</span>
-            <i data-lucide="ship" class="w-4 h-4"></i>
+        <!-- Card: Logistics & Chính Trị -->
+        <div onclick="setFilterState('pillar', 'Logistics')" id="kpiCard_Logistics" class="glare-card p-3 sm:p-5 cursor-pointer transition relative group flex flex-col justify-between hover:scale-[1.02]">
+          <div>
+            <div class="flex items-center justify-between mb-2 sm:mb-3">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white shadow-md shadow-rose-500/25">
+                <i data-lucide="ship" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+              </div>
+            </div>
+            <div class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              ĐỊA CHÍNH TRỊ & TÀU
+            </div>
+            <div class="flex items-baseline gap-1 mt-0.5 sm:mt-1">
+              <span id="kpiLogistics" class="text-xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">--</span>
+              <span class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-semibold">sự kiện</span>
+            </div>
           </div>
-          <div class="flex items-baseline gap-1.5 mt-2">
-            <span id="kpiLogistics" class="text-3xl font-extrabold text-slate-900 dark:text-white">--</span>
-            <span class="text-xs sm:text-sm text-slate-500 font-semibold">sự kiện</span>
-          </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2.5 truncate font-medium">Biển Đỏ, Cước container, Cảng biển</p>
+          <p class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-slate-200/60 dark:border-slate-800/60 truncate font-medium">Biển Đỏ, Cước cont, Cảng</p>
         </div>
 
-        <!-- Card: 5. Nguyên Liệu & Sản Xuất -->
-        <div onclick="setFilterState('pillar', 'Nguyên liệu')" id="kpiCard_Nguyên liệu" class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:border-teal-500 shadow-sm cursor-pointer transition">
-          <div class="flex items-center justify-between text-xs font-bold text-teal-800 dark:text-teal-400 uppercase tracking-wide">
-            <span>5. Nguyên Liệu & SX</span>
-            <i data-lucide="trees" class="w-4 h-4"></i>
+        <!-- Card: Nguyên Liệu & Sản Xuất -->
+        <div onclick="setFilterState('pillar', 'Nguyên liệu')" id="kpiCard_Nguyên liệu" class="glare-card p-3 sm:p-5 cursor-pointer transition relative group flex flex-col justify-between hover:scale-[1.02]">
+          <div>
+            <div class="flex items-center justify-between mb-2 sm:mb-3">
+              <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-white shadow-md shadow-teal-500/25">
+                <i data-lucide="trees" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+              </div>
+            </div>
+            <div class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              NGUYÊN LIỆU & SX
+            </div>
+            <div class="flex items-baseline gap-1 mt-0.5 sm:mt-1">
+              <span id="kpiMaterial" class="text-xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">--</span>
+              <span class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-semibold">sự kiện</span>
+            </div>
           </div>
-          <div class="flex items-baseline gap-1.5 mt-2">
-            <span id="kpiMaterial" class="text-3xl font-extrabold text-slate-900 dark:text-white">--</span>
-            <span class="text-xs sm:text-sm text-slate-500 font-semibold">sự kiện</span>
-          </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2.5 truncate font-medium">Gỗ keo FSC Phú Thọ, Phôi gỗ sấy</p>
+          <p class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-slate-200/60 dark:border-slate-800/60 truncate font-medium">Gỗ keo FSC Phú Thọ, Phôi sấy</p>
         </div>
       </div>
+    </section>
 
-      <!-- Executive Digest Box (Tiêu điểm điều hành của kỳ tháng đang chọn) -->
-      <div id="monthlyDigestBox" class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+    <!-- Executive Digest Box (Tiêu điểm điều hành của kỳ tháng đang chọn) -->
+      <div id="monthlyDigestBox" class="glare-card p-5 sm:p-6 rounded-3xl space-y-4">
         <!-- Rendered dynamically by JS -->
       </div>
     </section>
@@ -240,60 +371,60 @@
     <!-- SECTION 2: CHARTS & INTELLIGENCE VISUALIZATION (2x2 GRID, 4 ADVANCED CHARTS) -->
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
       <!-- Chart 1: Monthly Timeline Trend -->
-      <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+      <div class="glare-card p-4 sm:p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between">
         <div class="mb-3">
           <h2 class="text-sm font-extrabold uppercase tracking-wide text-slate-900 dark:text-white">
             1. Diễn Biến Biến Động Qua Các Tháng
           </h2>
           <p class="text-xs text-slate-500 mt-0.5">Xu hướng tổng số lượng sự kiện, rủi ro cao và cơ hội cao qua các kỳ</p>
         </div>
-        <div class="h-64 sm:h-72 relative">
+        <div class="h-56 sm:h-64 sm:h-72 relative">
           <canvas id="monthlyTimelineChart"></canvas>
         </div>
       </div>
 
       <!-- Chart 2: Market Risk & Opportunity Comparison -->
-      <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+      <div class="glare-card p-4 sm:p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between">
         <div class="mb-3">
           <h2 class="text-sm font-extrabold uppercase tracking-wide text-slate-900 dark:text-white">
             2. Tương Quan Rủi Ro & Cơ Hội Theo Thị Trường
           </h2>
           <p class="text-xs text-slate-500 mt-0.5">Phân bổ tại Hoa Kỳ, Châu Âu, Úc, Việt Nam, Nhật/Hàn, Anh/Canada</p>
         </div>
-        <div class="h-64 sm:h-72 relative">
+        <div class="h-56 sm:h-64 sm:h-72 relative">
           <canvas id="marketCompareChart"></canvas>
         </div>
       </div>
 
       <!-- Chart 3: Operational Value Chain Radar (NEW) -->
-      <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+      <div class="glare-card p-4 sm:p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between">
         <div class="mb-3">
           <h2 class="text-sm font-extrabold uppercase tracking-wide text-slate-900 dark:text-white">
             3. Đánh Giá Tác Động Vào 5 Mắt Xích Vận Hành SXKD
           </h2>
           <p class="text-xs text-slate-500 mt-0.5">Radar so sánh áp lực rủi ro vs tiềm năng cơ hội (Đơn hàng, Giá bán, Nguyên liệu, Logistics, Tỷ giá)</p>
         </div>
-        <div class="h-64 sm:h-72 relative flex items-center justify-center">
+        <div class="h-56 sm:h-64 sm:h-72 relative flex items-center justify-center">
           <canvas id="operationsRadarChart"></canvas>
         </div>
       </div>
 
       <!-- Chart 4: Pillar Breakdown -->
-      <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+      <div class="glare-card p-4 sm:p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between">
         <div class="mb-3">
           <h2 class="text-sm font-extrabold uppercase tracking-wide text-slate-900 dark:text-white">
             4. Phân Bổ Trọng Tâm Biến Động Theo Trụ Cột Vĩ Mô
           </h2>
           <p class="text-xs text-slate-500 mt-0.5">Tỷ trọng các nhóm: Kinh tế, Thuế quan, Tiêu chuẩn EUDR/Luật, Logistics, Nguyên liệu</p>
         </div>
-        <div class="h-64 sm:h-72 relative flex items-center justify-center">
+        <div class="h-56 sm:h-64 sm:h-72 relative flex items-center justify-center">
           <canvas id="pillarDonutChart"></canvas>
         </div>
       </div>
     </section>
 
     <!-- SECTION 3: STRATEGIC MARKET PROFILES (6 KEY MARKETS — CLEAN TEXT, NO FLAGS) -->
-    <section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+    <section class="glare-card p-4 sm:p-6 rounded-2xl sm:rounded-3xl space-y-3.5 sm:space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-slate-100 dark:border-slate-800">
         <div>
           <h2 class="text-base font-extrabold text-slate-900 dark:text-white uppercase flex items-center gap-2">
@@ -313,21 +444,21 @@
     </section>
 
     <!-- SECTION 4: ENHANCED DETAILED MATRIX TABLE -->
-    <section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4" id="tableSection">
+    <section class="glare-card p-3.5 sm:p-6 rounded-2xl sm:rounded-3xl space-y-3 sm:space-y-4" id="tableSection">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-slate-100 dark:border-slate-800">
         <div>
           <h2 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white uppercase flex items-center gap-2">
             <i data-lucide="table-2" class="w-5 h-5 text-emerald-700"></i>
             MA TRẬN DỮ LIỆU PHÂN NHÓM THEO TỪNG KỲ BÁO CÁO THÁNG
           </h2>
-          <p class="text-xs sm:text-sm text-slate-500 mt-0.5" id="tableRecordSummary">
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5 flex flex-wrap items-center gap-1.5"><span id="tableRecordSummary">Đang tải dữ liệu...</span><span class="inline sm:hidden text-emerald-600 dark:text-emerald-400 font-bold text-[11px]">(Vuốt ngang để xem đủ 7 cột ➔)</span></p><p class="hidden" id="dummySummary">
             Đang tải dữ liệu...
           </p>
         </div>
 
         <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
           <span class="font-medium">Hiển thị:</span>
-          <select id="pageSizeSelect" onchange="changePageSize(this.value)" class="bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-1.5 font-semibold text-slate-800 dark:text-slate-200 shadow-sm">
+          <select id="pageSizeSelect" onchange="changePageSize(this.value)" class="glare-control rounded-xl px-3 py-1.5 font-bold text-slate-800 dark:text-slate-200 shadow-sm">
             <option value="15">15 sự kiện / trang</option>
             <option value="30">30 sự kiện / trang</option>
             <option value="100" selected>Tất cả theo kỳ</option>
@@ -335,10 +466,10 @@
         </div>
       </div>
 
-      <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800 custom-scrollbar">
+      <div class="overflow-x-auto rounded-2xl border border-white/60 dark:border-slate-800/80 custom-scrollbar">
         <table class="w-full text-left text-sm border-collapse">
           <thead>
-            <tr class="bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-700 text-xs">
+            <tr class="bg-white/80 dark:bg-slate-800/90 backdrop-blur-md text-slate-700 dark:text-slate-300 font-bold uppercase tracking-wider border-b border-white/80 dark:border-slate-700 text-xs">
               <th class="py-3.5 px-4 w-28 shrink-0">Mã & Ngày</th>
               <th class="py-3.5 px-4 w-44 shrink-0">Thị Trường & SP</th>
               <th class="py-3.5 px-4 w-48 shrink-0">Trụ Cột & Sự Kiện</th>
@@ -370,8 +501,8 @@
   </main>
 
   <!-- ==================== 360 DETAIL MODAL ==================== -->
-  <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl max-w-3xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
+  <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-md hidden">
+    <div class="glare-card max-w-3xl w-full p-4 sm:p-6 shadow-2xl space-y-3.5 max-h-[92vh] overflow-y-auto custom-scrollbar">
       <div class="flex items-start justify-between border-b border-slate-200 dark:border-slate-800 pb-3.5 gap-4">
         <div>
           <div class="flex items-center gap-2 flex-wrap mb-1.5">
@@ -783,14 +914,14 @@
         const isActive = activeMonth === m.key;
         const count = allData.filter(d => matchMonthRecord(d, m.key) && matchMarketRecord(d, activeMarket)).length;
         return `
-          <button onclick="setFilterState('month', '${m.key}')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 border shadow-sm ${
+          <button onclick="setFilterState('month', '${m.key}')" class="px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 ${
             isActive
-              ? 'bg-emerald-700 text-white border-emerald-700'
-              : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700'
+              ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20'
+              : 'glare-control text-slate-700 dark:text-slate-200 hover:text-emerald-700 hover:bg-white/90'
           }">
             <span>${m.label}</span>
-            <span class="px-1.5 py-0.2 rounded text-xs ${
-              isActive ? 'bg-emerald-900/60 text-emerald-100' : 'bg-slate-100 dark:bg-slate-900 text-slate-500'
+            <span class="px-1.5 py-0.2 rounded-full text-xs font-black ${
+              isActive ? 'bg-white/25 text-white' : 'bg-slate-200/70 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
             }">${count}</span>
           </button>
         `;
@@ -938,14 +1069,14 @@
         ? `Đang lọc: ${filterParts.join(' • ')}`
         : 'Đang hiển thị: Toàn bộ dữ liệu (1 năm)';
 
-      // Highlight active KPI Pillar Card
+      // Highlight active KPI Pillar Card (GLARE Glass Style)
       ['ALL', 'Kinh tế', 'Thuế quan', 'Luật pháp', 'Logistics', 'Nguyên liệu'].forEach(k => {
         const card = document.getElementById(`kpiCard_${k}`);
         if (!card) return;
         if (k === activePillar) {
-          card.className = 'bg-emerald-50/50 dark:bg-emerald-950/30 rounded-2xl p-4 border-2 border-emerald-600 shadow-sm cursor-pointer transition';
+          card.className = 'glare-card glare-kpi-active p-4 sm:p-5 cursor-pointer transition relative group flex flex-col justify-between';
         } else {
-          card.className = 'bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:border-emerald-500 shadow-sm cursor-pointer transition';
+          card.className = 'glare-card p-4 sm:p-5 cursor-pointer transition relative group flex flex-col justify-between hover:scale-[1.02]';
         }
       });
 
