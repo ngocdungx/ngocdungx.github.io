@@ -141,8 +141,12 @@
           </div>
         </div>
 
-        <!-- Top Right Actions: Export CSV, Refresh, Theme Toggle -->
+        <!-- Top Right Actions: Auto-refresh Badge, Export CSV, Refresh, Theme Toggle -->
         <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-800/60 text-xs font-bold text-slate-700 dark:text-slate-200 shadow-xs" title="Tự động đồng bộ ngầm 10 phút/lần">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+            <span id="lastSyncStatus">Đồng bộ lúc --:--</span>
+          </div>
           <button onclick="exportToCSV()" class="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-sm transition active:scale-95" title="Xuất toàn bộ dữ liệu đang lọc ra file CSV">
             <i data-lucide="download" class="w-3.5 h-3.5"></i>
             <span class="hidden sm:inline">Xuất CSV</span>
@@ -749,6 +753,18 @@
       lucide.createIcons();
       fetchSheetData();
 
+      // Tự động cập nhật ngầm 10 phút/lần (600.000 ms)
+      setInterval(() => {
+        fetchSheetData(false);
+      }, 10 * 60 * 1000);
+
+      // Tự động kiểm tra và cập nhật ngầm khi người dùng quay lại tab trình duyệt
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+          fetchSheetData(false);
+        }
+      });
+
       // Close modal on clicking backdrop
       const modal = document.getElementById('detailModal');
       if (modal) {
@@ -785,10 +801,15 @@
       const callbackName = 'gviz_' + Date.now();
       let timedOut = false;
 
+      // Timeout 7 giây: nếu Google Sheets không phản hồi hoặc không có dữ liệu thì để trắng
       const timer = setTimeout(() => {
         timedOut = true;
-        loadFallbackData();
-      }, 6500);
+        if (!allData || allData.length === 0) {
+          allData = [];
+          onDataLoaded();
+        }
+        if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+      }, 7000);
 
       window[callbackName] = function(response) {
         clearTimeout(timer);
@@ -798,15 +819,16 @@
 
         try {
           const parsed = parseGviz(response);
-          if (parsed.length > 0) {
-            allData = parsed;
-            onDataLoaded();
-          } else {
-            loadFallbackData();
-          }
+          // Nạp dữ liệu thực tế từ Google Sheet. Nếu không có dữ liệu thì để trắng ([])
+          allData = Array.isArray(parsed) ? parsed : [];
+          onDataLoaded();
+          updateLastSyncTime();
         } catch (e) {
-          console.error(e);
-          loadFallbackData();
+          console.error('Lỗi nạp dữ liệu từ Google Sheets:', e);
+          if (!allData || allData.length === 0) {
+            allData = [];
+            onDataLoaded();
+          }
         } finally {
           if (refreshIcon) refreshIcon.classList.remove('animate-spin');
         }
@@ -818,23 +840,22 @@
         clearTimeout(timer);
         delete window[callbackName];
         if (script.parentNode) script.parentNode.removeChild(script);
-        loadFallbackData();
+        if (!allData || allData.length === 0) {
+          allData = [];
+          onDataLoaded();
+        }
+        if (refreshIcon) refreshIcon.classList.remove('animate-spin');
       };
       document.body.appendChild(script);
     }
 
-    function loadFallbackData() {
-      fetch('data.json')
-        .then(r => r.json())
-        .then(data => {
-          allData = data;
-          onDataLoaded();
-        })
-        .catch(err => console.error('Fallback error:', err))
-        .finally(() => {
-          const refreshIcon = document.getElementById('refreshIcon');
-          if (refreshIcon) refreshIcon.classList.remove('animate-spin');
-        });
+        function updateLastSyncTime() {
+      const el = document.getElementById('lastSyncStatus');
+      if (el) {
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        el.textContent = `Đồng bộ lúc ${timeStr}`;
+      }
     }
 
     function parseGviz(gviz) {
@@ -977,6 +998,14 @@
 
     function renderMonthlyDigest() {
       const box = document.getElementById('monthlyDigestBox');
+      if (!allData || allData.length === 0) {
+        box.innerHTML = `
+          <div class="py-8 text-center text-slate-400 dark:text-slate-500 font-medium italic">
+            Chưa có dữ liệu sự kiện từ Google Sheet.
+          </div>
+        `;
+        return;
+      }
       const meta = MONTH_METADATA[activeMonth] || MONTH_METADATA['Tháng 10'];
 
       box.innerHTML = `
@@ -1005,6 +1034,14 @@
 
     function renderCountryProfiles() {
       const container = document.getElementById('countryStrategicGrid');
+      if (!allData || allData.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-8 text-center text-slate-400 dark:text-slate-500 font-medium italic">
+            Chưa có dữ liệu thị trường từ Google Sheet.
+          </div>
+        `;
+        return;
+      }
       const monthScoped = allData.filter(d => matchMonthRecord(d, activeMonth));
 
       container.innerHTML = COUNTRY_PROFILES.map(c => {
@@ -1184,8 +1221,9 @@
       const pageData = filteredData.slice(start, end);
 
       if (pageData.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="py-12 text-center text-slate-500 font-medium">Không có sự kiện nào khớp với điều kiện lọc. Bấm "Xóa bộ lọc" ở thanh trên cùng để xem lại toàn bộ.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" class="py-16 text-center text-slate-400 dark:text-slate-500 font-medium italic"><div class="flex flex-col items-center justify-center gap-2"><i data-lucide="inbox" class="w-8 h-8 opacity-40"></i><span>Chưa có dữ liệu sự kiện nào từ Google Sheet.</span></div></td></tr>`;
         renderPagination(0);
+        lucide.createIcons();
         return;
       }
 
