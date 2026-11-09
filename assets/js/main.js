@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initQualificationTabs();
     initProjectToolbar();
     initCertLightbox();
+    initContactForm();
     initServiceWorker();
 });
 
@@ -445,6 +446,121 @@ function initCertLightbox() {
             lightboxClose?.focus();
         }
     });
+}
+
+/*==================== CONTACT FORM SUBMISSION ====================*/
+function initContactForm() {
+    const contactForm = document.getElementById('contact-form');
+    if (!contactForm) return;
+
+    const submitBtn = document.getElementById('contact-submit-btn');
+    const alertBox = document.getElementById('contact-alert');
+    const btnText = submitBtn?.querySelector('.btn-text');
+    const btnSpinner = submitBtn?.querySelector('.btn-spinner');
+
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwhoBwBvunUxUZmhGtQEicOOSiCHdMh6X06BGqI-KYLUm-tE7H8eBMtFgGdIH5SbXug/exec';
+
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Ẩn alert cũ nếu có
+        if (alertBox) {
+            alertBox.className = 'contact__alert';
+            alertBox.textContent = '';
+            alertBox.style.display = 'none';
+        }
+
+        const nameInput = document.getElementById('contact-name');
+        const emailInput = document.getElementById('contact-email');
+        const phoneInput = document.getElementById('contact-phone');
+        const subjectInput = document.getElementById('contact-subject');
+        const messageInput = document.getElementById('contact-message');
+
+        const name = nameInput ? nameInput.value.trim() : '';
+        const email = emailInput ? emailInput.value.trim() : '';
+        const phone = phoneInput ? phoneInput.value.trim() : '';
+        const subject = subjectInput ? subjectInput.value.trim() : '';
+        const message = messageInput ? messageInput.value.trim() : '';
+
+        // Validation phía client
+        if (!name) {
+            showAlert('Vui lòng nhập họ và tên của bạn.', 'error');
+            nameInput?.focus();
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+            showAlert('Vui lòng nhập địa chỉ Email hợp lệ (ví dụ: name@example.com).', 'error');
+            emailInput?.focus();
+            return;
+        }
+
+        if (!message) {
+            showAlert('Vui lòng nhập nội dung lời nhắn.', 'error');
+            messageInput?.focus();
+            return;
+        }
+
+        // Bật trạng thái Loading
+        setLoading(true);
+
+        try {
+            const payload = {
+                action: 'contact',
+                name: name,
+                email: email,
+                phone: phone,
+                subject: subject,
+                message: message
+            };
+
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+
+            if (result && result.status === 'success') {
+                showAlert('🎉 Tin nhắn của bạn đã được gửi thành công đến Gmail của Ngọc Dũng! Tôi sẽ phản hồi sớm nhất.', 'success');
+                contactForm.reset();
+            } else {
+                const errMsg = (result && result.message) ? result.message : 'Có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại!';
+                showAlert('⚠️ ' + errMsg, 'error');
+            }
+        } catch (error) {
+            console.error('Lỗi khi gửi form liên hệ:', error);
+            showAlert('⚠️ Không thể kết nối tới máy chủ gửi mail. Vui lòng kiểm tra kết nối mạng hoặc thử lại sau!', 'error');
+        } finally {
+            setLoading(false);
+        }
+    });
+
+    function showAlert(msg, type) {
+        if (!alertBox) return;
+        alertBox.textContent = msg;
+        alertBox.className = `contact__alert ${type}`;
+        alertBox.style.display = 'block';
+    }
+
+    function setLoading(isLoading) {
+        if (!submitBtn) return;
+        submitBtn.disabled = isLoading;
+        if (btnText) btnText.style.display = isLoading ? 'none' : 'inline-flex';
+        if (btnSpinner) {
+            if (isLoading) {
+                btnSpinner.classList.remove('d-none');
+                btnSpinner.style.display = 'inline-flex';
+            } else {
+                btnSpinner.classList.add('d-none');
+                btnSpinner.style.display = 'none';
+            }
+        }
+    }
 }
 
 /*==================== SERVICE WORKER ====================*/

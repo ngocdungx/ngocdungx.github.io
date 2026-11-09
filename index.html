@@ -69,7 +69,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" />
 
     <!--==================== MAIN CSS ====================-->
-    <link rel="stylesheet" href="assets/css/styles.css?v=6.0" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=6.1" />
     <link rel="stylesheet" href="assets/css/resources.css?v=1.6" />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -113,6 +113,11 @@
                     <li class="nav__item">
                         <a href="#Photos" class="nav__link">
                             <i class="uil uil-award"></i> Chứng chỉ
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#Contact" class="nav__link">
+                            <i class="uil uil-envelope-alt"></i> Liên hệ
                         </a>
                     </li>
                 </ul>
@@ -1215,6 +1220,143 @@
             </div>
         </section>
 
+        <!--==================== CONTACT ME ====================-->
+        <section class="section" id="Contact">
+            <div class="container">
+                <div class="section__header">
+                    <span class="section__badge">📬 Kết Nối & Hợp Tác</span>
+                    <h2 class="section__title">Liên Hệ Trực Tiếp</h2>
+                    <p class="section__subtitle">Bạn cần hợp tác dự án, tư vấn giải pháp AI / IT / Marketing hoặc có câu hỏi góp ý? Hãy để lại lời nhắn bên dưới, tôi sẽ nhận thông báo tức thì qua Gmail và phản hồi sớm nhất!</p>
+                </div>
+
+                <div class="contact__container">
+                    <!-- Cột trái: Thông tin kết nối -->
+                    <div class="contact__info-card">
+                        <h3 class="contact__info-title">Thông Tin Kết Nối</h3>
+                        <p class="contact__info-desc">Tôi luôn sẵn sàng đón nhận những ý tưởng sáng tạo và cơ hội hợp tác mới. Bạn có thể liên hệ trực tiếp hoặc gửi lời nhắn qua form bên cạnh.</p>
+
+                        <div class="contact__methods">
+                            <a href="mailto:ngocdung.email@gmail.com" class="contact__method-item">
+                                <div class="contact__method-icon">
+                                    <i class="uil uil-envelope-alt"></i>
+                                </div>
+                                <div class="contact__method-text">
+                                    <span class="contact__method-label">Email chính thức</span>
+                                    <span class="contact__method-value">ngocdung.email@gmail.com</span>
+                                </div>
+                            </a>
+
+                            <a href="https://zalo.me/0969080811" target="_blank" rel="noopener noreferrer" class="contact__method-item">
+                                <div class="contact__method-icon">
+                                    <i class="uil uil-comment-dots"></i>
+                                </div>
+                                <div class="contact__method-text">
+                                    <span class="contact__method-label">Zalo / Điện thoại</span>
+                                    <span class="contact__method-value">0969 080 811</span>
+                                </div>
+                            </a>
+
+                            <div class="contact__method-item">
+                                <div class="contact__method-icon">
+                                    <i class="uil uil-map-marker"></i>
+                                </div>
+                                <div class="contact__method-text">
+                                    <span class="contact__method-label">Khu vực làm việc</span>
+                                    <span class="contact__method-value">Hà Nội, Việt Nam</span>
+                                </div>
+                            </div>
+
+                            <div class="contact__method-item">
+                                <div class="contact__method-icon">
+                                    <i class="uil uil-clock-three"></i>
+                                </div>
+                                <div class="contact__method-text">
+                                    <span class="contact__method-label">Thời gian phản hồi</span>
+                                    <span class="contact__method-value">Thường trong vòng 2 - 4 giờ</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Badge trạng thái trực tuyến -->
+                        <div class="contact__status-pill">
+                            <span class="contact__status-dot"></span>
+                            <span>Đang sẵn sàng nhận dự án mới & tư vấn</span>
+                        </div>
+                    </div>
+
+                    <!-- Cột phải: Form gửi tin nhắn -->
+                    <div class="contact__form-card">
+                        <form id="contact-form" class="contact__form" novalidate>
+                            <div class="contact__form-grid">
+                                <div class="contact__form-group">
+                                    <label for="contact-name" class="contact__form-label">
+                                        Họ và tên <span class="required">*</span>
+                                    </label>
+                                    <div class="contact__input-wrap">
+                                        <i class="uil uil-user contact__input-icon"></i>
+                                        <input type="text" id="contact-name" name="name" class="contact__form-input" placeholder="Ví dụ: Nguyễn Văn A" required autocomplete="name" />
+                                    </div>
+                                </div>
+
+                                <div class="contact__form-group">
+                                    <label for="contact-email" class="contact__form-label">
+                                        Địa chỉ Email <span class="required">*</span>
+                                    </label>
+                                    <div class="contact__input-wrap">
+                                        <i class="uil uil-envelope contact__input-icon"></i>
+                                        <input type="email" id="contact-email" name="email" class="contact__form-input" placeholder="name@example.com" required autocomplete="email" />
+                                    </div>
+                                </div>
+
+                                <div class="contact__form-group">
+                                    <label for="contact-phone" class="contact__form-label">
+                                        Số điện thoại / Zalo
+                                    </label>
+                                    <div class="contact__input-wrap">
+                                        <i class="uil uil-phone contact__input-icon"></i>
+                                        <input type="tel" id="contact-phone" name="phone" class="contact__form-input" placeholder="09xx xxx xxx" autocomplete="tel" />
+                                    </div>
+                                </div>
+
+                                <div class="contact__form-group">
+                                    <label for="contact-subject" class="contact__form-label">
+                                        Chủ đề liên hệ
+                                    </label>
+                                    <div class="contact__input-wrap">
+                                        <i class="uil uil-bookmark contact__input-icon"></i>
+                                        <select id="contact-subject" name="subject" class="contact__form-input contact__form-select">
+                                            <option value="Hợp tác dự án & phát triển phần mềm">Hợp tác dự án & phát triển phần mềm</option>
+                                            <option value="Tư vấn giải pháp AI, Data & Marketing">Tư vấn giải pháp AI, Data & Marketing</option>
+                                            <option value="Trao đổi công việc / Tuyển dụng">Trao đổi công việc / Tuyển dụng</option>
+                                            <option value="Đóng góp ý kiến & phản hồi">Đóng góp ý kiến & phản hồi</option>
+                                            <option value="Chủ đề khác">Chủ đề khác</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="contact__form-group contact__form-full">
+                                    <label for="contact-message" class="contact__form-label">
+                                        Nội dung lời nhắn <span class="required">*</span>
+                                    </label>
+                                    <div class="contact__input-wrap">
+                                        <textarea id="contact-message" name="message" class="contact__form-input contact__form-textarea" rows="4" placeholder="Nhập chi tiết nội dung bạn muốn trao đổi..." required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contact__form-footer">
+                                <button type="submit" id="contact-submit-btn" class="contact__submit-btn">
+                                    <span class="btn-text"><i class="uil uil-message"></i> Gửi Tin Nhắn Về Gmail</span>
+                                    <span class="btn-spinner d-none"><i class="uil uil-spinner-alt spin-icon"></i> Đang gửi...</span>
+                                </button>
+                                <div id="contact-alert" class="contact__alert" role="alert" aria-live="polite"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!--==================== LIGHTBOX MODAL ====================-->
@@ -1272,7 +1414,7 @@
     </a>
 
     <!--==================== SCRIPTS ====================-->
-    <script src="assets/js/main.js?v=4.0"></script>
+    <script src="assets/js/main.js?v=4.1"></script>
 </body>
 
 </html>

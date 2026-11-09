@@ -1,6 +1,8 @@
 // --- CẤU HÌNH ---
 // Hãy thay ID thư mục Google Drive của bạn vào bên dưới
 const FOLDER_ID = "1lcMKQowuPbw35y9Rz_RaJ8T7y1Abz0AH"; 
+// Email nhận thông báo khi có người gửi qua Form liên hệ trang chủ
+const NOTIFY_EMAIL = "ngocdung.email@gmail.com"; 
 
 /**
  * Xử lý yêu cầu GET:
@@ -52,6 +54,12 @@ function doPost(e) {
 
     if (action === "delete") {
       var res = deleteFileFromDrive(body.fileId);
+      return ContentService.createTextOutput(JSON.stringify({ status: "success", data: res }))
+          .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if (action === "contact") {
+      var res = handleContactForm(body.name, body.email, body.phone, body.subject, body.message);
       return ContentService.createTextOutput(JSON.stringify({ status: "success", data: res }))
           .setMimeType(ContentService.MimeType.JSON);
     }
@@ -133,7 +141,7 @@ function deleteFileFromDrive(fileId) {
 
 // --- TÍNH NĂNG TỰ ĐỘNG DỌN DẸP FILE TẠM (CRON JOB HÀNG ĐÊM) ---
 // Tự động xóa file cũ hơn số ngày quy định để giải phóng dung lượng Google Drive
-const DAYS_TO_KEEP = 7; // Số ngày lưu trữ tối đa cho mỗi file tạm (Ví dụ: 7 ngày)
+const DAYS_TO_KEEP = 14; // Số ngày lưu trữ tối đa cho mỗi file tạm (14 ngày)
 
 /**
  * Hàm quét và xóa các file đã hết hạn lưu trữ tạm
@@ -183,4 +191,67 @@ function setupDailyCleanupTrigger() {
 
   console.log("Đã thiết lập lịch tự động dọn dẹp file vào 0h hàng ngày thành công!");
 }
+
+// --- TÍNH NĂNG NHẬN TIN NHẮN TỪ FORM LIÊN HỆ TRANG CHỦ & GỬI VỀ GMAIL ---
+/**
+ * Xử lý thông tin gửi từ Form liên hệ và gửi email thông báo về hộp thư cá nhân
+ */
+function handleContactForm(name, email, phone, subject, message) {
+  name = (name || "Ẩn danh").toString().trim();
+  email = (email || "").toString().trim();
+  phone = (phone || "Không cung cấp").toString().trim();
+  subject = (subject || "Lời nhắn mới từ website ngocdungx.github.io").toString().trim();
+  message = (message || "").toString().trim();
+
+  if (!message) {
+    throw "Nội dung lời nhắn không được để trống";
+  }
+
+  var nowStr = Utilities.formatDate(new Date(), "Asia/Ho_Chi_Minh", "HH:mm:ss dd/MM/yyyy");
+  var emailSubject = "[Liên Hệ ngocdungx.github.io] " + (subject ? subject : ("Tin nhắn từ " + name));
+
+  var safeMessage = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+  var emailHtml = '<div style="font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif; line-height: 1.6; color: #2d3748; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">'
+    + '<div style="background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%); padding: 24px; color: #ffffff;">'
+    + '<h2 style="margin: 0 0 6px 0; font-size: 22px; font-weight: 700; color: #ffffff;">📩 Tin Nhắn Liên Hệ Mới</h2>'
+    + '<p style="margin: 0; font-size: 13px; opacity: 0.92; color: #ffffff;">Nhận được từ website cá nhân lúc: ' + nowStr + '</p>'
+    + '</div>'
+    + '<div style="padding: 24px; background-color: #ffffff;">'
+    + '<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">'
+    + '<tr><td style="padding: 10px 0; font-weight: 600; width: 130px; color: #64748b; border-bottom: 1px solid #f1f5f9;">👤 Họ và tên:</td><td style="padding: 10px 0; color: #0f172a; font-weight: 600; border-bottom: 1px solid #f1f5f9;">' + name + '</td></tr>'
+    + '<tr><td style="padding: 10px 0; font-weight: 600; color: #64748b; border-bottom: 1px solid #f1f5f9;">📧 Địa chỉ Email:</td><td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;"><a href="mailto:' + email + '" style="color: #4f46e5; text-decoration: none; font-weight: 500;">' + email + '</a></td></tr>'
+    + '<tr><td style="padding: 10px 0; font-weight: 600; color: #64748b; border-bottom: 1px solid #f1f5f9;">📞 Điện thoại / Zalo:</td><td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">' + phone + '</td></tr>'
+    + '<tr><td style="padding: 10px 0; font-weight: 600; color: #64748b; border-bottom: 1px solid #f1f5f9;">📌 Chủ đề:</td><td style="padding: 10px 0; color: #0f172a; border-bottom: 1px solid #f1f5f9;">' + subject + '</td></tr>'
+    + '</table>'
+    + '<div style="background-color: #f8fafc; padding: 18px; border-radius: 8px; border-left: 4px solid #4f46e5; margin-top: 15px;">'
+    + '<div style="font-weight: 700; margin-bottom: 8px; color: #334155; font-size: 14px;">💬 Nội dung lời nhắn:</div>'
+    + '<p style="margin: 0; white-space: pre-wrap; color: #1e293b; font-size: 14.5px; line-height: 1.7;">' + safeMessage + '</p>'
+    + '</div>'
+    + '</div>'
+    + '<div style="padding: 14px 24px; background-color: #f1f5f9; font-size: 12px; color: #64748b; text-align: center; border-top: 1px solid #e2e8f0;">'
+    + 'Hệ thống tự động thông báo từ <b>ngocdungx.github.io</b> • Sử dụng Google Apps Script'
+    + '</div>'
+    + '</div>';
+
+  var emailText = "Tin nhắn mới từ website ngocdungx.github.io\n"
+    + "----------------------------------------\n"
+    + "Thời gian: " + nowStr + "\n"
+    + "Họ và tên: " + name + "\n"
+    + "Email: " + email + "\n"
+    + "Điện thoại/Zalo: " + phone + "\n"
+    + "Chủ đề: " + subject + "\n\n"
+    + "Nội dung:\n" + message + "\n";
+
+  MailApp.sendEmail({
+    to: NOTIFY_EMAIL,
+    replyTo: email || NOTIFY_EMAIL,
+    subject: emailSubject,
+    htmlBody: emailHtml,
+    body: emailText
+  });
+
+  return "Tin nhắn của bạn đã được gửi thành công đến Gmail của admin!";
+}
+
 
