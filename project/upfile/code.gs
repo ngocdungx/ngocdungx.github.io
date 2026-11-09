@@ -99,19 +99,21 @@ function getFilesFromDrive() {
     while (files.hasNext()) {
       var file = files.next();
       var dlUrl = file.getDownloadUrl() || ("https://drive.google.com/uc?export=download&id=" + file.getId());
+      var d = file.getDateCreated();
       
       fileList.push({
         id: file.getId(),
         name: file.getName(),
         url: dlUrl,
         size: (file.getSize() / 1024 / 1024).toFixed(2) + " MB",
-        date: file.getDateCreated().toLocaleString(),
+        date: Utilities.formatDate(d, "Asia/Ho_Chi_Minh", "HH:mm - dd/MM/yyyy"),
+        timestamp: d.getTime(),
         isTrashed: file.isTrashed()
       });
     }
     // Sắp xếp mới nhất lên đầu
     return fileList.sort(function(a, b) {
-      return new Date(b.date) - new Date(a.date);
+      return (b.timestamp || 0) - (a.timestamp || 0);
     });
   } catch (e) {
     return [];
