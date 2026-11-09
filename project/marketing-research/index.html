@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GEMMY WOOD — Báo Cáo Phân Tích Thị Trường Ngành Gỗ Xuất Khẩu</title>
+  <title>BÁO CÁO THỊ TRƯỜNG GỖ XUẤT KHẨU — GEMMY WOOD</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -35,51 +35,29 @@
   <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
     <div class="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-2.5">
 
-      <!-- Row 1: Brand & Top Actions -->
+      <!-- Row 1: Company Logo, Professional Title & Actions -->
       <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
         <!-- Logo & Title -->
-        <div class="flex items-center gap-3.5">
-          <div class="w-11 h-11 rounded-xl bg-emerald-700 flex items-center justify-center text-white font-extrabold text-lg tracking-tight shadow-md shadow-emerald-700/20 shrink-0">
-            GW
-          </div>
-          <div>
-            <div class="flex items-center gap-2.5 flex-wrap">
-              <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-                GEMMY WOOD — BÁO CÁO THỊ TRƯỜNG & TÁC ĐỘNG SXKD ĐỒ GỖ
-              </h1>
-              <span class="text-xs px-2.5 py-0.5 rounded-md font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-800">
-                marketing-research
-              </span>
-            </div>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
-              Hệ thống Giám sát & Phân tích Tác động Kinh tế, Chính trị, Thuế quan, Luật pháp đến Chuỗi SXKD Đồ Gỗ Xuất Khẩu
+        <div class="flex items-center gap-3.5 sm:gap-4">
+          <img src="logo.png" alt="GEMMY WOOD Logo" class="h-9 sm:h-11 w-auto object-contain shrink-0" />
+          <div class="border-l border-slate-200 dark:border-slate-700 pl-3.5 sm:pl-4">
+            <h1 class="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 dark:text-white uppercase">
+              BÁO CÁO THỊ TRƯỜNG GỖ XUẤT KHẨU
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+              Hệ thống Giám sát & Phân tích Tác động Kinh tế, Chính trị, Thuế quan, Luật pháp ảnh hưởng tới việc xuất khẩu B2B
             </p>
           </div>
         </div>
 
-        <!-- Top Right Actions -->
-        <div class="flex items-center flex-wrap gap-2.5">
-          <div id="syncStatusBadge" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="syncStatusText">Đang kết nối Google Sheets...</span>
-          </div>
-
-          <a href="https://docs.google.com/spreadsheets/d/1qgrD4aJsYw2Tp7tyiTi_NCicLdP0PtXmo-gBLrvKCaI/edit" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-            <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-600"></i>
-            <span>Mở Google Sheet</span>
-          </a>
-
-          <button onclick="runResearchAgent()" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm transition active:scale-95">
-            <i data-lucide="sparkles" class="w-4 h-4"></i>
-            <span>Quét Báo Cáo Mới (n8n)</span>
-          </button>
-
-          <button onclick="exportToCSV()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition" title="Xuất dữ liệu đang lọc ra file CSV">
+        <!-- Top Right Actions: Export CSV, Refresh, Theme Toggle (Clean & Streamlined) -->
+        <div class="flex items-center gap-2">
+          <button onclick="exportToCSV()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm transition active:scale-95" title="Xuất toàn bộ dữ liệu đang lọc ra file CSV">
             <i data-lucide="download" class="w-4 h-4"></i>
-            <span class="hidden sm:inline">Xuất CSV</span>
+            <span>Xuất CSV</span>
           </button>
 
-          <button onclick="fetchSheetData(true)" class="p-2 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition" title="Tải lại dữ liệu">
+          <button onclick="fetchSheetData(true)" class="p-2 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700 transition" title="Làm mới dữ liệu từ Google Sheets">
             <i data-lucide="refresh-cw" class="w-4 h-4" id="refreshIcon"></i>
           </button>
 
@@ -89,34 +67,33 @@
         </div>
       </div>
 
-      <!-- Row 2: Clean Unified Control Bar (EXACTLY 1 LINE: 3 Quick Tabs + Dropdown + Market/Pillar/Risk Filters) -->
+      <!-- Row 2: Clean Unified Control Bar (Time Controls at FAR LEFT -> Filters & Search on the Right) -->
       <div class="pt-2.5 border-t border-slate-200 dark:border-slate-800 flex flex-col xl:flex-row xl:items-center justify-between gap-3">
 
-        <!-- Left: 3 Quick Month Tabs + 1 Month Dropdown on the EXACT SAME SINGLE LINE -->
+        <!-- Left: Time Controls (Month Dropdown at FAR LEFT, adjacent to 3 Recent Month Tabs) -->
         <div class="flex items-center gap-2 flex-nowrap overflow-x-auto pb-1 xl:pb-0 custom-scrollbar shrink-0">
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-500 whitespace-nowrap">Kỳ báo cáo:</span>
-
-          <!-- 3 Recent Month Tabs (Label 10/2026, 09/2026, 08/2026) -->
-          <div class="flex items-center gap-1.5 flex-nowrap shrink-0" id="recentMonthTabs">
-            <!-- Populated by JS -->
-          </div>
-
-          <!-- 1 Month Selector Dropdown (Same single line) -->
-          <select id="monthSelectDropdown" onchange="onMonthDropdownChange(this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm shrink-0">
+          <!-- FAR LEFT: Month Selector Dropdown ("Xem tháng khác" when active month is in top 3) -->
+          <select id="monthSelectDropdown" onchange="onMonthDropdownChange(this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm shrink-0 cursor-pointer">
+            <option value="OTHER_PLACEHOLDER" selected>📅 Xem tháng khác</option>
             <option value="ALL">Tất cả kỳ (Lũy kế)</option>
-            <option value="Tháng 10" selected>10/2026 (Kỳ mới nhất)</option>
+            <option value="Tháng 10">10/2026</option>
             <option value="Tháng 9">09/2026</option>
             <option value="Tháng 8">08/2026</option>
             <option value="Tháng 7">07/2026</option>
             <option value="Tháng 6">06/2026</option>
             <option value="Tháng 5">05/2026</option>
           </select>
+
+          <!-- 3 Recent Month Tabs (Label 10/2026, 09/2026, 08/2026) -->
+          <div class="flex items-center gap-1.5 flex-nowrap shrink-0" id="recentMonthTabs">
+            <!-- Populated by JS -->
+          </div>
         </div>
 
-        <!-- Right: Market, Pillar, Risk & Search Filters -->
+        <!-- Right: Market, Pillar, Risk Filters, Search & Reset -->
         <div class="flex items-center gap-2 flex-wrap xl:flex-nowrap">
-          <!-- Market Filter (No country icons) -->
-          <select id="marketFilter" onchange="setFilterState('market', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm">
+          <!-- Market Filter -->
+          <select id="marketFilter" onchange="setFilterState('market', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm cursor-pointer">
             <option value="ALL">Tất cả thị trường</option>
             <option value="Mỹ">Hoa Kỳ (US)</option>
             <option value="EU">Liên minh Châu Âu (EU)</option>
@@ -128,7 +105,7 @@
           </select>
 
           <!-- Pillar Filter -->
-          <select id="pillarFilter" onchange="setFilterState('pillar', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm">
+          <select id="pillarFilter" onchange="setFilterState('pillar', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm cursor-pointer">
             <option value="ALL">Tất cả trụ cột vĩ mô</option>
             <option value="Kinh tế">Kinh tế & Tỷ giá</option>
             <option value="Thuế quan">Thuế quan & Phòng vệ TM</option>
@@ -138,7 +115,7 @@
           </select>
 
           <!-- Risk Filter -->
-          <select id="riskFilter" onchange="setFilterState('risk', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm">
+          <select id="riskFilter" onchange="setFilterState('risk', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm cursor-pointer">
             <option value="ALL">Mọi mức rủi ro</option>
             <option value="Cao">Rủi ro cao</option>
             <option value="Trung bình">Rủi ro trung bình</option>
@@ -148,11 +125,11 @@
           <!-- Search Input -->
           <div class="relative">
             <i data-lucide="search" class="w-4 h-4 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-            <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Tìm kiếm sự kiện, EUDR, ILPA..." class="pl-8 pr-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-emerald-600 w-44 sm:w-56 shadow-sm">
+            <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Tìm kiếm sự kiện, EUDR, ILPA..." class="pl-8 pr-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-emerald-600 w-48 sm:w-56 shadow-sm">
           </div>
 
           <!-- Reset Filter Button -->
-          <button onclick="resetAllFilters()" id="resetFilterBtn" class="hidden px-3 py-1.5 bg-rose-50 dark:bg-rose-950/50 hover:bg-rose-100 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 rounded-lg text-xs sm:text-sm font-bold transition whitespace-nowrap">
+          <button onclick="resetAllFilters()" id="resetFilterBtn" class="hidden px-2.5 py-1.5 bg-rose-50 dark:bg-rose-950/50 hover:bg-rose-100 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 rounded-lg text-xs sm:text-sm font-bold transition whitespace-nowrap">
             Xóa lọc
           </button>
         </div>
@@ -299,7 +276,7 @@
       </div>
     </section>
 
-    <!-- SECTION 3: STRATEGIC MARKET PROFILES (6 KEY MARKETS — NO FLAGS/ICONS) -->
+    <!-- SECTION 3: STRATEGIC MARKET PROFILES (6 KEY MARKETS — CLEAN TEXT, NO FLAGS) -->
     <section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-slate-100 dark:border-slate-800">
         <div>
@@ -319,7 +296,7 @@
       </div>
     </section>
 
-    <!-- SECTION 4: ENHANCED DETAILED MATRIX TABLE (EXPANDED CONTENT COLUMNS) -->
+    <!-- SECTION 4: ENHANCED DETAILED MATRIX TABLE -->
     <section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4" id="tableSection">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-slate-100 dark:border-slate-800">
         <div>
@@ -457,33 +434,17 @@
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-500">
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-500">
         <div>
           <span id="modalCompetitor">Đối thủ: --</span> •
           <span id="modalDept" class="text-slate-800 dark:text-slate-200 font-semibold">Phụ trách: --</span> •
           <span id="modalDeadline">Hạn: --</span>
         </div>
-        <a id="modalSourceLink" href="#" target="_blank" class="flex items-center gap-1 text-emerald-700 dark:text-emerald-400 hover:underline font-bold">
+        <a id="modalSourceLink" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm transition active:scale-95" title="Mở đường link nguồn tin gốc trong tab mới">
           <i data-lucide="external-link" class="w-4 h-4"></i>
-          <span>Nguồn tham chiếu</span>
+          <span>Xem Link Nguồn Tin Gốc ↗</span>
         </a>
       </div>
-    </div>
-  </div>
-
-  <!-- AGENT EXECUTION MODAL -->
-  <div id="agentModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl text-center space-y-4">
-      <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 flex items-center justify-center mx-auto border border-emerald-200 dark:border-emerald-800">
-        <i data-lucide="sparkles" class="w-6 h-6 animate-spin"></i>
-      </div>
-      <div>
-        <h3 class="text-base font-bold text-slate-900 dark:text-white">AI Agent `marketing-research` Đang Quét Tin...</h3>
-        <p class="text-sm text-slate-500 mt-1">
-          Hệ thống đang thu thập các biến động vĩ mô và pháp lý của kỳ báo cáo tháng và đồng bộ vào Google Sheets.
-        </p>
-      </div>
-      <p id="agentStatusText" class="text-xs sm:text-sm text-emerald-700 dark:text-emerald-400 font-bold">Đang kết nối n8n Webhook...</p>
     </div>
   </div>
 
@@ -500,7 +461,6 @@
     let charts = {};
 
     const GOOGLE_SHEET_ID = '1qgrD4aJsYw2Tp7tyiTi_NCicLdP0PtXmo-gBLrvKCaI';
-    const N8N_WEBHOOK_URL = 'https://n8n.gemmywood.com.vn/webhook/marketing-research';
 
     // 3 Most Recent Months for Quick Tabs (labels formatted as 10/2026, 09/2026, 08/2026)
     const RECENT_MONTHS = [
@@ -624,6 +584,19 @@
     document.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
       fetchSheetData();
+
+      // Close modal on clicking backdrop
+      const modal = document.getElementById('detailModal');
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal();
+        });
+      }
+
+      // Close modal on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+      });
     });
 
     function toggleTheme() {
@@ -644,7 +617,6 @@
     function fetchSheetData(showSpinner = false) {
       const refreshIcon = document.getElementById('refreshIcon');
       if (showSpinner && refreshIcon) refreshIcon.classList.add('animate-spin');
-      document.getElementById('syncStatusText').textContent = 'Đang đồng bộ Google Sheets...';
 
       const callbackName = 'gviz_' + Date.now();
       let timedOut = false;
@@ -664,7 +636,6 @@
           const parsed = parseGviz(response);
           if (parsed.length > 0) {
             allData = parsed;
-            document.getElementById('syncStatusText').textContent = `Google Sheets Live (${allData.length} sự kiện)`;
             onDataLoaded();
           } else {
             loadFallbackData();
@@ -693,7 +664,6 @@
         .then(r => r.json())
         .then(data => {
           allData = data;
-          document.getElementById('syncStatusText').textContent = `Dữ liệu Chuẩn Hóa (${allData.length} sự kiện)`;
           onDataLoaded();
         })
         .catch(err => console.error('Fallback error:', err))
@@ -766,14 +736,14 @@
       applyFilters();
     }
 
-    // Render the 3 Recent Month Tabs with clean concise labels: 10/2026, 09/2026, 08/2026
+    // Render the 3 Recent Month Tabs & sync the Far-Right dropdown label
     function renderRecentMonthTabs() {
       const container = document.getElementById('recentMonthTabs');
       container.innerHTML = RECENT_MONTHS.map(m => {
         const isActive = activeMonth === m.key;
         const count = allData.filter(d => matchMonthRecord(d, m.key) && matchMarketRecord(d, activeMarket)).length;
         return `
-          <button onclick="setFilterState('month', '${m.key}')" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 border shadow-sm ${
+          <button onclick="setFilterState('month', '${m.key}')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 border shadow-sm ${
             isActive
               ? 'bg-emerald-700 text-white border-emerald-700'
               : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700'
@@ -785,24 +755,32 @@
           </button>
         `;
       }).join('');
+
+      // If active month is one of the top 3, show "Xem tháng khác" in dropdown to avoid duplication
+      const dropdown = document.getElementById('monthSelectDropdown');
+      if (RECENT_MONTHS.some(rm => rm.key === activeMonth)) {
+        dropdown.value = "OTHER_PLACEHOLDER";
+      } else {
+        dropdown.value = activeMonth;
+      }
     }
 
     function onMonthDropdownChange(val) {
+      if (val === 'OTHER_PLACEHOLDER') return;
       setFilterState('month', val);
     }
 
     function setFilterState(type, val) {
       if (type === 'month') {
         activeMonth = val;
-        document.getElementById('monthSelectDropdown').value = activeMonth;
       } else if (type === 'market') {
-        activeMarket = (activeMarket === val && val !== 'ALL' && document.getElementById('marketFilter').value !== val) ? 'ALL' : val;
+        activeMarket = (activeMarket === val && val !== 'ALL') ? 'ALL' : val;
         document.getElementById('marketFilter').value = activeMarket;
       } else if (type === 'pillar') {
-        activePillar = val;
+        activePillar = (activePillar === val && val !== 'ALL') ? 'ALL' : val;
         document.getElementById('pillarFilter').value = activePillar;
       } else if (type === 'risk') {
-        activeRisk = val;
+        activeRisk = (activeRisk === val && val !== 'ALL') ? 'ALL' : val;
         document.getElementById('riskFilter').value = activeRisk;
       }
       applyFilters();
@@ -819,7 +797,6 @@
       activeMarket = 'ALL';
       activePillar = 'ALL';
       activeRisk = 'ALL';
-      document.getElementById('monthSelectDropdown').value = 'Tháng 10';
       document.getElementById('marketFilter').value = 'ALL';
       document.getElementById('pillarFilter').value = 'ALL';
       document.getElementById('riskFilter').value = 'ALL';
@@ -983,11 +960,35 @@
       return `<span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800">📊 ${pillar}</span>`;
     }
 
+    // Helper to normalize and ensure source URL has protocol
+    function formatSourceUrl(rawUrl) {
+      if (!rawUrl) return '';
+      let url = String(rawUrl).trim();
+      if (!url) return '';
+      if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        url = 'https://' + url;
+      }
+      return url;
+    }
+
+    // Direct clickable link button on each table row
+    function formatSourceLinkHtml(rawUrl) {
+      const url = formatSourceUrl(rawUrl);
+      if (!url) return '';
+      return `
+        <div class="mt-2">
+          <a href="${url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-bold bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-300 dark:hover:text-emerald-300 border border-slate-300 dark:border-slate-700 hover:border-emerald-500 transition shadow-xs group" title="Mở trang tin / bài viết nguồn gốc trong tab mới">
+            <i data-lucide="external-link" class="w-3 h-3 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform"></i>
+            <span>Nguồn tin ↗</span>
+          </a>
+        </div>
+      `;
+    }
+
     // Clean Country Name: Absolutely NO country flag emojis and NO codes like VN, JP KR
     function getCleanCountryName(rawCountry) {
       const c = (rawCountry || '').trim();
       if (!c) return 'Toàn cầu';
-      // Remove any country codes/emojis if present
       let clean = c.replace(/^(VN|JP|KR|US|EU|AU|UK|CA|CN|\uD83C[\uDDE6-\uDDFF]{2})\s*/gi, '').trim();
       return clean || c;
     }
@@ -1068,11 +1069,12 @@
         const countryClean = getCleanCountryName(row['Quốc Gia Tác Động']);
 
         tr.innerHTML = `
-          <!-- Cột 1: Mã & Ngày (Gọn gàng) -->
+          <!-- Cột 1: Mã & Ngày & Link Nguồn Tin -->
           <td class="py-4 px-4 whitespace-nowrap">
             <div class="font-mono font-bold text-emerald-800 dark:text-emerald-400 text-xs">${row['ID'] || ''}</div>
             <div class="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">${row['Tháng Báo Cáo'] || ''}/2026</div>
             <div class="text-[11px] text-slate-400 mt-0.5">${row['Ngày cập nhật'] || ''}</div>
+            ${formatSourceLinkHtml(row['Link nguồn tin'])}
           </td>
 
           <!-- Cột 2: Thị Trường & SP (Bỏ hoàn toàn icon/mã cờ, hiển thị rõ ràng) -->
@@ -1317,8 +1319,9 @@
       document.getElementById('modalDeadline').textContent = `Hạn: ${item['Deadiline'] || 'Thường xuyên'}`;
 
       const linkEl = document.getElementById('modalSourceLink');
-      if (item['Link nguồn tin'] && String(item['Link nguồn tin']).startsWith('http')) {
-        linkEl.href = item['Link nguồn tin'];
+      const safeUrl = formatSourceUrl(item['Link nguồn tin']);
+      if (safeUrl) {
+        linkEl.href = safeUrl;
         linkEl.classList.remove('hidden');
       } else {
         linkEl.classList.add('hidden');
@@ -1332,38 +1335,6 @@
       document.getElementById('detailModal').classList.add('hidden');
     }
 
-    async function runResearchAgent() {
-      const modal = document.getElementById('agentModal');
-      const statusText = document.getElementById('agentStatusText');
-      modal.classList.remove('hidden');
-      lucide.createIcons();
-
-      try {
-        statusText.textContent = 'Đang kích hoạt n8n Agent `marketing-research`...';
-        const res = await fetch(N8N_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            query: 'thị trường xuất khẩu gỗ Việt Nam Mỹ EU Úc Australia EUDR ILPA thuế quan giá gỗ 2026',
-            source: 'marketing-research-dashboard'
-          })
-        });
-        if (res.ok) {
-          const result = await res.json();
-          statusText.textContent = result.message || 'Đã tổng hợp sự kiện tháng mới vào Google Sheets!';
-        } else {
-          statusText.textContent = 'Đã gửi lệnh chạy Agent thành công!';
-        }
-      } catch (e) {
-        statusText.textContent = 'Agent đang xử lý dữ liệu và ghi vào Google Sheets...';
-      } finally {
-        setTimeout(() => {
-          modal.classList.add('hidden');
-          fetchSheetData(true);
-        }, 2200);
-      }
-    }
-
     function exportToCSV() {
       if (!filteredData.length) return;
       const csvRows = [STANDARD_COLS.join(',')];
@@ -1375,7 +1346,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `GemmyWood_MarketingResearch_${activeMonth === 'ALL' ? 'Full' : activeMonth.replace(/\s+/g, '')}_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.download = `GemmyWood_BaoCaoThiTruong_${activeMonth === 'ALL' ? 'Full' : activeMonth.replace(/\s+/g, '')}_${new Date().toISOString().slice(0, 10)}.csv`;
       a.click();
     }
   </script>
