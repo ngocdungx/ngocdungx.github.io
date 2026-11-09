@@ -18,6 +18,12 @@
 
   <!-- Mini Apps & Dự án -->
   <url>
+    <loc>https://ngocdungx.github.io/project/upfile/index.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://ngocdungx.github.io/project/marketing-research/index.html</loc>
     <lastmod>2026-11-09</lastmod>
     <changefreq>weekly</changefreq>
