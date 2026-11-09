@@ -27,17 +27,15 @@
     .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.35); border-radius: 9999px; }
-    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   </style>
 </head>
 <body class="bg-slate-100/70 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-200 custom-scrollbar">
 
-  <!-- ==================== 1. TOP HEADER & BRAND ==================== -->
+  <!-- ==================== 1. TOP HEADER & UNIFIED CONTROL BAR ==================== -->
   <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
-    <div class="max-w-[1440px] mx-auto px-4 lg:px-8 py-3.5 space-y-3">
+    <div class="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-3 space-y-2.5">
 
-      <!-- Row 1: Brand & Actions -->
+      <!-- Row 1: Brand & Top Actions -->
       <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
         <!-- Logo & Title -->
         <div class="flex items-center gap-3.5">
@@ -59,7 +57,7 @@
           </div>
         </div>
 
-        <!-- Action Buttons -->
+        <!-- Top Right Actions -->
         <div class="flex items-center flex-wrap gap-2.5">
           <div id="syncStatusBadge" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -91,71 +89,71 @@
         </div>
       </div>
 
-      <!-- Row 2: Clean Unified Control Bar (3 Recent Months + Dropdown + Market/Pillar/Risk Filters) -->
-      <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col xl:flex-row xl:items-center justify-between gap-3">
+      <!-- Row 2: Clean Unified Control Bar (EXACTLY 1 LINE: 3 Quick Tabs + Dropdown + Market/Pillar/Risk Filters) -->
+      <div class="pt-2.5 border-t border-slate-200 dark:border-slate-800 flex flex-col xl:flex-row xl:items-center justify-between gap-3">
 
-        <!-- Left: 3 Recent Month Tabs + 1 Month Selector Dropdown -->
-        <div class="flex items-center gap-2 flex-wrap">
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-500 mr-1 hidden sm:inline">Kỳ báo cáo:</span>
+        <!-- Left: 3 Quick Month Tabs + 1 Month Dropdown on the EXACT SAME SINGLE LINE -->
+        <div class="flex items-center gap-2 flex-nowrap overflow-x-auto pb-1 xl:pb-0 custom-scrollbar shrink-0">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500 whitespace-nowrap">Kỳ báo cáo:</span>
 
-          <!-- 3 Recent Month Tabs (Dynamic) -->
-          <div class="flex items-center gap-1.5" id="recentMonthTabs">
+          <!-- 3 Recent Month Tabs (Label 10/2026, 09/2026, 08/2026) -->
+          <div class="flex items-center gap-1.5 flex-nowrap shrink-0" id="recentMonthTabs">
             <!-- Populated by JS -->
           </div>
 
-          <!-- Single Month Selector Dropdown (All Months & Historical) -->
-          <select id="monthSelectDropdown" onchange="onMonthDropdownChange(this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm">
-            <option value="ALL">📅 Tất cả các tháng (Lũy kế)</option>
-            <option value="Tháng 10" selected>Tháng 10/2026 (Kỳ mới nhất)</option>
-            <option value="Tháng 9">Tháng 9/2026</option>
-            <option value="Tháng 8">Tháng 8/2026</option>
-            <option value="Tháng 7">Tháng 7/2026</option>
-            <option value="Tháng 6">Tháng 6/2026</option>
-            <option value="Tháng 5">Tháng 5/2026</option>
+          <!-- 1 Month Selector Dropdown (Same single line) -->
+          <select id="monthSelectDropdown" onchange="onMonthDropdownChange(this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm shrink-0">
+            <option value="ALL">Tất cả kỳ (Lũy kế)</option>
+            <option value="Tháng 10" selected>10/2026 (Kỳ mới nhất)</option>
+            <option value="Tháng 9">09/2026</option>
+            <option value="Tháng 8">08/2026</option>
+            <option value="Tháng 7">07/2026</option>
+            <option value="Tháng 6">06/2026</option>
+            <option value="Tháng 5">05/2026</option>
           </select>
         </div>
 
         <!-- Right: Market, Pillar, Risk & Search Filters -->
-        <div class="flex flex-wrap items-center gap-2">
-          <!-- Market Filter -->
+        <div class="flex items-center gap-2 flex-wrap xl:flex-nowrap">
+          <!-- Market Filter (No country icons) -->
           <select id="marketFilter" onchange="setFilterState('market', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm">
-            <option value="ALL">🌐 Tất cả thị trường</option>
-            <option value="Mỹ">🇺🇸 Hoa Kỳ (US)</option>
-            <option value="EU">🇪🇺 Liên minh Châu Âu (EU)</option>
-            <option value="Úc">🇦🇺 Úc (Australia)</option>
-            <option value="Việt Nam">🇻🇳 Việt Nam (Nội địa & SX)</option>
-            <option value="Nhật">🇯🇵🇰🇷 Nhật Bản & Hàn Quốc</option>
-            <option value="Anh">🇬🇧🇨🇦 Anh & Canada</option>
-            <option value="Trung Quốc">🇨🇳 Trung Quốc</option>
+            <option value="ALL">Tất cả thị trường</option>
+            <option value="Mỹ">Hoa Kỳ (US)</option>
+            <option value="EU">Liên minh Châu Âu (EU)</option>
+            <option value="Úc">Úc (Australia)</option>
+            <option value="Việt Nam">Việt Nam (Nội địa & SX)</option>
+            <option value="Nhật">Nhật Bản & Hàn Quốc</option>
+            <option value="Anh">Anh & Canada</option>
+            <option value="Trung Quốc">Trung Quốc</option>
           </select>
 
           <!-- Pillar Filter -->
           <select id="pillarFilter" onchange="setFilterState('pillar', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm">
-            <option value="ALL">📌 Tất cả trụ cột vĩ mô</option>
-            <option value="Kinh tế">📊 Kinh tế & Tỷ giá</option>
-            <option value="Thuế quan">🛡️ Thuế quan & Phòng vệ thương mại</option>
-            <option value="Luật pháp">⚖️ Luật pháp & Tiêu chuẩn xanh</option>
-            <option value="Logistics">🚢 Logistics & Địa chính trị</option>
-            <option value="Nguyên liệu">🌲 Nguyên liệu & Sản xuất</option>
+            <option value="ALL">Tất cả trụ cột vĩ mô</option>
+            <option value="Kinh tế">Kinh tế & Tỷ giá</option>
+            <option value="Thuế quan">Thuế quan & Phòng vệ TM</option>
+            <option value="Luật pháp">Luật pháp & Tiêu chuẩn xanh</option>
+            <option value="Logistics">Logistics & Địa chính trị</option>
+            <option value="Nguyên liệu">Nguyên liệu & Sản xuất</option>
           </select>
 
           <!-- Risk Filter -->
           <select id="riskFilter" onchange="setFilterState('risk', this.value)" class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:border-emerald-600 shadow-sm">
-            <option value="ALL">⚡ Mọi mức rủi ro</option>
-            <option value="Cao">🔴 Rủi ro cao</option>
-            <option value="Trung bình">🟡 Rủi ro trung bình</option>
-            <option value="Thấp">🟢 Rủi ro thấp</option>
+            <option value="ALL">Mọi mức rủi ro</option>
+            <option value="Cao">Rủi ro cao</option>
+            <option value="Trung bình">Rủi ro trung bình</option>
+            <option value="Thấp">Rủi ro thấp</option>
           </select>
 
           <!-- Search Input -->
           <div class="relative">
             <i data-lucide="search" class="w-4 h-4 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
-            <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Tìm EUDR, ILPA, thuế Mỹ..." class="pl-8 pr-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-emerald-600 w-44 sm:w-56 shadow-sm">
+            <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Tìm kiếm sự kiện, EUDR, ILPA..." class="pl-8 pr-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs sm:text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-emerald-600 w-44 sm:w-56 shadow-sm">
           </div>
 
           <!-- Reset Filter Button -->
-          <button onclick="resetAllFilters()" id="resetFilterBtn" class="hidden px-3 py-1.5 bg-rose-50 dark:bg-rose-950/50 hover:bg-rose-100 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 rounded-lg text-xs sm:text-sm font-bold transition">
-            Xóa bộ lọc
+          <button onclick="resetAllFilters()" id="resetFilterBtn" class="hidden px-3 py-1.5 bg-rose-50 dark:bg-rose-950/50 hover:bg-rose-100 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 rounded-lg text-xs sm:text-sm font-bold transition whitespace-nowrap">
+            Xóa lọc
           </button>
         </div>
 
@@ -164,8 +162,8 @@
     </div>
   </header>
 
-  <!-- ==================== MAIN CONTENT WRAPPER ==================== -->
-  <main class="max-w-[1440px] mx-auto px-4 lg:px-8 py-6 space-y-6">
+  <!-- ==================== MAIN CONTENT WRAPPER (EXPANDED WIDTH) ==================== -->
+  <main class="w-full max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
     <!-- SECTION 1: 6 MACRO KPI CARDS & EXECUTIVE DIGEST -->
     <section class="space-y-4">
@@ -253,7 +251,7 @@
         </div>
       </div>
 
-      <!-- Executive Digest Box (Tiêu điểm điều hành của tháng đang chọn) -->
+      <!-- Executive Digest Box (Tiêu điểm điều hành của kỳ tháng đang chọn) -->
       <div id="monthlyDigestBox" class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
         <!-- Rendered dynamically by JS -->
       </div>
@@ -280,7 +278,7 @@
           <h2 class="text-sm font-extrabold uppercase tracking-wide text-slate-900 dark:text-white">
             2. Tương Quan Rủi Ro & Cơ Hội Theo Thị Trường
           </h2>
-          <p class="text-xs text-slate-500 mt-0.5">Phân bổ tại Mỹ, EU, Úc, Việt Nam, Nhật/Hàn, Anh/Canada</p>
+          <p class="text-xs text-slate-500 mt-0.5">Phân bổ tại Hoa Kỳ, Châu Âu, Úc, Việt Nam, Nhật/Hàn, Anh/Canada</p>
         </div>
         <div class="h-60 relative">
           <canvas id="marketCompareChart"></canvas>
@@ -301,12 +299,12 @@
       </div>
     </section>
 
-    <!-- SECTION 3: STRATEGIC MARKET PROFILES (6 KEY MARKETS) -->
+    <!-- SECTION 3: STRATEGIC MARKET PROFILES (6 KEY MARKETS — NO FLAGS/ICONS) -->
     <section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-slate-100 dark:border-slate-800">
         <div>
           <h2 class="text-base font-extrabold text-slate-900 dark:text-white uppercase flex items-center gap-2">
-            <i data-lucide="globe-2" class="w-5 h-5 text-emerald-700"></i>
+            <i data-lucide="globe" class="w-5 h-5 text-emerald-700"></i>
             Hồ Sơ Đánh Giá Chiến Lược Tại 6 Thị Trường Trọng Điểm
           </h2>
           <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Bấm vào bất kỳ thẻ quốc gia nào bên dưới để lọc nhanh các biến động của thị trường đó</p>
@@ -321,7 +319,7 @@
       </div>
     </section>
 
-    <!-- SECTION 4: DETAILED MONTHLY MATRIX TABLE -->
+    <!-- SECTION 4: ENHANCED DETAILED MATRIX TABLE (EXPANDED CONTENT COLUMNS) -->
     <section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4" id="tableSection">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-slate-100 dark:border-slate-800">
         <div>
@@ -348,13 +346,13 @@
         <table class="w-full text-left text-sm border-collapse">
           <thead>
             <tr class="bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-700 text-xs">
-              <th class="py-3.5 px-3.5 w-32">Mã & Kỳ Tháng</th>
-              <th class="py-3.5 px-3.5 w-44">Thị Trường & SP</th>
-              <th class="py-3.5 px-3.5 w-52">Trụ Cột & Sự Kiện</th>
-              <th class="py-3.5 px-3.5 min-w-[300px]">Diễn Biến Vĩ Mô / Pháp Lý & Cơ Hội</th>
-              <th class="py-3.5 px-3.5 min-w-[270px]">Tác Động SXKD (Đơn Hàng • Giá • Gỗ)</th>
-              <th class="py-3.5 px-3.5 text-center w-36">Đánh Giá</th>
-              <th class="py-3.5 px-3.5 min-w-[260px]">Khuyến Nghị Hành Động (Gemmy Wood)</th>
+              <th class="py-3.5 px-4 w-28 shrink-0">Mã & Ngày</th>
+              <th class="py-3.5 px-4 w-44 shrink-0">Thị Trường & SP</th>
+              <th class="py-3.5 px-4 w-48 shrink-0">Trụ Cột & Sự Kiện</th>
+              <th class="py-3.5 px-4 min-w-[400px]">Diễn Biến Vĩ Mô / Pháp Lý & Cơ Hội</th>
+              <th class="py-3.5 px-4 min-w-[340px]">Tác Động SXKD (Đơn Hàng • Giá • Gỗ)</th>
+              <th class="py-3.5 px-4 text-center w-36 shrink-0">Đánh Giá</th>
+              <th class="py-3.5 px-4 min-w-[340px]">Khuyến Nghị Hành Động (Gemmy Wood)</th>
             </tr>
           </thead>
           <tbody id="dataTableBody" class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-800 dark:text-slate-200 text-sm">
@@ -495,7 +493,7 @@
     let filteredData = [];
     let currentPage = 1;
     let pageSize = 100;
-    let activeMonth = 'Tháng 10'; // Default to the newest month
+    let activeMonth = 'Tháng 10'; // Default to newest month
     let activeMarket = 'ALL';
     let activePillar = 'ALL';
     let activeRisk = 'ALL';
@@ -504,8 +502,12 @@
     const GOOGLE_SHEET_ID = '1qgrD4aJsYw2Tp7tyiTi_NCicLdP0PtXmo-gBLrvKCaI';
     const N8N_WEBHOOK_URL = 'https://n8n.gemmywood.com.vn/webhook/marketing-research';
 
-    // 3 Most Recent Months for Quick Tabs
-    const RECENT_MONTHS = ['Tháng 10', 'Tháng 9', 'Tháng 8'];
+    // 3 Most Recent Months for Quick Tabs (labels formatted as 10/2026, 09/2026, 08/2026)
+    const RECENT_MONTHS = [
+      { key: 'Tháng 10', label: '10/2026' },
+      { key: 'Tháng 9', label: '09/2026' },
+      { key: 'Tháng 8', label: '08/2026' }
+    ];
 
     const STANDARD_COLS = [
       "STT", "ID", "Ngày cập nhật", "Tháng Báo Cáo", "Nhóm biến động",
@@ -521,55 +523,55 @@
       'ALL': {
         title: 'TỔNG HỢP LŨY KẾ 6 THÁNG (THÁNG 5 – THÁNG 10/2026)',
         highlights: [
-          '🇺🇸 Hoa Kỳ: Chuyển từ ứng phó rủi ro thuế đối ứng sang tận dụng chu kỳ FED hạ lãi suất kích cầu nhà ở, song hải quan CBP siết rất chặt hồ sơ xuất xứ.',
-          '🇪🇺 Châu Âu: Luật EUDR bước vào giai đoạn thực thi khai báo tọa độ Polygon, tạo lợi thế lớn cho các nhà cung ứng có nguồn gỗ keo FSC như Gemmy Wood.',
-          '🇦🇺 Úc: Thị trường tăng trưởng bứt phá nhờ chương trình 1,2 triệu nhà ở mới và thuế ưu đãi 0% AANZFTA, đi kèm đạo luật gỗ hợp pháp ILPA mới.',
-          '🇻🇳 Việt Nam & G7: Giá gỗ keo FSC miền Bắc tăng 6–10% dịp cuối năm; đơn hàng ván ghép thanh đi Nhật, Hàn, Anh, Canada duy trì ổn định quanh năm.'
+          'Hoa Kỳ: Chuyển từ ứng phó rủi ro thuế đối ứng sang tận dụng chu kỳ FED hạ lãi suất kích cầu nhà ở, song hải quan CBP siết rất chặt hồ sơ xuất xứ.',
+          'Châu Âu: Luật EUDR bước vào giai đoạn thực thi khai báo tọa độ Polygon, tạo lợi thế lớn cho các nhà cung ứng có nguồn gỗ keo FSC như Gemmy Wood.',
+          'Úc: Thị trường tăng trưởng bứt phá nhờ chương trình 1,2 triệu nhà ở mới và thuế ưu đãi 0% AANZFTA, đi kèm đạo luật gỗ hợp pháp ILPA mới.',
+          'Việt Nam & G7: Giá gỗ keo FSC miền Bắc tăng 6–10% dịp cuối năm; đơn hàng ván ghép thanh đi Nhật, Hàn, Anh, Canada duy trì ổn định quanh năm.'
         ]
       },
       'Tháng 10': {
         title: 'KỲ BÁO CÁO THÁNG 10/2026',
         highlights: [
-          '🇦🇺 Úc thực thi Đạo luật ILPA kiểm định sợi gỗ & triển khai gói 1,2 triệu nhà ở mới — cơ hội bứt phá cho mặt bàn bếp gỗ keo phủ dầu thuế 0%.',
-          '🇪🇺 Cổng thông tin EUDR Traces NT yêu cầu tọa độ Polygon vùng rừng trồng cho các lô hàng xuất khẩu phục vụ mùa đơn hàng mới.',
-          '🇺🇸 Mỹ giảm lãi suất vay mua nhà về ~6,1% kích thích nhu cầu đồ gỗ nội thất gia đình & tủ bếp; DOC/CBP kiểm tra chặt chuyển tải bất hợp pháp.',
-          '🇻🇳 Cạnh tranh thu mua gỗ keo FSC tại Phú Thọ & Tuyên Quang khiến giá phôi sấy tăng 6–10%; Nhật, Hàn, Anh tăng đơn hàng vụ Đông – Xuân.'
+          'Úc thực thi Đạo luật ILPA kiểm định sợi gỗ & triển khai gói 1,2 triệu nhà ở mới — cơ hội bứt phá cho mặt bàn bếp gỗ keo phủ dầu thuế 0%.',
+          'Cổng thông tin EUDR Traces NT yêu cầu tọa độ Polygon vùng rừng trồng cho các lô hàng xuất khẩu phục vụ mùa đơn hàng mới.',
+          'Hoa Kỳ giảm lãi suất vay mua nhà về ~6,1% kích thích nhu cầu đồ gỗ nội thất gia đình & tủ bếp; DOC/CBP kiểm tra chặt chuyển tải bất hợp pháp.',
+          'Cạnh tranh thu mua gỗ keo FSC tại Phú Thọ & Tuyên Quang khiến giá phôi sấy tăng 6–10%; Nhật, Hàn, Anh tăng đơn hàng vụ Đông – Xuân.'
         ]
       },
       'Tháng 9': {
         title: 'KỲ BÁO CÁO THÁNG 9/2026',
         highlights: [
-          '🇺🇸 FED khởi động chu kỳ cắt giảm lãi suất giúp các chuỗi bán lẻ nội thất Mỹ tự tin đặt hàng trở lại cho mùa mua sắm cuối năm.',
-          '🇪🇺 Khách hàng châu Âu bắt đầu yêu cầu các nhà máy Việt Nam chuẩn bị sẵn sàng chuỗi hành trình sản phẩm FSC-CoC theo chuẩn EUDR.',
-          '🚢 Cước tàu biển có xu hướng ổn định nhẹ nhưng thời gian hành trình vòng qua Mũi Hảo Vọng vẫn kéo dài thêm 10–14 ngày.'
+          'Hoa Kỳ: FED khởi động chu kỳ cắt giảm lãi suất giúp các chuỗi bán lẻ nội thất Mỹ tự tin đặt hàng trở lại cho mùa mua sắm cuối năm.',
+          'Châu Âu: Khách hàng bắt đầu yêu cầu các nhà máy Việt Nam chuẩn bị sẵn sàng chuỗi hành trình sản phẩm FSC-CoC theo chuẩn EUDR.',
+          'Logistics: Cước tàu biển có xu hướng ổn định nhẹ nhưng thời gian hành trình vòng qua Mũi Hảo Vọng vẫn kéo dài thêm 10–14 ngày.'
         ]
       },
       'Tháng 8': {
         title: 'KỲ BÁO CÁO THÁNG 8/2026',
         highlights: [
-          '🛡️ Hoa Kỳ mở rộng điều tra phòng vệ thương mại chống lẩn tránh thuế với sản phẩm tủ gỗ và ván ép, yêu cầu minh bạch 100% hồ sơ xuất xứ.',
-          '🌲 Mưa bão miền Bắc ảnh hưởng khai thác rừng trồng ngắn hạn tại Phú Thọ; nhà máy cần duy trì lượng phôi sấy dự trữ an toàn 45–60 ngày.',
-          '💱 Tỷ giá USD/VND neo ở vùng cao tiếp tục hỗ trợ tích cực cho biên lợi nhuận quy đổi của các hợp đồng xuất khẩu FOB.'
+          'Hoa Kỳ mở rộng điều tra phòng vệ thương mại chống lẩn tránh thuế với sản phẩm tủ gỗ và ván ép, yêu cầu minh bạch 100% hồ sơ xuất xứ.',
+          'Mưa bão miền Bắc ảnh hưởng khai thác rừng trồng ngắn hạn tại Phú Thọ; nhà máy cần duy trì lượng phôi sấy dự trữ an toàn 45–60 ngày.',
+          'Tỷ giá USD/VND neo ở vùng cao tiếp tục hỗ trợ tích cực cho biên lợi nhuận quy đổi của các hợp đồng xuất khẩu FOB.'
         ]
       },
       'Tháng 7': {
         title: 'KỲ BÁO CÁO THÁNG 7/2026',
         highlights: [
-          '⚖️ Các nhà nhập khẩu Mỹ và EU đàm phán lại điều khoản chia sẻ chi phí thuế và siết chặt kiểm tra độ phát thải keo TSCA Title VI / CARB-P2.',
-          '🚢 Tuyến vận chuyển container sang Bắc Mỹ và châu Âu chịu áp lực thiếu vỏ container rỗng cục bộ vào mùa cao điểm.'
+          'Các nhà nhập khẩu Mỹ và EU đàm phán lại điều khoản chia sẻ chi phí thuế và siết chặt kiểm tra độ phát thải keo TSCA Title VI / CARB-P2.',
+          'Tuyến vận chuyển container sang Bắc Mỹ và châu Âu chịu áp lực thiếu vỏ container rỗng cục bộ vào mùa cao điểm.'
         ]
       },
       'Tháng 6': {
         title: 'KỲ BÁO CÁO THÁNG 6/2026',
         highlights: [
-          '📊 Sức mua phân khúc ván ghép thanh tự làm (DIY) tại châu Âu và Bắc Mỹ giữ nhịp tốt hơn phân khúc đồ nội thất hoàn thiện cao cấp.',
-          '🇻🇳 Cơ quan thuế và kiểm lâm tăng cường rà soát bảng kê lâm sản hợp pháp và điều kiện hoàn thuế giá trị gia tăng đối với gỗ rừng trồng.'
+          'Sức mua phân khúc ván ghép thanh tự làm (DIY) tại châu Âu và Bắc Mỹ giữ nhịp tốt hơn phân khúc đồ nội thất hoàn thiện cao cấp.',
+          'Cơ quan thuế và kiểm lâm tăng cường rà soát bảng kê lâm sản hợp pháp và điều kiện hoàn thuế giá trị gia tăng đối với gỗ rừng trồng.'
         ]
       },
       'Tháng 5': {
         title: 'KỲ BÁO CÁO THÁNG 5/2026',
         highlights: [
-          '🌐 Khởi động hệ thống cảnh báo sớm rủi ro thuế quan thị trường Mỹ và rà soát nguồn cung gỗ keo nguyên liệu FSC phục vụ kế hoạch nửa cuối năm.'
+          'Khởi động hệ thống cảnh báo sớm rủi ro thuế quan thị trường Mỹ và rà soát nguồn cung gỗ keo nguyên liệu FSC phục vụ kế hoạch nửa cuối năm.'
         ]
       }
     };
@@ -577,7 +579,6 @@
     const COUNTRY_PROFILES = [
       {
         key: 'Mỹ',
-        flag: '🇺🇸',
         name: 'Hoa Kỳ (US) — ~50% Kim Ngạch XK',
         policy: 'Giám sát thuế đối ứng, điều tra phòng vệ thương mại AD/CVD & kiểm tra xuất xứ CBP.',
         demand: 'Lãi suất vay mua nhà hạ nhiệt kích thích nhu cầu đồ gỗ nội thất gia đình & tủ bếp.',
@@ -585,7 +586,6 @@
       },
       {
         key: 'EU',
-        flag: '🇪🇺',
         name: 'Châu Âu (EU) — Trọng Tâm EUDR',
         policy: 'Bắt buộc khai báo tọa độ địa lý Polygon vùng trồng rừng trên cổng thông tin EUDR.',
         demand: 'Nhu cầu đồ gỗ ngoại thất (Outdoor) & mặt bàn gỗ tự nhiên FSC phục hồi tại Đức, Pháp, Bắc Âu.',
@@ -593,7 +593,6 @@
       },
       {
         key: 'Úc',
-        flag: '🇦🇺',
         name: 'Úc (Australia) — Luật ILPA & Thuế 0%',
         policy: 'Đạo luật gỗ hợp pháp ILPA mới siết kiểm định sợi gỗ; được hưởng thuế 0% theo AANZFTA.',
         demand: 'Chương trình xây 1,2 triệu nhà ở mới thúc đẩy mạnh đơn hàng mặt bàn bếp (Worktop) gỗ keo.',
@@ -601,7 +600,6 @@
       },
       {
         key: 'Việt Nam',
-        flag: '🇻🇳',
         name: 'Việt Nam — Trung Tâm Sản Xuất',
         policy: 'Siết quản lý bảng kê lâm sản, truy xuất nguồn gốc C/O, an toàn PCCC & hoàn thuế GTGT.',
         demand: 'Cạnh tranh thu mua gỗ keo FSC tại miền Bắc làm giá nguyên liệu tăng 6–10% cuối năm.',
@@ -609,7 +607,6 @@
       },
       {
         key: 'Nhật',
-        flag: '🇯🇵🇰🇷',
         name: 'Nhật Bản & Hàn Quốc — Chuẩn Kỹ Thuật',
         policy: 'Tiêu chuẩn phát thải Formaldehyde F☆☆☆☆ nghiêm ngặt tại Nhật & Đạo luật Clean Wood Act.',
         demand: 'Đơn hàng ván ghép thanh, nội thất nhỏ gọn và viên nén sinh khối ổn định quanh năm.',
@@ -617,7 +614,6 @@
       },
       {
         key: 'Anh',
-        flag: '🇬🇧🇨🇦',
         name: 'Anh & Canada — Đa Dạng Hóa G7',
         policy: 'Tuân thủ UK Timber Regulation (UKTR); hưởng ưu đãi thuế quan từ UKVFTA và CPTPP.',
         demand: 'Tăng nhập khẩu mặt bàn gỗ tự nhiên (Solid Wood Worktops) thay thế nguồn cung từ Trung Quốc.',
@@ -770,19 +766,19 @@
       applyFilters();
     }
 
-    // Render the 3 Recent Month Tabs
+    // Render the 3 Recent Month Tabs with clean concise labels: 10/2026, 09/2026, 08/2026
     function renderRecentMonthTabs() {
       const container = document.getElementById('recentMonthTabs');
       container.innerHTML = RECENT_MONTHS.map(m => {
-        const isActive = activeMonth === m;
-        const count = allData.filter(d => matchMonthRecord(d, m) && matchMarketRecord(d, activeMarket)).length;
+        const isActive = activeMonth === m.key;
+        const count = allData.filter(d => matchMonthRecord(d, m.key) && matchMarketRecord(d, activeMarket)).length;
         return `
-          <button onclick="setFilterState('month', '${m}')" class="px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 border shadow-sm ${
+          <button onclick="setFilterState('month', '${m.key}')" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition flex items-center gap-1.5 border shadow-sm ${
             isActive
               ? 'bg-emerald-700 text-white border-emerald-700'
               : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700'
           }">
-            <span>${m}/2026</span>
+            <span>${m.label}</span>
             <span class="px-1.5 py-0.2 rounded text-xs ${
               isActive ? 'bg-emerald-900/60 text-emerald-100' : 'bg-slate-100 dark:bg-slate-900 text-slate-500'
             }">${count}</span>
@@ -851,7 +847,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm">
           ${meta.highlights.map(h => `
-            <div class="p-3 rounded-xl bg-slate-50/80 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 leading-relaxed font-medium">
+            <div class="p-3.5 rounded-xl bg-slate-50/80 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 leading-relaxed font-medium">
               ${h}
             </div>
           `).join('')}
@@ -877,10 +873,7 @@
           }">
             <div class="space-y-2.5">
               <div class="flex items-center justify-between gap-2 pb-2.5 border-b border-slate-200 dark:border-slate-700/80">
-                <div class="flex items-center gap-2">
-                  <span class="text-2xl">${c.flag}</span>
-                  <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${c.name}</h3>
-                </div>
+                <h3 class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">${c.name}</h3>
                 <span class="px-2.5 py-0.5 rounded text-xs font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 shrink-0">${records.length} sự kiện</span>
               </div>
 
@@ -990,16 +983,13 @@
       return `<span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800">📊 ${pillar}</span>`;
     }
 
-    function getCountryFlag(country) {
-      const c = (country || '').toLowerCase();
-      if (c.includes('mỹ') || c.includes('hoa kỳ')) return '🇺🇸';
-      if (c.includes('eu') || c.includes('châu âu')) return '🇪🇺';
-      if (c.includes('úc') || c.includes('australia')) return '🇦🇺';
-      if (c.includes('việt nam')) return '🇻🇳';
-      if (c.includes('nhật') || c.includes('hàn')) return '🇯🇵🇰🇷';
-      if (c.includes('anh') || c.includes('canada')) return '🇬🇧🇨🇦';
-      if (c.includes('trung quốc')) return '🇨🇳';
-      return '🌐';
+    // Clean Country Name: Absolutely NO country flag emojis and NO codes like VN, JP KR
+    function getCleanCountryName(rawCountry) {
+      const c = (rawCountry || '').trim();
+      if (!c) return 'Toàn cầu';
+      // Remove any country codes/emojis if present
+      let clean = c.replace(/^(VN|JP|KR|US|EU|AU|UK|CA|CN|\uD83C[\uDDE6-\uDDFF]{2})\s*/gi, '').trim();
+      return clean || c;
     }
 
     function renderTable() {
@@ -1024,7 +1014,7 @@
       pageData.forEach(row => {
         const rowMonth = row['Tháng Báo Cáo'] || 'Khác';
 
-        // Monthly Divider Row (Clean, no n8n workflow text)
+        // Monthly Divider Row (Clean, no technical n8n text)
         if (rowMonth !== lastMonth) {
           lastMonth = rowMonth;
           const monthGroupRows = filteredData.filter(r => (r['Tháng Báo Cáo'] || '') === rowMonth);
@@ -1075,44 +1065,81 @@
           oppBadge = `<span class="px-2.5 py-1 rounded text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300 whitespace-nowrap">✨ Cơ hội cao</span>`;
         }
 
-        const flag = getCountryFlag(row['Quốc Gia Tác Động']);
+        const countryClean = getCleanCountryName(row['Quốc Gia Tác Động']);
 
         tr.innerHTML = `
-          <td class="py-4 px-3.5 whitespace-nowrap">
+          <!-- Cột 1: Mã & Ngày (Gọn gàng) -->
+          <td class="py-4 px-4 whitespace-nowrap">
             <div class="font-mono font-bold text-emerald-800 dark:text-emerald-400 text-xs">${row['ID'] || ''}</div>
             <div class="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">${row['Tháng Báo Cáo'] || ''}/2026</div>
             <div class="text-[11px] text-slate-400 mt-0.5">${row['Ngày cập nhật'] || ''}</div>
           </td>
-          <td class="py-4 px-3.5">
-            <div class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 text-sm">
-              <span>${flag}</span>
-              <span>${row['Quốc Gia Tác Động'] || 'Toàn cầu'}</span>
+
+          <!-- Cột 2: Thị Trường & SP (Bỏ hoàn toàn icon/mã cờ, hiển thị rõ ràng) -->
+          <td class="py-4 px-4">
+            <div class="font-extrabold text-slate-900 dark:text-white text-sm">
+              ${countryClean}
             </div>
-            <div class="text-xs text-slate-500 mt-1 line-clamp-1">Đích: ${row['Thị trường liên quan'] || ''}</div>
-            <div class="text-xs text-emerald-800 dark:text-emerald-400 font-semibold mt-0.5 line-clamp-1">${row['Nhóm sản phẩm'] || ''}</div>
+            <div class="text-xs text-slate-500 mt-1">
+              <span class="font-medium text-slate-600 dark:text-slate-400">Đích:</span> ${row['Thị trường liên quan'] || 'Toàn cầu'}
+            </div>
+            <div class="text-xs text-emerald-800 dark:text-emerald-400 font-bold mt-1">
+              ${row['Nhóm sản phẩm'] || ''}
+            </div>
           </td>
-          <td class="py-4 px-3.5">
+
+          <!-- Cột 3: Trụ Cột & Sự Kiện -->
+          <td class="py-4 px-4">
             <div class="mb-1.5">${getPillarBadge(row['Nhóm biến động'])}</div>
-            <div class="font-bold text-slate-900 dark:text-white text-xs leading-snug">${row['Loại biến động'] || ''}</div>
+            <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm leading-snug">${row['Loại biến động'] || ''}</div>
           </td>
-          <td class="py-4 px-3.5">
-            <p class="text-slate-700 dark:text-slate-200 text-sm leading-relaxed line-clamp-3">${row['Nội dụng biến động'] || ''}</p>
-            <p class="text-xs text-blue-700 dark:text-blue-400 font-medium mt-1.5 line-clamp-1"><strong>Cơ hội:</strong> ${row['Cơ hội cho VN'] || ''}</p>
+
+          <!-- Cột 4: Diễn Biến Vĩ Mô / Pháp Lý & Cơ Hội (MỞ RỘNG ĐỘ RỘNG, ĐỌC RÕ RÀNG) -->
+          <td class="py-4 px-4">
+            <p class="text-slate-800 dark:text-slate-200 text-sm leading-relaxed font-normal">
+              ${row['Nội dụng biến động'] || ''}
+            </p>
+            ${row['Cơ hội cho VN'] ? `
+              <div class="mt-2.5 p-2 rounded-lg bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200/60 dark:border-blue-900/50 text-xs sm:text-sm text-blue-900 dark:text-blue-200 leading-relaxed font-medium">
+                <span class="font-bold text-blue-700 dark:text-blue-400">Cơ hội cho VN:</span> ${row['Cơ hội cho VN']}
+              </div>
+            ` : ''}
           </td>
-          <td class="py-4 px-3.5 space-y-1 text-xs text-slate-600 dark:text-slate-300">
-            <div class="line-clamp-1"><strong class="text-slate-900 dark:text-white">Đơn hàng:</strong> ${row['Đơn hàng'] || ''}</div>
-            <div class="line-clamp-1"><strong class="text-slate-900 dark:text-white">Giá bán:</strong> ${row['Giá bán'] || ''}</div>
-            <div class="line-clamp-1"><strong class="text-slate-900 dark:text-white">Nguyên liệu:</strong> ${row['Nguyên Liệu'] || ''}</div>
+
+          <!-- Cột 5: Tác Động SXKD (MỞ RỘNG ĐỘ RỘNG, CHIA 3 MẮT XÍCH RÕ RÀNG) -->
+          <td class="py-4 px-4 space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+            <div class="leading-relaxed">
+              <strong class="text-slate-900 dark:text-white block sm:inline">📦 Đơn hàng:</strong>
+              <span>${row['Đơn hàng'] || 'Đang theo dõi'}</span>
+            </div>
+            <div class="leading-relaxed">
+              <strong class="text-slate-900 dark:text-white block sm:inline">💵 Giá bán:</strong>
+              <span>${row['Giá bán'] || 'Đang theo dõi'}</span>
+            </div>
+            <div class="leading-relaxed">
+              <strong class="text-slate-900 dark:text-white block sm:inline">🌲 Nguyên liệu:</strong>
+              <span>${row['Nguyên Liệu'] || 'Đang theo dõi'}</span>
+            </div>
           </td>
-          <td class="py-4 px-3.5 text-center">
-            <div class="flex flex-col items-center gap-1.5">
+
+          <!-- Cột 6: Đánh Giá (Rủi ro & Cơ hội) -->
+          <td class="py-4 px-4 text-center">
+            <div class="flex flex-col items-center gap-2">
               ${riskBadge}
               ${oppBadge}
             </div>
           </td>
-          <td class="py-4 px-3.5">
-            <p class="text-emerald-900 dark:text-emerald-300 text-sm leading-relaxed line-clamp-3 font-semibold">${row['Hành động đề xuất'] || ''}</p>
-            <div class="text-xs text-slate-500 mt-1.5">Phụ trách: ${row['Bộ phận phụ trách'] || 'Ban Giám Đốc'}</div>
+
+          <!-- Cột 7: Khuyến Nghị Hành Động (MỞ RỘNG ĐỘ RỘNG, THẺ NỔI BẬT) -->
+          <td class="py-4 px-4">
+            <div class="p-3 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200/70 dark:border-emerald-800/50">
+              <p class="text-emerald-950 dark:text-emerald-200 text-sm leading-relaxed font-semibold">
+                ${row['Hành động đề xuất'] || 'Duy trì theo dõi thị trường'}
+              </p>
+              <div class="text-xs text-slate-500 dark:text-slate-400 mt-2 pt-1.5 border-t border-emerald-200/50 dark:border-emerald-800/40">
+                <span class="font-medium text-slate-700 dark:text-slate-300">Phụ trách:</span> ${row['Bộ phận phụ trách'] || 'Ban Giám Đốc'}
+              </div>
+            </div>
           </td>
         `;
         tbody.appendChild(tr);
@@ -1167,7 +1194,7 @@
       charts.c1 = new Chart(ctx1, {
         type: 'bar',
         data: {
-          labels: ['Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10'],
+          labels: ['05/2026', '06/2026', '07/2026', '08/2026', '09/2026', '10/2026'],
           datasets: [
             {
               type: 'line',
@@ -1206,10 +1233,10 @@
         }
       });
 
-      // 2. Market Comparison Chart
+      // 2. Market Comparison Chart (Clean labels, no country codes)
       const monthScoped = allData.filter(d => matchMonthRecord(d, activeMonth));
       const mKeys = ['Mỹ', 'EU', 'Úc', 'Việt Nam', 'Nhật', 'Anh'];
-      const mLabels = ['Mỹ (US)', 'EU', 'Úc (AU)', 'Việt Nam', 'Nhật/Hàn', 'Anh/CA'];
+      const mLabels = ['Hoa Kỳ', 'Châu Âu', 'Úc', 'Việt Nam', 'Nhật/Hàn', 'Anh/Canada'];
       const mRisks = mKeys.map(k => monthScoped.filter(d => matchMarketRecord(d, k) && ((d['Mức độ rủi rõ'] || '').includes('Cao') || Number(d['Rủi ro cao']) === 1)).length);
       const mOpps = mKeys.map(k => monthScoped.filter(d => matchMarketRecord(d, k) && ((d['Top Cơ hội cho VN'] || '').includes('Cao') || Number(d['Cơ hội cao']) === 1)).length);
 
@@ -1270,7 +1297,7 @@
       document.getElementById('modalPillarBadge').textContent = item['Nhóm biến động'] || '';
       document.getElementById('modalDate').textContent = `Kỳ ${item['Tháng Báo Cáo'] || ''}/2026 (Cập nhật: ${item['Ngày cập nhật'] || ''})`;
       document.getElementById('modalTitle').textContent = item['Loại biến động'] || item['Nhóm biến động'] || '';
-      document.getElementById('modalCountry').textContent = `${getCountryFlag(item['Quốc Gia Tác Động'])} ${item['Quốc Gia Tác Động'] || ''}`;
+      document.getElementById('modalCountry').textContent = getCleanCountryName(item['Quốc Gia Tác Động']);
       document.getElementById('modalMarkets').textContent = item['Thị trường liên quan'] || '';
       document.getElementById('modalProduct').textContent = item['Nhóm sản phẩm'] || '';
       document.getElementById('modalRiskOpp').textContent = `Rủi ro: ${item['Mức độ rủi rõ'] || 'Trung bình'} | Cơ hội: ${item['Top Cơ hội cho VN'] || 'Trung bình'}`;
