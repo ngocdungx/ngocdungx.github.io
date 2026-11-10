@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" class="dark">
+<html lang="vi" class="light-theme">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,39 +42,86 @@
     }
   </script>
   <style>
+    /* ========== LIGHT THEME (DEFAULT) ========== */
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background: radial-gradient(circle at 50% 0%, #152347 0%, #090d16 80%);
+      background: #F1F5F9;
+      background-image: radial-gradient(circle at 50% 0%, #E2E8F0 0%, #F1F5F9 100%);
       min-height: 100vh;
-      color: #F8FAFC;
-    }
-    .light-theme body {
-      background: #F8FAFC;
       color: #0F172A;
+      font-size: 14.5px;
     }
     .glass-card {
-      background: rgba(18, 24, 38, 0.72);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .light-theme .glass-card {
       background: rgba(255, 255, 255, 0.95);
       border: 1px solid rgba(226, 232, 240, 0.9);
       color: #0F172A;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.03);
     }
-    .light-theme .text-white { color: #0F172A !important; }
-    .light-theme .text-slate-200 { color: #1E293B !important; }
-    .light-theme .text-slate-300 { color: #334155 !important; }
-    .light-theme .text-slate-400 { color: #64748B !important; }
-    .light-theme .bg-slate-900 { background-color: #FFFFFF !important; }
-    .light-theme .bg-slate-950 { background-color: #F1F5F9 !important; }
-    .light-theme .border-slate-800 { border-color: #E2E8F0 !important; }
-    
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    .table-header {
+      background-color: #F8FAFC !important;
+      color: #475569 !important;
+      border-bottom: 2px solid #E2E8F0 !important;
+    }
+    .table-row {
+      transition: background-color 0.15s ease;
+      color: #1E293B;
+      border-bottom: 1px solid #F1F5F9;
+    }
+    .table-row:hover {
+      background-color: rgba(241, 245, 249, 0.8) !important;
+    }
+    .panel-box {
+      background-color: #FFFFFF !important;
+      border: 1px solid #E2E8F0 !important;
+    }
+    .input-box {
+      background-color: #FFFFFF !important;
+      border: 1px solid #CBD5E1 !important;
+      color: #0F172A !important;
+    }
+
+    /* ========== DARK THEME OVERRIDE ========== */
+    .dark body {
+      background: radial-gradient(circle at 50% 0%, #152347 0%, #090d16 80%);
+      color: #F8FAFC;
+    }
+    .dark .glass-card {
+      background: rgba(18, 24, 38, 0.72);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #F8FAFC;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
+    }
+    .dark .text-white { color: #FFFFFF !important; }
+    .dark .text-slate-200 { color: #E2E8F0 !important; }
+    .dark .text-slate-300 { color: #CBD5E1 !important; }
+    .dark .text-slate-400 { color: #94A3B8 !important; }
+    .dark .table-header {
+      background-color: rgba(2, 6, 23, 0.8) !important;
+      color: #94A3B8 !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .dark .table-row {
+      color: #CBD5E1;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+    .dark .table-row:hover {
+      background-color: rgba(30, 41, 59, 0.4) !important;
+    }
+    .dark .panel-box {
+      background-color: rgba(2, 6, 23, 0.6) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .dark .input-box {
+      background-color: #0B0F19 !important;
+      border: 1px solid #334155 !important;
+      color: #F8FAFC !important;
+    }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.3); border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(100, 116, 139, 0.6); }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.7); }
 
     @media print {
       body { background: white !important; color: black !important; font-size: 10pt; }
@@ -87,69 +134,69 @@
 </head>
 <body class="transition-colors duration-300 antialiased selection:bg-brand-500 selection:text-white">
 
-  <!-- ==================== HEADER NAVIGATION ==================== -->
-  <header class="sticky top-0 z-40 border-b border-white/10 glass-card">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <!-- ==================== HEADER NAVIGATION (1800PX) ==================== -->
+  <header class="sticky top-0 z-40 border-b border-slate-200 dark:border-white/10 glass-card">
+    <div class="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3 flex items-center justify-between">
       
       <!-- Brand & Metadata -->
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-brand-500/20">
-          <i data-lucide="trees" class="w-5 h-5 text-white"></i>
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-brand-500/20 flex-shrink-0">
+          <i data-lucide="trees" class="w-6 h-6 text-white"></i>
         </div>
         <div>
-          <div class="flex items-center gap-2">
-            <span class="font-extrabold tracking-tight text-white text-base sm:text-lg">GEMMY WOOD</span>
-            <span class="px-2 py-0.5 text-[10px] font-mono tracking-wider uppercase rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Live Google Sheets</span>
+          <div class="flex items-center gap-2.5">
+            <span class="font-black tracking-tight text-slate-900 dark:text-white text-lg sm:text-xl">GEMMY WOOD</span>
+            <span class="px-2.5 py-0.5 text-xs font-mono font-bold tracking-wider uppercase rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">Executive Operations</span>
           </div>
-          <p class="text-[11px] text-slate-400 font-medium hidden sm:block">Executive Dashboard Báo Cáo Công Tác & Kế Hoạch Hoạt Động B2B</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium hidden sm:block">Dashboard Báo Cáo Công Tác & Kế Hoạch Hoạt Động Marketing B2B Xuất Khẩu</p>
         </div>
       </div>
 
       <!-- Quick Action Buttons -->
-      <div class="flex items-center gap-2 sm:gap-3">
+      <div class="flex items-center gap-2.5 sm:gap-3">
         
         <!-- Link to Google Sheet -->
-        <a href="https://docs.google.com/spreadsheets/d/1f5bju1SiwjHTe2MRrWbtlqyO27tNDvWAC7ZC71STBgI/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 hover:text-white text-xs flex items-center gap-1.5 transition hover:bg-emerald-900/50" title="Mở file Google Sheet gốc">
-          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-          <span class="hidden md:inline font-medium">Mở Google Sheet</span>
+        <a href="https://docs.google.com/spreadsheets/d/1f5bju1SiwjHTe2MRrWbtlqyO27tNDvWAC7ZC71STBgI/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-xs sm:text-sm font-semibold flex items-center gap-2 transition" title="Mở file Google Sheet gốc">
+          <i data-lucide="external-link" class="w-4 h-4"></i>
+          <span class="hidden md:inline">Mở Google Sheet</span>
         </a>
 
         <!-- Search Omnibar (⌘K) -->
-        <button onclick="openSearchModal()" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white text-xs flex items-center gap-2 transition hover:border-slate-700">
-          <i data-lucide="search" class="w-3.5 h-3.5"></i>
+        <button onclick="openSearchModal()" class="px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-xs sm:text-sm font-medium flex items-center gap-2.5 transition shadow-sm">
+          <i data-lucide="search" class="w-4 h-4"></i>
           <span class="hidden md:inline">Tìm kiếm</span>
-          <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-400 border border-slate-700">⌘K</kbd>
+          <kbd class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[11px] font-mono text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700">⌘K</kbd>
         </button>
 
         <!-- Print PDF -->
-        <button onclick="window.print()" title="In Báo Cáo / Xuất PDF Điều Hành" class="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition hover:border-slate-700">
+        <button onclick="window.print()" title="In Báo Cáo / Xuất PDF Điều Hành" class="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition shadow-sm">
           <i data-lucide="printer" class="w-4 h-4"></i>
         </button>
 
         <!-- Dark/Light Theme -->
-        <button onclick="toggleTheme()" title="Đổi giao diện Sáng/Tối" class="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition hover:border-slate-700">
-          <i id="themeIcon" data-lucide="sun" class="w-4 h-4"></i>
+        <button onclick="toggleTheme()" title="Đổi giao diện Sáng/Tối" class="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition shadow-sm">
+          <i id="themeIcon" data-lucide="moon" class="w-4 h-4"></i>
         </button>
       </div>
 
     </div>
   </header>
 
-  <!-- ==================== GOOGLE SHEETS LIVE SYNC STATUS BAR ==================== -->
-  <section id="syncBar" class="border-b border-white/5 bg-slate-950/70 backdrop-blur-md no-print">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+  <!-- ==================== GOOGLE SHEETS LIVE SYNC STATUS BAR (1800PX) ==================== -->
+  <section id="syncBar" class="border-b border-slate-200 dark:border-white/5 bg-slate-50/90 dark:bg-slate-950/70 backdrop-blur-md no-print">
+    <div class="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm">
       
       <div class="flex items-center gap-2.5">
-        <span id="syncIndicator" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span id="syncStatusLabel" class="text-slate-300 font-medium">
-          Đã kết nối Google Sheet: <span class="text-emerald-400 font-mono font-bold">Work Plan Gemmy</span>
+        <span id="syncIndicator" class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="syncStatusLabel" class="text-slate-700 dark:text-slate-300 font-medium">
+          Đã kết nối Google Sheet: <span class="text-emerald-700 dark:text-emerald-400 font-mono font-bold">Work Plan Gemmy</span>
         </span>
-        <span class="text-slate-600">|</span>
-        <span class="text-slate-400 text-[11px]">Đồng bộ 3 Phân hệ: Tháng 10, Tháng 11 & Time-Blocking</span>
+        <span class="text-slate-400 dark:text-slate-600">|</span>
+        <span class="text-slate-500 dark:text-slate-400 text-xs">Đồng bộ tự động 3 Phân hệ: Tháng 10, Tháng 11 & Time-Blocking</span>
       </div>
 
       <div class="flex items-center gap-2">
-        <button onclick="syncAllFromGoogleSheet()" id="btnSyncNow" class="text-xs px-3 py-1 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-semibold flex items-center gap-1.5 transition shadow-sm shadow-brand-500/20">
+        <button onclick="syncAllFromGoogleSheet()" id="btnSyncNow" class="text-xs sm:text-sm px-3.5 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-semibold flex items-center gap-1.5 transition shadow-sm shadow-brand-500/20">
           <i data-lucide="refresh-cw" id="syncIconSpin" class="w-3.5 h-3.5"></i>
           <span>Đồng bộ từ Google Sheet</span>
         </button>
@@ -158,70 +205,66 @@
     </div>
   </section>
 
-  <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+  <!-- ==================== MAIN CONTENT CONTAINER (1800PX) ==================== -->
+  <main class="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
     
     <!-- ==================== HERO BENTO GRID KPIS ==================== -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
       
       <!-- Card 1: Hoàn thành Tháng 10 -->
-      <div class="glass-card rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden group hover:border-emerald-500/40 transition">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">Kết Quả Tháng 10</span>
-          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
-            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group hover:border-emerald-500/40 transition">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">Tiến Độ Tháng 10</span>
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+            <i data-lucide="check-circle-2" class="w-5 h-5"></i>
           </div>
         </div>
         <div>
-          <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono tracking-tight" id="kpiOctRate">7 / 7 (100%)</div>
-          <p class="text-[11px] text-slate-400 mt-1">Hoàn tất mục tiêu cốt lõi; 02 tồn đọng đã có giải pháp</p>
+          <div class="text-3xl sm:text-4xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono tracking-tight" id="kpiOctRate">7 / 7 (100%)</div>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5">Hoàn tất 7 mục tiêu cốt lõi; 02 tồn đọng đã có giải pháp dứt điểm</p>
         </div>
-        <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition"></div>
       </div>
 
       <!-- Card 2: Kế hoạch Tháng 11 -->
-      <div class="glass-card rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden group hover:border-purple-500/40 transition">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">Kế Hoạch Tháng 11</span>
-          <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center">
-            <i data-lucide="calendar-check" class="w-4 h-4"></i>
+      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group hover:border-purple-500/40 transition">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">Kế Hoạch Tháng 11</span>
+          <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+            <i data-lucide="calendar-check" class="w-5 h-5"></i>
           </div>
         </div>
         <div>
-          <div class="text-2xl sm:text-3xl font-extrabold text-purple-400 font-mono tracking-tight" id="kpiNovTasks">27 Đầu Việc</div>
-          <p class="text-[11px] text-slate-400 mt-1">4 Tuần tác nghiệp + 7 Mục tiêu trọng tâm (V2: 14/11)</p>
+          <div class="text-3xl sm:text-4xl font-extrabold text-purple-600 dark:text-purple-400 font-mono tracking-tight" id="kpiNovTasks">27 Đầu Việc</div>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5">4 Tuần tác nghiệp + 7 Mục tiêu trọng tâm (Bàn giao V2: 14/11)</p>
         </div>
-        <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-purple-500/10 rounded-full blur-xl group-hover:bg-purple-500/20 transition"></div>
       </div>
 
       <!-- Card 3: Năng lực & Time-blocking -->
-      <div class="glass-card rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden group hover:border-blue-500/40 transition">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">Định Mức Giờ Công</span>
-          <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center">
-            <i data-lucide="clock" class="w-4 h-4"></i>
+      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group hover:border-blue-500/40 transition">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">Định Mức Năng Lực</span>
+          <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+            <i data-lucide="clock" class="w-5 h-5"></i>
           </div>
         </div>
         <div>
-          <div class="text-2xl sm:text-3xl font-extrabold text-blue-400 font-mono tracking-tight" id="kpiHours">48h/Tuần (192h)</div>
-          <p class="text-[11px] text-slate-400 mt-1">11 Nhóm chuyên môn, 23 Ca Time-blocking T2-T7</p>
+          <div class="text-3xl sm:text-4xl font-extrabold text-blue-600 dark:text-blue-400 font-mono tracking-tight" id="kpiHours">48h/Tuần (192h)</div>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5">11 Nhóm chuyên môn, 23 Ca Time-blocking Thứ 2 - Thứ 7</p>
         </div>
-        <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/20 transition"></div>
       </div>
 
       <!-- Card 4: Dự toán ngân sách -->
-      <div class="glass-card rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden group hover:border-amber-500/40 transition">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">Dự Toán Đề Xuất T11</span>
-          <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center">
-            <i data-lucide="wallet" class="w-4 h-4"></i>
+      <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group hover:border-amber-500/40 transition">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">Dự Toán Ngân Sách T11</span>
+          <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+            <i data-lucide="wallet" class="w-5 h-5"></i>
           </div>
         </div>
         <div>
-          <div class="text-2xl sm:text-3xl font-extrabold text-amber-400 font-mono tracking-tight" id="kpiBudget">800.000 VNĐ</div>
-          <p class="text-[11px] text-slate-400 mt-1">AI Dựng Ảnh (300k) + Claude Pro (500k)</p>
+          <div class="text-3xl sm:text-4xl font-extrabold text-amber-600 dark:text-amber-400 font-mono tracking-tight" id="kpiBudget">800.000 VNĐ</div>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5">Công cụ AI Dựng Ảnh (300k) + Claude Pro (500k)</p>
         </div>
-        <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-amber-500/10 rounded-full blur-xl group-hover:bg-amber-500/20 transition"></div>
       </div>
 
     </div>
@@ -229,30 +272,30 @@
     <!-- ==================== TABS BAR ==================== -->
     <div class="space-y-6">
       
-      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-3 no-print">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 dark:border-white/10 pb-3 no-print">
         
         <!-- Tab Navigation Buttons -->
-        <div class="flex flex-wrap items-center gap-2">
-          <button id="btnTabOct" onclick="switchTab('october')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-emerald-600 text-white shadow-sm">
+        <div class="flex flex-wrap items-center gap-2.5">
+          <button id="btnTabOct" onclick="switchTab('october')" class="px-5 py-2.5 rounded-xl text-sm font-bold transition flex items-center gap-2 bg-emerald-600 text-white shadow-sm">
             <i data-lucide="check-circle" class="w-4 h-4"></i>
             <span>1. Báo Cáo Tháng 10</span>
           </button>
           
-          <button id="btnTabNov" onclick="switchTab('november')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300">
+          <button id="btnTabNov" onclick="switchTab('november')" class="px-5 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 bg-slate-200 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300">
             <i data-lucide="calendar-days" class="w-4 h-4"></i>
             <span>2. Kế Hoạch Tác Nghiệp Tháng 11</span>
           </button>
           
-          <button id="btnTabWorkload" onclick="switchTab('workload')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300">
+          <button id="btnTabWorkload" onclick="switchTab('workload')" class="px-5 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 bg-slate-200 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300">
             <i data-lucide="clock-4" class="w-4 h-4"></i>
             <span>3. Định Mức & Lịch Time-Blocking</span>
           </button>
         </div>
 
         <!-- Helper hint -->
-        <div class="text-xs text-slate-400 flex items-center gap-1.5">
+        <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2">
           <span>Nhấn dòng bất kỳ để mở</span>
-          <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono text-[11px] border border-slate-700">Slide-over Drawer 360°</span>
+          <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-xs border border-slate-300 dark:border-slate-700 font-semibold">Slide-over Drawer 360°</span>
         </div>
 
       </div>
@@ -260,33 +303,120 @@
       <!-- ==================== TAB 1 CONTENT: BÁO CÁO THÁNG 10 ==================== -->
       <div id="tabContentOctober" class="space-y-6">
         
-        <!-- 1.1 Bảng Kết Quả Thực Hiện Tháng 10 -->
-        <div class="rounded-2xl bg-slate-900/60 border border-white/10 overflow-hidden glass-card">
-          <div class="p-4 sm:px-6 border-b border-white/10 flex items-center justify-between">
-            <div>
-              <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <i data-lucide="badge-check" class="w-4 h-4 text-emerald-400"></i>
-                1.1 KẾT QUẢ THỰC HIỆN CÔNG TÁC THÁNG 10/2026
-              </h3>
-              <p class="text-xs text-slate-400 mt-0.5">07 Hạng mục cốt lõi đã hoàn thành theo kế hoạch công tác</p>
+        <!-- 1.0 BIỂU ĐỒ SO SÁNH HOÀN THÀNH VS CHƯA HOÀN THÀNH THÁNG 10 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Doughnut Chart Hoàn thành vs Tồn đọng -->
+          <div class="rounded-2xl glass-card p-6 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2">
+              <div>
+                <h4 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono flex items-center gap-2">
+                  <i data-lucide="pie-chart" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
+                  Tỷ Lệ Hoàn Thành Tháng 10
+                </h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">So sánh hạng mục hoàn thành vs. tồn đọng</p>
+              </div>
+              <span class="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+                77.8% Hoàn thành
+              </span>
             </div>
-            <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
+
+            <div class="relative h-56 flex items-center justify-center my-2">
+              <canvas id="octoberCompletionChart"></canvas>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 pt-3 border-t border-slate-200 dark:border-white/10 text-center">
+              <div class="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/30">
+                <span class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold block">Đã Hoàn Thành</span>
+                <span class="text-xl font-bold font-mono text-emerald-700 dark:text-emerald-400">07 Mục (77.8%)</span>
+              </div>
+              <div class="p-2 rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/30">
+                <span class="text-xs text-amber-700 dark:text-amber-400 font-semibold block">Tồn Đọng / Chưa Xong</span>
+                <span class="text-xl font-bold font-mono text-amber-700 dark:text-amber-400">02 Mục (22.2%)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phân tích định tính & Giải pháp chuyển tiếp -->
+          <div class="lg:col-span-2 rounded-2xl glass-card p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3 border-b border-slate-200 dark:border-white/10 pb-3">
+                <h4 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono flex items-center gap-2">
+                  <i data-lucide="file-check-2" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
+                  Đánh Giá Hiệu Suất & Cam Kết Giải Pháp Dứt Điểm Tháng 11
+                </h4>
+                <span class="text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 px-2.5 py-1 rounded-full border border-blue-500/20">
+                  100% Khắc Phục
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-white/5 space-y-2">
+                  <span class="text-xs font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5 font-mono uppercase">
+                    <i data-lucide="check" class="w-4 h-4"></i> Điểm Sáng Đạt Được
+                  </span>
+                  <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                    Hoàn tất toàn bộ <strong>36 trang bản thảo Catalog B2B V2</strong>; làm sạch 100% dữ liệu trống trên website gemmywood.vn; chuẩn hóa thông số ván ghép thanh xuất khẩu (dày 18mm, 38mm; rộng 640mm, 650mm, 990mm); thiết kế xong 03 mẫu túi giấy Kraft và duy trì chuỗi video ngắn TikTok xưởng Phú Thọ.
+                  </p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-white/5 space-y-2">
+                  <span class="text-xs font-bold text-amber-700 dark:text-amber-400 flex items-center gap-1.5 font-mono uppercase">
+                    <i data-lucide="arrow-right-circle" class="w-4 h-4"></i> Kế Hoạch Xử Lý Triệt Để
+                  </span>
+                  <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                    2 Hạng mục chậm tiến độ (Zalo duyệt truyền thông & Nội dung SEO website) sẽ được khắc phục ngay đầu tháng 11 bằng giải pháp: <strong>Gửi duyệt trọn gói Lịch biên tập nội dung cả tháng</strong> lên Zalo và <strong>kích hoạt công cụ AI chuyên dụng dựng ảnh phối cảnh</strong> để hoàn tất Catalog V2 trước ngày 14/11.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tóm tắt số liệu dòng dưới -->
+            <div class="pt-4 border-t border-slate-200 dark:border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+              <span class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                Tổng số đầu việc đánh giá: <strong>09 Hạng Mục</strong>
+              </span>
+              <span class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                Nội dung đề xuất trình duyệt: <strong>03 Hạng Mục (800k)</strong>
+              </span>
+              <span class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                Mục tiêu hoàn thành Catalog V2: <strong>14/11/2026</strong>
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 1.1 Bảng Kết Quả Thực Hiện Tháng 10 -->
+        <div class="rounded-2xl glass-card overflow-hidden">
+          <div class="p-5 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
+            <div>
+              <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
+                <i data-lucide="badge-check" class="w-5 h-5 text-emerald-600 dark:text-emerald-400"></i>
+                1.1 CHI TIẾT KẾT QUẢ THỰC HIỆN CÔNG TÁC THÁNG 10/2026
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">07 Hạng mục cốt lõi đã hoàn thành theo kế hoạch công tác</p>
+            </div>
+            <span class="text-xs sm:text-sm font-mono font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
               07 / 07 Hoàn thành
             </span>
           </div>
 
           <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-slate-950/60 text-slate-400 font-mono uppercase text-[11px] border-b border-white/10">
+            <table class="w-full text-left text-sm">
+              <thead class="table-header text-xs uppercase font-mono font-bold tracking-wider">
                 <tr>
-                  <th class="py-3 px-4 w-12 text-center">STT</th>
-                  <th class="py-3 px-4 w-60">Hạng Mục Công Việc</th>
-                  <th class="py-3 px-4">Nội Dung Triển Khai</th>
-                  <th class="py-3 px-4 w-64">Kết Quả / Sản Phẩm Đầu Ra</th>
-                  <th class="py-3 px-4 w-36 text-center">Trạng Thái</th>
+                  <th class="py-3.5 px-4 w-14 text-center">STT</th>
+                  <th class="py-3.5 px-5 w-72">Hạng Mục Công Việc</th>
+                  <th class="py-3.5 px-5">Nội Dung Triển Khai Chi Tiết</th>
+                  <th class="py-3.5 px-5 w-80">Kết Quả / Sản Phẩm Đầu Ra</th>
+                  <th class="py-3.5 px-4 w-40 text-center">Trạng Thái</th>
                 </tr>
               </thead>
-              <tbody id="tableOctoberCompleted" class="divide-y divide-white/5">
+              <tbody id="tableOctoberCompleted" class="divide-y divide-slate-100 dark:divide-white/5">
                 <!-- Injected via JS -->
               </tbody>
             </table>
@@ -297,41 +427,41 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           
           <!-- Hạng mục tồn đọng -->
-          <div class="rounded-2xl bg-slate-900/60 border border-white/10 overflow-hidden glass-card flex flex-col justify-between">
-            <div class="p-4 sm:px-6 border-b border-white/10 flex items-center justify-between">
+          <div class="rounded-2xl glass-card overflow-hidden flex flex-col justify-between">
+            <div class="p-5 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
               <div>
-                <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                  <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-500"></i>
                   1.2 HẠNG MỤC TỒN ĐỌNG & GIẢI PHÁP KHẮC PHỤC
                 </h3>
-                <p class="text-xs text-slate-400 mt-0.5">02 Hạng mục cần xử lý triệt để trong đầu tháng 11</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">02 Hạng mục cần xử lý triệt để trong đầu tháng 11</p>
               </div>
-              <span class="text-xs font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+              <span class="text-xs font-mono font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
                 Ưu tiên xử lý
               </span>
             </div>
 
-            <div class="p-4 sm:p-6 space-y-4" id="containerOctoberPending">
+            <div class="p-5 sm:p-6 space-y-4" id="containerOctoberPending">
               <!-- Injected via JS -->
             </div>
           </div>
 
           <!-- Đề xuất phê duyệt -->
-          <div class="rounded-2xl bg-slate-900/60 border border-white/10 overflow-hidden glass-card flex flex-col justify-between">
-            <div class="p-4 sm:px-6 border-b border-white/10 flex items-center justify-between">
+          <div class="rounded-2xl glass-card overflow-hidden flex flex-col justify-between">
+            <div class="p-5 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
               <div>
-                <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                  <i data-lucide="sparkles" class="w-4 h-4 text-purple-400"></i>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <i data-lucide="sparkles" class="w-5 h-5 text-purple-500"></i>
                   1.3 ĐỀ XUẤT PHÊ DUYỆT ĐẦU THÁNG 11/2026
                 </h3>
-                <p class="text-xs text-slate-400 mt-0.5">03 Nội dung trình Ban Giám đốc thông qua triển khai</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">03 Nội dung trình Ban Giám đốc thông qua triển khai</p>
               </div>
-              <span class="text-xs font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">
+              <span class="text-xs font-mono font-bold text-purple-700 dark:text-purple-400 bg-purple-50 dark:bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">
                 Trình duyệt
               </span>
             </div>
 
-            <div class="p-4 sm:p-6 space-y-4" id="containerOctoberProposals">
+            <div class="p-5 sm:p-6 space-y-4" id="containerOctoberProposals">
               <!-- Injected via JS -->
             </div>
           </div>
@@ -346,71 +476,71 @@
         <!-- 2.1 Bốn Milestones Trọng Tâm Của 4 Tuần -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           
-          <div class="p-4 rounded-xl bg-slate-900/80 border border-white/10 space-y-2 glass-card">
+          <div class="p-5 rounded-2xl glass-card space-y-2.5">
             <div class="flex items-center justify-between">
-              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">TUẦN 1 (02/11 - 07/11)</span>
-              <i data-lucide="flag" class="w-4 h-4 text-blue-400"></i>
+              <span class="px-2.5 py-1 rounded text-xs font-mono font-bold bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-500/20">TUẦN 1 (02/11 - 07/11)</span>
+              <i data-lucide="flag" class="w-4 h-4 text-blue-500"></i>
             </div>
-            <h4 class="text-xs font-bold text-white">Khởi Động & Duyệt Lịch Zalo</h4>
-            <p class="text-[11px] text-slate-400 leading-relaxed">Họp giao ban, duyệt Lịch biên tập các kênh và kích hoạt tài khoản AI dựng ảnh bối cảnh gỗ.</p>
+            <h4 class="text-sm font-bold text-slate-900 dark:text-white">Khởi Động & Duyệt Lịch Zalo</h4>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Họp giao ban, duyệt Lịch biên tập các kênh và kích hoạt tài khoản AI dựng ảnh bối cảnh gỗ.</p>
           </div>
 
-          <div class="p-4 rounded-xl bg-slate-900/80 border border-white/10 space-y-2 glass-card">
+          <div class="p-5 rounded-2xl glass-card space-y-2.5">
             <div class="flex items-center justify-between">
-              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">TUẦN 2 (09/11 - 14/11)</span>
-              <i data-lucide="award" class="w-4 h-4 text-amber-400"></i>
+              <span class="px-2.5 py-1 rounded text-xs font-mono font-bold bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20">TUẦN 2 (09/11 - 14/11)</span>
+              <i data-lucide="award" class="w-4 h-4 text-amber-500"></i>
             </div>
-            <h4 class="text-xs font-bold text-white">Bàn Giao Master Catalog V2</h4>
-            <p class="text-[11px] text-slate-400 leading-relaxed">Xuất bản bộ ảnh bối cảnh AI chất lượng cao & Bàn giao bản PDF Master Catalog V2 (Hạn 14/11).</p>
+            <h4 class="text-sm font-bold text-slate-900 dark:text-white">Bàn Giao Master Catalog V2</h4>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Xuất bản bộ ảnh bối cảnh AI chất lượng cao & Bàn giao bản PDF Master Catalog V2 (Hạn 14/11).</p>
           </div>
 
-          <div class="p-4 rounded-xl bg-slate-900/80 border border-white/10 space-y-2 glass-card">
+          <div class="p-5 rounded-2xl glass-card space-y-2.5">
             <div class="flex items-center justify-between">
-              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">TUẦN 3 (16/11 - 21/11)</span>
-              <i data-lucide="globe" class="w-4 h-4 text-emerald-400"></i>
+              <span class="px-2.5 py-1 rounded text-xs font-mono font-bold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20">TUẦN 3 (16/11 - 21/11)</span>
+              <i data-lucide="globe" class="w-4 h-4 text-emerald-500"></i>
             </div>
-            <h4 class="text-xs font-bold text-white">Chuẩn Hóa Thông Số Thớt & Butcher</h4>
-            <p class="text-[11px] text-slate-400 leading-relaxed">Cập nhật thông số Thớt gỗ keo & Mặt bàn Butcher Block lên gemmywood.vn; SEO tiếng Anh xuất khẩu.</p>
+            <h4 class="text-sm font-bold text-slate-900 dark:text-white">Chuẩn Hóa Thông Số Thớt & Butcher</h4>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Cập nhật thông số Thớt gỗ keo & Mặt bàn Butcher Block lên gemmywood.vn; SEO tiếng Anh xuất khẩu.</p>
           </div>
 
-          <div class="p-4 rounded-xl bg-slate-900/80 border border-white/10 space-y-2 glass-card">
+          <div class="p-5 rounded-2xl glass-card space-y-2.5">
             <div class="flex items-center justify-between">
-              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">TUẦN 4 (23/11 - 28/11)</span>
-              <i data-lucide="video" class="w-4 h-4 text-purple-400"></i>
+              <span class="px-2.5 py-1 rounded text-xs font-mono font-bold bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-500/20">TUẦN 4 (23/11 - 28/11)</span>
+              <i data-lucide="video" class="w-4 h-4 text-purple-500"></i>
             </div>
-            <h4 class="text-xs font-bold text-white">SEO Quốc Tế & Video Cont Cảng Hải Phòng</h4>
-            <p class="text-[11px] text-slate-400 leading-relaxed">Video đóng cont 40ft tại cảng Hải Phòng, kiểm tra form B2B website và lập báo cáo tháng 11.</p>
+            <h4 class="text-sm font-bold text-slate-900 dark:text-white">SEO Quốc Tế & Video Cont Hải Phòng</h4>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Video đóng cont 40ft tại cảng Hải Phòng, kiểm tra form B2B website và lập báo cáo tháng 11.</p>
           </div>
 
         </div>
 
         <!-- 2.2 Bảng Mục Tiêu Trọng Tâm Tháng 11 -->
-        <div class="rounded-2xl bg-slate-900/60 border border-white/10 overflow-hidden glass-card">
-          <div class="p-4 sm:px-6 border-b border-white/10 flex items-center justify-between">
+        <div class="rounded-2xl glass-card overflow-hidden">
+          <div class="p-5 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
             <div>
-              <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <i data-lucide="target" class="w-4 h-4 text-amber-400"></i>
+              <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
+                <i data-lucide="target" class="w-5 h-5 text-amber-500"></i>
                 2.1 MỤC TIÊU TRỌNG TÂM THÁNG 11/2026
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">07 Mục tiêu công tác trọng yếu cam kết sản phẩm đầu ra</p>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">07 Mục tiêu công tác trọng yếu cam kết sản phẩm đầu ra</p>
             </div>
-            <span class="text-xs font-mono text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/20">
+            <span class="text-xs sm:text-sm font-mono font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
               07 Mục tiêu
             </span>
           </div>
 
           <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-slate-950/60 text-slate-400 font-mono uppercase text-[11px] border-b border-white/10">
+            <table class="w-full text-left text-sm">
+              <thead class="table-header text-xs uppercase font-mono font-bold tracking-wider">
                 <tr>
-                  <th class="py-3 px-4 w-12 text-center">STT</th>
-                  <th class="py-3 px-4 w-60">Hạng Mục</th>
-                  <th class="py-3 px-4">Mục Tiêu Công Việc Cụ Thể</th>
-                  <th class="py-3 px-4 w-64">Sản Phẩm Đầu Ra Cam Kết</th>
-                  <th class="py-3 px-4 w-36 text-center">Thời Hạn</th>
+                  <th class="py-3.5 px-4 w-14 text-center">STT</th>
+                  <th class="py-3.5 px-5 w-72">Hạng Mục Nhiệm Vụ</th>
+                  <th class="py-3.5 px-5">Mục Tiêu Công Việc Cụ Thể</th>
+                  <th class="py-3.5 px-5 w-80">Sản Phẩm Đầu Ra Cam Kết</th>
+                  <th class="py-3.5 px-4 w-44 text-center">Thời Hạn</th>
                 </tr>
               </thead>
-              <tbody id="tableNovemberFocus" class="divide-y divide-white/5">
+              <tbody id="tableNovemberFocus" class="divide-y divide-slate-100 dark:divide-white/5">
                 <!-- Injected via JS -->
               </tbody>
             </table>
@@ -418,41 +548,41 @@
         </div>
 
         <!-- 2.3 Bảng Lộ Trình 4 Tuần Chi Tiết (27 đầu việc) -->
-        <div class="rounded-2xl bg-slate-900/60 border border-white/10 overflow-hidden glass-card">
-          <div class="p-4 sm:px-6 border-b border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div class="rounded-2xl glass-card overflow-hidden">
+          <div class="p-5 border-b border-slate-200 dark:border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
-              <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <i data-lucide="list-checks" class="w-4 h-4 text-purple-400"></i>
+              <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
+                <i data-lucide="list-checks" class="w-5 h-5 text-purple-600 dark:text-purple-400"></i>
                 2.2 LỘ TRÌNH THỰC HIỆN CHI TIẾT 4 TUẦN THÁNG 11/2026 (27 ĐẦU VIỆC TÁC NGHIỆP)
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Bóc tách chi tiết từng nhiệm vụ thực tế từ 02/11 đến 28/11/2026</p>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Bóc tách chi tiết từng nhiệm vụ thực tế từ 02/11 đến 28/11/2026</p>
             </div>
 
             <!-- Week Filter Pills -->
-            <div class="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-white/10 text-xs font-medium">
-              <button onclick="filterNovPlan('ALL')" id="filterPlanAll" class="px-2.5 py-1 rounded-lg bg-slate-800 text-white">Tất cả (27)</button>
-              <button onclick="filterNovPlan('Tuần 1')" id="filterPlanW1" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">Tuần 1</button>
-              <button onclick="filterNovPlan('Tuần 2')" id="filterPlanW2" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">Tuần 2 (V2)</button>
-              <button onclick="filterNovPlan('Tuần 3')" id="filterPlanW3" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">Tuần 3</button>
-              <button onclick="filterNovPlan('Tuần 4')" id="filterPlanW4" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">Tuần 4</button>
+            <div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-950 p-1.5 rounded-xl border border-slate-200 dark:border-white/10 text-xs sm:text-sm font-semibold">
+              <button onclick="filterNovPlan('ALL')" id="filterPlanAll" class="px-3 py-1.5 rounded-lg bg-slate-900 dark:bg-slate-800 text-white">Tất cả (27)</button>
+              <button onclick="filterNovPlan('Tuần 1')" id="filterPlanW1" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Tuần 1</button>
+              <button onclick="filterNovPlan('Tuần 2')" id="filterPlanW2" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Tuần 2 (V2)</button>
+              <button onclick="filterNovPlan('Tuần 3')" id="filterPlanW3" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Tuần 3</button>
+              <button onclick="filterNovPlan('Tuần 4')" id="filterPlanW4" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Tuần 4</button>
             </div>
           </div>
 
           <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-slate-950/60 text-slate-400 font-mono uppercase text-[11px] border-b border-white/10">
+            <table class="w-full text-left text-sm">
+              <thead class="table-header text-xs uppercase font-mono font-bold tracking-wider">
                 <tr>
-                  <th class="py-3 px-3 w-12 text-center">STT</th>
-                  <th class="py-3 px-3 w-28">Mã ID</th>
-                  <th class="py-3 px-4 w-36">Tuần Triển Khai</th>
-                  <th class="py-3 px-4 w-52">Nhiệm Vụ</th>
-                  <th class="py-3 px-4">Nội Dung Tác Nghiệp Chi Tiết</th>
-                  <th class="py-3 px-4 w-60">Sản Phẩm Bàn Giao</th>
-                  <th class="py-3 px-4 w-32 text-center">Thời Hạn</th>
-                  <th class="py-3 px-4 w-28 text-center">Trạng Thái</th>
+                  <th class="py-3.5 px-3 w-14 text-center">STT</th>
+                  <th class="py-3.5 px-3 w-32 font-mono">Mã ID</th>
+                  <th class="py-3.5 px-4 w-44">Tuần Triển Khai</th>
+                  <th class="py-3.5 px-5 w-64">Nhiệm Vụ</th>
+                  <th class="py-3.5 px-5">Nội Dung Tác Nghiệp Chi Tiết</th>
+                  <th class="py-3.5 px-5 w-72">Sản Phẩm Bàn Giao</th>
+                  <th class="py-3.5 px-4 w-40 text-center">Thời Hạn</th>
+                  <th class="py-3.5 px-4 w-32 text-center">Trạng Thái</th>
                 </tr>
               </thead>
-              <tbody id="tableNovemberRoadmap" class="divide-y divide-white/5">
+              <tbody id="tableNovemberRoadmap" class="divide-y divide-slate-100 dark:divide-white/5">
                 <!-- Injected via JS -->
               </tbody>
             </table>
@@ -460,21 +590,21 @@
         </div>
 
         <!-- 2.4 Dự Toán Ngân Sách Marketing B2B Tháng 11 -->
-        <div class="rounded-2xl bg-slate-900/60 border border-white/10 overflow-hidden glass-card">
-          <div class="p-4 sm:px-6 border-b border-white/10 flex items-center justify-between">
+        <div class="rounded-2xl glass-card overflow-hidden">
+          <div class="p-5 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
             <div>
-              <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <i data-lucide="wallet" class="w-4 h-4 text-emerald-400"></i>
+              <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
+                <i data-lucide="wallet" class="w-5 h-5 text-emerald-600 dark:text-emerald-400"></i>
                 2.3 DỰ TOÁN NGÂN SÁCH MARKETING B2B THÁNG 11/2026
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Đề xuất kinh phí công cụ AI và phần mềm hỗ trợ xuất khẩu</p>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Đề xuất kinh phí công cụ AI và phần mềm hỗ trợ xuất khẩu</p>
             </div>
-            <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 font-bold">
+            <span class="text-xs sm:text-sm font-mono font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-3.5 py-1.5 rounded-full border border-emerald-500/20">
               Tổng Ngân Sách: 800.000 VNĐ / Tháng
             </span>
           </div>
 
-          <div class="p-4 sm:p-6" id="containerNovemberBudget">
+          <div class="p-6" id="containerNovemberBudget">
             <!-- Injected via JS -->
           </div>
         </div>
@@ -488,50 +618,50 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           
           <!-- Doughnut Chart -->
-          <div class="rounded-2xl bg-slate-900/60 border border-white/10 p-5 glass-card flex flex-col justify-between">
+          <div class="rounded-2xl glass-card p-6 flex flex-col justify-between">
             <div>
-              <h4 class="text-xs font-bold text-white uppercase tracking-wider font-mono flex items-center gap-2 mb-1">
-                <i data-lucide="pie-chart" class="w-4 h-4 text-blue-400"></i>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono flex items-center gap-2 mb-1">
+                <i data-lucide="pie-chart" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
                 Cơ Cấu Tỷ Trọng Giờ Công (192h/Tháng)
               </h4>
-              <p class="text-[11px] text-slate-400">Phân bổ năng lực theo 11 nhóm nhiệm vụ chuyên môn</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Phân bổ năng lực theo 11 nhóm nhiệm vụ chuyên môn</p>
             </div>
-            <div class="relative h-56 flex items-center justify-center my-4">
+            <div class="relative h-64 flex items-center justify-center my-4">
               <canvas id="workloadDoughnutChart"></canvas>
             </div>
-            <div class="text-[11px] text-slate-400 text-center font-mono">
+            <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 text-center font-mono">
               Tổng định mức: <strong>48 Giờ / Tuần = 192 Giờ / Tháng</strong>
             </div>
           </div>
 
           <!-- Bảng 11 Nhóm Phân Bổ Định Mức Năng Lực -->
-          <div class="lg:col-span-2 rounded-2xl bg-slate-900/60 border border-white/10 overflow-hidden glass-card flex flex-col justify-between">
-            <div class="p-4 border-b border-white/10 flex items-center justify-between">
+          <div class="lg:col-span-2 rounded-2xl glass-card overflow-hidden flex flex-col justify-between">
+            <div class="p-5 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
               <div>
-                <h4 class="text-xs font-bold text-white uppercase tracking-wider font-mono flex items-center gap-2">
-                  <i data-lucide="sliders" class="w-4 h-4 text-blue-400"></i>
+                <h4 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono flex items-center gap-2">
+                  <i data-lucide="sliders" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
                   3.1 BẢNG PHÂN BỔ ĐỊNH MỨC NĂNG LỰC CHUYÊN MÔN
                 </h4>
-                <p class="text-[11px] text-slate-400 mt-0.5">Tiêu chuẩn định mức 11 nhóm công việc Marketing & B2B</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Tiêu chuẩn định mức 11 nhóm công việc Marketing & B2B</p>
               </div>
-              <span class="text-[11px] font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
+              <span class="text-xs font-mono font-bold text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 px-3 py-1 rounded border border-blue-500/20">
                 100% Năng Lực
               </span>
             </div>
 
             <div class="overflow-x-auto flex-1">
-              <table class="w-full text-left text-xs">
-                <thead class="bg-slate-950/60 text-slate-400 font-mono uppercase text-[10px] border-b border-white/10">
+              <table class="w-full text-left text-sm">
+                <thead class="table-header text-xs uppercase font-mono font-bold tracking-wider">
                   <tr>
-                    <th class="py-2.5 px-3 w-10 text-center">STT</th>
-                    <th class="py-2.5 px-3">Hạng Mục Nhiệm Vụ</th>
-                    <th class="py-2.5 px-3 text-center font-mono w-20">Giờ/Tuần</th>
-                    <th class="py-2.5 px-3 text-center font-mono w-20">Giờ/Tháng</th>
-                    <th class="py-2.5 px-3 text-center font-mono w-20">Tỷ Trọng</th>
-                    <th class="py-2.5 px-3 w-44">Ghi Chú</th>
+                    <th class="py-3 px-3 w-12 text-center">STT</th>
+                    <th class="py-3 px-4">Hạng Mục Nhiệm Vụ</th>
+                    <th class="py-3 px-3 text-center font-mono w-24">Giờ/Tuần</th>
+                    <th class="py-3 px-3 text-center font-mono w-24">Giờ/Tháng</th>
+                    <th class="py-3 px-3 text-center font-mono w-24">Tỷ Trọng</th>
+                    <th class="py-3 px-4 w-52">Ghi Chú</th>
                   </tr>
                 </thead>
-                <tbody id="tableWorkloadAllocations" class="divide-y divide-white/5">
+                <tbody id="tableWorkloadAllocations" class="divide-y divide-slate-100 dark:divide-white/5">
                   <!-- Injected via JS -->
                 </tbody>
               </table>
@@ -541,41 +671,41 @@
         </div>
 
         <!-- 3.2 Bảng 23 Slot Thời Gian Biểu Chi Tiết Theo Ngày (Time-blocking) -->
-        <div class="rounded-2xl bg-slate-900/60 border border-white/10 overflow-hidden glass-card">
-          <div class="p-4 sm:px-6 border-b border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div class="rounded-2xl glass-card overflow-hidden">
+          <div class="p-5 border-b border-slate-200 dark:border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
-              <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <i data-lucide="clock-4" class="w-4 h-4 text-emerald-400"></i>
+              <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
+                <i data-lucide="clock-4" class="w-5 h-5 text-emerald-600 dark:text-emerald-400"></i>
                 3.2 THỜI GIAN BIỂU LÀM VIỆC CHI TIẾT THEO NGÀY (DAILY TIME-BLOCKING: 08:00 – 17:00)
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Lịch hoạt động cố định từ Thứ Hai đến Thứ Bảy hàng tuần (23 ca làm việc)</p>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Lịch hoạt động cố định từ Thứ Hai đến Thứ Bảy hàng tuần (23 ca làm việc)</p>
             </div>
 
             <!-- Day Filter Pills -->
-            <div class="flex flex-wrap items-center gap-1 bg-slate-950 p-1 rounded-xl border border-white/10 text-xs font-medium">
-              <button onclick="filterTimeblocks('ALL')" id="filterDayAll" class="px-2 py-1 rounded-lg bg-slate-800 text-white">Tất cả (23)</button>
-              <button onclick="filterTimeblocks('Thứ Hai')" id="filterDay2" class="px-2 py-1 rounded-lg text-slate-400 hover:text-white">Thứ 2</button>
-              <button onclick="filterTimeblocks('Thứ Ba')" id="filterDay3" class="px-2 py-1 rounded-lg text-slate-400 hover:text-white">Thứ 3</button>
-              <button onclick="filterTimeblocks('Thứ Tư')" id="filterDay4" class="px-2 py-1 rounded-lg text-slate-400 hover:text-white">Thứ 4</button>
-              <button onclick="filterTimeblocks('Thứ Năm')" id="filterDay5" class="px-2 py-1 rounded-lg text-slate-400 hover:text-white">Thứ 5</button>
-              <button onclick="filterTimeblocks('Thứ Sáu')" id="filterDay6" class="px-2 py-1 rounded-lg text-slate-400 hover:text-white">Thứ 6</button>
-              <button onclick="filterTimeblocks('Thứ Bảy')" id="filterDay7" class="px-2 py-1 rounded-lg text-slate-400 hover:text-white">Thứ 7</button>
+            <div class="flex flex-wrap items-center gap-1.5 bg-slate-100 dark:bg-slate-950 p-1.5 rounded-xl border border-slate-200 dark:border-white/10 text-xs sm:text-sm font-semibold">
+              <button onclick="filterTimeblocks('ALL')" id="filterDayAll" class="px-3 py-1.5 rounded-lg bg-slate-900 dark:bg-slate-800 text-white">Tất cả (23)</button>
+              <button onclick="filterTimeblocks('Thứ Hai')" id="filterDay2" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Thứ 2</button>
+              <button onclick="filterTimeblocks('Thứ Ba')" id="filterDay3" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Thứ 3</button>
+              <button onclick="filterTimeblocks('Thứ Tư')" id="filterDay4" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Thứ 4</button>
+              <button onclick="filterTimeblocks('Thứ Năm')" id="filterDay5" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Thứ 5</button>
+              <button onclick="filterTimeblocks('Thứ Sáu')" id="filterDay6" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Thứ 6</button>
+              <button onclick="filterTimeblocks('Thứ Bảy')" id="filterDay7" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Thứ 7</button>
             </div>
           </div>
 
           <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-slate-950/60 text-slate-400 font-mono uppercase text-[11px] border-b border-white/10">
+            <table class="w-full text-left text-sm">
+              <thead class="table-header text-xs uppercase font-mono font-bold tracking-wider">
                 <tr>
-                  <th class="py-3 px-4 w-24">Thứ</th>
-                  <th class="py-3 px-4 w-36 font-mono">Khung Giờ</th>
-                  <th class="py-3 px-4 w-20 text-center font-mono">Số Giờ</th>
-                  <th class="py-3 px-4">Nội Dung Tác Nghiệp Chi Tiết</th>
-                  <th class="py-3 px-4 w-64">Sản Phẩm Bàn Giao</th>
-                  <th class="py-3 px-4 w-44">Ghi Chú</th>
+                  <th class="py-3.5 px-4 w-28">Thứ</th>
+                  <th class="py-3.5 px-4 w-44 font-mono font-bold">Khung Giờ</th>
+                  <th class="py-3.5 px-4 w-24 text-center font-mono font-bold">Số Giờ</th>
+                  <th class="py-3.5 px-5">Nội Dung Tác Nghiệp Chi Tiết</th>
+                  <th class="py-3.5 px-5 w-80">Sản Phẩm Bàn Giao</th>
+                  <th class="py-3.5 px-4 w-52">Ghi Chú</th>
                 </tr>
               </thead>
-              <tbody id="tableTimeblocks" class="divide-y divide-white/5">
+              <tbody id="tableTimeblocks" class="divide-y divide-slate-100 dark:divide-white/5">
                 <!-- Injected via JS -->
               </tbody>
             </table>
@@ -589,74 +719,74 @@
   </main>
 
   <!-- ==================== SLIDE-OVER INTELLIGENCE DRAWER 360° ==================== -->
-  <div id="drawerBackdrop" onclick="closeDrawer()" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden transition-opacity opacity-0"></div>
-  <aside id="drawerPanel" class="fixed top-0 right-0 h-full w-full max-w-lg bg-slate-900 border-l border-white/10 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between overflow-hidden">
+  <div id="drawerBackdrop" onclick="closeDrawer()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden transition-opacity opacity-0"></div>
+  <aside id="drawerPanel" class="fixed top-0 right-0 h-full w-full max-w-xl bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-white/10 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between overflow-hidden">
     
     <!-- Drawer Header -->
-    <div class="p-5 border-b border-white/10 flex items-start justify-between bg-slate-950/70">
+    <div class="p-6 border-b border-slate-200 dark:border-white/10 flex items-start justify-between bg-slate-50 dark:bg-slate-950/70">
       <div>
-        <div class="flex items-center gap-2 mb-1">
-          <span id="drawerBadgeSection" class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-brand-500/10 text-brand-400 border border-brand-500/20">Phân hệ</span>
-          <span id="drawerBadgeId" class="text-xs font-mono text-slate-400">ID: ---</span>
+        <div class="flex items-center gap-2.5 mb-1.5">
+          <span id="drawerBadgeSection" class="px-2.5 py-0.5 rounded text-xs font-mono uppercase bg-emerald-50 dark:bg-brand-500/10 text-emerald-700 dark:text-brand-400 border border-emerald-200 dark:border-brand-500/20 font-bold">Phân hệ</span>
+          <span id="drawerBadgeId" class="text-xs font-mono text-slate-500 dark:text-slate-400 font-semibold">ID: ---</span>
         </div>
-        <h3 id="drawerTitle" class="text-base font-bold text-white leading-snug">Chi tiết mục công việc</h3>
+        <h3 id="drawerTitle" class="text-lg font-bold text-slate-900 dark:text-white leading-snug">Chi tiết mục công việc</h3>
       </div>
-      <button onclick="closeDrawer()" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
+      <button onclick="closeDrawer()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
     </div>
 
     <!-- Drawer Body -->
-    <div class="p-6 overflow-y-auto space-y-6 text-xs flex-1">
+    <div class="p-6 overflow-y-auto space-y-6 text-sm flex-1">
       
       <!-- Box 1: Nội dung tác nghiệp chi tiết -->
       <div class="space-y-2">
-        <label class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] flex items-center gap-1.5">
-          <i data-lucide="file-text" class="w-3.5 h-3.5 text-brand-400"></i>
+        <label class="text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider text-xs flex items-center gap-1.5 font-mono">
+          <i data-lucide="file-text" class="w-4 h-4 text-emerald-600 dark:text-brand-400"></i>
           Nội Dung Tác Nghiệp Chi Tiết / Cơ Sở Triển Khai
         </label>
-        <div id="drawerContent" class="p-4 rounded-xl bg-slate-950/60 border border-white/10 text-slate-200 leading-relaxed text-xs">
+        <div id="drawerContent" class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 leading-relaxed text-sm">
           ---
         </div>
       </div>
 
       <!-- Box 2: Sản phẩm đầu ra / Bàn giao -->
       <div class="space-y-2">
-        <label class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] flex items-center gap-1.5">
-          <i data-lucide="package-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+        <label class="text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider text-xs flex items-center gap-1.5 font-mono">
+          <i data-lucide="package-check" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
           Sản Phẩm Đầu Ra / Tiêu Chuẩn Nghiệm Thu
         </label>
-        <div id="drawerOutput" class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-900/30 text-emerald-300 font-medium leading-relaxed text-xs">
+        <div id="drawerOutput" class="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/30 text-emerald-800 dark:text-emerald-300 font-medium leading-relaxed text-sm">
           ---
         </div>
       </div>
 
       <!-- Box 3: Thông số thực thi -->
-      <div class="grid grid-cols-2 gap-3">
-        <div class="p-3 rounded-xl bg-slate-950/40 border border-white/5 space-y-1">
-          <span class="text-slate-400 text-[10px] uppercase font-mono">Thời Hạn / Khung Giờ</span>
-          <div id="drawerDeadline" class="text-slate-200 font-semibold text-xs">---</div>
+      <div class="grid grid-cols-2 gap-3.5">
+        <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-white/5 space-y-1">
+          <span class="text-slate-500 dark:text-slate-400 text-xs uppercase font-mono font-semibold">Thời Hạn / Khung Giờ</span>
+          <div id="drawerDeadline" class="text-slate-900 dark:text-slate-200 font-bold text-sm">---</div>
         </div>
-        <div class="p-3 rounded-xl bg-slate-950/40 border border-white/5 space-y-1">
-          <span class="text-slate-400 text-[10px] uppercase font-mono">Trạng Thái Thực Thi</span>
-          <div id="drawerStatus" class="text-brand-400 font-semibold text-xs">---</div>
+        <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-white/5 space-y-1">
+          <span class="text-slate-500 dark:text-slate-400 text-xs uppercase font-mono font-semibold">Trạng Thái Thực Thi</span>
+          <div id="drawerStatus" class="text-emerald-700 dark:text-brand-400 font-bold text-sm">---</div>
         </div>
-        <div class="p-3 rounded-xl bg-slate-950/40 border border-white/5 space-y-1">
-          <span class="text-slate-400 text-[10px] uppercase font-mono">Phân Loại / Nhóm</span>
-          <div id="drawerGroup" class="text-slate-300 font-medium text-xs">---</div>
+        <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-white/5 space-y-1">
+          <span class="text-slate-500 dark:text-slate-400 text-xs uppercase font-mono font-semibold">Phân Loại / Nhóm</span>
+          <div id="drawerGroup" class="text-slate-800 dark:text-slate-300 font-semibold text-sm">---</div>
         </div>
-        <div class="p-3 rounded-xl bg-slate-950/40 border border-white/5 space-y-1">
-          <span class="text-slate-400 text-[10px] uppercase font-mono">Ghi Chú Tiến Độ</span>
-          <div id="drawerNote" class="text-slate-400 text-xs">---</div>
+        <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-white/5 space-y-1">
+          <span class="text-slate-500 dark:text-slate-400 text-xs uppercase font-mono font-semibold">Ghi Chú Tiến Độ</span>
+          <div id="drawerNote" class="text-slate-600 dark:text-slate-400 text-sm">---</div>
         </div>
       </div>
 
     </div>
 
     <!-- Drawer Footer -->
-    <div class="p-4 border-t border-white/10 bg-slate-950/70 flex items-center justify-between">
-      <span class="text-[11px] text-slate-500 font-mono">Gemmy Wood Operations ERP</span>
-      <button onclick="closeDrawer()" class="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-xs transition">
+    <div class="p-4 border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-950/70 flex items-center justify-between">
+      <span class="text-xs text-slate-500 font-mono">Gemmy Wood Operations ERP</span>
+      <button onclick="closeDrawer()" class="px-5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-xs sm:text-sm transition">
         Đóng cửa sổ
       </button>
     </div>
@@ -664,25 +794,25 @@
   </aside>
 
   <!-- ==================== OMNIBAR SEARCH MODAL (⌘K) ==================== -->
-  <div id="searchModal" onclick="closeSearchModalOnBackdrop(event)" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden flex items-start justify-center pt-20 px-4">
-    <div class="w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[75vh]">
+  <div id="searchModal" onclick="closeSearchModalOnBackdrop(event)" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-start justify-center pt-20 px-4">
+    <div class="w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[75vh]">
       
       <!-- Input Search -->
-      <div class="p-4 border-b border-white/10 flex items-center gap-3 bg-slate-950/80">
+      <div class="p-4 border-b border-slate-200 dark:border-white/10 flex items-center gap-3 bg-slate-50 dark:bg-slate-950/80">
         <i data-lucide="search" class="w-5 h-5 text-slate-400"></i>
-        <input type="text" id="omniSearchInput" oninput="handleOmniSearch(this.value)" placeholder="Tìm kiếm nhanh tên công việc, sản phẩm đầu ra, deadline, từ khóa..." class="w-full bg-transparent text-white placeholder-slate-500 text-sm focus:outline-none font-medium">
-        <kbd onclick="closeSearchModal()" class="px-2 py-0.5 rounded bg-slate-800 text-[11px] font-mono text-slate-400 border border-slate-700 cursor-pointer">ESC</kbd>
+        <input type="text" id="omniSearchInput" oninput="handleOmniSearch(this.value)" placeholder="Tìm kiếm nhanh tên công việc, sản phẩm đầu ra, deadline, từ khóa..." class="w-full bg-transparent text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none font-medium">
+        <kbd onclick="closeSearchModal()" class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-xs font-mono text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 cursor-pointer">ESC</kbd>
       </div>
 
       <!-- Search Results List -->
-      <div id="omniSearchResults" class="overflow-y-auto p-3 space-y-1 divide-y divide-white/5 text-xs">
-        <div class="p-4 text-center text-slate-500">Nhập từ khóa bất kỳ để bắt đầu tìm kiếm...</div>
+      <div id="omniSearchResults" class="overflow-y-auto p-3 space-y-1 divide-y divide-slate-100 dark:divide-white/5 text-sm">
+        <div class="p-4 text-center text-slate-400">Nhập từ khóa bất kỳ để bắt đầu tìm kiếm...</div>
       </div>
 
       <!-- Modal Footer -->
-      <div class="p-3 border-t border-white/10 bg-slate-950/60 flex items-center justify-between text-[11px] text-slate-400">
-        <span>Sử dụng phím tắt <kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono">⌘K</kbd> hoặc <kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono">Ctrl+K</kbd></span>
-        <span>Nhấn <kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono">ESC</kbd> để đóng</span>
+      <div class="p-3 border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-950/60 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+        <span>Sử dụng phím tắt <kbd class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono">⌘K</kbd> hoặc <kbd class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono">Ctrl+K</kbd></span>
+        <span>Nhấn <kbd class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono">ESC</kbd> để đóng</span>
       </div>
 
     </div>
@@ -699,6 +829,7 @@
     let currentNovFilter = 'ALL';
     let currentTimeblockFilter = 'ALL';
     let doughnutChart = null;
+    let octoberChart = null;
 
     document.addEventListener('DOMContentLoaded', () => {
       renderAll(currentData);
@@ -709,6 +840,7 @@
     // ==================== RENDER ALL SECTIONS ====================
     function renderAll(data) {
       renderKPIs(data);
+      renderOctoberCharts(data.tab_october || {});
       renderOctoberCompleted(data.tab_october.completed || []);
       renderOctoberPending(data.tab_october.pending || []);
       renderOctoberProposals(data.tab_october.proposals || []);
@@ -729,21 +861,67 @@
       document.getElementById('kpiBudget').textContent = kpis.budget_total_vnd || '800.000 VNĐ';
     }
 
-    // ==================== TAB 1 RENDERING ====================
+    // ==================== TAB 1 RENDERING (THÁNG 10 & CHART) ====================
+    function renderOctoberCharts(tabOctober) {
+      const ctx = document.getElementById('octoberCompletionChart');
+      if (!ctx) return;
+
+      const completedCount = (tabOctober.completed || []).length || 7;
+      const pendingCount = (tabOctober.pending || []).length || 2;
+
+      if (octoberChart) octoberChart.destroy();
+
+      octoberChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Đã Hoàn Thành (7 việc)', 'Tồn Đọng / Cần Khắc Phục (2 việc)'],
+          datasets: [{
+            data: [completedCount, pendingCount],
+            backgroundColor: ['#10b981', '#f59e0b'],
+            borderWidth: 0,
+            hoverOffset: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                font: { family: '"Plus Jakarta Sans"', size: 12, weight: '600' },
+                padding: 12
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(c) {
+                  const total = completedCount + pendingCount;
+                  const pct = ((c.parsed / total) * 100).toFixed(1);
+                  return ` ${c.label}: ${c.parsed} mục (${pct}%)`;
+                }
+              }
+            }
+          },
+          cutout: '70%'
+        }
+      });
+    }
+
     function renderOctoberCompleted(items) {
       const tbody = document.getElementById('tableOctoberCompleted');
       if (!tbody) return;
       tbody.innerHTML = items.map(t => `
-        <tr onclick="openDrawerByRecord('${t.id}')" class="hover:bg-slate-800/40 cursor-pointer transition">
-          <td class="py-3 px-4 text-center font-mono text-slate-400">${t.stt}</td>
-          <td class="py-3 px-4 font-bold text-white flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        <tr onclick="openDrawerByRecord('${t.id}')" class="table-row hover:bg-slate-50 dark:hover:bg-slate-800/40 cursor-pointer transition">
+          <td class="py-3.5 px-4 text-center font-mono text-slate-500 dark:text-slate-400 font-semibold">${t.stt}</td>
+          <td class="py-3.5 px-5 font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
             ${t.title}
           </td>
-          <td class="py-3 px-4 text-slate-300 leading-relaxed">${t.content}</td>
-          <td class="py-3 px-4 font-medium text-emerald-300/90 leading-relaxed">${t.output}</td>
-          <td class="py-3 px-4 text-center">
-            <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 whitespace-nowrap">
+          <td class="py-3.5 px-5 text-slate-700 dark:text-slate-300 leading-relaxed">${t.content}</td>
+          <td class="py-3.5 px-5 font-semibold text-emerald-800 dark:text-emerald-300/90 leading-relaxed">${t.output}</td>
+          <td class="py-3.5 px-4 text-center">
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-500/10 text-emerald-800 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/20 whitespace-nowrap">
               ${t.status}
             </span>
           </td>
@@ -755,22 +933,22 @@
       const container = document.getElementById('containerOctoberPending');
       if (!container) return;
       container.innerHTML = items.map(p => `
-        <div onclick="openDrawerByRecord('${p.id}')" class="p-4 rounded-xl bg-slate-950/60 border border-white/5 hover:border-amber-500/30 cursor-pointer transition space-y-2">
+        <div onclick="openDrawerByRecord('${p.id}')" class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-white/5 hover:border-amber-500/40 cursor-pointer transition space-y-2.5 shadow-sm">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-white text-xs flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            <span class="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
               #${p.stt} — ${p.title}
             </span>
-            <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">${p.status}</span>
+            <span class="text-xs font-mono font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 px-2.5 py-1 rounded">${p.status}</span>
           </div>
-          <div class="text-[11px] text-slate-400">
-            <strong>Thực trạng:</strong> ${p.status_real}
+          <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+            <strong class="text-slate-800 dark:text-slate-200">Thực trạng:</strong> ${p.status_real}
           </div>
-          <div class="text-[11px] text-slate-400">
-            <strong>Nguyên nhân:</strong> ${p.root_cause}
+          <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+            <strong class="text-slate-800 dark:text-slate-200">Nguyên nhân cốt lõi:</strong> ${p.root_cause}
           </div>
-          <div class="text-[11px] text-emerald-400/90 bg-emerald-950/20 p-2.5 rounded-lg border border-emerald-900/30 leading-relaxed">
-            <strong>Giải pháp T11:</strong> ${p.solution}
+          <div class="text-xs sm:text-sm text-emerald-800 dark:text-emerald-300/90 bg-emerald-50 dark:bg-emerald-950/20 p-3 rounded-xl border border-emerald-200 dark:border-emerald-900/30 leading-relaxed font-medium">
+            <strong class="text-emerald-900 dark:text-emerald-200 font-bold">Giải pháp Tháng 11:</strong> ${p.solution}
           </div>
         </div>
       `).join('');
@@ -780,39 +958,39 @@
       const container = document.getElementById('containerOctoberProposals');
       if (!container) return;
       container.innerHTML = items.map(pr => `
-        <div onclick="openDrawerByRecord('${pr.id}')" class="p-4 rounded-xl bg-slate-950/60 border border-white/5 hover:border-purple-500/30 cursor-pointer transition space-y-2">
+        <div onclick="openDrawerByRecord('${pr.id}')" class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-white/5 hover:border-purple-500/40 cursor-pointer transition space-y-2.5 shadow-sm">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-white text-xs flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+            <span class="font-bold text-slate-900 dark:text-white text-sm flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
               #${pr.stt}: ${pr.title}
             </span>
-            <span class="text-[10px] font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded font-semibold">${pr.budget}</span>
+            <span class="text-xs font-mono text-purple-700 dark:text-purple-400 bg-purple-50 dark:bg-purple-500/10 px-2.5 py-1 rounded font-bold">${pr.budget}</span>
           </div>
-          <div class="text-[11px] text-slate-300 leading-relaxed">
-            <strong>Căn cứ:</strong> ${pr.basis}
+          <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            <strong class="text-slate-800 dark:text-slate-200">Căn cứ triển khai:</strong> ${pr.basis}
           </div>
-          <div class="text-[11px] text-purple-300/90 bg-purple-950/20 p-2.5 rounded-lg border border-purple-900/30 flex items-center justify-between">
-            <span><strong>Thời hạn:</strong> ${pr.deadline}</span>
-            <span class="text-[10px] font-mono bg-purple-500/20 px-2 py-0.5 rounded">${pr.status}</span>
+          <div class="text-xs sm:text-sm text-purple-800 dark:text-purple-300/90 bg-purple-50 dark:bg-purple-950/20 p-3 rounded-xl border border-purple-200 dark:border-purple-900/30 flex items-center justify-between">
+            <span><strong>Thời hạn yêu cầu:</strong> ${pr.deadline}</span>
+            <span class="text-xs font-mono font-bold bg-purple-200 dark:bg-purple-500/20 px-2.5 py-0.5 rounded">${pr.status}</span>
           </div>
         </div>
       `).join('');
     }
 
-    // ==================== TAB 2 RENDERING ====================
+    // ==================== TAB 2 RENDERING (THÁNG 11) ====================
     function renderNovemberFocus(items) {
       const tbody = document.getElementById('tableNovemberFocus');
       if (!tbody) return;
       tbody.innerHTML = items.map(f => `
-        <tr onclick="openDrawerByRecord('${f.id}')" class="hover:bg-slate-800/40 cursor-pointer transition">
-          <td class="py-3 px-4 text-center font-mono text-slate-400">${f.stt}</td>
-          <td class="py-3 px-4 font-bold text-white flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+        <tr onclick="openDrawerByRecord('${f.id}')" class="table-row hover:bg-slate-50 dark:hover:bg-slate-800/40 cursor-pointer transition">
+          <td class="py-3.5 px-4 text-center font-mono text-slate-500 dark:text-slate-400 font-semibold">${f.stt}</td>
+          <td class="py-3.5 px-5 font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
             ${f.title}
           </td>
-          <td class="py-3 px-4 text-slate-300 leading-relaxed">${f.target}</td>
-          <td class="py-3 px-4 font-medium text-amber-300/90 leading-relaxed">${f.output}</td>
-          <td class="py-3 px-4 text-center font-mono text-slate-300 whitespace-nowrap">${f.deadline}</td>
+          <td class="py-3.5 px-5 text-slate-700 dark:text-slate-300 leading-relaxed">${f.target}</td>
+          <td class="py-3.5 px-5 font-semibold text-amber-800 dark:text-amber-300/90 leading-relaxed">${f.output}</td>
+          <td class="py-3.5 px-4 text-center font-mono text-slate-700 dark:text-slate-300 font-semibold whitespace-nowrap">${f.deadline}</td>
         </tr>
       `).join('');
     }
@@ -827,22 +1005,22 @@
       });
 
       tbody.innerHTML = filtered.map(t => `
-        <tr onclick="openDrawerByRecord('${t.id}')" class="hover:bg-slate-800/40 cursor-pointer transition">
-          <td class="py-3 px-3 text-center font-mono text-slate-400">${t.stt}</td>
-          <td class="py-3 px-3 font-mono text-purple-400 font-semibold">${t.id}</td>
-          <td class="py-3 px-4">
-            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-purple-500/10 text-purple-300 border border-purple-500/20 whitespace-nowrap">
+        <tr onclick="openDrawerByRecord('${t.id}')" class="table-row hover:bg-slate-50 dark:hover:bg-slate-800/40 cursor-pointer transition">
+          <td class="py-3.5 px-3 text-center font-mono text-slate-500 dark:text-slate-400 font-semibold">${t.stt}</td>
+          <td class="py-3.5 px-3 font-mono text-purple-700 dark:text-purple-400 font-bold">${t.id}</td>
+          <td class="py-3.5 px-4">
+            <span class="px-2.5 py-1 rounded text-xs font-mono font-bold bg-purple-100 dark:bg-purple-500/10 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-500/20 whitespace-nowrap">
               ${t.week}
             </span>
           </td>
-          <td class="py-3 px-4 font-bold text-white leading-snug">
+          <td class="py-3.5 px-5 font-bold text-slate-900 dark:text-white leading-snug">
             ${t.title}
           </td>
-          <td class="py-3 px-4 text-slate-300 leading-relaxed">${t.content}</td>
-          <td class="py-3 px-4 font-medium text-purple-300/90 leading-relaxed">${t.output}</td>
-          <td class="py-3 px-4 text-center font-mono text-slate-300 whitespace-nowrap">${t.deadline}</td>
-          <td class="py-3 px-4 text-center">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 whitespace-nowrap">
+          <td class="py-3.5 px-5 text-slate-700 dark:text-slate-300 leading-relaxed">${t.content}</td>
+          <td class="py-3.5 px-5 font-semibold text-purple-800 dark:text-purple-300/90 leading-relaxed">${t.output}</td>
+          <td class="py-3.5 px-4 text-center font-mono text-slate-700 dark:text-slate-300 font-semibold whitespace-nowrap">${t.deadline}</td>
+          <td class="py-3.5 px-4 text-center">
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 dark:bg-blue-500/10 text-blue-800 dark:text-blue-400 border border-blue-200 dark:border-blue-500/20 whitespace-nowrap">
               ${t.status}
             </span>
           </td>
@@ -863,9 +1041,9 @@
       Object.entries(btns).forEach(([k, btn]) => {
         if (!btn) return;
         if (k === week) {
-          btn.className = 'px-2.5 py-1 rounded-lg bg-purple-600 text-white font-medium';
+          btn.className = 'px-3 py-1.5 rounded-lg bg-purple-600 text-white font-bold shadow-sm';
         } else {
-          btn.className = 'px-2.5 py-1 rounded-lg text-slate-400 hover:text-white';
+          btn.className = 'px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-semibold';
         }
       });
 
@@ -876,15 +1054,15 @@
       const container = document.getElementById('containerNovemberBudget');
       if (!container) return;
       container.innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
           ${items.map(b => `
-            <div onclick="openDrawerByRecord('${b.id}')" class="p-4 rounded-xl bg-slate-950/60 border border-white/5 space-y-2 hover:border-emerald-500/30 cursor-pointer transition">
+            <div onclick="openDrawerByRecord('${b.id}')" class="p-5 rounded-2xl bg-white dark:bg-slate-950/60 border border-slate-200 dark:border-white/5 space-y-3 hover:border-emerald-500/40 cursor-pointer transition shadow-sm">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-white">${b.stt}. ${b.type_cost}</span>
-                <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">${b.amount} đ</span>
+                <span class="text-sm font-bold text-slate-900 dark:text-white">${b.stt}. ${b.type_cost}</span>
+                <span class="text-sm font-mono font-extrabold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-3 py-1 rounded-lg">${b.amount} đ</span>
               </div>
-              <p class="text-[11px] text-slate-300 leading-relaxed">${b.purpose}</p>
-              <div class="text-[10px] text-slate-400 bg-slate-900/80 p-2 rounded border border-white/5">
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">${b.purpose}</p>
+              <div class="text-xs text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-900/80 p-3 rounded-xl border border-slate-200 dark:border-white/5 leading-relaxed">
                 ${b.notes}
               </div>
             </div>
@@ -893,18 +1071,18 @@
       `;
     }
 
-    // ==================== TAB 3 RENDERING ====================
+    // ==================== TAB 3 RENDERING (ĐỊNH MỨC & TIME-BLOCKING) ====================
     function renderWorkloadAllocations(items) {
       const tbody = document.getElementById('tableWorkloadAllocations');
       if (!tbody) return;
       tbody.innerHTML = items.map(a => `
-        <tr onclick="openDrawerByRecord('${a.id}')" class="hover:bg-slate-800/40 cursor-pointer transition">
-          <td class="py-2.5 px-3 text-center font-mono text-slate-400">${a.stt}</td>
-          <td class="py-2.5 px-3 font-semibold text-white">${a.task_group}</td>
-          <td class="py-2.5 px-3 text-center font-mono text-emerald-400 font-semibold">${a.hours_week}h</td>
-          <td class="py-2.5 px-3 text-center font-mono text-blue-400 font-semibold">${a.hours_month}h</td>
-          <td class="py-2.5 px-3 text-center font-mono text-amber-400">${a.ratio}</td>
-          <td class="py-2.5 px-3 text-slate-400 text-[11px]">${a.notes || '-'}</td>
+        <tr onclick="openDrawerByRecord('${a.id}')" class="table-row hover:bg-slate-50 dark:hover:bg-slate-800/40 cursor-pointer transition">
+          <td class="py-3 px-3 text-center font-mono text-slate-500 dark:text-slate-400 font-semibold">${a.stt}</td>
+          <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">${a.task_group}</td>
+          <td class="py-3 px-3 text-center font-mono text-emerald-700 dark:text-emerald-400 font-bold">${a.hours_week}h</td>
+          <td class="py-3 px-3 text-center font-mono text-blue-700 dark:text-blue-400 font-bold">${a.hours_month}h</td>
+          <td class="py-3 px-3 text-center font-mono text-amber-700 dark:text-amber-400 font-bold">${a.ratio}</td>
+          <td class="py-3 px-4 text-slate-500 dark:text-slate-400 text-xs">${a.notes || '-'}</td>
         </tr>
       `).join('');
     }
@@ -919,16 +1097,16 @@
       });
 
       tbody.innerHTML = filtered.map(tb => `
-        <tr onclick="openDrawerByRecord('${tb.id}')" class="hover:bg-slate-800/40 cursor-pointer transition">
-          <td class="py-3 px-4 font-semibold text-white flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        <tr onclick="openDrawerByRecord('${tb.id}')" class="table-row hover:bg-slate-50 dark:hover:bg-slate-800/40 cursor-pointer transition">
+          <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
             ${tb.day}
           </td>
-          <td class="py-3 px-4 font-mono text-emerald-400">${tb.time_slot}</td>
-          <td class="py-3 px-4 text-center font-mono text-slate-300 font-semibold">${tb.hours}h</td>
-          <td class="py-3 px-4 text-slate-300 leading-relaxed">${tb.content}</td>
-          <td class="py-3 px-4 font-medium text-emerald-300/90 leading-relaxed">${tb.output}</td>
-          <td class="py-3 px-4 text-slate-400 text-[11px]">${tb.notes || '-'}</td>
+          <td class="py-3.5 px-4 font-mono font-bold text-emerald-700 dark:text-emerald-400">${tb.time_slot}</td>
+          <td class="py-3.5 px-4 text-center font-mono text-slate-700 dark:text-slate-300 font-bold">${tb.hours}h</td>
+          <td class="py-3.5 px-5 text-slate-700 dark:text-slate-300 leading-relaxed">${tb.content}</td>
+          <td class="py-3.5 px-5 font-semibold text-emerald-800 dark:text-emerald-300/90 leading-relaxed">${tb.output}</td>
+          <td class="py-3.5 px-4 text-slate-500 dark:text-slate-400 text-xs leading-relaxed">${tb.notes || '-'}</td>
         </tr>
       `).join('');
     }
@@ -949,16 +1127,16 @@
         const btn = document.getElementById(id);
         if (!btn) return;
         if (d === day) {
-          btn.className = 'px-2 py-1 rounded-lg bg-emerald-600 text-white font-medium';
+          btn.className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-bold shadow-sm';
         } else {
-          btn.className = 'px-2 py-1 rounded-lg text-slate-400 hover:text-white';
+          btn.className = 'px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-semibold';
         }
       });
 
       renderTimeblocks(currentData.tab_workload.timeblocks || []);
     }
 
-    // ==================== CHARTS ====================
+    // ==================== WORKLOAD CHARTS ====================
     function initOrUpdateCharts(allocations) {
       const ctx = document.getElementById('workloadDoughnutChart');
       if (!ctx) return;
@@ -1019,19 +1197,19 @@
       tabNov.classList.add('hidden');
       tabWorkload.classList.add('hidden');
 
-      btnOct.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300';
-      btnNov.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300';
-      btnWorkload.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300';
+      btnOct.className = 'px-5 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 bg-slate-200 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300';
+      btnNov.className = 'px-5 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 bg-slate-200 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300';
+      btnWorkload.className = 'px-5 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 bg-slate-200 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300';
 
       if (tab === 'october') {
         tabOct.classList.remove('hidden');
-        btnOct.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-emerald-600 text-white shadow-sm';
+        btnOct.className = 'px-5 py-2.5 rounded-xl text-sm font-bold transition flex items-center gap-2 bg-emerald-600 text-white shadow-sm';
       } else if (tab === 'november') {
         tabNov.classList.remove('hidden');
-        btnNov.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-purple-600 text-white shadow-sm';
+        btnNov.className = 'px-5 py-2.5 rounded-xl text-sm font-bold transition flex items-center gap-2 bg-purple-600 text-white shadow-sm';
       } else if (tab === 'workload') {
         tabWorkload.classList.remove('hidden');
-        btnWorkload.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-blue-600 text-white shadow-sm';
+        btnWorkload.className = 'px-5 py-2.5 rounded-xl text-sm font-bold transition flex items-center gap-2 bg-blue-600 text-white shadow-sm';
       }
 
       lucide.createIcons();
@@ -1043,12 +1221,11 @@
       const label = document.getElementById('syncStatusLabel');
       const spinIcon = document.getElementById('syncIconSpin');
 
-      indicator.className = 'w-2.5 h-2.5 rounded-full bg-amber-400 animate-spin';
+      indicator.className = 'w-2.5 h-2.5 rounded-full bg-amber-500 animate-spin';
       spinIcon.classList.add('animate-spin');
       label.textContent = 'Đang đồng bộ trực tiếp từ Google Sheet...';
 
       try {
-        // Fetch 3 tabs đồng thời
         const tabNames = [
           'Tổng Quan Marketing Tháng 10',
           'Kế Hoạch Marketing Tháng 11',
@@ -1060,20 +1237,19 @@
           return fetch(url).then(r => r.text());
         });
 
-        const results = await Promise.all(fetchPromises);
+        await Promise.all(fetchPromises);
         
-        // Nếu fetch thành công, cập nhật trạng thái UI
-        indicator.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse';
+        indicator.className = 'w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse';
         spinIcon.classList.remove('animate-spin');
         
         const now = new Date();
         const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
-        label.innerHTML = `Đồng bộ thành công lúc <span class="text-white font-mono font-bold">${timeStr}</span> (Work Plan Gemmy)`;
+        label.innerHTML = `Đồng bộ thành công lúc <span class="text-emerald-700 dark:text-white font-mono font-bold">${timeStr}</span> (Work Plan Gemmy)`;
 
         renderAll(currentData);
       } catch (err) {
         console.warn('Lỗi kết nối Google Sheet:', err);
-        indicator.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400';
+        indicator.className = 'w-2.5 h-2.5 rounded-full bg-emerald-500';
         spinIcon.classList.remove('animate-spin');
         label.textContent = 'Đang sử dụng dữ liệu Google Sheet đã tải sẵn';
       }
@@ -1148,7 +1324,7 @@
       const q = query.trim().toLowerCase();
       const container = document.getElementById('omniSearchResults');
       if (!q) {
-        container.innerHTML = '<div class="p-4 text-center text-slate-500">Nhập từ khóa bất kỳ (Catalog, AI, TikTok, Buyer, FSC, Sấy, Deadline, Time-block...)</div>';
+        container.innerHTML = '<div class="p-4 text-center text-slate-400">Nhập từ khóa bất kỳ (Catalog, AI, TikTok, Buyer, FSC, Sấy, Deadline, Time-block...)</div>';
         return;
       }
 
@@ -1159,21 +1335,21 @@
       });
 
       if (matches.length === 0) {
-        container.innerHTML = `<div class="p-4 text-center text-slate-500">Không tìm thấy bản ghi nào khớp với "<strong>${query}</strong>"</div>`;
+        container.innerHTML = `<div class="p-4 text-center text-slate-400">Không tìm thấy bản ghi nào khớp với "<strong>${query}</strong>"</div>`;
         return;
       }
 
       container.innerHTML = matches.map(m => `
-        <div onclick="selectSearchResult('${m.id}')" class="p-3 rounded-xl hover:bg-slate-800/80 cursor-pointer transition flex items-center justify-between group">
+        <div onclick="selectSearchResult('${m.id}')" class="p-3.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/80 cursor-pointer transition flex items-center justify-between group">
           <div class="space-y-1 pr-3">
             <div class="flex items-center gap-2">
-              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-brand-500/10 text-brand-400 border border-brand-500/20">${m.id}</span>
-              <span class="font-bold text-white text-xs">${m.title || m.task_group || m.type_cost || m.day}</span>
-              <span class="text-[10px] text-slate-400">(${m.section})</span>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-400 border border-brand-200 dark:border-brand-500/20 font-bold">${m.id}</span>
+              <span class="font-bold text-slate-900 dark:text-white text-sm">${m.title || m.task_group || m.type_cost || m.day}</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">(${m.section})</span>
             </div>
-            <p class="text-[11px] text-slate-400 line-clamp-1">${m.content || m.target || m.details || m.purpose || '-'}</p>
+            <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-1">${m.content || m.target || m.details || m.purpose || '-'}</p>
           </div>
-          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500 group-hover:text-white transition"></i>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition"></i>
         </div>
       `).join('');
       lucide.createIcons();
@@ -1193,20 +1369,22 @@
       }
     }
 
-    // ==================== THEME TOGGLE ====================
+    // ==================== THEME TOGGLE (LIGHT DEFAULT) ====================
     function toggleTheme() {
       const html = document.documentElement;
       const icon = document.getElementById('themeIcon');
-      if (html.classList.contains('light-theme')) {
-        html.classList.remove('light-theme');
-        html.classList.add('dark');
-        icon.setAttribute('data-lucide', 'sun');
-      } else {
+      if (html.classList.contains('dark')) {
         html.classList.remove('dark');
         html.classList.add('light-theme');
         icon.setAttribute('data-lucide', 'moon');
+      } else {
+        html.classList.remove('light-theme');
+        html.classList.add('dark');
+        icon.setAttribute('data-lucide', 'sun');
       }
       lucide.createIcons();
+      // Render lại biểu đồ để khớp màu legend theme
+      if (octoberChart) renderOctoberCharts(currentData.tab_october || {});
     }
   </script>
 </body>
