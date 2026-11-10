@@ -430,42 +430,43 @@
               <div class="flex items-center gap-2">
                 <h2 class="text-sm sm:text-base font-extrabold uppercase tracking-wide text-slate-900 dark:text-white flex items-center gap-2">
                   <i data-lucide="compass" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
-                  <span id="matrixHeaderTitle">Cán Cân Rủi Ro vs Cơ Hội</span>
+                  <span id="matrixHeaderTitle">Cán Cân Đối Lập Rủi Ro vs Cơ Hội</span>
                 </h2>
               </div>
               <p id="matrixHeaderSubtitle" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                So sánh song song mức độ Rủi ro (Đỏ) vs Cơ hội (Xanh) của 10 sự kiện trọng yếu
+                Cán cân đối xứng âm/dương đo lường áp lực Rủi ro (Đỏ) vs tiềm năng Cơ hội (Xanh) của 10 sự kiện
               </p>
             </div>
 
             <!-- 3-Mode Visual Chart Switcher -->
             <div class="flex items-center gap-1 p-1 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shrink-0 self-start sm:self-auto">
-              <button id="btnMatrixBar" onclick="setMatrixChartType('bar')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs" title="Xem dạng Cán Cân Rủi Ro vs Cơ Hội (Paired Bar)">
+              <button id="btnMatrixBar" onclick="setMatrixChartType('bar')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs" title="Xem dạng Cán Cân Đối Lập (Tornado Chart) trực quan">
                 <i data-lucide="split" class="w-3.5 h-3.5"></i>
                 <span>Cán Cân</span>
               </button>
-              <button id="btnMatrixScatter" onclick="setMatrixChartType('scatter')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200" title="Xem dạng Ma Trận Tọa Độ 2x2 Tinh Gọn">
+              <button id="btnMatrixTiles" onclick="setMatrixChartType('tiles')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200" title="Xem dạng 4 Hộp Hành Động Chiến Lược (Tối ưu 100% Mobile, ít chữ)">
+                <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+                <span>Hộp Hành Động</span>
+              </button>
+              <button id="btnMatrixScatter" onclick="setMatrixChartType('scatter')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200" title="Xem dạng Tọa Độ 2x2 Không Gian Tinh Gọn (Zero text rác)">
                 <i data-lucide="crosshair" class="w-3.5 h-3.5"></i>
                 <span>Tọa Độ 2x2</span>
-              </button>
-              <button id="btnMatrixDonut" onclick="setMatrixChartType('donut')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200" title="Xem dạng Vòng Tròn Tỷ Trọng Phân Vùng">
-                <i data-lucide="pie-chart" class="w-3.5 h-3.5"></i>
-                <span>Tỷ Trọng</span>
               </button>
             </div>
           </div>
 
-          <!-- Pure Visual Chart Canvas -->
+          <!-- Pure Visual Chart Canvas & Interactive Tiles Container -->
           <div class="h-80 sm:h-96 w-full relative mt-3 flex items-center justify-center">
-            <canvas id="strategicMatrixChart"></canvas>
+            <canvas id="strategicMatrixChart" class="w-full h-full"></canvas>
+            <div id="strategicMatrixTilesContainer" class="hidden w-full h-full overflow-y-auto pr-1"></div>
           </div>
         </div>
 
         <!-- Matrix Card Footer -->
         <div id="matrixFooterInfo" class="pt-2 border-t border-slate-100 dark:border-slate-800/60 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
           <div class="flex items-center gap-3" id="matrixLegendContainer">
-            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-rose-500"></span> Áp lực Rủi ro</span>
-            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span> Tiềm năng Cơ hội</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-rose-500"></span> Áp lực Rủi ro (Bên trái)</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span> Tiềm năng Cơ hội (Bên phải)</span>
           </div>
           <span class="font-medium text-slate-700 dark:text-slate-300 flex items-center gap-1">
             <i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5 text-indigo-500"></i> Bấm để mở Drawer 360°
@@ -688,7 +689,7 @@
     <div class="p-5 border-b border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/50 flex items-start justify-between gap-4">
       <div class="space-y-1">
         <div class="flex items-center gap-2 flex-wrap">
-          <span id="drawerId" class="hidden"></span>
+          <span id="drawerId" class="px-2 py-0.5 rounded text-xs font-mono font-bold bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">#26101</span>
           <span id="drawerPillarBadge" class="px-2 py-0.5 rounded text-xs font-bold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">Nhóm</span>
           <span id="drawerDate" class="text-xs text-slate-500 font-semibold font-num">Kỳ báo cáo</span>
           <a id="drawerHeaderLink" href="#" target="_blank" rel="noopener noreferrer" class="hidden inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg text-xs font-bold bg-indigo-50 hover:bg-indigo-100 text-indigo-700 dark:bg-indigo-950/80 dark:hover:bg-indigo-900 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 transition shadow-2xs" title="Mở link kiểm chứng nguồn tin gốc">
@@ -1395,11 +1396,14 @@
       renderMarketBenchmark();
     }
 
-    /* Helper function to strip event ID code (e.g., [26101], 26101 -, [GMW-202610-001] or GMW-001) from strings */
+    /* Helper function to strip event ID code (e.g., [26101], 26101 -, [GMW-202610-001], [#1] or GMW-001) from strings */
     function stripEventCode(str) {
       if (!str) return '';
       return String(str)
-        .replace(/^(\[?(?:GMW-[a-zA-Z0-9_-]+|R?\d{5,6})\]?\s*[-:–—]?\s*)/i, '')
+        // 1. Xóa mọi tiền tố trong ngoặc vuông: [#1], [1], [GMW-xxx], [26101], [Tin 1]...
+        .replace(/^\[(?:#?\d+|[a-zA-Z0-9_\-\s]+)\]\s*[-:–—.]?\s*/i, '')
+        // 2. Xóa các mã tiền tố mở đầu không ngoặc: GMW-001, 26101 -, #1 -, Tin 1:...
+        .replace(/^(?:GMW-[a-zA-Z0-9_-]+|R?\d{4,6}|#\d{1,3}|Tin\s*\d{1,2})\s*[-:–—.]?\s*/i, '')
         .trim();
     }
 
@@ -1462,14 +1466,14 @@
       };
     }
 
-    /* 1. ĐỊNH VỊ CHIẾN LƯỢC: RỦI RO VS CƠ HỘI (3 Chế Độ Biểu Đồ: Cán Cân / Tọa Độ 2x2 / Tỷ Trọng) */
-    let currentMatrixChartType = 'bar'; // 'bar' (mặc định), 'scatter', 'donut'
+    /* 1. ĐỊNH VỊ CHIẾN LƯỢC: RỦI RO VS CƠ HỘI (3 Chế Độ: Cán Cân Tornado / Hộp Hành Động / Tọa Độ 2x2) */
+    let currentMatrixChartType = 'bar'; // 'bar' (mặc định), 'tiles', 'scatter'
 
     function setMatrixChartType(type) {
       currentMatrixChartType = type;
       const btnB = document.getElementById('btnMatrixBar');
+      const btnT = document.getElementById('btnMatrixTiles');
       const btnS = document.getElementById('btnMatrixScatter');
-      const btnD = document.getElementById('btnMatrixDonut');
       const titleEl = document.getElementById('matrixHeaderTitle');
       const subtitleEl = document.getElementById('matrixHeaderSubtitle');
       const legendEl = document.getElementById('matrixLegendContainer');
@@ -1477,24 +1481,22 @@
       const inactiveClass = 'px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200';
       const activeClass = 'px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs';
 
-      if (btnB && btnS && btnD) {
-        btnB.className = type === 'bar' ? activeClass : inactiveClass;
-        btnS.className = type === 'scatter' ? activeClass : inactiveClass;
-        btnD.className = type === 'donut' ? activeClass : inactiveClass;
-      }
+      if (btnB) btnB.className = type === 'bar' ? activeClass : inactiveClass;
+      if (btnT) btnT.className = type === 'tiles' ? activeClass : inactiveClass;
+      if (btnS) btnS.className = type === 'scatter' ? activeClass : inactiveClass;
 
       if (type === 'bar') {
-        if (titleEl) titleEl.textContent = 'Cán Cân Rủi Ro vs Cơ Hội';
-        if (subtitleEl) subtitleEl.textContent = 'So sánh song song mức độ Rủi ro (Đỏ) vs Cơ hội (Xanh) của 10 sự kiện trọng yếu';
+        if (titleEl) titleEl.textContent = 'Cán Cân Đối Lập Rủi Ro vs Cơ Hội';
+        if (subtitleEl) subtitleEl.textContent = 'Cán cân đối xứng âm/dương đo lường áp lực Rủi ro (Đỏ) vs tiềm năng Cơ hội (Xanh) của 10 sự kiện';
         if (legendEl) {
           legendEl.innerHTML = `
-            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-rose-500"></span> Áp lực Rủi ro</span>
-            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span> Tiềm năng Cơ hội</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-rose-500"></span> Áp lực Rủi ro (Bên trái)</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span> Tiềm năng Cơ hội (Bên phải)</span>
           `;
         }
-      } else if (type === 'scatter') {
-        if (titleEl) titleEl.textContent = 'Ma Trận Tọa Độ Chiến Lược 2x2';
-        if (subtitleEl) subtitleEl.textContent = 'Định vị 10 sự kiện trên 4 phân vùng ứng phó & khai thác thị trường';
+      } else if (type === 'tiles') {
+        if (titleEl) titleEl.textContent = '4 Hộp Hành Động Chiến Lược';
+        if (subtitleEl) subtitleEl.textContent = 'Phân loại 10 sự kiện vào các nhóm hành động: Phòng vệ khẩn, Chiến trường, Bứt phá & Giám sát (Tối ưu 100% Mobile)';
         if (legendEl) {
           legendEl.innerHTML = `
             <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Phòng Vệ Khẩn</span>
@@ -1503,15 +1505,15 @@
             <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span> Giám Sát</span>
           `;
         }
-      } else if (type === 'donut') {
-        if (titleEl) titleEl.textContent = 'Cơ Cấu Tỷ Trọng 4 Phân Vùng';
-        if (subtitleEl) subtitleEl.textContent = 'Tỷ lệ phân bổ 10 sự kiện vào các nhóm hành động chiến lược';
+      } else if (type === 'scatter') {
+        if (titleEl) titleEl.textContent = 'Ma Trận Tọa Độ Chiến Lược 2x2';
+        if (subtitleEl) subtitleEl.textContent = 'Định vị 10 sự kiện trên 4 phân vùng ứng phó & khai thác thị trường (Chuẩn BCG/Gartner, Zero text rác)';
         if (legendEl) {
           legendEl.innerHTML = `
-            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Bứt Phá (50%)</span>
-            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Phòng Vệ (20%)</span>
-            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span> Chiến Trường (20%)</span>
-            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span> Giám Sát (10%)</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Phòng Vệ Khẩn</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span> Chiến Trường Lớn</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Bứt Phá Doanh Số</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span> Giám Sát</span>
           `;
         }
       }
@@ -1520,28 +1522,92 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    // Function render biểu đồ ma trận chiến lược đa chế độ (Visual-First, Low-Text)
+    // Function render biểu đồ ma trận chiến lược đa chế độ (Visual-First, Low-Text, Mobile-Optimized)
     function renderStrategicMatrix() {
       const canvas = document.getElementById('strategicMatrixChart');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      if (charts.matrix) charts.matrix.destroy();
+      const tilesContainer = document.getElementById('strategicMatrixTilesContainer');
+      if (!canvas || !tilesContainer) return;
+
+      if (charts.matrix) {
+        charts.matrix.destroy();
+        charts.matrix = null;
+      }
 
       const isDark = document.documentElement.classList.contains('dark');
       const textColor = isDark ? '#94a3b8' : '#64748b';
       const gridColor = isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)';
       const items = (filteredData && filteredData.length > 0) ? filteredData : allData;
 
-      if (currentMatrixChartType === 'bar') {
-        // CHẾ ĐỘ 1: CÁN CÂN RỦI RO VS CƠ HỘI (Dual Horizontal Bar)
-        const labels = items.map((d, idx) => {
-          const cfg = getStrategicPointConfig(d, idx);
-          return cfg.label || `Sự kiện ${idx+1}`;
-        });
-        const riskScores = items.map((d, idx) => getStrategicPointConfig(d, idx).y);
-        const oppScores = items.map((d, idx) => getStrategicPointConfig(d, idx).x);
+      if (currentMatrixChartType === 'tiles') {
+        // CHẾ ĐỘ 2: 4 HỘP HÀNH ĐỘNG CHIẾN LƯỢC (Mobile Native, Zero Text Clutter)
+        canvas.classList.add('hidden');
+        tilesContainer.classList.remove('hidden');
 
-        charts.matrix = new Chart(ctx, {
+        const q1 = [], q2 = [], q3 = [], q4 = [];
+        items.forEach((d, idx) => {
+          const cfg = getStrategicPointConfig(d, idx);
+          if (cfg.quadKey === 'q1') q1.push(d);
+          else if (cfg.quadKey === 'q2') q2.push(d);
+          else if (cfg.quadKey === 'q3') q3.push(d);
+          else q4.push(d);
+        });
+
+        const renderQuadrantBox = (title, count, icon, borderClass, bgClass, badgeClass, list) => `
+          <div class="rounded-xl border ${borderClass} ${bgClass} p-3 flex flex-col justify-between transition hover:shadow-xs">
+            <div class="flex items-center justify-between pb-2 border-b border-black/5 dark:border-white/5 mb-2">
+              <span class="text-xs font-black uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="${icon}" class="w-3.5 h-3.5"></i>
+                <span>${title}</span>
+              </span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black ${badgeClass}">${count} sự kiện</span>
+            </div>
+            <div class="space-y-1.5 flex-1">
+              ${list.length === 0 ? '<p class="text-[11px] text-slate-400 italic py-1">Không có sự kiện</p>' : ''}
+              ${list.map(item => `
+                <div onclick="openDrawerById('${item.ID}')" class="p-2 rounded-lg bg-white/80 dark:bg-slate-900/80 hover:bg-white dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 transition cursor-pointer flex items-center justify-between gap-2 shadow-2xs group">
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span class="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-indigo-50 dark:bg-indigo-950/70 text-indigo-600 dark:text-indigo-400 shrink-0">#${item.ID || ''}</span>
+                    <span class="font-bold text-xs text-slate-800 dark:text-slate-100 truncate group-hover:text-indigo-600 dark:group-hover:text-indigo-400">${stripEventCode(item['Loại biến động'])}</span>
+                  </div>
+                  <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium shrink-0 flex items-center gap-1">
+                    ${item['Top thị trường'] || item['Quốc Gia Tác Động'] || ''}
+                    <i data-lucide="chevron-right" class="w-3 h-3 text-slate-400 group-hover:translate-x-0.5 transition"></i>
+                  </span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+
+        tilesContainer.innerHTML = `
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 h-full">
+            ${renderQuadrantBox('Phòng Vệ Khẩn Cấp', q1.length, 'shield-alert', 'border-rose-200/80 dark:border-rose-900/50', 'bg-rose-50/40 dark:bg-rose-950/20 text-rose-800 dark:text-rose-300', 'bg-rose-100 text-rose-700 dark:bg-rose-900/60 dark:text-rose-300', q1)}
+            ${renderQuadrantBox('Chiến Trường Lớn', q2.length, 'swords', 'border-indigo-200/80 dark:border-indigo-900/50', 'bg-indigo-50/40 dark:bg-indigo-950/20 text-indigo-800 dark:text-indigo-300', 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/60 dark:text-indigo-300', q2)}
+            ${renderQuadrantBox('Bứt Phá Doanh Số', q3.length, 'trending-up', 'border-emerald-200/80 dark:border-emerald-900/50', 'bg-emerald-50/40 dark:bg-emerald-950/20 text-emerald-800 dark:text-emerald-300', 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300', q3)}
+            ${renderQuadrantBox('Giám Sát Định Kỳ', q4.length, 'eye', 'border-slate-200/80 dark:border-slate-700/50', 'bg-slate-50/60 dark:bg-slate-800/20 text-slate-700 dark:text-slate-300', 'bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-slate-300', q4)}
+          </div>
+        `;
+        if (window.lucide) lucide.createIcons();
+        return;
+      }
+
+      // CHẾ ĐỘ CANVAS (BAR hoặc SCATTER)
+      tilesContainer.classList.add('hidden');
+      canvas.classList.remove('hidden');
+
+      if (currentMatrixChartType === 'bar') {
+        // CHẾ ĐỘ 1: CÁN CÂN ĐỐI LẬP RỦI RO VS CƠ HỘI (Diverging Tornado Balance Bar - Bloomberg Standard)
+        const labels = items.map((d, idx) => {
+          const clean = stripEventCode(d['Loại biến động']);
+          return clean.length > 22 ? clean.slice(0, 22) + '...' : clean;
+        });
+
+        // Rủi ro âm (-100 đến 0), Cơ hội dương (0 đến 100)
+        const riskScores = items.map((d, idx) => -(parseFloat(d['Điểm ưu tiên']) || getStrategicPointConfig(d, idx).y));
+        const oppScores = items.map((d, idx) => parseFloat(d['Điểm ưu tiên cơ hội']) || getStrategicPointConfig(d, idx).x);
+
+        const ctx2d = canvas.getContext('2d');
+        charts.matrix = new Chart(ctx2d, {
           type: 'bar',
           data: {
             labels: labels,
@@ -1550,17 +1616,17 @@
                 label: 'Áp lực Rủi ro',
                 data: riskScores,
                 backgroundColor: '#f43f5e',
-                borderRadius: 4,
+                borderRadius: { topLeft: 4, bottomLeft: 4, topRight: 0, bottomRight: 0 },
                 barPercentage: 0.72,
-                categoryPercentage: 0.8
+                categoryPercentage: 0.82
               },
               {
                 label: 'Tiềm năng Cơ hội',
                 data: oppScores,
                 backgroundColor: '#10b981',
-                borderRadius: 4,
+                borderRadius: { topLeft: 0, bottomLeft: 0, topRight: 4, bottomRight: 4 },
                 barPercentage: 0.72,
-                categoryPercentage: 0.8
+                categoryPercentage: 0.82
               }
             ]
           },
@@ -1580,28 +1646,48 @@
                 bodyColor: isDark ? '#cbd5e1' : '#334155',
                 borderColor: isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.12)',
                 borderWidth: 1,
-                padding: 10,
+                padding: 11,
                 boxPadding: 4,
                 callbacks: {
                   title: (tooltipItems) => {
                     const rawItem = items[tooltipItems[0].dataIndex];
                     return stripEventCode(rawItem['Loại biến động']);
                   },
-                  label: (ctxItem) => `${ctxItem.dataset.label}: ${ctxItem.raw}/100 điểm`,
+                  label: (ctxItem) => {
+                    const val = Math.abs(ctxItem.raw);
+                    return `${ctxItem.dataset.label}: ${val}/100 điểm`;
+                  },
+                  afterBody: (tooltipItems) => {
+                    const rawItem = items[tooltipItems[0].dataIndex];
+                    return [
+                      `Mã tin: #${rawItem.ID || ''} • Thị trường: ${rawItem['Top thị trường'] || rawItem['Quốc Gia Tác Động'] || 'Toàn cầu'}`
+                    ];
+                  },
                   footer: () => '👉 Bấm chuột để mở Drawer xem hồ sơ chi tiết 360°'
                 }
               }
             },
             scales: {
               x: {
-                min: 0,
+                min: -100,
                 max: 100,
-                grid: { color: gridColor },
-                ticks: { stepSize: 20, color: textColor, font: { family: 'JetBrains Mono', size: 10 } }
+                grid: {
+                  color: (c) => c.tick && c.tick.value === 0 ? (isDark ? '#94a3b8' : '#475569') : gridColor,
+                  lineWidth: (c) => c.tick && c.tick.value === 0 ? 2 : 1
+                },
+                ticks: {
+                  stepSize: 25,
+                  color: textColor,
+                  font: { family: 'JetBrains Mono', size: 10 },
+                  callback: (val) => Math.abs(val)
+                }
               },
               y: {
                 grid: { display: false },
-                ticks: { color: textColor, font: { family: 'Plus Jakarta Sans', size: 10, weight: 'bold' } }
+                ticks: {
+                  color: isDark ? '#e2e8f0' : '#1e293b',
+                  font: { family: 'Plus Jakarta Sans', size: 10.5, weight: 'bold' }
+                }
               }
             },
             onClick: (evt, activeEls) => {
@@ -1614,7 +1700,7 @@
         });
 
       } else if (currentMatrixChartType === 'scatter') {
-        // CHẾ ĐỘ 2: MA TRẬN TỌA ĐỘ 2x2 TINH GỌN (Minimalist Scatter 2x2 - Zero Text Clutter)
+        // CHẾ ĐỘ 3: MA TRẬN TỌA ĐỘ 2x2 TINH GỌN (Minimalist BCG Matrix - Zero Text Clutter)
         const scatterPoints = items.map((d, idx) => {
           const cfg = getStrategicPointConfig(d, idx);
           return {
@@ -1654,7 +1740,7 @@
             ctx.moveTo(left, midY); ctx.lineTo(right, midY);
             ctx.stroke();
 
-            // Nhãn mờ định hướng 4 góc
+            // Nhãn mờ định hướng 4 góc (Watermark tinh tế)
             ctx.font = 'bold 10px Plus Jakarta Sans, sans-serif';
             ctx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.25)' : 'rgba(0, 0, 0, 0.28)';
             ctx.setLineDash([]);
@@ -1681,7 +1767,8 @@
           }
         };
 
-        charts.matrix = new Chart(ctx, {
+        const ctx2d = canvas.getContext('2d');
+        charts.matrix = new Chart(ctx2d, {
           type: 'scatter',
           data: {
             datasets: [{
@@ -1710,13 +1797,13 @@
                 callbacks: {
                   title: (items) => {
                     const p = items[0].raw;
-                    return `[#${p.indexNum}] ${stripEventCode(p.raw['Loại biến động'])}`;
+                    return stripEventCode(p.raw['Loại biến động']);
                   },
                   label: (item) => {
                     const p = item.raw;
                     return [
-                      `Thị trường: ${p.raw['Top thị trường'] || p.raw['Quốc Gia Tác Động'] || 'Toàn cầu'}`,
-                      `Tọa độ: Cơ hội ${p.x} / Rủi ro ${p.y}`,
+                      `Mã tin: #${p.raw.ID || p.indexNum} • Thị trường: ${p.raw['Top thị trường'] || p.raw['Quốc Gia Tác Động'] || 'Toàn cầu'}`,
+                      `Tọa độ: Cơ hội ${p.x}/100 • Rủi ro ${p.y}/100`,
                       `👉 Bấm để mở Drawer xem chi tiết 360°`
                     ];
                   }
@@ -1745,89 +1832,6 @@
             }
           },
           plugins: [cleanQuadrantPlugin]
-        });
-
-      } else if (currentMatrixChartType === 'donut') {
-        // CHẾ ĐỘ 3: VÒNG TRÒN TỶ TRỌNG 4 PHÂN VÙNG (Strategic Quadrant Donut)
-        let countQ1 = 0, countQ2 = 0, countQ3 = 0, countQ4 = 0;
-        items.forEach((d, idx) => {
-          const cfg = getStrategicPointConfig(d, idx);
-          if (cfg.quadKey === 'q1') countQ1++;
-          else if (cfg.quadKey === 'q2') countQ2++;
-          else if (cfg.quadKey === 'q3') countQ3++;
-          else if (cfg.quadKey === 'q4') countQ4++;
-        });
-
-        const centerTextPlugin = {
-          id: 'centerTextPlugin',
-          beforeDraw: (chart) => {
-            const { ctx, chartArea: { left, top, right, bottom } } = chart;
-            const centerX = (left + right) / 2;
-            const centerY = (top + bottom) / 2;
-            ctx.save();
-            ctx.font = 'bold 28px JetBrains Mono, sans-serif';
-            ctx.fillStyle = isDark ? '#ffffff' : '#0f172a';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(`${items.length}`, centerX, centerY - 8);
-
-            ctx.font = 'bold 10px Plus Jakarta Sans, sans-serif';
-            ctx.fillStyle = '#10b981';
-            ctx.fillText('70% Cơ Hội', centerX, centerY + 16);
-            ctx.restore();
-          }
-        };
-
-        charts.matrix = new Chart(ctx, {
-          type: 'doughnut',
-          data: {
-            labels: [
-              'Góc III: Bứt Phá Doanh Số',
-              'Góc I: Phòng Vệ Khẩn Cấp',
-              'Góc II: Chiến Trường Lớn',
-              'Góc IV: Giám Sát Định Kỳ'
-            ],
-            datasets: [{
-              data: [countQ3, countQ1, countQ2, countQ4],
-              backgroundColor: ['#10b981', '#f43f5e', '#6366f1', isDark ? '#475569' : '#94a3b8'],
-              borderWidth: 2,
-              borderColor: isDark ? '#0f172a' : '#ffffff',
-              hoverOffset: 6
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            cutout: '72%',
-            plugins: {
-              legend: {
-                position: 'bottom',
-                labels: { color: textColor, boxWidth: 8, font: { size: 10, weight: 'bold', family: 'Plus Jakarta Sans' }, padding: 10 }
-              },
-              tooltip: {
-                backgroundColor: isDark ? 'rgba(15, 23, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)',
-                titleColor: isDark ? '#ffffff' : '#0f172a',
-                bodyColor: isDark ? '#cbd5e1' : '#334155',
-                borderColor: isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.12)',
-                borderWidth: 1,
-                padding: 10,
-                boxPadding: 4,
-                callbacks: {
-                  label: (ctxItem) => `${ctxItem.label}: ${ctxItem.raw} sự kiện (${Math.round((ctxItem.raw / items.length) * 100)}%)`,
-                  footer: () => '👉 Bấm lát bánh để lọc danh sách sự kiện'
-                }
-              }
-            },
-            onClick: (evt, activeEls) => {
-              if (activeEls.length > 0) {
-                const idx = activeEls[0].index;
-                if (idx === 0) setFilterState('risk', 'OPP_HIGH');
-                else if (idx === 1) setFilterState('risk', 'RISK_HIGH');
-                else setFilterState('risk', 'ALL');
-              }
-            }
-          },
-          plugins: [centerTextPlugin]
         });
       }
     }
@@ -2309,7 +2313,10 @@
 
             <!-- Diễn Biến Vĩ Mô -->
             <td class="py-3 px-3.5 align-top">
-              <h5 class="font-bold text-xs text-slate-900 dark:text-white mb-0.5">${stripEventCode(d['Loại biến động'])}</h5>
+              <div class="flex items-start gap-1.5 mb-1">
+                <span class="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-indigo-50 dark:bg-indigo-950/70 text-indigo-600 dark:text-indigo-400 border border-indigo-200/50 dark:border-indigo-800/50 shrink-0">#${d.ID || ''}</span>
+                <h5 class="font-bold text-xs text-slate-900 dark:text-white leading-snug">${stripEventCode(d['Loại biến động'])}</h5>
+              </div>
               <p class="text-[11px] text-slate-500 line-clamp-2">${d['Nội dụng biến động'] || ''}</p>
               ${d['Link nguồn tin'] && d['Link nguồn tin'].startsWith('http') ? `
                 <div class="mt-2">
@@ -2379,7 +2386,7 @@
     function openDrawer(item) {
       if (!item) return;
 
-      document.getElementById('drawerId').textContent = item.ID || 'N/A';
+      document.getElementById('drawerId').textContent = '#' + (item.ID || 'N/A');
       document.getElementById('drawerPillarBadge').textContent = item['Nhóm biến động'] || 'Vĩ mô';
       document.getElementById('drawerDate').textContent = `${item['Tháng Báo Cáo'] || ''} • ${item['Ngày cập nhật'] || ''}`;
       document.getElementById('drawerTitle').textContent = stripEventCode(item['Loại biến động']) || '';
