@@ -1357,7 +1357,13 @@
       renderMarketBenchmark();
     }
 
-        // 1. MA TRẬN RỦI RO & CƠ HỘI 2x2 (Precision Coordinates & Direct Labels)
+        /* Helper function to strip event ID code (e.g., [GMW-202610-001] or GMW-001) from strings */
+    function stripEventCode(str) {
+      if (!str) return '';
+      return String(str).replace(/^(\[?GMW-[a-zA-Z0-9_-]+\]?\s*[-:]?\s*)/i, '').trim();
+    }
+
+    // 1. MA TRẬN RỦI RO & CƠ HỘI 2x2 (Precision Coordinates & Direct Labels)
     function renderStrategicMatrix() {
       const canvas = document.getElementById('strategicMatrixChart');
       if (!canvas) return;
@@ -1507,7 +1513,7 @@
               callbacks: {
                 title: (items) => {
                   const p = items[0].raw;
-                  return p.raw['Loại biến động'] || '';
+                  return stripEventCode(p.raw['Loại biến động']);
                 },
                 label: (item) => {
                   const p = item.raw;
@@ -1959,7 +1965,7 @@
 
             <!-- Diễn Biến Vĩ Mô -->
             <td class="py-3 px-3.5 align-top">
-              <h5 class="font-bold text-xs text-slate-900 dark:text-white mb-0.5">${d['Loại biến động'] || ''}</h5>
+              <h5 class="font-bold text-xs text-slate-900 dark:text-white mb-0.5">${stripEventCode(d['Loại biến động'])}</h5>
               <p class="text-[11px] text-slate-500 line-clamp-2">${d['Nội dụng biến động'] || ''}</p>
             </td>
 
@@ -2148,7 +2154,7 @@
               <span class="px-1.5 py-0.2 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">${d['Nhóm biến động'] || ''}</span>
               <span class="text-[11px] text-slate-400 font-num">${d['Ngày cập nhật'] || d['Tháng Báo Cáo'] || ''}</span>
             </div>
-            <h5 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">${d['Loại biến động'] || ''}</h5>
+            <h5 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">${stripEventCode(d['Loại biến động'])}</h5>
           </div>
           <i data-lucide="arrow-right" class="w-4 h-4 text-slate-400 shrink-0"></i>
         </div>
