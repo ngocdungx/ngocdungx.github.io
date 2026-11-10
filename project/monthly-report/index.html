@@ -144,9 +144,10 @@
           <i data-lucide="trees" class="w-6 h-6 text-white"></i>
         </div>
         <div>
-          <div class="flex items-center gap-2.5">
+          <div class="flex items-center gap-2.5 flex-wrap">
             <span class="font-black tracking-tight text-slate-900 dark:text-white text-lg sm:text-xl">GEMMY WOOD</span>
             <span class="px-2.5 py-0.5 text-xs font-mono font-bold tracking-wider uppercase rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">Executive Operations</span>
+            <span id="headerDynamicCycleBadge" class="px-2.5 py-0.5 text-xs font-mono font-bold rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">Kỳ báo cáo: Tháng trước → Kế hoạch: Tháng hiện tại</span>
           </div>
           <p class="text-xs text-slate-500 dark:text-slate-400 font-medium hidden sm:block">Dashboard Báo Cáo Công Tác & Kế Hoạch Hoạt Động Marketing B2B Xuất Khẩu</p>
         </div>
@@ -189,31 +190,31 @@
     <!-- ==================== HERO BENTO GRID KPIS ==================== -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
       
-      <!-- Card 1: Hoàn thành Tháng 10 -->
+      <!-- Card 1: Hoàn thành Tháng Trước -->
       <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group hover:border-emerald-500/40 transition">
         <div class="flex items-center justify-between mb-3">
-          <span class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">Tiến Độ Tháng 10</span>
+          <span id="kpiOctTitle" class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">Tiến Độ Tháng Trước</span>
           <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
             <i data-lucide="check-circle-2" class="w-5 h-5"></i>
           </div>
         </div>
         <div>
           <div class="text-3xl sm:text-4xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono tracking-tight" id="kpiOctRate">7 / 7 (100%)</div>
-          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5">Hoàn tất 7 mục tiêu cốt lõi; 02 tồn đọng đã có giải pháp dứt điểm</p>
+          <p id="kpiOctDesc" class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5">Hoàn tất 7 mục tiêu cốt lõi; 02 tồn đọng đã có giải pháp dứt điểm</p>
         </div>
       </div>
 
-      <!-- Card 2: Kế hoạch Tháng 11 -->
+      <!-- Card 2: Kế hoạch Tháng Hiện Tại -->
       <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group hover:border-purple-500/40 transition">
         <div class="flex items-center justify-between mb-3">
-          <span class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">Kế Hoạch Tháng 11</span>
+          <span id="kpiNovTitle" class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">Kế Hoạch Tháng Hiện Tại</span>
           <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center">
             <i data-lucide="calendar-check" class="w-5 h-5"></i>
           </div>
         </div>
         <div>
           <div class="text-3xl sm:text-4xl font-extrabold text-purple-600 dark:text-purple-400 font-mono tracking-tight" id="kpiNovTasks">27 Đầu Việc</div>
-          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5">4 Tuần tác nghiệp + 7 Mục tiêu trọng tâm (Bàn giao V2: 14/11)</p>
+          <p id="kpiNovDesc" class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5">4 Tuần tác nghiệp + 7 Mục tiêu trọng tâm</p>
         </div>
       </div>
 
@@ -234,7 +235,7 @@
       <!-- Card 4: Dự toán ngân sách -->
       <div class="glass-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group hover:border-amber-500/40 transition">
         <div class="flex items-center justify-between mb-3">
-          <span class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">Dự Toán Ngân Sách T11</span>
+          <span id="kpiBudgetTitle" class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">Dự Toán Ngân Sách</span>
           <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
             <i data-lucide="wallet" class="w-5 h-5"></i>
           </div>
@@ -256,12 +257,12 @@
         <div class="flex flex-wrap items-center gap-2.5">
           <button id="btnTabOct" onclick="switchTab('october')" class="px-5 py-2.5 rounded-xl text-sm font-bold transition flex items-center gap-2 bg-emerald-600 text-white shadow-sm">
             <i data-lucide="check-circle" class="w-4 h-4"></i>
-            <span>1. Báo Cáo Tháng 10</span>
+            <span id="lblTabOct">1. Báo Cáo Tháng Trước</span>
           </button>
           
           <button id="btnTabNov" onclick="switchTab('november')" class="px-5 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 bg-slate-200 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300">
             <i data-lucide="calendar-days" class="w-4 h-4"></i>
-            <span>2. Kế Hoạch Tác Nghiệp Tháng 11</span>
+            <span id="lblTabNov">2. Kế Hoạch Tác Nghiệp Tháng Hiện Tại</span>
           </button>
           
           <button id="btnTabWorkload" onclick="switchTab('workload')" class="px-5 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 bg-slate-200 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300">
@@ -290,7 +291,7 @@
               <div>
                 <h4 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono flex items-center gap-2">
                   <i data-lucide="pie-chart" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
-                  Tỷ Lệ Hoàn Thành Tháng 10
+                  <span id="lblPrevChartTitle">Tỷ Lệ Hoàn Thành Tháng Trước</span>
                 </h4>
                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">So sánh hạng mục hoàn thành vs. tồn đọng</p>
               </div>
@@ -321,7 +322,7 @@
               <div class="flex items-center justify-between mb-3 border-b border-slate-200 dark:border-white/10 pb-3">
                 <h4 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono flex items-center gap-2">
                   <i data-lucide="file-check-2" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
-                  Đánh Giá Hiệu Suất & Cam Kết Giải Pháp Dứt Điểm Tháng 11
+                  <span id="lblEvalCardTitle">Đánh Giá Hiệu Suất & Cam Kết Giải Pháp Dứt Điểm Tháng Hiện Tại</span>
                 </h4>
                 <span class="text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 px-2.5 py-1 rounded-full border border-blue-500/20">
                   100% Khắc Phục
@@ -342,8 +343,8 @@
                   <span class="text-xs font-bold text-amber-700 dark:text-amber-400 flex items-center gap-1.5 font-mono uppercase">
                     <i data-lucide="arrow-right-circle" class="w-4 h-4"></i> Kế Hoạch Xử Lý Triệt Để
                   </span>
-                  <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-                    2 Hạng mục chậm tiến độ (Zalo duyệt truyền thông & Nội dung SEO website) sẽ được khắc phục ngay đầu tháng 11 bằng giải pháp: <strong>Gửi duyệt trọn gói Lịch biên tập nội dung cả tháng</strong> lên Zalo và <strong>kích hoạt công cụ AI chuyên dụng dựng ảnh phối cảnh</strong> để hoàn tất Catalog V2 trước ngày 14/11.
+                  <p id="lblEvalSolutionText" class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                    2 Hạng mục chậm tiến độ (Zalo duyệt truyền thông & Nội dung SEO website) sẽ được khắc phục ngay đầu tháng hiện tại bằng giải pháp: <strong>Gửi duyệt trọn gói Lịch biên tập nội dung cả tháng</strong> lên Zalo và <strong>kích hoạt công cụ AI chuyên dụng dựng ảnh phối cảnh</strong> để hoàn tất Catalog V2 đúng tiến độ.
                   </p>
                 </div>
               </div>
@@ -361,7 +362,7 @@
               </span>
               <span class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-                Mục tiêu hoàn thành Catalog V2: <strong>14/11/2026</strong>
+                Mục tiêu hoàn thành Catalog V2: <strong id="lblTargetDateV2">Tuần 2</strong>
               </span>
             </div>
           </div>
@@ -374,7 +375,7 @@
             <div>
               <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
                 <i data-lucide="badge-check" class="w-5 h-5 text-emerald-600 dark:text-emerald-400"></i>
-                1.1 CHI TIẾT KẾT QUẢ THỰC HIỆN CÔNG TÁC THÁNG 10/2026
+                <span id="lblTable11Title">1.1 CHI TIẾT KẾT QUẢ THỰC HIỆN CÔNG TÁC THÁNG TRƯỚC</span>
               </h3>
               <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">07 Hạng mục cốt lõi đã hoàn thành theo kế hoạch công tác</p>
             </div>
@@ -412,7 +413,7 @@
                   <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-500"></i>
                   1.2 HẠNG MỤC TỒN ĐỌNG & GIẢI PHÁP KHẮC PHỤC
                 </h3>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">02 Hạng mục cần xử lý triệt để trong đầu tháng 11</p>
+                <p id="lblPendingSubtitle" class="text-xs text-slate-500 dark:text-slate-400 mt-1">02 Hạng mục cần xử lý triệt để trong đầu tháng hiện tại</p>
               </div>
               <span class="text-xs font-mono font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
                 Ưu tiên xử lý
@@ -430,7 +431,7 @@
               <div>
                 <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                   <i data-lucide="sparkles" class="w-5 h-5 text-purple-500"></i>
-                  1.3 ĐỀ XUẤT PHÊ DUYỆT ĐẦU THÁNG 11/2026
+                  <span id="lblProposalsTitle">1.3 ĐỀ XUẤT PHÊ DUYỆT ĐẦU THÁNG HIỆN TẠI</span>
                 </h3>
                 <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">03 Nội dung trình Ban Giám đốc thông qua triển khai</p>
               </div>
@@ -456,7 +457,7 @@
           
           <div class="p-5 rounded-2xl glass-card space-y-2.5">
             <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded text-xs font-mono font-bold bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-500/20">TUẦN 1 (02/11 - 07/11)</span>
+              <span id="lblMilestoneW1" class="px-2.5 py-1 rounded text-xs font-mono font-bold bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-500/20">TUẦN 1</span>
               <i data-lucide="flag" class="w-4 h-4 text-blue-500"></i>
             </div>
             <h4 class="text-sm font-bold text-slate-900 dark:text-white">Khởi Động & Duyệt Lịch Zalo</h4>
@@ -465,16 +466,16 @@
 
           <div class="p-5 rounded-2xl glass-card space-y-2.5">
             <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded text-xs font-mono font-bold bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20">TUẦN 2 (09/11 - 14/11)</span>
+              <span id="lblMilestoneW2" class="px-2.5 py-1 rounded text-xs font-mono font-bold bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20">TUẦN 2</span>
               <i data-lucide="award" class="w-4 h-4 text-amber-500"></i>
             </div>
             <h4 class="text-sm font-bold text-slate-900 dark:text-white">Bàn Giao Master Catalog V2</h4>
-            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Xuất bản bộ ảnh bối cảnh AI chất lượng cao & Bàn giao bản PDF Master Catalog V2 (Hạn 14/11).</p>
+            <p id="lblMilestoneW2Desc" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Xuất bản bộ ảnh bối cảnh AI chất lượng cao & Bàn giao bản PDF Master Catalog V2.</p>
           </div>
 
           <div class="p-5 rounded-2xl glass-card space-y-2.5">
             <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded text-xs font-mono font-bold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20">TUẦN 3 (16/11 - 21/11)</span>
+              <span id="lblMilestoneW3" class="px-2.5 py-1 rounded text-xs font-mono font-bold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20">TUẦN 3</span>
               <i data-lucide="globe" class="w-4 h-4 text-emerald-500"></i>
             </div>
             <h4 class="text-sm font-bold text-slate-900 dark:text-white">Chuẩn Hóa Thông Số Thớt & Butcher</h4>
@@ -483,22 +484,22 @@
 
           <div class="p-5 rounded-2xl glass-card space-y-2.5">
             <div class="flex items-center justify-between">
-              <span class="px-2.5 py-1 rounded text-xs font-mono font-bold bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-500/20">TUẦN 4 (23/11 - 28/11)</span>
+              <span id="lblMilestoneW4" class="px-2.5 py-1 rounded text-xs font-mono font-bold bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-500/20">TUẦN 4</span>
               <i data-lucide="video" class="w-4 h-4 text-purple-500"></i>
             </div>
             <h4 class="text-sm font-bold text-slate-900 dark:text-white">SEO Quốc Tế & Video Cont Hải Phòng</h4>
-            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Video đóng cont 40ft tại cảng Hải Phòng, kiểm tra form B2B website và lập báo cáo tháng 11.</p>
+            <p id="lblMilestoneW4Desc" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Video đóng cont 40ft tại cảng Hải Phòng, kiểm tra form B2B website và lập báo cáo tháng.</p>
           </div>
 
         </div>
 
-        <!-- 2.2 Bảng Mục Tiêu Trọng Tâm Tháng 11 -->
+        <!-- 2.2 Bảng Mục Tiêu Trọng Tâm Tháng Hiện Tại -->
         <div class="rounded-2xl glass-card overflow-hidden">
           <div class="p-5 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
             <div>
               <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
                 <i data-lucide="target" class="w-5 h-5 text-amber-500"></i>
-                2.1 MỤC TIÊU TRỌNG TÂM THÁNG 11/2026
+                <span id="lblTable21Title">2.1 MỤC TIÊU TRỌNG TÂM THÁNG HIỆN TẠI</span>
               </h3>
               <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">07 Mục tiêu công tác trọng yếu cam kết sản phẩm đầu ra</p>
             </div>
@@ -531,9 +532,9 @@
             <div>
               <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
                 <i data-lucide="list-checks" class="w-5 h-5 text-purple-600 dark:text-purple-400"></i>
-                2.2 LỘ TRÌNH THỰC HIỆN CHI TIẾT 4 TUẦN THÁNG 11/2026 (27 ĐẦU VIỆC TÁC NGHIỆP)
+                <span id="lblTable22Title">2.2 LỘ TRÌNH THỰC HIỆN CHI TIẾT 4 TUẦN THÁNG HIỆN TẠI (27 ĐẦU VIỆC TÁC NGHIỆP)</span>
               </h3>
-              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Bóc tách chi tiết từng nhiệm vụ thực tế từ 02/11 đến 28/11/2026</p>
+              <p id="lblTable22Subtitle" class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Bóc tách chi tiết từng nhiệm vụ thực tế theo 4 tuần</p>
             </div>
 
             <!-- Week Filter Pills -->
@@ -573,7 +574,7 @@
             <div>
               <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
                 <i data-lucide="wallet" class="w-5 h-5 text-emerald-600 dark:text-emerald-400"></i>
-                2.3 DỰ TOÁN NGÂN SÁCH MARKETING B2B THÁNG 11/2026
+                <span id="lblTable23Title">2.3 DỰ TOÁN NGÂN SÁCH MARKETING B2B THÁNG HIỆN TẠI</span>
               </h3>
               <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Đề xuất kinh phí công cụ AI và phần mềm hỗ trợ xuất khẩu</p>
             </div>
@@ -808,8 +809,182 @@
     let currentTimeblockFilter = 'ALL';
     let doughnutChart = null;
     let octoberChart = null;
+    let calendarCtx = null;
+
+    // ==================== DYNAMIC CALENDAR ENGINE ====================
+    function computeDynamicCalendar(referenceDate) {
+      const now = referenceDate instanceof Date ? referenceDate : new Date();
+      const currM = now.getMonth() + 1; // 1..12
+      const currY = now.getFullYear();
+      const prevM = currM === 1 ? 12 : currM - 1;
+      const prevY = currM === 1 ? currY - 1 : currY;
+      const nextM = currM === 12 ? 1 : currM + 1;
+      const nextY = currM === 12 ? currY + 1 : currY;
+
+      const pad = (n) => String(n).padStart(2, '0');
+      const currMPad = pad(currM);
+      const prevMPad = pad(prevM);
+
+      // Tìm ngày Thứ Hai đầu tiên của tháng hiện tại (hoặc ngày 01 nếu đầu tháng rơi vào giữa tuần, chuẩn lịch Thứ 2 -> Thứ 7)
+      const firstDayOfMonth = new Date(currY, currM - 1, 1);
+      const dayOfWeek = firstDayOfMonth.getDay(); // 0=CN, 1=T2, ... 6=T7
+      let firstMonDate = 1;
+      if (dayOfWeek === 0) firstMonDate = 2; // Chủ nhật -> Thứ Hai là ngày 02
+      else if (dayOfWeek > 1) firstMonDate = 1; // Nếu tháng bắt đầu từ T3..T7, Tuần 1 bắt đầu ngay từ đầu tháng
+
+      const lastDayOfMonth = new Date(currY, currM, 0).getDate();
+
+      // Tính 4 tuần làm việc trong tháng hiện tại
+      const weeks = [];
+      let startD = firstMonDate;
+      for (let w = 1; w <= 4; w++) {
+        let endD = Math.min(startD + 5, lastDayOfMonth);
+        if (w === 4 && endD < lastDayOfMonth && (lastDayOfMonth - startD) <= 7) {
+          endD = Math.min(startD + 5, lastDayOfMonth);
+        }
+        const rangeStr = `${pad(startD)}/${currMPad} - ${pad(endD)}/${currMPad}`;
+        weeks.push({
+          weekNum: w,
+          startD: pad(startD),
+          endD: pad(endD),
+          monthPad: currMPad,
+          range: rangeStr,
+          label: `Tuần ${w} (${rangeStr})`,
+          upperLabel: `TUẦN ${w} (${rangeStr})`
+        });
+        startD = Math.min(endD + 2, lastDayOfMonth);
+      }
+
+      return {
+        currM, currY, prevM, prevY, nextM, nextY,
+        currMPad, prevMPad,
+        prevLabel: `Tháng ${prevM}`,
+        prevFull: `Tháng ${prevMPad}/${prevY}`,
+        prevShort: `T${prevM}`,
+        currLabel: `Tháng ${currM}`,
+        currFull: `Tháng ${currMPad}/${currY}`,
+        currShort: `T${currM}`,
+        nextLabel: `Tháng ${nextM}`,
+        weeks
+      };
+    }
+
+    // Đồng bộ động toàn bộ văn bản & mã công việc từ mẫu (T10/T11) sang Tháng Trước & Tháng Hiện Tại theo lịch
+    function applyDynamicCalendarToData(rawData, cal) {
+      const rawJson = JSON.stringify(rawData);
+      const w1 = cal.weeks[0];
+      const w2 = cal.weeks[1];
+      const w3 = cal.weeks[2];
+      const w4 = cal.weeks[3];
+
+      let dynamicJson = rawJson
+        // Thay thế các mốc tuần cố định sang tuần của tháng hiện tại
+        .replace(/02\/11 - 07\/11/g, w1.range)
+        .replace(/09\/11 - 14\/11/g, w2.range)
+        .replace(/16\/11 - 21\/11/g, w3.range)
+        .replace(/23\/11 - 28\/11/g, w4.range)
+        .replace(/02\/11/g, `${w1.startD}/${cal.currMPad}`)
+        .replace(/03\/11/g, `${ String(Math.min(Number(w1.startD)+1, 28)).padStart(2,'0') }/${cal.currMPad}`)
+        .replace(/06\/11/g, `${ String(Math.min(Number(w1.endD)-1, 28)).padStart(2,'0') }/${cal.currMPad}`)
+        .replace(/07\/11/g, `${w1.endD}/${cal.currMPad}`)
+        .replace(/12\/11/g, `${ String(Math.min(Number(w2.endD)-2, 28)).padStart(2,'0') }/${cal.currMPad}`)
+        .replace(/13\/11/g, `${ String(Math.min(Number(w2.endD)-1, 28)).padStart(2,'0') }/${cal.currMPad}`)
+        .replace(/14\/11/g, `${w2.endD}/${cal.currMPad}`)
+        .replace(/19\/11/g, `${ String(Math.min(Number(w3.endD)-2, 28)).padStart(2,'0') }/${cal.currMPad}`)
+        .replace(/20\/11/g, `${ String(Math.min(Number(w3.endD)-1, 28)).padStart(2,'0') }/${cal.currMPad}`)
+        .replace(/21\/11/g, `${w3.endD}/${cal.currMPad}`)
+        .replace(/24\/11/g, `${ String(Math.min(Number(w4.startD)+1, 28)).padStart(2,'0') }/${cal.currMPad}`)
+        .replace(/25\/11/g, `${ String(Math.min(Number(w4.startD)+2, 28)).padStart(2,'0') }/${cal.currMPad}`)
+        .replace(/26\/11/g, `${ String(Math.min(Number(w4.endD)-2, 28)).padStart(2,'0') }/${cal.currMPad}`)
+        .replace(/27\/11/g, `${ String(Math.min(Number(w4.endD)-1, 28)).padStart(2,'0') }/${cal.currMPad}`)
+        .replace(/28\/11/g, `${w4.endD}/${cal.currMPad}`)
+        // Thay thế tháng kế tiếp (tháng 12 -> nextM)
+        .replace(/tháng 12/g, `tháng ${cal.nextM}`)
+        .replace(/Tháng 12/g, `Tháng ${cal.nextM}`)
+        // Thay thế tháng hiện tại (11 -> currM) dùng placeholder tạm để không đụng khi prevM = 11
+        .replace(/THÁNG 11\/2026/g, `__CURR_UPPER_FULL__`)
+        .replace(/Tháng 11\/2026/g, `__CURR_TITLE_FULL__`)
+        .replace(/tháng 11\/2026/g, `__CURR_LOWER_FULL__`)
+        .replace(/Tháng 11/g, `__CURR_TITLE__`)
+        .replace(/tháng 11/g, `__CURR_LOWER__`)
+        .replace(/T11-/g, `__CURR_SHORT__-`)
+        .replace(/KH11-/g, `KH__CURR_NUM__-`)
+        .replace(/T11/g, `__CURR_SHORT__`)
+        // Thay thế tháng trước (10 -> prevM)
+        .replace(/THÁNG 10\/2026/g, `THÁNG ${cal.prevMPad}/${cal.prevY}`)
+        .replace(/Tháng 10\/2026/g, `Tháng ${cal.prevMPad}/${cal.prevY}`)
+        .replace(/tháng 10\/2026/g, `tháng ${cal.prevMPad}/${cal.prevY}`)
+        .replace(/Tháng 10/g, `Tháng ${cal.prevM}`)
+        .replace(/tháng 10/g, `tháng ${cal.prevM}`)
+        .replace(/T10-/g, `T${cal.prevM}-`)
+        .replace(/T10/g, `T${cal.prevM}`)
+        // Giải phóng placeholder tháng hiện tại
+        .replace(/__CURR_UPPER_FULL__/g, `THÁNG ${cal.currMPad}/${cal.currY}`)
+        .replace(/__CURR_TITLE_FULL__/g, `Tháng ${cal.currMPad}/${cal.currY}`)
+        .replace(/__CURR_LOWER_FULL__/g, `tháng ${cal.currMPad}/${cal.currY}`)
+        .replace(/__CURR_TITLE__/g, `Tháng ${cal.currM}`)
+        .replace(/__CURR_LOWER__/g, `tháng ${cal.currM}`)
+        .replace(/__CURR_SHORT__/g, `T${cal.currM}`)
+        .replace(/__CURR_NUM__/g, `${cal.currM}`);
+
+      return JSON.parse(dynamicJson);
+    }
+
+    function updateDynamicDOMHeaders(cal) {
+      const setTxt = (id, text) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+      };
+      const setHtml = (id, html) => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = html;
+      };
+
+      const w1 = cal.weeks[0];
+      const w2 = cal.weeks[1];
+      const w3 = cal.weeks[2];
+      const w4 = cal.weeks[3];
+
+      document.title = `GEMMY WOOD — Báo Cáo Tháng ${cal.prevM}/${cal.prevY} & Kế Hoạch Tháng ${cal.currM}/${cal.currY}`;
+      setTxt('headerDynamicCycleBadge', `Báo cáo T${cal.prevM}/${cal.prevY} • Kế hoạch T${cal.currM}/${cal.currY}`);
+
+      // KPI Cards
+      setTxt('kpiOctTitle', `Tiến Độ Tháng ${cal.prevM}/${cal.prevY}`);
+      setTxt('kpiNovTitle', `Kế Hoạch Tháng ${cal.currM}/${cal.currY}`);
+      setTxt('kpiNovDesc', `4 Tuần tác nghiệp + 7 Mục tiêu trọng tâm (Bàn giao V2: ${w2.endD}/${cal.currMPad})`);
+      setTxt('kpiBudgetTitle', `Dự Toán Ngân Sách T${cal.currM}`);
+
+      // Tab Navigation
+      setTxt('lblTabOct', `1. Báo Cáo Tháng ${cal.prevM}`);
+      setTxt('lblTabNov', `2. Kế Hoạch Tác Nghiệp Tháng ${cal.currM}`);
+
+      // Tab 1 Headings
+      setTxt('lblPrevChartTitle', `Tỷ Lệ Hoàn Thành Tháng ${cal.prevM}`);
+      setTxt('lblEvalCardTitle', `Đánh Giá Hiệu Suất T${cal.prevM} & Cam Kết Giải Pháp Tháng ${cal.currM}`);
+      setHtml('lblEvalSolutionText', `2 Hạng mục chậm tiến độ (Zalo duyệt truyền thông & Nội dung SEO website) sẽ được khắc phục ngay đầu tháng ${cal.currM} bằng giải pháp: <strong>Gửi duyệt trọn gói Lịch biên tập nội dung cả tháng</strong> lên Zalo và <strong>kích hoạt công cụ AI chuyên dụng dựng ảnh phối cảnh</strong> để hoàn tất Catalog V2 trước ngày ${w2.endD}/${cal.currMPad}.`);
+      setTxt('lblTargetDateV2', `${w2.endD}/${cal.currMPad}/${cal.currY}`);
+      setTxt('lblTable11Title', `1.1 CHI TIẾT KẾT QUẢ THỰC HIỆN CÔNG TÁC THÁNG ${cal.prevMPad}/${cal.prevY}`);
+      setTxt('lblPendingSubtitle', `02 Hạng mục cần xử lý triệt để trong đầu tháng ${cal.currM}/${cal.currY}`);
+      setTxt('lblProposalsTitle', `1.3 ĐỀ XUẤT PHÊ DUYỆT ĐẦU THÁNG ${cal.currMPad}/${cal.currY}`);
+
+      // Tab 2 Milestones & Headings
+      setTxt('lblMilestoneW1', w1.upperLabel);
+      setTxt('lblMilestoneW2', w2.upperLabel);
+      setTxt('lblMilestoneW2Desc', `Xuất bản bộ ảnh bối cảnh AI chất lượng cao & Bàn giao bản PDF Master Catalog V2 (Hạn ${w2.endD}/${cal.currMPad}).`);
+      setTxt('lblMilestoneW3', w3.upperLabel);
+      setTxt('lblMilestoneW4', w4.upperLabel);
+      setTxt('lblMilestoneW4Desc', `Video đóng cont 40ft tại cảng Hải Phòng, kiểm tra form B2B website và lập báo cáo tháng ${cal.currM}.`);
+
+      setTxt('lblTable21Title', `2.1 MỤC TIÊU TRỌNG TÂM THÁNG ${cal.currMPad}/${cal.currY}`);
+      setTxt('lblTable22Title', `2.2 LỘ TRÌNH THỰC HIỆN CHI TIẾT 4 TUẦN THÁNG ${cal.currMPad}/${cal.currY} (27 ĐẦU VIỆC TÁC NGHIỆP)`);
+      setTxt('lblTable22Subtitle', `Bóc tách chi tiết từng nhiệm vụ thực tế từ ${w1.startD}/${cal.currMPad} đến ${w4.endD}/${cal.currMPad}/${cal.currY}`);
+      setTxt('lblTable23Title', `2.3 DỰ TOÁN NGÂN SÁCH MARKETING B2B THÁNG ${cal.currMPad}/${cal.currY}`);
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
+      calendarCtx = computeDynamicCalendar();
+      updateDynamicDOMHeaders(calendarCtx);
+      currentData = applyDynamicCalendarToData(EMBEDDED_SYNC_DATA, calendarCtx);
       renderAll(currentData);
       lucide.createIcons();
       setupKeyboardShortcuts();
@@ -926,7 +1101,7 @@
             <strong class="text-slate-800 dark:text-slate-200">Nguyên nhân cốt lõi:</strong> ${p.root_cause}
           </div>
           <div class="text-xs sm:text-sm text-emerald-800 dark:text-emerald-300/90 bg-emerald-50 dark:bg-emerald-950/20 p-3 rounded-xl border border-emerald-200 dark:border-emerald-900/30 leading-relaxed font-medium">
-            <strong class="text-emerald-900 dark:text-emerald-200 font-bold">Giải pháp Tháng 11:</strong> ${p.solution}
+            <strong class="text-emerald-900 dark:text-emerald-200 font-bold">Giải pháp Tháng ${calendarCtx ? calendarCtx.currM : ''}:</strong> ${p.solution}
           </div>
         </div>
       `).join('');
@@ -1205,8 +1380,8 @@
 
       try {
         const tabNames = [
-          'Tổng Quan Marketing Tháng 10',
-          'Kế Hoạch Marketing Tháng 11',
+          `Tổng Quan Marketing Tháng ${calendarCtx ? calendarCtx.prevM : 10}`,
+          `Kế Hoạch Marketing Tháng ${calendarCtx ? calendarCtx.currM : 11}`,
           'Định Mức & Lịch Time-Blocking'
         ];
 
@@ -1344,8 +1519,10 @@
       const r = all.find(item => item.id === recordId);
       if (r) {
         const sec = r.section || '';
-        if (sec.includes('Tháng 10') || sec.includes('Tồn Đọng') || sec.includes('Đề Xuất')) switchTab('october');
-        else if (sec.includes('T11') || sec.includes('Ngân Sách')) switchTab('november');
+        const prevStr = calendarCtx ? `Tháng ${calendarCtx.prevM}` : 'Tháng 10';
+        const currShort = calendarCtx ? `T${calendarCtx.currM}` : 'T11';
+        if (sec.includes(prevStr) || sec.includes('Kết Quả') || sec.includes('Tồn Đọng') || sec.includes('Đề Xuất')) switchTab('october');
+        else if (sec.includes(currShort) || sec.includes('Mục Tiêu') || sec.includes('Kế Hoạch') || sec.includes('Ngân Sách')) switchTab('november');
         else switchTab('workload');
       }
     }
