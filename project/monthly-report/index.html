@@ -3,18 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BÁO CÁO CÔNG TÁC MARKETING & KẾ HOẠCH HÀNG THÁNG — GEMMY WOOD</title>
-
-  <!-- Google Fonts: Plus Jakarta Sans (UI) & JetBrains Mono (Data) -->
+  <title>Báo Cáo Công Tác & Kế Hoạch Chi Tiết - Gemmy Wood</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310b981' stroke-width='2'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <!-- Core Libraries -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -35,321 +31,251 @@
             obsidian: {
               base: '#0B0F19',
               surface: 'rgba(17, 24, 39, 0.75)',
-              elevated: 'rgba(31, 41, 55, 0.85)',
-              border: 'rgba(255, 255, 255, 0.08)',
+              card: 'rgba(30, 41, 59, 0.55)',
+              border: 'rgba(51, 65, 85, 0.45)'
             }
           }
         }
       }
     }
   </script>
-
   <style>
-    /* Custom Scrollbar */
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: radial-gradient(circle at 50% 0%, #172554 0%, #0B0F19 75%);
+      min-height: 100vh;
+      color: #F8FAFC;
+    }
+    .light-theme body {
+      background: #F8FAFC;
+      color: #0F172A;
+    }
+    .glass-card {
+      background: rgba(17, 24, 39, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(51, 65, 85, 0.45);
+    }
+    .light-theme .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      color: #0F172A;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    .light-theme .text-white { color: #0F172A !important; }
+    .light-theme .text-slate-300 { color: #334155 !important; }
+    .light-theme .text-slate-400 { color: #64748B !important; }
+    .light-theme .bg-slate-900 { background-color: #FFFFFF !important; }
+    .light-theme .bg-slate-950 { background-color: #F1F5F9 !important; }
+    .light-theme .border-slate-800 { border-color: #E2E8F0 !important; }
+    
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.2); border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.4); }
+    ::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.3); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(100, 116, 139, 0.6); }
 
-    /* Print Optimization */
     @media print {
-      body { background: #fff !important; color: #000 !important; font-size: 11pt; }
-      .no-print { display: none !important; }
-      .print-only { display: block !important; }
-      .bg-obsidian-surface, .bg-obsidian-base, .bg-slate-900, .bg-slate-800 { background: #fff !important; color: #000 !important; border-color: #cbd5e1 !important; }
-      .text-white, .text-slate-200, .text-slate-300 { color: #0f172a !important; }
-      .shadow-2xl, .shadow-lg { box-shadow: none !important; }
-      .chart-container { max-height: 250px !important; }
+      body { background: white !important; color: black !important; font-size: 11pt; }
+      .no-print, header, nav, #globalToolbar, #syncBar, #searchModal, #drawerBackdrop, #drawerPanel { display: none !important; }
+      .glass-card { background: transparent !important; border: 1px solid #ccc !important; box-shadow: none !important; backdrop-filter: none !important; }
+      .print-break { page-break-before: always; }
+      table { border-collapse: collapse; width: 100%; }
+      th, td { border: 1px solid #ddd !important; padding: 6px !important; color: black !important; }
     }
   </style>
 </head>
+<body class="transition-colors duration-300 antialiased selection:bg-brand-500 selection:text-white">
 
-<body class="bg-[#0B0F19] text-slate-100 min-h-screen font-sans selection:bg-brand-500 selection:text-white transition-colors duration-200">
-
-  <!-- ==================== TOP NAVIGATION BAR ==================== -->
-  <header class="sticky top-0 z-40 bg-[#0B0F19]/90 backdrop-blur-md border-b border-slate-800/80 px-4 lg:px-8 py-3 no-print">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+  <!-- ==================== TOP NAVIGATION ==================== -->
+  <header class="sticky top-0 z-40 border-b border-slate-800/80 glass-card">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       
-      <!-- Brand & Title -->
+      <!-- Logo & Branding -->
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-white font-black text-lg">
-          GW
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-brand-500/20">
+          <i data-lucide="trees" class="w-5 h-5 text-white"></i>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <h1 class="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-2">
-              GEMMY WOOD
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                Marketing B2B Hub
-              </span>
-            </h1>
+            <span class="font-extrabold tracking-tight text-white text-base sm:text-lg">GEMMY WOOD</span>
+            <span class="px-2 py-0.5 text-[10px] font-mono tracking-wider uppercase rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">1-Sheet Architecture</span>
           </div>
-          <p class="text-xs text-slate-400 hidden sm:block">
-            Báo Cáo Công Tác & Kế Hoạch Hành Động • Kiến trúc 1 Sheet / Tháng
-          </p>
+          <p class="text-[11px] text-slate-400 font-medium hidden sm:block">Báo Cáo Công Tác & Kế Hoạch Chi Tiết | Phòng Marketing & B2B</p>
         </div>
       </div>
 
-      <!-- Quick Nav Links & Actions -->
+      <!-- Actions & Shortcuts -->
       <div class="flex items-center gap-2 sm:gap-3">
-        
-        <!-- Month Selector Dropdown (Kiến trúc 1 Sheet / Tháng) -->
-        <div class="flex items-center gap-1.5 bg-slate-900 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-slate-200">
-          <i data-lucide="calendar" class="w-3.5 h-3.5 text-emerald-400 shrink-0"></i>
-          <select id="monthSelect" onchange="onMonthChange(this.value)" class="bg-transparent text-white font-bold focus:outline-none cursor-pointer">
-            <option value="Tháng 10_2026" class="bg-slate-900 text-white">Tháng 10/2026 (Sheet Hiện Tại)</option>
-            <option value="Tháng 11_2026" class="bg-slate-900 text-white">Tháng 11/2026 (Kỳ Kế Tiếp)</option>
-            <option value="Tháng 12_2026" class="bg-slate-900 text-white">Tháng 12/2026</option>
-          </select>
-        </div>
-
-        <!-- Link to Market Research Dashboard -->
-        <a href="../marketing-research/index.html" class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition">
-          <i data-lucide="line-chart" class="w-3.5 h-3.5 text-emerald-400"></i>
-          <span>Market Research</span>
-        </a>
-
-        <!-- Search Omnibar Trigger -->
-        <button onclick="toggleOmnibar()" class="inline-flex items-center gap-2 px-3 py-1.5 text-xs rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700 transition">
+        <!-- Search trigger -->
+        <button onclick="openSearchModal()" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white text-xs flex items-center gap-2 transition hover:border-slate-700">
           <i data-lucide="search" class="w-3.5 h-3.5"></i>
-          <span class="hidden sm:inline">Tìm kiếm...</span>
-          <kbd class="hidden sm:inline text-[10px] font-mono bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded border border-slate-700">⌘K</kbd>
+          <span class="hidden md:inline">Tìm kiếm nhanh</span>
+          <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-400 border border-slate-700">⌘K</kbd>
         </button>
 
-        <!-- Export / Print Button -->
-        <button onclick="window.print()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm shadow-emerald-600/30 transition">
-          <i data-lucide="printer" class="w-3.5 h-3.5"></i>
-          <span class="hidden sm:inline">In Báo Cáo</span>
+        <!-- Print PDF -->
+        <button onclick="window.print()" title="In Báo Cáo / Xuất PDF" class="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition hover:border-slate-700">
+          <i data-lucide="printer" class="w-4 h-4"></i>
         </button>
 
-        <!-- Theme Toggle Button -->
-        <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition" title="Đổi giao diện Sáng / Tối">
-          <i data-lucide="sun" id="themeIcon" class="w-4 h-4"></i>
+        <!-- Dark/Light Mode -->
+        <button onclick="toggleTheme()" title="Đổi giao diện Sáng/Tối" class="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition hover:border-slate-700">
+          <i id="themeIcon" data-lucide="sun" class="w-4 h-4"></i>
         </button>
       </div>
 
     </div>
   </header>
 
-  <!-- ==================== MAIN CONTAINER ==================== -->
-  <main class="max-w-7xl mx-auto px-4 lg:px-8 py-6 space-y-6">
-
-    <!-- ==================== GOOGLE SHEET SYNC BAR ==================== -->
-    <div class="rounded-xl bg-slate-900/90 border border-slate-800 p-3.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs no-print">
-      <div class="flex items-center gap-2.5">
+  <!-- ==================== GOOGLE SHEETS LIVE SYNC BAR ==================== -->
+  <section id="syncBar" class="border-b border-slate-800/60 bg-slate-950/60 backdrop-blur-md no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+      
+      <div class="flex items-center gap-2">
         <span id="syncIndicator" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-        <div>
-          <span class="font-bold text-white">Nguồn Dữ Liệu: Google Sheets (1 Sheet / Tháng)</span>
-          <span id="syncStatusLabel" class="text-slate-400 ml-2">Đang nạp từ sheet <strong class="text-emerald-400" id="currentSheetLabel">Tháng 10_2026</strong></span>
-        </div>
+        <span id="syncStatusLabel" class="text-slate-300 font-medium">Đang sử dụng dữ liệu 1 Sheet: <span class="text-white font-mono font-semibold">Tháng 10 & Kế hoạch T11</span></span>
+        <span class="text-slate-500">|</span>
+        <span class="text-slate-400">Cấu trúc chuẩn Google Sheets (Mỗi tháng 1 Sheet độc lập)</span>
       </div>
+
       <div class="flex items-center gap-2 w-full sm:w-auto">
-        <input type="text" id="customSheetId" placeholder="Nhập Google Spreadsheet ID..." class="px-2.5 py-1 text-[11px] rounded bg-slate-950 border border-slate-700 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500 flex-1 sm:w-64" value="1qgrD4aJsYw2Tp7tyiTi_NCicLdP0PtXmo-gBLrvKCaI">
-        <button onclick="loadFromGoogleSheet()" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-medium flex items-center gap-1 transition shrink-0">
-          <i data-lucide="refresh-cw" class="w-3 h-3"></i>
-          <span>Đồng Bộ Sheet</span>
+        <select id="monthSelect" onchange="changeMonthDataset(this.value)" class="bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-slate-300 text-xs focus:ring-1 focus:ring-brand-500 focus:outline-none">
+          <option value="Tháng 10_2026" selected>Tháng 10/2026 & Kế Hoạch T11 (62 dòng)</option>
+        </select>
+
+        <button onclick="toggleSheetConfig()" class="text-xs px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5 transition">
+          <i data-lucide="link" class="w-3.5 h-3.5"></i>
+          <span>Kết nối Google Sheet</span>
         </button>
       </div>
+
     </div>
 
-    <!-- ==================== 1. EXECUTIVE BRIEFING HERO ==================== -->
-    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900/90 to-emerald-950/40 border border-slate-800 p-5 sm:p-6 shadow-xl">
-      <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-        <div class="space-y-2 max-w-3xl">
-          <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            Executive Briefing • Chu Kỳ Báo Cáo Tháng 10 & Kế Hoạch Tháng 11
-          </div>
-          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
-            Hoàn Thiện Nền Tảng Tài Liệu B2B & Chuẩn Hóa Lộ Trình 48h/Tuần
-          </h2>
-          <p class="text-sm text-slate-300 leading-relaxed">
-            Dữ liệu toàn diện được lưu trữ trong <strong>01 Sheet duy nhất</strong> trên Google Sheet, giúp quản lý tập trung và tự động tổng hợp số liệu lên Dashboard GitHub. Tháng 10 hoàn thành bản thảo <strong>Catalog B2B V2 (36 trang)</strong>, làm sạch website, chuẩn hóa thông số EGP và 3 mẫu túi giấy. Kế hoạch Tháng 11 tập trung bàn giao Master PDF Catalog V2 trước <strong>17:00 ngày 14/11</strong> và mở rộng mạng lưới Buyer quốc tế trên LinkedIn.
-          </p>
-        </div>
-
-        <!-- 3 Highlight Pills -->
-        <div class="grid grid-cols-3 gap-3 w-full lg:w-auto shrink-0">
-          <div class="p-3 rounded-xl bg-slate-800/80 border border-slate-700/60 text-center">
-            <div class="text-xs text-slate-400 font-medium">Định Mức</div>
-            <div class="text-lg font-black text-emerald-400 font-mono mt-0.5">48h/tuần</div>
-            <div class="text-[10px] text-slate-500">192h/tháng</div>
-          </div>
-          <div class="p-3 rounded-xl bg-slate-800/80 border border-slate-700/60 text-center">
-            <div class="text-xs text-slate-400 font-medium">Hạn Catalog V2</div>
-            <div class="text-lg font-black text-amber-400 font-mono mt-0.5">14/11</div>
-            <div class="text-[10px] text-slate-500">Master PDF</div>
-          </div>
-          <div class="p-3 rounded-xl bg-slate-800/80 border border-slate-700/60 text-center">
-            <div class="text-xs text-slate-400 font-medium">Tổng Dữ Liệu</div>
-            <div id="heroTotalRecords" class="text-lg font-black text-blue-400 font-mono mt-0.5">84</div>
-            <div class="text-[10px] text-slate-500">Hàng / 1 Sheet</div>
-          </div>
-        </div>
+    <!-- Hidden Sheet Config Dropdown -->
+    <div id="sheetConfigPanel" class="hidden border-t border-slate-800 px-4 sm:px-8 py-3 bg-slate-900/90 text-xs space-y-2">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+        <label class="text-slate-300 font-medium whitespace-nowrap">Google Sheet ID:</label>
+        <input type="text" id="customSheetId" value="1Z7WJ0q_example_google_sheet_id" placeholder="Nhập Google Spreadsheet ID công khai..." class="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-slate-200 text-xs w-full sm:w-96 focus:ring-1 focus:ring-brand-500 focus:outline-none font-mono">
+        <button onclick="loadFromGoogleSheet()" class="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-medium flex items-center gap-1.5 transition">
+          <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+          <span>Đồng bộ từ Google Sheet</span>
+        </button>
       </div>
+      <p class="text-slate-400 text-[11px]">
+        💡 Bảng tính Google Sheet cần được cấu hình "Bất kỳ ai có đường liên kết đều có thể xem". Dashboard sẽ gọi trực tiếp qua Google Visualization API (GViz).
+      </p>
     </div>
+  </section>
 
-    <!-- ==================== 2. KPI PULSE BENTO GRID ==================== -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+  <!-- ==================== MAIN DASHBOARD CONTAINER ==================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    
+    <!-- ==================== HERO BENTO GRID KPIS ==================== -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       
-      <!-- Card 1: Tiến độ Tháng 10 -->
-      <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800/80 hover:border-slate-700 transition shadow-sm">
-        <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
-          <span>Tiến Độ Tháng 10</span>
-          <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+      <!-- Card 1: Tổng số mục ghi nhận -->
+      <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden group hover:border-slate-700 transition">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold text-slate-400">Dữ Liệu Chuẩn 1 Sheet</span>
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+            <i data-lucide="table-2" class="w-4 h-4"></i>
+          </div>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span id="kpiOctCount" class="text-2xl font-bold font-mono text-white">7 / 7</span>
-          <span class="text-xs text-emerald-400 font-medium font-mono">100% Khung</span>
+        <div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-white font-mono tracking-tight" id="heroTotalRecords">62</div>
+          <p class="text-[11px] text-slate-400 mt-1">Dòng dữ liệu phẳng, mỗi tháng 1 Sheet</p>
         </div>
-        <p class="text-[11px] text-slate-400 mt-2 truncate">
-          Catalog V2, Web sạch, EGP, 3 mẫu túi giấy
-        </p>
+        <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-emerald-500/5 rounded-full blur-xl group-hover:bg-emerald-500/10 transition"></div>
       </div>
 
-      <!-- Card 2: Mục tiêu Tháng 11 -->
-      <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800/80 hover:border-slate-700 transition shadow-sm">
-        <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
-          <span>Mục Tiêu Tháng 11</span>
-          <i data-lucide="target" class="w-4 h-4 text-amber-400"></i>
+      <!-- Card 2: Kết quả Tháng 10 -->
+      <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden group hover:border-slate-700 transition">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold text-slate-400">Kết Quả Tháng 10</span>
+          <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center">
+            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+          </div>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span id="kpiNovFocusCount" class="text-2xl font-bold font-mono text-white">7</span>
-          <span class="text-xs text-amber-400 font-medium font-mono">Trọng tâm</span>
+        <div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono tracking-tight" id="kpiOctCount">7 / 7</div>
+          <p class="text-[11px] text-slate-400 mt-1">100% mục tiêu cốt lõi hoàn tất</p>
         </div>
-        <p class="text-[11px] text-slate-400 mt-2 truncate">
-          Catalog V2 PDF (14/11), Fanpage, TikTok, LinkedIn
-        </p>
+        <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-blue-500/5 rounded-full blur-xl group-hover:bg-blue-500/10 transition"></div>
       </div>
 
-      <!-- Card 3: Định mức giờ công -->
-      <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800/80 hover:border-slate-700 transition shadow-sm">
-        <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
-          <span>Định Mức Giờ Công</span>
-          <i data-lucide="clock" class="w-4 h-4 text-blue-400"></i>
+      <!-- Card 3: Kế hoạch chi tiết Tháng 11 -->
+      <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden group hover:border-slate-700 transition">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold text-slate-400">Kế Hoạch Chi Tiết T11</span>
+          <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center">
+            <i data-lucide="calendar-check" class="w-4 h-4"></i>
+          </div>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-bold font-mono text-white">48h</span>
-          <span class="text-xs text-blue-400 font-medium font-mono">/tuần</span>
+        <div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-purple-400 font-mono tracking-tight" id="kpiNovTasksCount">27</div>
+          <p class="text-[11px] text-slate-400 mt-1">Đầu việc tác nghiệp chia 4 tuần</p>
         </div>
-        <p class="text-[11px] text-slate-400 mt-2 truncate">
-          Thứ 2 – Thứ 7 (08:00 – 17:00, lấp đầy 100%)
-        </p>
+        <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-purple-500/5 rounded-full blur-xl group-hover:bg-purple-500/10 transition"></div>
       </div>
 
-      <!-- Card 4: Đề xuất phê duyệt -->
-      <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800/80 hover:border-slate-700 transition shadow-sm">
-        <div class="flex items-center justify-between text-slate-400 text-xs mb-2">
-          <span>Đề Xuất Ban Giám Đốc</span>
-          <i data-lucide="file-check-2" class="w-4 h-4 text-purple-400"></i>
+      <!-- Card 4: Lịch làm việc Time-blocking -->
+      <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden group hover:border-slate-700 transition">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold text-slate-400">Lịch Time-Blocking</span>
+          <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center">
+            <i data-lucide="clock" class="w-4 h-4"></i>
+          </div>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span id="kpiProposalsCount" class="text-2xl font-bold font-mono text-white">02</span>
-          <span class="text-xs text-purple-400 font-medium font-mono">Đề xuất</span>
+        <div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-amber-400 font-mono tracking-tight" id="kpiTimeblocksCount">23</div>
+          <p class="text-[11px] text-slate-400 mt-1">Khung giờ làm việc cố định Thứ 2 - Thứ 7</p>
         </div>
-        <p class="text-[11px] text-slate-400 mt-2 truncate">
-          Kinh phí AI ~300k & Phê duyệt Lịch cả tháng
-        </p>
+        <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-amber-500/5 rounded-full blur-xl group-hover:bg-amber-500/10 transition"></div>
       </div>
 
     </div>
 
-    <!-- ==================== 3. BI VISUALIZATION LAYER ==================== -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      
-      <!-- Chart 1: Cơ cấu giờ công 48h/tuần (Doughnut) -->
-      <div class="p-5 rounded-2xl bg-slate-900/70 border border-slate-800/80 flex flex-col justify-between">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h3 class="text-sm font-bold text-white flex items-center gap-2">
-              <i data-lucide="pie-chart" class="w-4 h-4 text-emerald-400"></i>
-              Phân Bổ Định Mức Giờ Công
-            </h3>
-            <p class="text-xs text-slate-400 mt-0.5">Tổng hợp từ sheet (48h/tuần = 192h/tháng)</p>
-          </div>
-          <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-            100% Lấp đầy
-          </span>
-        </div>
-        <div class="relative h-60 w-full flex items-center justify-center">
-          <canvas id="workloadDoughnutChart"></canvas>
-        </div>
-        <div class="text-[11px] text-slate-400 text-center mt-3 pt-3 border-t border-slate-800">
-          Tự động bóc tách từ các dòng phân hệ Định Mức Giờ Công
-        </div>
-      </div>
-
-      <!-- Chart 2: Khối lượng đầu ra Tháng 11 theo Kênh (Bar Chart) -->
-      <div class="p-5 rounded-2xl bg-slate-900/70 border border-slate-800/80 flex flex-col justify-between lg:col-span-2">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h3 class="text-sm font-bold text-white flex items-center gap-2">
-              <i data-lucide="bar-chart-3" class="w-4 h-4 text-amber-400"></i>
-              Kế Hoạch Khối Lượng Đầu Ra Tháng 11 Theo Kênh
-            </h3>
-            <p class="text-xs text-slate-400 mt-0.5">Chỉ tiêu bàn giao định kỳ & sản phẩm trọng điểm</p>
-          </div>
-          <span class="text-xs font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">
-            Tháng 11/2026
-          </span>
-        </div>
-        <div class="relative h-60 w-full">
-          <canvas id="deliverablesBarChart"></canvas>
-        </div>
-        <div class="flex items-center justify-between text-[11px] text-slate-400 mt-3 pt-3 border-t border-slate-800">
-          <span>Cam kết: Đúng lịch, đồng bộ đa kênh, chuẩn hóa quy cách xuất khẩu</span>
-          <span class="font-mono text-amber-400">Hạn chót V2: 14/11</span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ==================== 4. TABS & DETAILED DATA SECTIONS ==================== -->
+    <!-- ==================== TABS BAR ==================== -->
     <div class="space-y-4">
       
-      <!-- Tab Buttons Header -->
-      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
-        <div class="flex items-center gap-2">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3 no-print">
+        <!-- Tab Navigation Buttons -->
+        <div class="flex flex-wrap items-center gap-2">
           <button id="btnTabOct" onclick="switchTab('october')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-emerald-600 text-white shadow-sm">
-            <i data-lucide="calendar-check" class="w-4 h-4"></i>
-            <span>1. Kết Quả & Đề Xuất</span>
-            <span class="text-[10px] px-1.5 py-0.2 rounded bg-white/20 font-mono">Review</span>
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            <span>1. Kết Quả & Đề Xuất Tháng 10</span>
           </button>
-          
           <button id="btnTabNov" onclick="switchTab('november')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300">
-            <i data-lucide="compass" class="w-4 h-4"></i>
-            <span>2. Kế Hoạch & Lộ Trình</span>
-            <span class="text-[10px] px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 font-mono">4 Tuần</span>
+            <i data-lucide="calendar-days" class="w-4 h-4"></i>
+            <span>2. Kế Hoạch Làm Việc Chi Tiết Tháng 11</span>
           </button>
-          
           <button id="btnTabWorkload" onclick="switchTab('workload')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 text-slate-300">
-            <i data-lucide="calendar-range" class="w-4 h-4"></i>
-            <span>3. Định Mức & Time-Blocking</span>
-            <span class="text-[10px] px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-300 font-mono">48h/Tuần</span>
+            <i data-lucide="clock-4" class="w-4 h-4"></i>
+            <span>3. Lịch Tác Nghiệp Hàng Ngày (Time-Blocking)</span>
           </button>
         </div>
 
-        <!-- Filter / Quick Action for active tab -->
-        <div id="tabSubFilters" class="flex items-center gap-2">
-          <!-- Dynamic Filter injected by JS -->
+        <!-- Filter Status / Actions -->
+        <div class="text-xs text-slate-400 flex items-center gap-2">
+          <span>Nhấn vào bất kỳ dòng nào để mở</span>
+          <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono text-[11px] border border-slate-700">Drawer Chi Tiết 360°</span>
         </div>
       </div>
 
-      <!-- ==================== TAB 1 CONTENT: TỔNG QUAN THÁNG 10 ==================== -->
+      <!-- ==================== TAB 1 CONTENT: THÁNG 10 ==================== -->
       <div id="tabContentOctober" class="space-y-6">
         
-        <!-- 1.1 Bảng 7 Hạng mục hoàn thành -->
+        <!-- 1.1 Bảng Kết Quả Tháng 10 -->
         <div class="rounded-2xl bg-slate-900/60 border border-slate-800 overflow-hidden">
           <div class="p-4 sm:px-6 border-b border-slate-800 flex items-center justify-between">
             <div>
               <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
-                1. Kết Quả Thực Hiện Công Tác Tháng 10/2026
+                <i data-lucide="badge-check" class="w-4 h-4 text-emerald-400"></i>
+                1.1 Báo Cáo Kết Quả Đạt Được Tháng 10/2026
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Chi tiết nội dung triển khai và sản phẩm đầu ra đã nghiệm thu</p>
+              <p class="text-xs text-slate-400 mt-0.5">07 Hạng mục cốt lõi đã hoàn thành theo kế hoạch công tác</p>
             </div>
             <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-              Đã hoàn thành 100%
+              07/07 Hoàn thành
             </span>
           </div>
 
@@ -358,9 +284,9 @@
               <thead class="bg-slate-950/60 text-slate-400 font-mono uppercase text-[11px] border-b border-slate-800">
                 <tr>
                   <th class="py-3 px-4 w-12 text-center">STT</th>
-                  <th class="py-3 px-4 w-52">Hạng Mục Công Việc</th>
-                  <th class="py-3 px-4">Nội Dung Triển Khai</th>
-                  <th class="py-3 px-4 w-72">Sản Phẩm Đầu Ra</th>
+                  <th class="py-3 px-4 w-56">Hạng Mục</th>
+                  <th class="py-3 px-4">Nội Dung Tác Nghiệp Chi Tiết</th>
+                  <th class="py-3 px-4 w-64">Sản Phẩm Đầu Ra / Bàn Giao</th>
                   <th class="py-3 px-4 w-32 text-center">Trạng Thái</th>
                 </tr>
               </thead>
@@ -371,37 +297,45 @@
           </div>
         </div>
 
-        <!-- 1.2 Bảng Tồn đọng & Giải pháp & 1.3 Đề xuất phê duyệt -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- 1.2 & 1.3: Tồn đọng & Đề xuất -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           
-          <!-- Tồn đọng & Giải pháp -->
-          <div class="rounded-2xl bg-slate-900/60 border border-slate-800 p-5 space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i>
-                2. Nội Dung Tồn Đọng & Giải Pháp Khắc Phục
-              </h3>
-              <span class="text-[10px] font-mono bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded border border-amber-500/20">
-                02 Đầu việc
+          <!-- Tồn đọng & Khắc phục -->
+          <div class="rounded-2xl bg-slate-900/60 border border-slate-800 overflow-hidden flex flex-col justify-between">
+            <div class="p-4 sm:px-6 border-b border-slate-800 flex items-center justify-between">
+              <div>
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                  <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i>
+                  1.2 Tồn Đọng & Phương Án Khắc Phục
+                </h3>
+                <p class="text-xs text-slate-400 mt-0.5">02 Hạng mục cần xử lý triệt để trong đầu tháng 11</p>
+              </div>
+              <span class="text-xs font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                Ưu tiên xử lý
               </span>
             </div>
-            <div id="containerOctoberPending" class="space-y-3">
+
+            <div class="p-4 sm:p-6 space-y-4" id="containerOctoberPending">
               <!-- Injected via JS -->
             </div>
           </div>
 
-          <!-- Đề xuất phê duyệt gửi Ban Giám Đốc -->
-          <div class="rounded-2xl bg-slate-900/60 border border-slate-800 p-5 space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <i data-lucide="file-check" class="w-4 h-4 text-purple-400"></i>
-                3. Đề Xuất Phê Duyệt Đầu Tháng 11
-              </h3>
-              <span class="text-[10px] font-mono bg-purple-500/10 text-purple-400 px-2 py-0.5 rounded border border-purple-500/20">
-                Trình Ban Giám Đốc
+          <!-- Đề xuất phê duyệt -->
+          <div class="rounded-2xl bg-slate-900/60 border border-slate-800 overflow-hidden flex flex-col justify-between">
+            <div class="p-4 sm:px-6 border-b border-slate-800 flex items-center justify-between">
+              <div>
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                  <i data-lucide="sparkles" class="w-4 h-4 text-purple-400"></i>
+                  1.3 Đề Xuất Phê Duyệt Đầu Tháng 11
+                </h3>
+                <p class="text-xs text-slate-400 mt-0.5">03 Nội dung trình Ban Giám đốc phê duyệt triển khai</p>
+              </div>
+              <span class="text-xs font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">
+                Trình duyệt
               </span>
             </div>
-            <div id="containerOctoberProposals" class="space-y-3">
+
+            <div class="p-4 sm:p-6 space-y-4" id="containerOctoberProposals">
               <!-- Injected via JS -->
             </div>
           </div>
@@ -410,60 +344,68 @@
 
       </div>
 
-      <!-- ==================== TAB 2 CONTENT: KẾ HOẠCH THÁNG 11 ==================== -->
+      <!-- ==================== TAB 2 CONTENT: KẾ HOẠCH CHI TIẾT THÁNG 11 ==================== -->
       <div id="tabContentNovember" class="hidden space-y-6">
         
-        <!-- 2.1 Bảng 7 Mục tiêu trọng tâm -->
-        <div class="rounded-2xl bg-slate-900/60 border border-slate-800 overflow-hidden">
-          <div class="p-4 sm:px-6 border-b border-slate-800 flex items-center justify-between">
-            <div>
-              <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <i data-lucide="flag" class="w-4 h-4 text-amber-400"></i>
-                1. Mục Tiêu Trọng Tâm Tháng 11/2026
-              </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Sản phẩm đầu ra cam kết & mốc thời hạn bàn giao</p>
+        <!-- 2.1 Các Milestone Trọng Tâm Tháng 11 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2 relative overflow-hidden">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">TUẦN 1 (02/11 - 07/11)</span>
+              <i data-lucide="flag" class="w-4 h-4 text-blue-400"></i>
             </div>
-            <span class="text-xs font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
-              Kế hoạch hành động
-            </span>
+            <h4 class="text-xs font-bold text-white">Khởi Động & Duyệt Lịch Tháng</h4>
+            <p class="text-[11px] text-slate-400 leading-relaxed">Họp giao ban, duyệt Lịch biên tập các kênh và kích hoạt tài khoản AI dựng ảnh bối cảnh gỗ.</p>
           </div>
 
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-slate-950/60 text-slate-400 font-mono uppercase text-[11px] border-b border-slate-800">
-                <tr>
-                  <th class="py-3 px-4 w-12 text-center">STT</th>
-                  <th class="py-3 px-4 w-60">Nhóm Nhiệm Vụ</th>
-                  <th class="py-3 px-4">Mục Tiêu Công Việc</th>
-                  <th class="py-3 px-4 w-64">Sản Phẩm Đầu Ra</th>
-                  <th class="py-3 px-4 w-36 text-center">Thời Hạn</th>
-                </tr>
-              </thead>
-              <tbody id="tableNovemberFocus" class="divide-y divide-slate-800/60">
-                <!-- Injected via JS -->
-              </tbody>
-            </table>
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2 relative overflow-hidden">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">TUẦN 2 (09/11 - 14/11)</span>
+              <i data-lucide="award" class="w-4 h-4 text-amber-400"></i>
+            </div>
+            <h4 class="text-xs font-bold text-white">Bàn Giao Master Catalog V2</h4>
+            <p class="text-[11px] text-slate-400 leading-relaxed">Xuất bản bộ ảnh bối cảnh AI chất lượng cao & Bàn giao chính thức file Master PDF Catalog B2B V2 (14/11).</p>
           </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2 relative overflow-hidden">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">TUẦN 3 (16/11 - 21/11)</span>
+              <i data-lucide="globe" class="w-4 h-4 text-emerald-400"></i>
+            </div>
+            <h4 class="text-xs font-bold text-white">Chuẩn Hóa Thông Số Thớt & Butcher</h4>
+            <p class="text-[11px] text-slate-400 leading-relaxed">Cập nhật thông số Thớt gỗ keo & Mặt bàn Butcher Block lên gemmywood.vn; bài viết SEO tiếng Anh xuất khẩu.</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2 relative overflow-hidden">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">TUẦN 4 (23/11 - 28/11)</span>
+              <i data-lucide="video" class="w-4 h-4 text-purple-400"></i>
+            </div>
+            <h4 class="text-xs font-bold text-white">SEO Quốc Tế & Video Đóng Cont</h4>
+            <p class="text-[11px] text-slate-400 leading-relaxed">Video đóng container 40ft tại cảng Hải Phòng, kiểm tra form B2B website và lập báo cáo tháng 11.</p>
+          </div>
+
         </div>
 
-        <!-- 2.2 Lộ trình 4 tuần chi tiết -->
+        <!-- 2.2 Bảng Kế Hoạch Làm Việc Chi Tiết Tháng 11 -->
         <div class="rounded-2xl bg-slate-900/60 border border-slate-800 overflow-hidden">
           <div class="p-4 sm:px-6 border-b border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
               <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <i data-lucide="calendar-days" class="w-4 h-4 text-blue-400"></i>
-                2. Lộ Trình Thực Hiện Chi Tiết 4 Tuần Tháng 11/2026
+                <i data-lucide="list-checks" class="w-4 h-4 text-purple-400"></i>
+                BẢNG KẾ HOẠCH LÀM VIỆC CHI TIẾT THÁNG 11/2026 (27 ĐẦU VIỆC TÁC NGHIỆP)
               </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Bóc tách từng đầu việc theo tuần từ 02/11 đến 28/11/2026</p>
+              <p class="text-xs text-slate-400 mt-0.5">Chi tiết hóa lộ trình tác nghiệp thực tế từ 02/11 đến 28/11/2026 kèm sản phẩm đầu ra và thời hạn</p>
             </div>
 
             <!-- Week Filter Pills -->
             <div class="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs font-medium">
-              <button onclick="filterRoadmap('ALL')" id="filterWAll" class="px-2.5 py-1 rounded-lg bg-slate-800 text-white">Tất cả</button>
-              <button onclick="filterRoadmap('Tuần 1')" id="filterW1" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">Tuần 1</button>
-              <button onclick="filterRoadmap('Tuần 2')" id="filterW2" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">Tuần 2 (V2)</button>
-              <button onclick="filterRoadmap('Tuần 3')" id="filterW3" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">Tuần 3</button>
-              <button onclick="filterRoadmap('Tuần 4')" id="filterW4" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">Tuần 4</button>
+              <button onclick="filterNovPlan('ALL')" id="filterPlanAll" class="px-2.5 py-1 rounded-lg bg-slate-800 text-white">Tất cả (27)</button>
+              <button onclick="filterNovPlan('Tuần 1')" id="filterPlanW1" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">Tuần 1</button>
+              <button onclick="filterNovPlan('Tuần 2')" id="filterPlanW2" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">Tuần 2 (Catalog V2)</button>
+              <button onclick="filterNovPlan('Tuần 3')" id="filterPlanW3" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">Tuần 3</button>
+              <button onclick="filterNovPlan('Tuần 4')" id="filterPlanW4" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white">Tuần 4</button>
             </div>
           </div>
 
@@ -471,14 +413,17 @@
             <table class="w-full text-left text-xs">
               <thead class="bg-slate-950/60 text-slate-400 font-mono uppercase text-[11px] border-b border-slate-800">
                 <tr>
-                  <th class="py-3 px-4 w-24">Tuần</th>
-                  <th class="py-3 px-4 w-52">Hạng Mục</th>
+                  <th class="py-3 px-3 w-12 text-center">STT</th>
+                  <th class="py-3 px-3 w-28">Mã ID</th>
+                  <th class="py-3 px-4 w-36">Tuần Triển Khai</th>
+                  <th class="py-3 px-4 w-52">Nhiệm Vụ / Hạng Mục</th>
                   <th class="py-3 px-4">Nội Dung Tác Nghiệp Chi Tiết</th>
-                  <th class="py-3 px-4 w-60">Sản Phẩm Đầu Ra</th>
+                  <th class="py-3 px-4 w-60">Sản Phẩm Bàn Giao</th>
                   <th class="py-3 px-4 w-32 text-center">Thời Hạn</th>
+                  <th class="py-3 px-4 w-28 text-center">Trạng Thái</th>
                 </tr>
               </thead>
-              <tbody id="tableNovemberRoadmap" class="divide-y divide-slate-800/60">
+              <tbody id="tableNovemberPlan" class="divide-y divide-slate-800/60">
                 <!-- Injected via JS -->
               </tbody>
             </table>
@@ -487,58 +432,42 @@
 
       </div>
 
-      <!-- ==================== TAB 3 CONTENT: ĐỊNH MỨC & TIME-BLOCKING ==================== -->
+      <!-- ==================== TAB 3 CONTENT: TIME-BLOCKING HÀNG NGÀY ==================== -->
       <div id="tabContentWorkload" class="hidden space-y-6">
         
-        <!-- 3.1 Bảng 11 Nhóm Nhiệm Vụ & Phân bổ giờ công -->
-        <div class="rounded-2xl bg-slate-900/60 border border-slate-800 overflow-hidden">
-          <div class="p-4 sm:px-6 border-b border-slate-800 flex items-center justify-between">
-            <div>
-              <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <i data-lucide="calculator" class="w-4 h-4 text-blue-400"></i>
-                1. Bảng Phân Bổ Định Mức Năng Lực (48h/Tuần = 192h/Tháng)
-              </h3>
-              <p class="text-xs text-slate-400 mt-0.5">Tiêu chuẩn định mức giờ công theo 11 nhóm nhiệm vụ chuyên môn</p>
-            </div>
-            <span class="text-xs font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
-              Chuẩn 48h/tuần
-            </span>
+        <!-- Giới thiệu Lịch Time-blocking -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-1">
+            <span class="text-slate-400 text-xs">Tổng định mức hoạt động:</span>
+            <div class="text-xl font-bold text-white font-mono">48 Giờ / Tuần = 192 Giờ / Tháng</div>
+            <p class="text-[11px] text-slate-400">Từ Thứ Hai đến Thứ Bảy (08:00 – 17:00, nghỉ trưa 12:00 – 13:00)</p>
           </div>
-
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-slate-950/60 text-slate-400 font-mono uppercase text-[11px] border-b border-slate-800">
-                <tr>
-                  <th class="py-3 px-4 w-12 text-center">STT</th>
-                  <th class="py-3 px-4 w-60">Nhóm Nhiệm Vụ Chuyên Môn</th>
-                  <th class="py-3 px-4">Chi Tiết Triển Khai</th>
-                  <th class="py-3 px-4 w-24 text-center font-mono">Giờ/Tuần</th>
-                  <th class="py-3 px-4 w-24 text-center font-mono">Giờ/Tháng</th>
-                  <th class="py-3 px-4 w-28 text-center font-mono">Tỷ Trọng %</th>
-                  <th class="py-3 px-4 w-44">Ghi Chú</th>
-                </tr>
-              </thead>
-              <tbody id="tableWorkloadAllocations" class="divide-y divide-slate-800/60">
-                <!-- Injected via JS -->
-              </tbody>
-            </table>
+          <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-1">
+            <span class="text-slate-400 text-xs">Cấu trúc phân bổ ca làm việc:</span>
+            <div class="text-xl font-bold text-emerald-400 font-mono">23 Khung Giờ Cố Định</div>
+            <p class="text-[11px] text-slate-400">Tối ưu hóa hiệu suất, tránh chuyển ngữ cảnh liên tục</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-1">
+            <span class="text-slate-400 text-xs">Quỹ thời gian dự phòng phát sinh:</span>
+            <div class="text-xl font-bold text-blue-400 font-mono">6 Giờ Buffer / Tuần (~12.5%)</div>
+            <p class="text-[11px] text-slate-400">Xử lý yêu cầu phát sinh đột xuất của Ban Giám đốc & Sales</p>
           </div>
         </div>
 
-        <!-- 3.2 Bảng 23 Slot Thời Gian Biểu Chi Tiết (Time-blocking) -->
+        <!-- Bảng 23 Slot Thời Gian Biểu Chi Tiết (Time-blocking) -->
         <div class="rounded-2xl bg-slate-900/60 border border-slate-800 overflow-hidden">
           <div class="p-4 sm:px-6 border-b border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
               <h3 class="text-sm font-bold text-white flex items-center gap-2">
                 <i data-lucide="clock-4" class="w-4 h-4 text-emerald-400"></i>
-                2. Thời Gian Biểu Làm Việc Chi Tiết Theo Ngày (Daily Time-Blocking: 08:00 – 17:00)
+                THỜI GIAN BIỂU LÀM VIỆC CHI TIẾT THEO NGÀY (DAILY TIME-BLOCKING: 08:00 – 17:00)
               </h3>
               <p class="text-xs text-slate-400 mt-0.5">Lịch hoạt động cố định từ Thứ Hai đến Thứ Bảy hàng tuần</p>
             </div>
 
             <!-- Day Filter Pills -->
             <div class="flex flex-wrap items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs font-medium">
-              <button onclick="filterTimeblocks('ALL')" id="filterDayAll" class="px-2 py-1 rounded-lg bg-slate-800 text-white">Tất cả</button>
+              <button onclick="filterTimeblocks('ALL')" id="filterDayAll" class="px-2 py-1 rounded-lg bg-slate-800 text-white">Tất cả (23)</button>
               <button onclick="filterTimeblocks('Thứ Hai')" id="filterDay2" class="px-2 py-1 rounded-lg text-slate-400 hover:text-white">Thứ 2</button>
               <button onclick="filterTimeblocks('Thứ Ba')" id="filterDay3" class="px-2 py-1 rounded-lg text-slate-400 hover:text-white">Thứ 3</button>
               <button onclick="filterTimeblocks('Thứ Tư')" id="filterDay4" class="px-2 py-1 rounded-lg text-slate-400 hover:text-white">Thứ 4</button>
@@ -553,10 +482,10 @@
               <thead class="bg-slate-950/60 text-slate-400 font-mono uppercase text-[11px] border-b border-slate-800">
                 <tr>
                   <th class="py-3 px-4 w-24">Thứ</th>
-                  <th class="py-3 px-4 w-32 font-mono">Khung Giờ</th>
+                  <th class="py-3 px-4 w-36 font-mono">Khung Giờ</th>
                   <th class="py-3 px-4 w-20 text-center font-mono">Số Giờ</th>
                   <th class="py-3 px-4">Nội Dung Tác Nghiệp Chi Tiết</th>
-                  <th class="py-3 px-4 w-60">Sản Phẩm Bàn Giao</th>
+                  <th class="py-3 px-4 w-64">Sản Phẩm Bàn Giao</th>
                   <th class="py-3 px-4 w-44">Ghi Chú</th>
                 </tr>
               </thead>
@@ -581,60 +510,116 @@
     <div class="p-5 border-b border-slate-800 flex items-start justify-between bg-slate-950/60">
       <div>
         <div class="flex items-center gap-2 mb-1">
-          <span id="drawerBadgeId" class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">ID</span>
-          <span id="drawerBadgeTag" class="text-[10px] font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300">Category</span>
+          <span id="drawerBadgeSection" class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-brand-500/10 text-brand-400 border border-brand-500/20">Phân hệ</span>
+          <span id="drawerBadgeId" class="text-xs font-mono text-slate-400">ID: ---</span>
         </div>
-        <h3 id="drawerTitle" class="text-base font-bold text-white tracking-tight leading-snug">Chi Tiết Nhiệm Vụ</h3>
+        <h3 id="drawerTitle" class="text-base font-bold text-white leading-snug">Chi tiết mục công việc</h3>
       </div>
-      <button onclick="closeDrawer()" class="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white transition">
-        <i data-lucide="x" class="w-4 h-4"></i>
+      <button onclick="closeDrawer()" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
       </button>
     </div>
 
     <!-- Drawer Body -->
-    <div id="drawerBody" class="p-5 overflow-y-auto space-y-4 flex-1 text-xs text-slate-300">
-      <!-- Dynamic Details Injected -->
+    <div class="p-6 overflow-y-auto space-y-6 text-xs flex-1">
+      
+      <!-- Box 1: Nội dung tác nghiệp chi tiết -->
+      <div class="space-y-2">
+        <label class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] flex items-center gap-1.5">
+          <i data-lucide="file-text" class="w-3.5 h-3.5 text-brand-400"></i>
+          Nội Dung Tác Nghiệp Chi Tiết
+        </label>
+        <div id="drawerContent" class="p-4 rounded-xl bg-slate-950/60 border border-slate-800 text-slate-200 leading-relaxed text-xs">
+          ---
+        </div>
+      </div>
+
+      <!-- Box 2: Sản phẩm đầu ra / Bàn giao -->
+      <div class="space-y-2">
+        <label class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] flex items-center gap-1.5">
+          <i data-lucide="package-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+          Sản Phẩm Đầu Ra / Tiêu Chuẩn Nghiệm Thu
+        </label>
+        <div id="drawerOutput" class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-900/30 text-emerald-300 font-medium leading-relaxed text-xs">
+          ---
+        </div>
+      </div>
+
+      <!-- Box 3: Thông số thực thi -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="p-3 rounded-xl bg-slate-950/40 border border-slate-800/80 space-y-1">
+          <span class="text-slate-400 text-[10px] uppercase font-mono">Thời Hạn / Khung Giờ</span>
+          <div id="drawerDeadline" class="text-slate-200 font-semibold text-xs">---</div>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-950/40 border border-slate-800/80 space-y-1">
+          <span class="text-slate-400 text-[10px] uppercase font-mono">Trạng Thái Thực Thi</span>
+          <div id="drawerStatus" class="text-brand-400 font-semibold text-xs">---</div>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-950/40 border border-slate-800/80 space-y-1">
+          <span class="text-slate-400 text-[10px] uppercase font-mono">Phân Loại / Nhóm</span>
+          <div id="drawerGroup" class="text-slate-300 font-medium text-xs">---</div>
+        </div>
+        <div class="p-3 rounded-xl bg-slate-950/40 border border-slate-800/80 space-y-1">
+          <span class="text-slate-400 text-[10px] uppercase font-mono">Ghi Chú Tiến Độ</span>
+          <div id="drawerNote" class="text-slate-400 text-xs">---</div>
+        </div>
+      </div>
+
     </div>
 
     <!-- Drawer Footer -->
-    <div class="p-4 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between gap-3">
-      <div class="text-[11px] text-slate-400">
-        Bộ phận Marketing B2B • Gemmy Wood
-      </div>
-      <button onclick="closeDrawer()" class="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-white transition">
-        Đóng
+    <div class="p-4 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between">
+      <span class="text-[11px] text-slate-500 font-mono">Gemmy Wood Operations ERP</span>
+      <button onclick="closeDrawer()" class="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-xs transition">
+        Đóng cửa sổ
       </button>
     </div>
 
   </aside>
 
-  <!-- ==================== OMNIBAR SEARCH MODAL ==================== -->
-  <div id="omnibarModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-start justify-center pt-20 px-4">
-    <div class="w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-      <div class="p-4 border-b border-slate-800 flex items-center gap-3 bg-slate-950/70">
-        <i data-lucide="search" class="w-5 h-5 text-emerald-400"></i>
-        <input type="text" id="omnibarInput" oninput="handleOmnibarSearch(this.value)" placeholder="Tìm kiếm nhiệm vụ, Catalog V2, TikTok, LinkedIn, thông số EGP..." class="bg-transparent text-sm text-white placeholder-slate-400 w-full focus:outline-none">
-        <kbd class="text-[10px] font-mono text-slate-400 bg-slate-800 px-2 py-1 rounded border border-slate-700">ESC</kbd>
+  <!-- ==================== OMNIBAR SEARCH MODAL (⌘K) ==================== -->
+  <div id="searchModal" onclick="closeSearchModalOnBackdrop(event)" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-start justify-center pt-20 px-4">
+    <div class="w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[75vh]">
+      
+      <!-- Input Search -->
+      <div class="p-4 border-b border-slate-800 flex items-center gap-3 bg-slate-950/80">
+        <i data-lucide="search" class="w-5 h-5 text-slate-400"></i>
+        <input type="text" id="omniSearchInput" oninput="handleOmniSearch(this.value)" placeholder="Tìm kiếm nhanh tên công việc, sản phẩm, deadline, từ khóa..." class="w-full bg-transparent text-white placeholder-slate-500 text-sm focus:outline-none font-medium">
+        <kbd onclick="closeSearchModal()" class="px-2 py-0.5 rounded bg-slate-800 text-[11px] font-mono text-slate-400 border border-slate-700 cursor-pointer">ESC</kbd>
       </div>
-      <div id="omnibarResults" class="max-h-96 overflow-y-auto p-2 space-y-1 divide-y divide-slate-800/40 text-xs">
-        <div class="p-4 text-center text-slate-500">Nhập từ khóa để tra cứu toàn bộ hồ sơ báo cáo...</div>
+
+      <!-- Search Results List -->
+      <div id="omniSearchResults" class="overflow-y-auto p-3 space-y-1 divide-y divide-slate-800/40 text-xs">
+        <div class="p-4 text-center text-slate-500">Nhập từ khóa để bắt đầu tìm kiếm...</div>
       </div>
+
+      <!-- Modal Footer -->
+      <div class="p-3 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between text-[11px] text-slate-400">
+        <span>Sử dụng phím tắt <kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono">⌘K</kbd> hoặc <kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono">Ctrl+K</kbd></span>
+        <span>Nhấn <kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono">ESC</kbd> để đóng</span>
+      </div>
+
     </div>
   </div>
 
-  <!-- ==================== EMBEDDED DATA & APPLICATION SCRIPT ==================== -->
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
   <script>
-    // 1 Sheet / Mỗi Tháng Data Schema
-    const EMBEDDED_UNIFIED_DATA = {"sheet_name": "Tháng 10_2026", "month_label": "Tháng 10/2026", "total_rows": 84, "rows": [{"STT": 1, "Mã ID": "T10-C1", "Phân Hệ": "1. Kết Quả Tháng 10", "Hạng Mục / Tiêu Đề": "Catalog B2B phiên bản số 2", "Nội Dung Tác Nghiệp Chi Tiết": "Hoàn thiện bản thảo Catalog B2B V2 (36 trang): Tinh chỉnh bố cục danh mục Outdoor, Butcher Block, Ván ghép; hoàn thiện khung quy cách xuất khẩu.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bản thảo Catalog B2B V2 hoàn chỉnh nội dung & bố cục", "Thời Hạn / Khung Giờ": "Tháng 10/2026", "Trạng Thái": "Đã hoàn thành bản thảo", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Hoàn Thành", "Ghi Chú Tiến Độ": ""}, {"STT": 2, "Mã ID": "T10-C2", "Phân Hệ": "1. Kết Quả Tháng 10", "Hạng Mục / Tiêu Đề": "Làm sạch dữ liệu Website", "Nội Dung Tác Nghiệp Chi Tiết": "Rà soát toàn diện website gemmywood.vn: Gỡ bỏ triệt để các sản phẩm thiếu hình ảnh hoặc không có nội dung mô tả, xử lý các trang sản phẩm trống.", "Sản Phẩm Đầu Ra / Bàn Giao": "Website vận hành ổn định, 100% sản phẩm hiển thị đầy đủ hình ảnh và thông số", "Thời Hạn / Khung Giờ": "Tháng 10/2026", "Trạng Thái": "Đã hoàn thành", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Hoàn Thành", "Ghi Chú Tiến Độ": ""}, {"STT": 3, "Mã ID": "T10-C3", "Phân Hệ": "1. Kết Quả Tháng 10", "Hạng Mục / Tiêu Đề": "Chuẩn hóa thông số Ván ghép thanh", "Nội Dung Tác Nghiệp Chi Tiết": "Cập nhật bảng thông số kỹ thuật chi tiết cho dòng Ván ghép thanh (Finger Joint Board / EGP): độ dày tiêu chuẩn 18mm, 38mm; các bản rộng xuất khẩu 640mm, 650mm, 990mm và chiều dài tương ứng.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bảng quy cách kỹ thuật Ván ghép thanh cập nhật chuẩn xác trên web & Catalog V2", "Thời Hạn / Khung Giờ": "Tháng 10/2026", "Trạng Thái": "Đã hoàn thành", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Hoàn Thành", "Ghi Chú Tiến Độ": ""}, {"STT": 4, "Mã ID": "T10-C4", "Phân Hệ": "1. Kết Quả Tháng 10", "Hạng Mục / Tiêu Đề": "Kênh truyền thông TikTok", "Nội Dung Tác Nghiệp Chi Tiết": "Sản xuất và đăng tải các video ngắn TikTok giới thiệu xưởng gỗ keo Phú Thọ 45.000m², máy móc chế biến và quy trình sản xuất.", "Sản Phẩm Đầu Ra / Bàn Giao": "Các video ngắn xuất bản định kỳ trên kênh TikTok xưởng", "Thời Hạn / Khung Giờ": "Tháng 10/2026", "Trạng Thái": "Đã đăng tải", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Hoàn Thành", "Ghi Chú Tiến Độ": ""}, {"STT": 5, "Mã ID": "T10-C5", "Phân Hệ": "1. Kết Quả Tháng 10", "Hạng Mục / Tiêu Đề": "Nghiên cứu & Đề xuất phối cảnh sản phẩm", "Nội Dung Tác Nghiệp Chi Tiết": "Khảo sát và đánh giá 2 phương án: Tự thực hiện (In-house) vs. Thuê dịch vụ bên ngoài. Đã tổng hợp so sánh về chi phí, tiến độ và chất lượng ảnh.", "Sản Phẩm Đầu Ra / Bàn Giao": "Đề xuất phương án tự dựng ảnh phối cảnh bằng công cụ AI chuyên dụng (kinh phí dự kiến ~300.000 đ/tháng)", "Thời Hạn / Khung Giờ": "Tháng 10/2026", "Trạng Thái": "Đã thống nhất phương án", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Hoàn Thành", "Ghi Chú Tiến Độ": ""}, {"STT": 6, "Mã ID": "T10-C6", "Phân Hệ": "1. Kết Quả Tháng 10", "Hạng Mục / Tiêu Đề": "Thiết kế bao bì túi xách giấy (03 mẫu)", "Nội Dung Tác Nghiệp Chi Tiết": "Thiết kế hoàn thiện 03 phương án túi xách giấy nhận diện thương hiệu Gemmy Wood (phong cách mộc Eco Kraft, màu Corporate Navy và phối cảnh vân gỗ) dùng đựng tài liệu B2B và mẫu gỗ gửi khách.", "Sản Phẩm Đầu Ra / Bàn Giao": "03 Mẫu thiết kế bao bì túi xách giấy hoàn chỉnh (đầy đủ bản vẽ cấn bế và file in ấn chất lượng cao)", "Thời Hạn / Khung Giờ": "Tháng 10/2026", "Trạng Thái": "Đã hoàn thành", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Hoàn Thành", "Ghi Chú Tiến Độ": ""}, {"STT": 7, "Mã ID": "T10-C7", "Phân Hệ": "1. Kết Quả Tháng 10", "Hạng Mục / Tiêu Đề": "Vận hành công tác thường nhật Tháng 10", "Nội Dung Tác Nghiệp Chi Tiết": "Thực hiện các đầu việc quản trị nền tảng theo định mức giờ công tiêu chuẩn của nhân sự Marketing (tuần 6 ngày).", "Sản Phẩm Đầu Ra / Bàn Giao": "Bảo đảm tiến độ các nhiệm vụ chuyên môn thường nhật", "Thời Hạn / Khung Giờ": "Tháng 10/2026", "Trạng Thái": "Đã triển khai", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Hoàn Thành", "Ghi Chú Tiến Độ": ""}, {"STT": 8, "Mã ID": "T10-P1", "Phân Hệ": "2. Tồn Đọng & Khắc Phục", "Hạng Mục / Tiêu Đề": "Quản trị truyền thông nhóm Zalo & Fanpage GMW", "Nội Dung Tác Nghiệp Chi Tiết": "Thực trạng: Chưa duy trì cập nhật tiến độ định kỳ trên nhóm Zalo kiểm duyệt truyền thông; thời gian đăng bài các kênh Fanpage GMW chưa đồng bộ. | Nguyên nhân: Chưa thiết lập quy trình gửi duyệt trọn gói: Chưa chủ động gửi Lịch biên tập nội dung tổng thể cả tháng cho các kênh digital (Website, Fanpage GMW, TikTok).", "Sản Phẩm Đầu Ra / Bàn Giao": "Giải pháp: Ngay đầu tháng 11, Marketing xây dựng và gửi duyệt trọn gói Lịch biên tập nội dung cả tháng 11 lên nhóm Zalo để thông qua một lần, làm căn cứ chủ động triển khai đúng lịch.", "Thời Hạn / Khung Giờ": "Đầu Tháng 11", "Trạng Thái": "Đang khắc phục", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tồn Đọng", "Ghi Chú Tiến Độ": "Ngay đầu tháng 11, Marketing xây dựng và gửi duyệt trọn gói Lịch biên tập nội dung cả tháng 11 lên nhóm Zalo để thông qua một lần, làm căn cứ chủ động triển khai đúng lịch."}, {"STT": 9, "Mã ID": "T10-P2", "Phân Hệ": "2. Tồn Đọng & Khắc Phục", "Hạng Mục / Tiêu Đề": "Kế hoạch nội dung Digital (Website & SEO)", "Nội Dung Tác Nghiệp Chi Tiết": "Thực trạng: Chưa triển khai các tuyến bài chuyên môn và bài viết chuẩn SEO trên hệ thống website trong tháng 10. | Nguyên nhân: 1. Chưa có Lịch biên tập nội dung cả tháng được thông qua để làm căn cứ phát hành đồng bộ.\n2. Ưu tiên tập trung xử lý dứt điểm việc làm sạch website, chuẩn hóa thông số ván ghép thanh và hoàn thiện khung Catalog V2.\n3. Đang chờ hoàn thiện bộ ảnh phối cảnh sản phẩm để chèn đồng bộ vào bài viết.", "Sản Phẩm Đầu Ra / Bàn Giao": "Giải pháp: Kích hoạt triển khai kế hoạch nội dung ngay trong tháng 11 theo Lịch biên tập đã duyệt, kết hợp sử dụng hình ảnh phối cảnh dựng bằng công cụ AI chuyên dụng.", "Thời Hạn / Khung Giờ": "Đầu Tháng 11", "Trạng Thái": "Đang khắc phục", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tồn Đọng", "Ghi Chú Tiến Độ": "Kích hoạt triển khai kế hoạch nội dung ngay trong tháng 11 theo Lịch biên tập đã duyệt, kết hợp sử dụng hình ảnh phối cảnh dựng bằng công cụ AI chuyên dụng."}, {"STT": 10, "Mã ID": "T10-PR1", "Phân Hệ": "3. Đề Xuất Phê Duyệt", "Hạng Mục / Tiêu Đề": "Phê duyệt kinh phí công cụ AI dựng ảnh phối cảnh", "Nội Dung Tác Nghiệp Chi Tiết": "Đăng ký tài khoản công cụ AI chuyên dụng (~500.000 đ): Tuần 1 thử nghiệm thông số và chuẩn hóa quy trình xuất ảnh; Tuần 2 hoàn thiện ảnh phục vụ Catalog V2.", "Sản Phẩm Đầu Ra / Bàn Giao": "500.000 VNĐ", "Thời Hạn / Khung Giờ": "Đầu Tháng 11", "Trạng Thái": "Chờ phê duyệt", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Đề Xuất BGĐ", "Ghi Chú Tiến Độ": "500.000 VNĐ"}, {"STT": 11, "Mã ID": "T10-PR2", "Phân Hệ": "3. Đề Xuất Phê Duyệt", "Hạng Mục / Tiêu Đề": "Phê duyệt trọn gói Lịch biên tập nội dung cả tháng trên nhóm Zalo", "Nội Dung Tác Nghiệp Chi Tiết": "Thông qua tổng thể lịch phát hành bài viết các kênh digital để chủ động triển khai đúng tiến độ và đồng bộ thời gian.", "Sản Phẩm Đầu Ra / Bàn Giao": "0 VNĐ (Bộ phận Marketing gửi bản lịch tổng thể)", "Thời Hạn / Khung Giờ": "Đầu Tháng 11", "Trạng Thái": "Chờ phê duyệt", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Đề Xuất BGĐ", "Ghi Chú Tiến Độ": "0 VNĐ (Bộ phận Marketing gửi bản lịch tổng thể)"}, {"STT": 12, "Mã ID": "T10-PR3", "Phân Hệ": "3. Đề Xuất Phê Duyệt", "Hạng Mục / Tiêu Đề": "Nghiệm thu nội dung Catalog B2B phiên bản số 2", "Nội Dung Tác Nghiệp Chi Tiết": "Khung nội dung và bảng thông số kỹ thuật đã hoàn thiện trong tháng 10, cần rà soát lần cuối để tiến hành ghép ảnh phối cảnh.", "Sản Phẩm Đầu Ra / Bàn Giao": "Rà soát nội bộ", "Thời Hạn / Khung Giờ": "Đầu Tháng 11", "Trạng Thái": "Chờ phê duyệt", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Đề Xuất BGĐ", "Ghi Chú Tiến Độ": "Rà soát nội bộ"}, {"STT": 13, "Mã ID": "T11-F1", "Phân Hệ": "4. Mục Tiêu Trọng Tâm", "Hạng Mục / Tiêu Đề": "Quy trình phê duyệt Lịch cả tháng", "Nội Dung Tác Nghiệp Chi Tiết": "Lập và gửi duyệt trọn gói Lịch biên tập nội dung cả tháng 11 cho tất cả các kênh (Website, Fanpage GMW, TikTok, LinkedIn) lên nhóm Zalo ngay đầu tháng.", "Sản Phẩm Đầu Ra / Bàn Giao": "Lịch biên tập nội dung tháng 11 được thông qua tổng thể", "Thời Hạn / Khung Giờ": "Đầu Tuần 1 (02/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Mục Tiêu T11", "Ghi Chú Tiến Độ": ""}, {"STT": 14, "Mã ID": "T11-F2", "Phân Hệ": "4. Mục Tiêu Trọng Tâm", "Hạng Mục / Tiêu Đề": "Dựng ảnh phối cảnh & Bàn giao Catalog V2", "Nội Dung Tác Nghiệp Chi Tiết": "Tuần 1: Nghiên cứu công cụ AI chuyên dụng, chuẩn hóa thông số dựng bối cảnh nội/ngoại thất. Tuần 2: Xuất bản bộ ảnh bối cảnh chất lượng cao và hoàn thiện bản PDF Master Catalog V2.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bộ thông số prompt chuẩn + File Master PDF Catalog V2 hoàn chỉnh", "Thời Hạn / Khung Giờ": "Tuần 2 (14/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Mục Tiêu T11", "Ghi Chú Tiến Độ": ""}, {"STT": 15, "Mã ID": "T11-F3", "Phân Hệ": "4. Mục Tiêu Trọng Tâm", "Hạng Mục / Tiêu Đề": "Chuẩn hóa thông số kỹ thuật Website", "Nội Dung Tác Nghiệp Chi Tiết": "Cập nhật bảng quy cách kỹ thuật chi tiết cho Thớt gỗ keo và Mặt bàn Butcher Block lên website gemmywood.vn (tương tự như ván ghép thanh).", "Sản Phẩm Đầu Ra / Bàn Giao": "Dữ liệu thông số kỹ thuật chuẩn hóa được cập nhật lên website", "Thời Hạn / Khung Giờ": "Tuần 3 (21/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Mục Tiêu T11", "Ghi Chú Tiến Độ": ""}, {"STT": 16, "Mã ID": "T11-F4", "Phân Hệ": "4. Mục Tiêu Trọng Tâm", "Hạng Mục / Tiêu Đề": "Kênh Fanpage Facebook & Mạng xã hội", "Nội Dung Tác Nghiệp Chi Tiết": "Biên tập và phát hành 10 – 14 bài viết (định mức 3 bài/tuần) theo Lịch biên tập đã duyệt; trực tương tác và chăm sóc khách hàng.", "Sản Phẩm Đầu Ra / Bàn Giao": "10 – 14 bài viết Fanpage GMW được phát hành theo đúng lịch", "Thời Hạn / Khung Giờ": "Hàng tuần (3 bài/tuần)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Mục Tiêu T11", "Ghi Chú Tiến Độ": ""}, {"STT": 17, "Mã ID": "T11-F5", "Phân Hệ": "4. Mục Tiêu Trọng Tâm", "Hạng Mục / Tiêu Đề": "Kênh Video TikTok xưởng sản xuất", "Nội Dung Tác Nghiệp Chi Tiết": "Sản xuất định kỳ 04 video ngắn (1 video/tuần) về quy trình sấy gỗ MC 8-12%, máy ghép finger joint, đóng cont xuất khẩu; biên tập bằng CapCut Pro.", "Sản Phẩm Đầu Ra / Bàn Giao": "04 Video TikTok xưởng kèm phụ đề song ngữ Anh - Việt", "Thời Hạn / Khung Giờ": "Hàng tuần (1 video/tuần)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Mục Tiêu T11", "Ghi Chú Tiến Độ": ""}, {"STT": 18, "Mã ID": "T11-F6", "Phân Hệ": "4. Mục Tiêu Trọng Tâm", "Hạng Mục / Tiêu Đề": "Kênh B2B LinkedIn (Tiếp cận Buyer xuất khẩu)", "Nội Dung Tác Nghiệp Chi Tiết": "Chuẩn hóa Company Page theo tiêu chuẩn quốc tế, biên soạn 1-2 bài chuyên môn tiếng Anh/tuần, kết nối 40-60 Buyer quốc tế mục tiêu/tuần.", "Sản Phẩm Đầu Ra / Bàn Giao": "Hồ sơ Company Page hoàn chỉnh + Mạng lưới đối tác quốc tế mở rộng", "Thời Hạn / Khung Giờ": "Hàng tuần", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Mục Tiêu T11", "Ghi Chú Tiến Độ": ""}, {"STT": 19, "Mã ID": "T11-F7", "Phân Hệ": "4. Mục Tiêu Trọng Tâm", "Hạng Mục / Tiêu Đề": "Họp giao ban định kỳ tháng", "Nội Dung Tác Nghiệp Chi Tiết": "Tham gia họp giao ban công tác tháng (08:00 – 12:00 sáng Thứ Hai đầu tiên) với Ban Giám đốc & phòng Kinh doanh: Báo cáo công tác tháng cũ, thống nhất mục tiêu tháng mới.", "Sản Phẩm Đầu Ra / Bàn Giao": "Biên bản họp tháng và thống nhất kế hoạch công tác", "Thời Hạn / Khung Giờ": "Sáng Thứ Hai đầu tháng", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Mục Tiêu T11", "Ghi Chú Tiến Độ": ""}, {"STT": 20, "Mã ID": "T11-R1", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "STT", "Nội Dung Tác Nghiệp Chi Tiết": "Nhiệm Vụ Cụ Thể (Đầu Việc Thực Hiện)", "Sản Phẩm Đầu Ra / Bàn Giao": "Sản Phẩm Bàn Giao", "Thời Hạn / Khung Giờ": "Ngày Thực Hiện", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 1", "Ghi Chú Tiến Độ": "Ghi Chú Tiến Độ"}, {"STT": 21, "Mã ID": "T11-R2", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "1", "Nội Dung Tác Nghiệp Chi Tiết": "Họp giao ban tháng với Ban Giám đốc & phòng Kinh doanh (08:00 – 12:00): Báo cáo công tác T10, giải trình tồn đọng, trình duyệt kinh phí công cụ AI và duyệt Lịch tháng", "Sản Phẩm Đầu Ra / Bàn Giao": "Biên bản họp tháng, phê duyệt kinh phí AI & Lịch tháng", "Thời Hạn / Khung Giờ": "Thứ Hai (02/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 1 (02/11 - 07/11)", "Ghi Chú Tiến Độ": "Ưu tiên số 1 đầu tháng"}, {"STT": 22, "Mã ID": "T11-R3", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "2", "Nội Dung Tác Nghiệp Chi Tiết": "Trình duyệt trọn gói Lịch biên tập nội dung cả tháng 11 cho tất cả các kênh digital lên nhóm Zalo", "Sản Phẩm Đầu Ra / Bàn Giao": "Bản Lịch biên tập nội dung cả tháng 11", "Thời Hạn / Khung Giờ": "Thứ Hai (02/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 1 (02/11 - 07/11)", "Ghi Chú Tiến Độ": "Duyệt 1 lần cho cả tháng"}, {"STT": 23, "Mã ID": "T11-R4", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "3", "Nội Dung Tác Nghiệp Chi Tiết": "Kích hoạt tài khoản công cụ AI chuyên dụng: Thử nghiệm thông số dựng bối cảnh gỗ, test tách viền, đồng bộ hướng sáng và đổ bóng tự nhiên", "Sản Phẩm Đầu Ra / Bàn Giao": "Bộ thông số prompt chuẩn bối cảnh gỗ Gemmy Wood & ảnh test đạt chuẩn", "Thời Hạn / Khung Giờ": "Thứ Ba (03/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 1 (02/11 - 07/11)", "Ghi Chú Tiến Độ": "Chuẩn hóa quy trình xuất ảnh"}, {"STT": 24, "Mã ID": "T11-R5", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "4", "Nội Dung Tác Nghiệp Chi Tiết": "Biên soạn & xuất bản bài viết kỹ thuật số 1: Quy trình sấy hơi nước MC 8-12% & giải pháp kiểm soát độ ẩm container biển", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết web + 01 bài Fanpage GMW phát hành đồng bộ", "Thời Hạn / Khung Giờ": "Thứ Ba - Thứ Tư", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 1 (02/11 - 07/11)", "Ghi Chú Tiến Độ": "Bài kỹ thuật chuyên sâu #1"}, {"STT": 25, "Mã ID": "T11-R6", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "5", "Nội Dung Tác Nghiệp Chi Tiết": "Biên tập và đăng video TikTok xưởng số 1 (Quy trình cụm lò sấy hơi nước MC 8-12% chống mốc)", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Video TikTok xuất bản", "Thời Hạn / Khung Giờ": "Thứ Sáu (06/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 1 (02/11 - 07/11)", "Ghi Chú Tiến Độ": "Video TikTok tuần 1"}, {"STT": 26, "Mã ID": "T11-R7", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "6", "Nội Dung Tác Nghiệp Chi Tiết": "Khởi tạo & Chuẩn hóa trang LinkedIn Company Page Gemmy Wood theo tiêu chuẩn quốc tế", "Sản Phẩm Đầu Ra / Bàn Giao": "LinkedIn Company Page hoàn thiện nhận diện B2B", "Thời Hạn / Khung Giờ": "Thứ Sáu (06/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 1 (02/11 - 07/11)", "Ghi Chú Tiến Độ": "Mở rộng kênh B2B"}, {"STT": 27, "Mã ID": "T11-R8", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "7", "Nội Dung Tác Nghiệp Chi Tiết": "Tổng hợp số liệu và gửi Báo cáo tuần số 1; hoàn thiện kho ảnh bối cảnh sản phẩm", "Sản Phẩm Đầu Ra / Bàn Giao": "Báo cáo tuần 1 gửi Ban Giám đốc", "Thời Hạn / Khung Giờ": "Thứ Bảy (07/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 1 (02/11 - 07/11)", "Ghi Chú Tiến Độ": "Đúng hạn 17:00 Thứ Bảy"}, {"STT": 28, "Mã ID": "T11-R9", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "8", "Nội Dung Tác Nghiệp Chi Tiết": "Hoàn thiện ghép sản phẩm lên ảnh bối cảnh (Outdoor & Butcher Block), chọn lọc chèn Catalog V2 & Website", "Sản Phẩm Đầu Ra / Bàn Giao": "Bộ ảnh phối cảnh hoàn thiện chất lượng cao", "Thời Hạn / Khung Giờ": "Thứ Hai - Thứ Ba", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 2 (09/11 - 14/11)", "Ghi Chú Tiến Độ": "Dựng ảnh phối cảnh in-house"}, {"STT": 29, "Mã ID": "T11-R10", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "9", "Nội Dung Tác Nghiệp Chi Tiết": "Bàn giao chính thức Catalog B2B V2 (file PDF in ấn & gửi khách) chèn đầy đủ ảnh phối cảnh cho phòng Kinh doanh", "Sản Phẩm Đầu Ra / Bàn Giao": "File Master PDF Catalog B2B V2 hoàn chỉnh", "Thời Hạn / Khung Giờ": "Thứ Ba - Thứ Tư", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 2 (09/11 - 14/11)", "Ghi Chú Tiến Độ": "Trọng tâm cốt lõi tháng 11"}, {"STT": 30, "Mã ID": "T11-R11", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "10", "Nội Dung Tác Nghiệp Chi Tiết": "Đăng bài Fanpage GMW số 2 theo Lịch biên tập nội dung đã duyệt", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết Fanpage GMW phát hành đúng hẹn", "Thời Hạn / Khung Giờ": "Thứ Năm (12/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 2 (09/11 - 14/11)", "Ghi Chú Tiến Độ": "Đúng lịch duyệt"}, {"STT": 31, "Mã ID": "T11-R12", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "11", "Nội Dung Tác Nghiệp Chi Tiết": "Đăng bài chuyên môn LinkedIn số 1 (Tiêu chuẩn MC 8-12% & Keo D4) + Kết nối 30 Buyer quốc tế mục tiêu", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết LinkedIn B2B + Mạng lưới 30 Buyer", "Thời Hạn / Khung Giờ": "Thứ Năm (12/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 2 (09/11 - 14/11)", "Ghi Chú Tiến Độ": "Tìm kiếm Buyer B2B"}, {"STT": 32, "Mã ID": "T11-R13", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "12", "Nội Dung Tác Nghiệp Chi Tiết": "Biên tập và đăng video TikTok xưởng số 2 (Chuyền máy ghép thanh finger joint & chà nhám grit 240)", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Video TikTok xuất bản", "Thời Hạn / Khung Giờ": "Thứ Sáu (13/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 2 (09/11 - 14/11)", "Ghi Chú Tiến Độ": "Video TikTok tuần 2"}, {"STT": 33, "Mã ID": "T11-R14", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "13", "Nội Dung Tác Nghiệp Chi Tiết": "Tối ưu Onpage SEO tiếng Anh & liên kết nội bộ các trang sản phẩm Ván ghép thanh, Butcher block trên gemmywood.vn/en/", "Sản Phẩm Đầu Ra / Bàn Giao": "Hệ thống liên kết & Onpage tiếng Anh hoàn chỉnh", "Thời Hạn / Khung Giờ": "Thứ Sáu (13/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 2 (09/11 - 14/11)", "Ghi Chú Tiến Độ": "Tối ưu web tiếng Anh"}, {"STT": 34, "Mã ID": "T11-R15", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "14", "Nội Dung Tác Nghiệp Chi Tiết": "Tổng hợp số liệu và gửi Báo cáo tuần số 2", "Sản Phẩm Đầu Ra / Bàn Giao": "Báo cáo tuần 2 gửi Ban Giám đốc", "Thời Hạn / Khung Giờ": "Thứ Bảy (14/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 2 (09/11 - 14/11)", "Ghi Chú Tiến Độ": "Đúng hạn 17:00 Thứ Bảy"}, {"STT": 35, "Mã ID": "T11-R16", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "15", "Nội Dung Tác Nghiệp Chi Tiết": "Cập nhật và rà soát thông số kỹ thuật Thớt gỗ keo & Mặt bàn Butcher Block lên hệ thống website", "Sản Phẩm Đầu Ra / Bàn Giao": "Bảng thông số kỹ thuật cập nhật lên website", "Thời Hạn / Khung Giờ": "Thứ Hai - Thứ Ba", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 3 (16/11 - 21/11)", "Ghi Chú Tiến Độ": "Chuẩn hóa dữ liệu web"}, {"STT": 36, "Mã ID": "T11-R17", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "16", "Nội Dung Tác Nghiệp Chi Tiết": "Biên soạn & xuất bản bài viết kỹ thuật số 2: Tiêu chuẩn mặt bàn Butcher Block & thớt gỗ keo xuất khẩu", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết web + 01 bài Fanpage GMW phát hành", "Thời Hạn / Khung Giờ": "Thứ Tư - Thứ Năm", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 3 (16/11 - 21/11)", "Ghi Chú Tiến Độ": "Bài kỹ thuật chuyên sâu #2"}, {"STT": 37, "Mã ID": "T11-R18", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "17", "Nội Dung Tác Nghiệp Chi Tiết": "Biên soạn bài viết SEO Tiếng Anh số 1 trên web: Acacia Butcher Block Countertop Manufacturer Vietnam", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết web tiếng Anh chuẩn SEO quốc tế", "Thời Hạn / Khung Giờ": "Thứ Năm (19/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 3 (16/11 - 21/11)", "Ghi Chú Tiến Độ": "SEO B2B Tiếng Anh"}, {"STT": 38, "Mã ID": "T11-R19", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "18", "Nội Dung Tác Nghiệp Chi Tiết": "Đăng bài chuyên môn LinkedIn số 2 (Tiêu chuẩn xuất cont mặt bàn Butcher block) & kết nối Buyer", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết LinkedIn B2B + Mạng lưới 30 Buyer", "Thời Hạn / Khung Giờ": "Thứ Sáu (20/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 3 (16/11 - 21/11)", "Ghi Chú Tiến Độ": "Tìm kiếm Buyer B2B"}, {"STT": 39, "Mã ID": "T11-R20", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "19", "Nội Dung Tác Nghiệp Chi Tiết": "Biên tập và đăng video TikTok xưởng số 3 (Quy trình sản xuất thớt gỗ keo & kiểm tra chứng chỉ FSC)", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Video TikTok xuất bản", "Thời Hạn / Khung Giờ": "Thứ Sáu (20/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 3 (16/11 - 21/11)", "Ghi Chú Tiến Độ": "Video TikTok tuần 3"}, {"STT": 40, "Mã ID": "T11-R21", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "20", "Nội Dung Tác Nghiệp Chi Tiết": "Tổng hợp số liệu và gửi Báo cáo tuần số 3", "Sản Phẩm Đầu Ra / Bàn Giao": "Báo cáo tuần 3 gửi Ban Giám đốc", "Thời Hạn / Khung Giờ": "Thứ Bảy (21/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 3 (16/11 - 21/11)", "Ghi Chú Tiến Độ": "Đúng hạn 17:00 Thứ Bảy"}, {"STT": 41, "Mã ID": "T11-R22", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "21", "Nội Dung Tác Nghiệp Chi Tiết": "Đăng bài Fanpage GMW số 4 theo Lịch biên tập nội dung đã duyệt", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết Fanpage GMW phát hành", "Thời Hạn / Khung Giờ": "Thứ Ba (24/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Đúng lịch duyệt"}, {"STT": 42, "Mã ID": "T11-R23", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "22", "Nội Dung Tác Nghiệp Chi Tiết": "Đăng bài chuyên môn LinkedIn số 3: Giới thiệu quy mô nhà máy Phú Thọ 45.000m² & Chuỗi cung ứng FSC", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết LinkedIn B2B chuẩn xuất khẩu", "Thời Hạn / Khung Giờ": "Thứ Tư (25/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Nâng cao uy tín quốc tế"}, {"STT": 43, "Mã ID": "T11-R24", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "23", "Nội Dung Tác Nghiệp Chi Tiết": "Biên tập và đăng video TikTok xưởng số 4: Quy trình kiểm soát độ ẩm khi đóng container 40ft xuất cảng Hải Phòng", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Video TikTok xuất bản", "Thời Hạn / Khung Giờ": "Thứ Năm (26/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Video TikTok tuần 4"}, {"STT": 44, "Mã ID": "T11-R25", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "24", "Nội Dung Tác Nghiệp Chi Tiết": "Biên soạn bài viết SEO Tiếng Anh số 2 trên web: Vietnam Acacia Finger Joint Board Manufacturer - FSC Certified", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết web tiếng Anh chuẩn SEO quốc tế", "Thời Hạn / Khung Giờ": "Thứ Sáu (27/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "SEO B2B Tiếng Anh"}, {"STT": 45, "Mã ID": "T11-R26", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "25", "Nội Dung Tác Nghiệp Chi Tiết": "Rà soát kỹ thuật website: Kiểm tra đường truyền, form liên hệ B2B và tốc độ tải trang", "Sản Phẩm Đầu Ra / Bàn Giao": "Báo cáo tình trạng vận hành website", "Thời Hạn / Khung Giờ": "Thứ Sáu (27/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Bảo trì định kỳ"}, {"STT": 46, "Mã ID": "T11-R27", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "26", "Nội Dung Tác Nghiệp Chi Tiết": "Tổng hợp số liệu tháng 11 & Lập Dự thảo Báo cáo tháng 11 chuẩn bị họp đầu tháng 12", "Sản Phẩm Đầu Ra / Bàn Giao": "Bộ Báo cáo tháng 11 (bản thảo hoàn chỉnh)", "Thời Hạn / Khung Giờ": "Thứ Bảy (28/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Chuẩn bị họp tháng 12"}, {"STT": 47, "Mã ID": "T11-R28", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "27", "Nội Dung Tác Nghiệp Chi Tiết": "Tổng hợp số liệu và gửi Báo cáo tuần số 4 gửi Ban Giám đốc", "Sản Phẩm Đầu Ra / Bàn Giao": "Báo cáo tuần 4 gửi Ban Giám đốc", "Thời Hạn / Khung Giờ": "Thứ Bảy (28/11)", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Hoàn tất chu kỳ tháng"}, {"STT": 48, "Mã ID": "T11-R29", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "Tài khoản công cụ AI dựng ảnh phối cảnh", "Nội Dung Tác Nghiệp Chi Tiết": "Thuê bao / Gói", "Sản Phẩm Đầu Ra / Bàn Giao": "500000", "Thời Hạn / Khung Giờ": "Đăng ký tài khoản công cụ AI chuyên dụng tạo ảnh bối cảnh/lifestyle mockup cho Catalog V2 và bài viết website", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Chủ động tạo ảnh phối cảnh chất lượng cao, chi phí thấp hơn nhiều so với thuê ngoài"}, {"STT": 49, "Mã ID": "T11-R30", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "Tài khoản Claude Pro (Anthropic)", "Nội Dung Tác Nghiệp Chi Tiết": "Thuê bao tháng", "Sản Phẩm Đầu Ra / Bàn Giao": "500000", "Thời Hạn / Khung Giờ": "Hỗ trợ biên soạn nội dung kỹ thuật tiếng Anh (B2B Sourcing), dịch thuật thương mại và nghiên cứu tiêu chuẩn xuất khẩu", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Tối ưu thời gian biên soạn, đảm bảo tính chuẩn xác của tài liệu kỹ thuật xuất khẩu"}, {"STT": 50, "Mã ID": "T11-R31", "Phân Hệ": "5. Lộ Trình Tuần", "Hạng Mục / Tiêu Đề": "TỔNG NGÂN SÁCH ĐỀ XUẤT THÁNG 11", "Nội Dung Tác Nghiệp Chi Tiết": "Tổng cộng", "Sản Phẩm Đầu Ra / Bàn Giao": "", "Thời Hạn / Khung Giờ": "Gồm: Công cụ AI dựng ảnh (300.000 đ) + Claude Pro (500.000 đ). Các công cụ khác (Canva Pro, CapCut Pro) tận dụng tài khoản hiện có, không phát sinh chi phí.", "Trạng Thái": "Kế hoạch", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Tổng ngân sách hoạt động: 800.000 đ/tháng"}, {"STT": 51, "Mã ID": "WL-1", "Phân Hệ": "6. Định Mức Giờ Công", "Hạng Mục / Tiêu Đề": "Dựng ảnh phối cảnh & Catalog B2B", "Nội Dung Tác Nghiệp Chi Tiết": "Tuần 1: Thử nghiệm thông số và chuẩn hóa quy trình xuất ảnh. Tuần 2: Hoàn thiện ảnh và xuất bản Catalog V2", "Sản Phẩm Đầu Ra / Bàn Giao": "6.0h/tuần (24.0h/tháng)", "Thời Hạn / Khung Giờ": "Hàng tuần", "Trạng Thái": "Định mức 48h", "Số Giờ (h)": 6, "Tỷ Trọng (%)": 12.5, "Phân Loại Nhóm": "Định Mức 48h", "Ghi Chú Tiến Độ": "Tuần 1 test, Tuần 2 hoàn thành"}, {"STT": 52, "Mã ID": "WL-2", "Phân Hệ": "6. Định Mức Giờ Công", "Hạng Mục / Tiêu Đề": "Quản trị Website & Chuẩn hóa thông số", "Nội Dung Tác Nghiệp Chi Tiết": "Cập nhật thông số Thớt gỗ & Mặt bàn Butcher Block, bảo trì kỹ thuật hệ thống gemmywood.vn", "Sản Phẩm Đầu Ra / Bàn Giao": "3.5h/tuần (14.0h/tháng)", "Thời Hạn / Khung Giờ": "Hàng tuần", "Trạng Thái": "Định mức 48h", "Số Giờ (h)": 3.5, "Tỷ Trọng (%)": 7.3, "Phân Loại Nhóm": "Định Mức 48h", "Ghi Chú Tiến Độ": "Chuẩn hóa dữ liệu web"}, {"STT": 53, "Mã ID": "WL-3", "Phân Hệ": "6. Định Mức Giờ Công", "Hạng Mục / Tiêu Đề": "Kênh Video TikTok xưởng sản xuất", "Nội Dung Tác Nghiệp Chi Tiết": "Sản xuất định kỳ 04 video ngắn/tháng (1 video/tuần), biên tập bằng CapCut Pro", "Sản Phẩm Đầu Ra / Bàn Giao": "6.0h/tuần (24.0h/tháng)", "Thời Hạn / Khung Giờ": "Hàng tuần", "Trạng Thái": "Định mức 48h", "Số Giờ (h)": 6, "Tỷ Trọng (%)": 12.5, "Phân Loại Nhóm": "Định Mức 48h", "Ghi Chú Tiến Độ": "Định mức 1 video/tuần"}, {"STT": 54, "Mã ID": "WL-4", "Phân Hệ": "6. Định Mức Giờ Công", "Hạng Mục / Tiêu Đề": "Kênh Fanpage Facebook & Mạng xã hội", "Nội Dung Tác Nghiệp Chi Tiết": "Biên tập và phát hành 10 – 14 bài/tháng (3 bài/tuần), thiết kế hình ảnh, trực tương tác và phản hồi khách hàng", "Sản Phẩm Đầu Ra / Bàn Giao": "10.0h/tuần (40.0h/tháng)", "Thời Hạn / Khung Giờ": "Hàng tuần", "Trạng Thái": "Định mức 48h", "Số Giờ (h)": 10, "Tỷ Trọng (%)": 20.8, "Phân Loại Nhóm": "Định Mức 48h", "Ghi Chú Tiến Độ": "Duy trì 3 bài/tuần"}, {"STT": 55, "Mã ID": "WL-5", "Phân Hệ": "6. Định Mức Giờ Công", "Hạng Mục / Tiêu Đề": "Nội dung kỹ thuật & SEO Tiếng Việt", "Nội Dung Tác Nghiệp Chi Tiết": "Biên soạn 02 bài viết chuyên môn sâu/tháng (định mức 1 bài/2 tuần) với sự hỗ trợ của Claude Pro", "Sản Phẩm Đầu Ra / Bàn Giao": "3.5h/tuần (14.0h/tháng)", "Thời Hạn / Khung Giờ": "Hàng tuần", "Trạng Thái": "Định mức 48h", "Số Giờ (h)": 3.5, "Tỷ Trọng (%)": 7.3, "Phân Loại Nhóm": "Định Mức 48h", "Ghi Chú Tiến Độ": "Bài viết kỹ thuật sâu"}, {"STT": 56, "Mã ID": "WL-6", "Phân Hệ": "6. Định Mức Giờ Công", "Hạng Mục / Tiêu Đề": "Kênh B2B LinkedIn (Khách hàng xuất khẩu)", "Nội Dung Tác Nghiệp Chi Tiết": "Chuẩn hóa Company Page, biên soạn 1-2 bài kỹ thuật tiếng Anh/tuần, kết nối 40-60 Buyer quốc tế mục tiêu/tuần", "Sản Phẩm Đầu Ra / Bàn Giao": "6.0h/tuần (24.0h/tháng)", "Thời Hạn / Khung Giờ": "Hàng tuần", "Trạng Thái": "Định mức 48h", "Số Giờ (h)": 6, "Tỷ Trọng (%)": 12.5, "Phân Loại Nhóm": "Định Mức 48h", "Ghi Chú Tiến Độ": "Tiếp cận đối tác xuất khẩu"}, {"STT": 57, "Mã ID": "WL-7", "Phân Hệ": "6. Định Mức Giờ Công", "Hạng Mục / Tiêu Đề": "SEO Tiếng Anh Website (Export)", "Nội Dung Tác Nghiệp Chi Tiết": "Biên soạn 02 bài viết kỹ thuật tiếng Anh sâu/tháng trên gemmywood.vn/en/, tối ưu Onpage & Schema tiếp cận đối tác quốc tế", "Sản Phẩm Đầu Ra / Bàn Giao": "4.0h/tuần (16.0h/tháng)", "Thời Hạn / Khung Giờ": "Hàng tuần", "Trạng Thái": "Định mức 48h", "Số Giờ (h)": 4, "Tỷ Trọng (%)": 8.3, "Phân Loại Nhóm": "Định Mức 48h", "Ghi Chú Tiến Độ": "Tiếp cận Buyer quốc tế"}, {"STT": 58, "Mã ID": "WL-8", "Phân Hệ": "6. Định Mức Giờ Công", "Hạng Mục / Tiêu Đề": "Họp giao ban định kỳ tháng", "Nội Dung Tác Nghiệp Chi Tiết": "Tham gia họp giao ban đầu tháng (08:00 – 12:00 sáng Thứ Hai đầu tiên) với Ban Giám đốc và phòng Kinh doanh", "Sản Phẩm Đầu Ra / Bàn Giao": "1.0h/tuần (4.0h/tháng)", "Thời Hạn / Khung Giờ": "Hàng tuần", "Trạng Thái": "Định mức 48h", "Số Giờ (h)": 1, "Tỷ Trọng (%)": 2.1, "Phân Loại Nhóm": "Định Mức 48h", "Ghi Chú Tiến Độ": "04h sáng Thứ Hai đầu tháng"}, {"STT": 59, "Mã ID": "WL-9", "Phân Hệ": "6. Định Mức Giờ Công", "Hạng Mục / Tiêu Đề": "Nghiên cứu công nghệ & Ứng dụng AI", "Nội Dung Tác Nghiệp Chi Tiết": "Nghiên cứu ứng dụng công cụ tự động hóa & AI hỗ trợ quy trình công việc (Chiều Thứ Bảy, 13:00 – 15:00)", "Sản Phẩm Đầu Ra / Bàn Giao": "2.0h/tuần (8.0h/tháng)", "Thời Hạn / Khung Giờ": "Hàng tuần", "Trạng Thái": "Định mức 48h", "Số Giờ (h)": 2, "Tỷ Trọng (%)": 4.2, "Phân Loại Nhóm": "Định Mức 48h", "Ghi Chú Tiến Độ": "Chiều Thứ Bảy"}, {"STT": 60, "Mã ID": "WL-10", "Phân Hệ": "6. Định Mức Giờ Công", "Hạng Mục / Tiêu Đề": "Báo cáo công tác tuần & tháng", "Nội Dung Tác Nghiệp Chi Tiết": "Tổng hợp số liệu và lập báo cáo công tác định kỳ gửi Ban Giám đốc (Chiều Thứ Bảy, 15:00 – 17:00)", "Sản Phẩm Đầu Ra / Bàn Giao": "2.0h/tuần (8.0h/tháng)", "Thời Hạn / Khung Giờ": "Hàng tuần", "Trạng Thái": "Định mức 48h", "Số Giờ (h)": 2, "Tỷ Trọng (%)": 4.2, "Phân Loại Nhóm": "Định Mức 48h", "Ghi Chú Tiến Độ": "Chiều Thứ Bảy"}, {"STT": 61, "Mã ID": "WL-11", "Phân Hệ": "6. Định Mức Giờ Công", "Hạng Mục / Tiêu Đề": "Quỹ thời gian dự phòng phát sinh (Buffer)", "Nội Dung Tác Nghiệp Chi Tiết": "Xử lý các nhiệm vụ đột xuất từ Ban Giám đốc, hỗ trợ phòng Kinh doanh và phát sinh tại nhà máy Phú Thọ", "Sản Phẩm Đầu Ra / Bàn Giao": "4.0h/tuần (16.0h/tháng)", "Thời Hạn / Khung Giờ": "Hàng tuần", "Trạng Thái": "Định mức 48h", "Số Giờ (h)": 4, "Tỷ Trọng (%)": 8.3, "Phân Loại Nhóm": "Định Mức 48h", "Ghi Chú Tiến Độ": "Tương đương 2 ngày công/tháng"}, {"STT": 62, "Mã ID": "TB-1", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Hai: 08:00 – 12:00", "Nội Dung Tác Nghiệp Chi Tiết": "• Tuần 1 (Thứ Hai đầu tháng): Họp giao ban tháng với Ban Giám đốc & phòng Kinh doanh (08:00 – 12:00): Báo cáo công tác T10, giải trình tồn đọng, trình duyệt kinh phí công cụ AI và duyệt Lịch tháng.\n• Tuần 2, 3, 4: Biên soạn bài viết kỹ thuật Tiếng Việt theo đúng Lịch biên tập đã duyệt.", "Sản Phẩm Đầu Ra / Bàn Giao": "Biên bản họp tháng (Tuần 1) / Bản thảo bài viết web (Tuần 2-4)", "Thời Hạn / Khung Giờ": "Thứ Hai (08:00 – 12:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 4, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Hai", "Ghi Chú Tiến Độ": "Họp 4h sáng Thứ Hai đầu tháng"}, {"STT": 63, "Mã ID": "TB-2", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Hai: 13:00 – 13:30", "Nội Dung Tác Nghiệp Chi Tiết": "Tối ưu hình ảnh, kiểm tra thông số SEO và xuất bản bài viết lên website gemmywood.vn.", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết hoàn chỉnh trên web", "Thời Hạn / Khung Giờ": "Thứ Hai (13:00 – 13:30)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 0.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Hai", "Ghi Chú Tiến Độ": "Xuất bản website"}, {"STT": 64, "Mã ID": "TB-3", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Hai: 13:30 – 15:30", "Nội Dung Tác Nghiệp Chi Tiết": "Fanpage Facebook (Bài 1): Thiết kế hình ảnh minh họa bằng Canva Pro, biên soạn nội dung bài đăng số 1 trong tuần.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bản thiết kế hình ảnh + Nội dung bài 1", "Thời Hạn / Khung Giờ": "Thứ Hai (13:30 – 15:30)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Hai", "Ghi Chú Tiến Độ": "Định mức 3 bài/tuần"}, {"STT": 65, "Mã ID": "TB-4", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Hai: 15:30 – 17:00", "Nội Dung Tác Nghiệp Chi Tiết": "Phát hành bài đăng số 1 lên Fanpage GMW, chia sẻ thông tin chuyên ngành, theo dõi tương tác và trả lời phản hồi của khách hàng.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bài viết phát hành & theo dõi tương tác", "Thời Hạn / Khung Giờ": "Thứ Hai (15:30 – 17:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 1.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Hai", "Ghi Chú Tiến Độ": "Chăm sóc trang"}, {"STT": 66, "Mã ID": "TB-5", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Ba: 08:00 – 12:00", "Nội Dung Tác Nghiệp Chi Tiết": "Dựng ảnh phối cảnh sản phẩm (Công cụ AI chuyên dụng):\n• Tuần 1: Nghiên cứu thông số kỹ thuật, thử nghiệm tạo bối cảnh gỗ, test tách viền và đổ bóng tự nhiên, hoàn thiện bộ prompt chuẩn.\n• Tuần 2: Xuất bản bộ ảnh bối cảnh chất lượng cao cho 4 dòng sản phẩm chủ lực và ghép mẫu sản phẩm.\n• Tuần 3-4: Tạo hình ảnh phục vụ bài viết website và các kênh mạng xã hội.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bộ thông số prompt chuẩn (Tuần 1) / Bộ ảnh phối cảnh hoàn thiện (Tuần 2)", "Thời Hạn / Khung Giờ": "Thứ Ba (08:00 – 12:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 4, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Ba", "Ghi Chú Tiến Độ": "Dựng ảnh phối cảnh in-house"}, {"STT": 67, "Mã ID": "TB-6", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Ba: 13:00 – 15:00", "Nội Dung Tác Nghiệp Chi Tiết": "Dàn trang Catalog B2B phiên bản 2 trên Canva Pro: chèn ảnh phối cảnh, đối soát bảng mã quy cách L x W x H mm chuẩn xưởng sản xuất.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bản dàn trang Catalog V2 hoàn chỉnh", "Thời Hạn / Khung Giờ": "Thứ Ba (13:00 – 15:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Ba", "Ghi Chú Tiến Độ": "Khớp quy cách xưởng"}, {"STT": 68, "Mã ID": "TB-7", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Ba: 15:00 – 17:00", "Nội Dung Tác Nghiệp Chi Tiết": "Kênh LinkedIn B2B (Buổi 1): Chuẩn hóa Company Page Gemmy Wood theo tiêu chuẩn xuất khẩu quốc tế; tiếp cận và kết nối 20-30 Buyer mục tiêu.", "Sản Phẩm Đầu Ra / Bàn Giao": "Hồ sơ LinkedIn hoàn thiện", "Thời Hạn / Khung Giờ": "Thứ Ba (15:00 – 17:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Ba", "Ghi Chú Tiến Độ": "Kết nối đối tác quốc tế"}, {"STT": 69, "Mã ID": "TB-8", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Tư: 08:00 – 10:30", "Nội Dung Tác Nghiệp Chi Tiết": "Phân loại và xử lý tư liệu video từ nhà máy Phú Thọ: lò sấy hơi nước MC 8-12%, dây chuyền finger joint, quy trình đóng container.", "Sản Phẩm Đầu Ra / Bàn Giao": "Kho tư liệu video sản xuất", "Thời Hạn / Khung Giờ": "Thứ Tư (08:00 – 10:30)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Tư", "Ghi Chú Tiến Độ": "Nguồn tư liệu thực tế xưởng"}, {"STT": 70, "Mã ID": "TB-9", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Tư: 10:30 – 12:00", "Nội Dung Tác Nghiệp Chi Tiết": "Biên tập video ngắn bằng CapCut Pro: chèn phụ đề song ngữ Anh - Việt, xuất file định dạng chất lượng cao.", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Video hoàn chỉnh", "Thời Hạn / Khung Giờ": "Thứ Tư (10:30 – 12:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 1.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Tư", "Ghi Chú Tiến Độ": "01 video/tuần"}, {"STT": 71, "Mã ID": "TB-10", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Tư: 13:00 – 15:00", "Nội Dung Tác Nghiệp Chi Tiết": "Đăng tải video lên kênh TikTok xưởng; biên soạn nội dung mô tả B2B, kiểm tra hiển thị và gắn thẻ ngành hàng gỗ xuất khẩu.", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Video TikTok xuất bản", "Thời Hạn / Khung Giờ": "Thứ Tư (13:00 – 15:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Tư", "Ghi Chú Tiến Độ": "Định mức 4 video/tháng"}, {"STT": 72, "Mã ID": "TB-11", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Tư: 15:00 – 17:00", "Nội Dung Tác Nghiệp Chi Tiết": "Fanpage Facebook (Bài 2): Biên tập và phát hành bài đăng số 2 (video quy trình sản xuất hoặc hình ảnh sản phẩm thực tế); trực tin nhắn và hỗ trợ khách hàng.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bài đăng Fanpage số 2 phát hành", "Thời Hạn / Khung Giờ": "Thứ Tư (15:00 – 17:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Tư", "Ghi Chú Tiến Độ": "Chăm sóc khách hàng"}, {"STT": 73, "Mã ID": "TB-12", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Năm: 08:00 – 10:30", "Nội Dung Tác Nghiệp Chi Tiết": "Kênh LinkedIn B2B (Buổi 2): Biên soạn và đăng bài chuyên môn kỹ thuật tiếng Anh (tiêu chuẩn MC 8-12%, keo D4, kiểm soát độ ẩm cont biển).", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết LinkedIn chuyên ngành", "Thời Hạn / Khung Giờ": "Thứ Năm (08:00 – 10:30)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Năm", "Ghi Chú Tiến Độ": "Xây dựng hình ảnh nhà máy"}, {"STT": 74, "Mã ID": "TB-13", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Năm: 10:30 – 12:00", "Nội Dung Tác Nghiệp Chi Tiết": "Tương tác và phản hồi tin nhắn của Buyer trên LinkedIn; mở rộng mạng lưới kết nối thêm 20-30 đối tác quốc tế.", "Sản Phẩm Đầu Ra / Bàn Giao": "Mạng lưới Buyer được chăm sóc", "Thời Hạn / Khung Giờ": "Thứ Năm (10:30 – 12:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 1.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Năm", "Ghi Chú Tiến Độ": "Duy trì tương tác định kỳ"}, {"STT": 75, "Mã ID": "TB-14", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Năm: 13:00 – 14:30", "Nội Dung Tác Nghiệp Chi Tiết": "Quản trị website: Cập nhật và rà soát bảng thông số kỹ thuật ván ghép thanh, thớt gỗ keo, mặt bàn lên website gemmywood.vn.", "Sản Phẩm Đầu Ra / Bàn Giao": "Thông số kỹ thuật đồng bộ", "Thời Hạn / Khung Giờ": "Thứ Năm (13:00 – 14:30)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 1.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Năm", "Ghi Chú Tiến Độ": "Khớp dữ liệu sản xuất"}, {"STT": 76, "Mã ID": "TB-15", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Năm: 14:30 – 15:00", "Nội Dung Tác Nghiệp Chi Tiết": "Fanpage Facebook: Theo dõi hoạt động trang, kiểm duyệt bình luận và trực hộp thư tư vấn.", "Sản Phẩm Đầu Ra / Bàn Giao": "Hộp thư được xử lý kịp thời", "Thời Hạn / Khung Giờ": "Thứ Năm (14:30 – 15:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 0.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Năm", "Ghi Chú Tiến Độ": "Phản hồi khách hàng"}, {"STT": 77, "Mã ID": "TB-16", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Năm: 15:00 – 17:00", "Nội Dung Tác Nghiệp Chi Tiết": "Quỹ thời gian dự phòng phát sinh 1 (Buffer Time): Xử lý các nhiệm vụ đột xuất từ Ban Giám đốc hoặc các công việc phát sinh tại nhà máy.", "Sản Phẩm Đầu Ra / Bàn Giao": "Xử lý việc phát sinh trong tuần", "Thời Hạn / Khung Giờ": "Thứ Năm (15:00 – 17:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Năm", "Ghi Chú Tiến Độ": "Dự phòng chiều Thứ Năm"}, {"STT": 78, "Mã ID": "TB-17", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Sáu: 08:00 – 12:00", "Nội Dung Tác Nghiệp Chi Tiết": "SEO Tiếng Anh Website gemmywood.vn/en/: Nghiên cứu từ khóa B2B Sourcing quốc tế, biên soạn bài viết kỹ thuật chuyên sâu (MC 8-12%, keo D4, Butcher block), tối ưu Onpage SEO và cấu trúc Schema tiếp cận Buyer quốc tế.", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết web tiếng Anh chuẩn SEO", "Thời Hạn / Khung Giờ": "Thứ Sáu (08:00 – 12:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 4, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Sáu", "Ghi Chú Tiến Độ": "Định mức 2 bài/tháng"}, {"STT": 79, "Mã ID": "TB-18", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Sáu: 13:00 – 15:30", "Nội Dung Tác Nghiệp Chi Tiết": "Fanpage Facebook (Bài 3): Biên tập và phát hành bài đăng số 3 (chủ đề không gian sống, ứng dụng đồ gỗ ngoại thất/bếp, văn hóa nhà xưởng); theo dõi tương tác trang.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bài đăng Fanpage số 3 phát hành", "Thời Hạn / Khung Giờ": "Thứ Sáu (13:00 – 15:30)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Sáu", "Ghi Chú Tiến Độ": "Duy trì tần suất cuối tuần"}, {"STT": 80, "Mã ID": "TB-19", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Sáu: 15:30 – 17:00", "Nội Dung Tác Nghiệp Chi Tiết": "Fanpage Facebook (Tổng kết tuần & Chăm sóc trang): Rà soát số liệu tiếp cận bài đăng trong tuần, kiểm tra hộp thư tư vấn khách hàng.", "Sản Phẩm Đầu Ra / Bàn Giao": "Tổng hợp tương tác trang trong tuần", "Thời Hạn / Khung Giờ": "Thứ Sáu (15:30 – 17:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 1.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Sáu", "Ghi Chú Tiến Độ": "Chăm sóc khách hàng"}, {"STT": 81, "Mã ID": "TB-20", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Bảy: 08:00 – 10:00", "Nội Dung Tác Nghiệp Chi Tiết": "Kiểm tra kỹ thuật website định kỳ: kiểm tra tốc độ tải trang, đường dẫn tải Catalog V2 hoạt động ổn định, sao lưu dữ liệu hệ thống.", "Sản Phẩm Đầu Ra / Bàn Giao": "Website vận hành an toàn, ổn định", "Thời Hạn / Khung Giờ": "Thứ Bảy (08:00 – 10:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Bảy", "Ghi Chú Tiến Độ": "Bảo trì định kỳ Thứ Bảy"}, {"STT": 82, "Mã ID": "TB-21", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Bảy: 10:00 – 12:00", "Nội Dung Tác Nghiệp Chi Tiết": "Quỹ thời gian dự phòng phát sinh 2 (Buffer Time): Xử lý các nhiệm vụ đột xuất cuối tuần từ Ban Giám đốc hoặc hỗ trợ tư liệu gấp cho phòng Kinh doanh.", "Sản Phẩm Đầu Ra / Bàn Giao": "Xử lý dứt điểm việc phát sinh", "Thời Hạn / Khung Giờ": "Thứ Bảy (10:00 – 12:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Bảy", "Ghi Chú Tiến Độ": "Dự phòng sáng Thứ Bảy"}, {"STT": 83, "Mã ID": "TB-22", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Bảy: 13:00 – 15:00", "Nội Dung Tác Nghiệp Chi Tiết": "Nghiên cứu công nghệ & Ứng dụng AI: Nghiên cứu các giải pháp tự động hóa quy trình và ứng dụng công nghệ hỗ trợ tác nghiệp Marketing.", "Sản Phẩm Đầu Ra / Bàn Giao": "Báo cáo thử nghiệm công nghệ mới", "Thời Hạn / Khung Giờ": "Thứ Bảy (13:00 – 15:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Bảy", "Ghi Chú Tiến Độ": "Chiều Thứ Bảy"}, {"STT": 84, "Mã ID": "TB-23", "Phân Hệ": "7. Lịch Time-Blocking", "Hạng Mục / Tiêu Đề": "Thứ Bảy: 15:00 – 17:00", "Nội Dung Tác Nghiệp Chi Tiết": "Tổng hợp số liệu công tác trong tuần và hoàn thiện Báo cáo tuần gửi Ban Giám đốc trước 17:00.", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Báo cáo tuần hoàn chỉnh gửi Ban Giám đốc", "Thời Hạn / Khung Giờ": "Thứ Bảy (15:00 – 17:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Bảy", "Ghi Chú Tiến Độ": "Đúng hạn 17:00 Thứ Bảy"}]};
+    // Dữ liệu 1 Sheet duy nhất chuẩn hóa (62 dòng)
+    const EMBEDDED_UNIFIED_DATA = {"sheet_name": "Tháng 10 & Kế hoạch T11", "month_label": "Tháng 10/2026 & Kế Hoạch Chi Tiết Tháng 11/2026", "total_rows": 62, "sections": ["1. Kết Quả Tháng 10", "2. Tồn Đọng & Khắc Phục", "3. Đề Xuất Phê Duyệt", "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "5. Lịch Time-Blocking Hàng Tuần"], "rows": [{"STT": 1, "Mã ID": "T10-C1", "Phân Hệ": "1. Kết Quả Tháng 10", "Hạng Mục / Tiêu Đề": "Catalog B2B phiên bản số 2", "Nội Dung Tác Nghiệp Chi Tiết": "Hoàn thiện bản thảo Catalog B2B V2 (36 trang): Tinh chỉnh bố cục danh mục Outdoor, Butcher Block, Ván ghép; hoàn thiện khung quy cách xuất khẩu.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bản thảo Catalog B2B V2 hoàn chỉnh nội dung & bố cục", "Thời Hạn / Khung Giờ": "Tháng 10/2026", "Trạng Thái": "Đã hoàn thành bản thảo", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Hoàn Thành", "Ghi Chú Tiến Độ": ""}, {"STT": 2, "Mã ID": "T10-C2", "Phân Hệ": "1. Kết Quả Tháng 10", "Hạng Mục / Tiêu Đề": "Làm sạch dữ liệu Website", "Nội Dung Tác Nghiệp Chi Tiết": "Rà soát toàn diện website gemmywood.vn: Gỡ bỏ triệt để các sản phẩm thiếu hình ảnh hoặc không có nội dung mô tả, xử lý các trang sản phẩm trống.", "Sản Phẩm Đầu Ra / Bàn Giao": "Website vận hành ổn định, 100% sản phẩm hiển thị đầy đủ hình ảnh và thông số", "Thời Hạn / Khung Giờ": "Tháng 10/2026", "Trạng Thái": "Đã hoàn thành", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Hoàn Thành", "Ghi Chú Tiến Độ": ""}, {"STT": 3, "Mã ID": "T10-C3", "Phân Hệ": "1. Kết Quả Tháng 10", "Hạng Mục / Tiêu Đề": "Chuẩn hóa thông số Ván ghép thanh", "Nội Dung Tác Nghiệp Chi Tiết": "Cập nhật bảng thông số kỹ thuật chi tiết cho dòng Ván ghép thanh (Finger Joint Board / EGP): độ dày tiêu chuẩn 18mm, 38mm; các bản rộng xuất khẩu 640mm, 650mm, 990mm và chiều dài tương ứng.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bảng quy cách kỹ thuật Ván ghép thanh cập nhật chuẩn xác trên web & Catalog V2", "Thời Hạn / Khung Giờ": "Tháng 10/2026", "Trạng Thái": "Đã hoàn thành", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Hoàn Thành", "Ghi Chú Tiến Độ": ""}, {"STT": 4, "Mã ID": "T10-C4", "Phân Hệ": "1. Kết Quả Tháng 10", "Hạng Mục / Tiêu Đề": "Kênh truyền thông TikTok", "Nội Dung Tác Nghiệp Chi Tiết": "Sản xuất và đăng tải các video ngắn TikTok giới thiệu xưởng gỗ keo Phú Thọ 45.000m², máy móc chế biến và quy trình sản xuất.", "Sản Phẩm Đầu Ra / Bàn Giao": "Các video ngắn xuất bản định kỳ trên kênh TikTok xưởng", "Thời Hạn / Khung Giờ": "Tháng 10/2026", "Trạng Thái": "Đã đăng tải", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Hoàn Thành", "Ghi Chú Tiến Độ": ""}, {"STT": 5, "Mã ID": "T10-C5", "Phân Hệ": "1. Kết Quả Tháng 10", "Hạng Mục / Tiêu Đề": "Nghiên cứu & Đề xuất phối cảnh sản phẩm", "Nội Dung Tác Nghiệp Chi Tiết": "Khảo sát và đánh giá 2 phương án: Tự thực hiện (In-house) vs. Thuê dịch vụ bên ngoài. Đã tổng hợp so sánh về chi phí, tiến độ và chất lượng ảnh.", "Sản Phẩm Đầu Ra / Bàn Giao": "Đề xuất phương án tự dựng ảnh phối cảnh bằng công cụ AI chuyên dụng (kinh phí dự kiến ~300.000 đ/tháng)", "Thời Hạn / Khung Giờ": "Tháng 10/2026", "Trạng Thái": "Đã thống nhất phương án", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Hoàn Thành", "Ghi Chú Tiến Độ": ""}, {"STT": 6, "Mã ID": "T10-C6", "Phân Hệ": "1. Kết Quả Tháng 10", "Hạng Mục / Tiêu Đề": "Thiết kế bao bì túi xách giấy (03 mẫu)", "Nội Dung Tác Nghiệp Chi Tiết": "Thiết kế hoàn thiện 03 phương án túi xách giấy nhận diện thương hiệu Gemmy Wood (phong cách mộc Eco Kraft, màu Corporate Navy và phối cảnh vân gỗ) dùng đựng tài liệu B2B và mẫu gỗ gửi khách.", "Sản Phẩm Đầu Ra / Bàn Giao": "03 Mẫu thiết kế bao bì túi xách giấy hoàn chỉnh (đầy đủ bản vẽ cấn bế và file in ấn chất lượng cao)", "Thời Hạn / Khung Giờ": "Tháng 10/2026", "Trạng Thái": "Đã hoàn thành", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Hoàn Thành", "Ghi Chú Tiến Độ": ""}, {"STT": 7, "Mã ID": "T10-C7", "Phân Hệ": "1. Kết Quả Tháng 10", "Hạng Mục / Tiêu Đề": "Vận hành công tác thường nhật Tháng 10", "Nội Dung Tác Nghiệp Chi Tiết": "Thực hiện các đầu việc quản trị nền tảng theo định mức giờ công tiêu chuẩn của nhân sự Marketing (tuần 6 ngày).", "Sản Phẩm Đầu Ra / Bàn Giao": "Bảo đảm tiến độ các nhiệm vụ chuyên môn thường nhật", "Thời Hạn / Khung Giờ": "Tháng 10/2026", "Trạng Thái": "Đã triển khai", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Hoàn Thành", "Ghi Chú Tiến Độ": ""}, {"STT": 8, "Mã ID": "T10-P1", "Phân Hệ": "2. Tồn Đọng & Khắc Phục", "Hạng Mục / Tiêu Đề": "Quản trị truyền thông nhóm Zalo & Fanpage GMW", "Nội Dung Tác Nghiệp Chi Tiết": "Thực trạng: Chưa duy trì cập nhật tiến độ định kỳ trên nhóm Zalo kiểm duyệt truyền thông; thời gian đăng bài các kênh Fanpage GMW chưa đồng bộ. | Nguyên nhân: Chưa thiết lập quy trình gửi duyệt trọn gói: Chưa chủ động gửi Lịch biên tập nội dung tổng thể cả tháng cho các kênh digital (Website, Fanpage GMW, TikTok).", "Sản Phẩm Đầu Ra / Bàn Giao": "Giải pháp: Ngay đầu tháng 11, Marketing xây dựng và gửi duyệt trọn gói Lịch biên tập nội dung cả tháng 11 lên nhóm Zalo để thông qua một lần, làm căn cứ chủ động triển khai đúng lịch.", "Thời Hạn / Khung Giờ": "Đầu Tháng 11", "Trạng Thái": "Đang khắc phục", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tồn Đọng", "Ghi Chú Tiến Độ": "Ngay đầu tháng 11, Marketing xây dựng và gửi duyệt trọn gói Lịch biên tập nội dung cả tháng 11 lên nhóm Zalo để thông qua một lần, làm căn cứ chủ động triển khai đúng lịch."}, {"STT": 9, "Mã ID": "T10-P2", "Phân Hệ": "2. Tồn Đọng & Khắc Phục", "Hạng Mục / Tiêu Đề": "Kế hoạch nội dung Digital (Website & SEO)", "Nội Dung Tác Nghiệp Chi Tiết": "Thực trạng: Chưa triển khai các tuyến bài chuyên môn và bài viết chuẩn SEO trên hệ thống website trong tháng 10. | Nguyên nhân: 1. Chưa có Lịch biên tập nội dung cả tháng được thông qua để làm căn cứ phát hành đồng bộ.\n2. Ưu tiên tập trung xử lý dứt điểm việc làm sạch website, chuẩn hóa thông số ván ghép thanh và hoàn thiện khung Catalog V2.\n3. Đang chờ hoàn thiện bộ ảnh phối cảnh sản phẩm để chèn đồng bộ vào bài viết.", "Sản Phẩm Đầu Ra / Bàn Giao": "Giải pháp: Kích hoạt triển khai kế hoạch nội dung ngay trong tháng 11 theo Lịch biên tập đã duyệt, kết hợp sử dụng hình ảnh phối cảnh dựng bằng công cụ AI chuyên dụng.", "Thời Hạn / Khung Giờ": "Đầu Tháng 11", "Trạng Thái": "Đang khắc phục", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Tồn Đọng", "Ghi Chú Tiến Độ": "Kích hoạt triển khai kế hoạch nội dung ngay trong tháng 11 theo Lịch biên tập đã duyệt, kết hợp sử dụng hình ảnh phối cảnh dựng bằng công cụ AI chuyên dụng."}, {"STT": 10, "Mã ID": "T10-PR1", "Phân Hệ": "3. Đề Xuất Phê Duyệt", "Hạng Mục / Tiêu Đề": "Phê duyệt kinh phí công cụ AI dựng ảnh phối cảnh", "Nội Dung Tác Nghiệp Chi Tiết": "Đăng ký tài khoản công cụ AI chuyên dụng (~500.000 đ): Tuần 1 thử nghiệm thông số và chuẩn hóa quy trình xuất ảnh; Tuần 2 hoàn thiện ảnh phục vụ Catalog V2.", "Sản Phẩm Đầu Ra / Bàn Giao": "500.000 VNĐ", "Thời Hạn / Khung Giờ": "Đầu Tháng 11", "Trạng Thái": "Chờ phê duyệt", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Đề Xuất BGĐ", "Ghi Chú Tiến Độ": "500.000 VNĐ"}, {"STT": 11, "Mã ID": "T10-PR2", "Phân Hệ": "3. Đề Xuất Phê Duyệt", "Hạng Mục / Tiêu Đề": "Phê duyệt trọn gói Lịch biên tập nội dung cả tháng trên nhóm Zalo", "Nội Dung Tác Nghiệp Chi Tiết": "Thông qua tổng thể lịch phát hành bài viết các kênh digital để chủ động triển khai đúng tiến độ và đồng bộ thời gian.", "Sản Phẩm Đầu Ra / Bàn Giao": "0 VNĐ (Bộ phận Marketing gửi bản lịch tổng thể)", "Thời Hạn / Khung Giờ": "Đầu Tháng 11", "Trạng Thái": "Chờ phê duyệt", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Đề Xuất BGĐ", "Ghi Chú Tiến Độ": "0 VNĐ (Bộ phận Marketing gửi bản lịch tổng thể)"}, {"STT": 12, "Mã ID": "T10-PR3", "Phân Hệ": "3. Đề Xuất Phê Duyệt", "Hạng Mục / Tiêu Đề": "Nghiệm thu nội dung Catalog B2B phiên bản số 2", "Nội Dung Tác Nghiệp Chi Tiết": "Khung nội dung và bảng thông số kỹ thuật đã hoàn thiện trong tháng 10, cần rà soát lần cuối để tiến hành ghép ảnh phối cảnh.", "Sản Phẩm Đầu Ra / Bàn Giao": "Rà soát nội bộ", "Thời Hạn / Khung Giờ": "Đầu Tháng 11", "Trạng Thái": "Chờ phê duyệt", "Số Giờ (h)": "", "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Đề Xuất BGĐ", "Ghi Chú Tiến Độ": "Rà soát nội bộ"}, {"STT": 13, "Mã ID": "KH11-01", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Họp giao ban tháng với Ban Giám đốc & phòng Kinh doanh (08", "Nội Dung Tác Nghiệp Chi Tiết": "Họp giao ban tháng với Ban Giám đốc & phòng Kinh doanh (08:00 – 12:00): Báo cáo công tác T10, giải trình tồn đọng, trình duyệt kinh phí công cụ AI và duyệt Lịch tháng", "Sản Phẩm Đầu Ra / Bàn Giao": "Biên bản họp tháng, phê duyệt kinh phí AI & Lịch tháng", "Thời Hạn / Khung Giờ": "Thứ Hai (02/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 1 (02/11 - 07/11)", "Ghi Chú Tiến Độ": "Mục tiêu trọng tâm Tháng 11"}, {"STT": 14, "Mã ID": "KH11-02", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Trình duyệt trọn gói Lịch biên tập nội d...", "Nội Dung Tác Nghiệp Chi Tiết": "Trình duyệt trọn gói Lịch biên tập nội dung cả tháng 11 cho tất cả các kênh digital lên nhóm Zalo", "Sản Phẩm Đầu Ra / Bàn Giao": "Bản Lịch biên tập nội dung cả tháng 11", "Thời Hạn / Khung Giờ": "Thứ Hai (02/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 1 (02/11 - 07/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 15, "Mã ID": "KH11-03", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Kích hoạt tài khoản công cụ AI chuyên dụng", "Nội Dung Tác Nghiệp Chi Tiết": "Kích hoạt tài khoản công cụ AI chuyên dụng: Thử nghiệm thông số dựng bối cảnh gỗ, test tách viền, đồng bộ hướng sáng và đổ bóng tự nhiên", "Sản Phẩm Đầu Ra / Bàn Giao": "Bộ thông số prompt chuẩn bối cảnh gỗ Gemmy Wood & ảnh test đạt chuẩn", "Thời Hạn / Khung Giờ": "Thứ Ba (03/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 1 (02/11 - 07/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 16, "Mã ID": "KH11-04", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Biên soạn & xuất bản bài viết kỹ thuật số 1", "Nội Dung Tác Nghiệp Chi Tiết": "Biên soạn & xuất bản bài viết kỹ thuật số 1: Quy trình sấy hơi nước MC 8-12% & giải pháp kiểm soát độ ẩm container biển", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết web + 01 bài Fanpage GMW phát hành đồng bộ", "Thời Hạn / Khung Giờ": "Thứ Ba - Thứ Tư", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 1 (02/11 - 07/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 17, "Mã ID": "KH11-05", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Biên tập và đăng video TikTok xưởng số 1...", "Nội Dung Tác Nghiệp Chi Tiết": "Biên tập và đăng video TikTok xưởng số 1 (Quy trình cụm lò sấy hơi nước MC 8-12% chống mốc)", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Video TikTok xuất bản", "Thời Hạn / Khung Giờ": "Thứ Sáu (06/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 1 (02/11 - 07/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 18, "Mã ID": "KH11-06", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Khởi tạo & Chuẩn hóa trang LinkedIn Comp...", "Nội Dung Tác Nghiệp Chi Tiết": "Khởi tạo & Chuẩn hóa trang LinkedIn Company Page Gemmy Wood theo tiêu chuẩn quốc tế", "Sản Phẩm Đầu Ra / Bàn Giao": "LinkedIn Company Page hoàn thiện nhận diện B2B", "Thời Hạn / Khung Giờ": "Thứ Sáu (06/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 1 (02/11 - 07/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 19, "Mã ID": "KH11-07", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Tổng hợp số liệu và gửi Báo cáo tuần số...", "Nội Dung Tác Nghiệp Chi Tiết": "Tổng hợp số liệu và gửi Báo cáo tuần số 1; hoàn thiện kho ảnh bối cảnh sản phẩm", "Sản Phẩm Đầu Ra / Bàn Giao": "Báo cáo tuần 1 gửi Ban Giám đốc", "Thời Hạn / Khung Giờ": "Thứ Bảy (07/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 1 (02/11 - 07/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 20, "Mã ID": "KH11-08", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Hoàn thiện ghép sản phẩm lên ảnh bối cản...", "Nội Dung Tác Nghiệp Chi Tiết": "Hoàn thiện ghép sản phẩm lên ảnh bối cảnh (Outdoor & Butcher Block), chọn lọc chèn Catalog V2 & Website", "Sản Phẩm Đầu Ra / Bàn Giao": "Bộ ảnh phối cảnh hoàn thiện chất lượng cao", "Thời Hạn / Khung Giờ": "Thứ Hai - Thứ Ba", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 2 (09/11 - 14/11)", "Ghi Chú Tiến Độ": "Mục tiêu trọng tâm Tháng 11"}, {"STT": 21, "Mã ID": "KH11-09", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Bàn giao chính thức Catalog B2B V2 (file...", "Nội Dung Tác Nghiệp Chi Tiết": "Bàn giao chính thức Catalog B2B V2 (file PDF in ấn & gửi khách) chèn đầy đủ ảnh phối cảnh cho phòng Kinh doanh", "Sản Phẩm Đầu Ra / Bàn Giao": "File Master PDF Catalog B2B V2 hoàn chỉnh", "Thời Hạn / Khung Giờ": "Thứ Ba - Thứ Tư", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 2 (09/11 - 14/11)", "Ghi Chú Tiến Độ": "Mục tiêu trọng tâm Tháng 11"}, {"STT": 22, "Mã ID": "KH11-10", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Đăng bài Fanpage GMW số 2 theo Lịch biên...", "Nội Dung Tác Nghiệp Chi Tiết": "Đăng bài Fanpage GMW số 2 theo Lịch biên tập nội dung đã duyệt", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết Fanpage GMW phát hành đúng hẹn", "Thời Hạn / Khung Giờ": "Thứ Năm (12/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 2 (09/11 - 14/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 23, "Mã ID": "KH11-11", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Đăng bài chuyên môn LinkedIn số 1 (Tiêu...", "Nội Dung Tác Nghiệp Chi Tiết": "Đăng bài chuyên môn LinkedIn số 1 (Tiêu chuẩn MC 8-12% & Keo D4) + Kết nối 30 Buyer quốc tế mục tiêu", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết LinkedIn B2B + Mạng lưới 30 Buyer", "Thời Hạn / Khung Giờ": "Thứ Năm (12/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 2 (09/11 - 14/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 24, "Mã ID": "KH11-12", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Biên tập và đăng video TikTok xưởng số 2...", "Nội Dung Tác Nghiệp Chi Tiết": "Biên tập và đăng video TikTok xưởng số 2 (Chuyền máy ghép thanh finger joint & chà nhám grit 240)", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Video TikTok xuất bản", "Thời Hạn / Khung Giờ": "Thứ Sáu (13/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 2 (09/11 - 14/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 25, "Mã ID": "KH11-13", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Tối ưu Onpage SEO tiếng Anh & liên kết n...", "Nội Dung Tác Nghiệp Chi Tiết": "Tối ưu Onpage SEO tiếng Anh & liên kết nội bộ các trang sản phẩm Ván ghép thanh, Butcher block trên gemmywood.vn/en/", "Sản Phẩm Đầu Ra / Bàn Giao": "Hệ thống liên kết & Onpage tiếng Anh hoàn chỉnh", "Thời Hạn / Khung Giờ": "Thứ Sáu (13/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 2 (09/11 - 14/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 26, "Mã ID": "KH11-14", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Tổng hợp số liệu và gửi Báo cáo tuần số...", "Nội Dung Tác Nghiệp Chi Tiết": "Tổng hợp số liệu và gửi Báo cáo tuần số 2", "Sản Phẩm Đầu Ra / Bàn Giao": "Báo cáo tuần 2 gửi Ban Giám đốc", "Thời Hạn / Khung Giờ": "Thứ Bảy (14/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 2 (09/11 - 14/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 27, "Mã ID": "KH11-15", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Cập nhật và rà soát thông số kỹ thuật Th...", "Nội Dung Tác Nghiệp Chi Tiết": "Cập nhật và rà soát thông số kỹ thuật Thớt gỗ keo & Mặt bàn Butcher Block lên hệ thống website", "Sản Phẩm Đầu Ra / Bàn Giao": "Bảng thông số kỹ thuật cập nhật lên website", "Thời Hạn / Khung Giờ": "Thứ Hai - Thứ Ba", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 3 (16/11 - 21/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 28, "Mã ID": "KH11-16", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Biên soạn & xuất bản bài viết kỹ thuật số 2", "Nội Dung Tác Nghiệp Chi Tiết": "Biên soạn & xuất bản bài viết kỹ thuật số 2: Tiêu chuẩn mặt bàn Butcher Block & thớt gỗ keo xuất khẩu", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết web + 01 bài Fanpage GMW phát hành", "Thời Hạn / Khung Giờ": "Thứ Tư - Thứ Năm", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 3 (16/11 - 21/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 29, "Mã ID": "KH11-17", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Biên soạn bài viết SEO Tiếng Anh số 1 trên web", "Nội Dung Tác Nghiệp Chi Tiết": "Biên soạn bài viết SEO Tiếng Anh số 1 trên web: Acacia Butcher Block Countertop Manufacturer Vietnam", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết web tiếng Anh chuẩn SEO quốc tế", "Thời Hạn / Khung Giờ": "Thứ Năm (19/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 3 (16/11 - 21/11)", "Ghi Chú Tiến Độ": "Mục tiêu trọng tâm Tháng 11"}, {"STT": 30, "Mã ID": "KH11-18", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Đăng bài chuyên môn LinkedIn số 2 (Tiêu...", "Nội Dung Tác Nghiệp Chi Tiết": "Đăng bài chuyên môn LinkedIn số 2 (Tiêu chuẩn xuất cont mặt bàn Butcher block) & kết nối Buyer", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết LinkedIn B2B + Mạng lưới 30 Buyer", "Thời Hạn / Khung Giờ": "Thứ Sáu (20/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 3 (16/11 - 21/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 31, "Mã ID": "KH11-19", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Biên tập và đăng video TikTok xưởng số 3...", "Nội Dung Tác Nghiệp Chi Tiết": "Biên tập và đăng video TikTok xưởng số 3 (Quy trình sản xuất thớt gỗ keo & kiểm tra chứng chỉ FSC)", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Video TikTok xuất bản", "Thời Hạn / Khung Giờ": "Thứ Sáu (20/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 3 (16/11 - 21/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 32, "Mã ID": "KH11-20", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Tổng hợp số liệu và gửi Báo cáo tuần số...", "Nội Dung Tác Nghiệp Chi Tiết": "Tổng hợp số liệu và gửi Báo cáo tuần số 3", "Sản Phẩm Đầu Ra / Bàn Giao": "Báo cáo tuần 3 gửi Ban Giám đốc", "Thời Hạn / Khung Giờ": "Thứ Bảy (21/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 3 (16/11 - 21/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 33, "Mã ID": "KH11-21", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Đăng bài Fanpage GMW số 4 theo Lịch biên...", "Nội Dung Tác Nghiệp Chi Tiết": "Đăng bài Fanpage GMW số 4 theo Lịch biên tập nội dung đã duyệt", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết Fanpage GMW phát hành", "Thời Hạn / Khung Giờ": "Thứ Ba (24/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 34, "Mã ID": "KH11-22", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Đăng bài chuyên môn LinkedIn số 3", "Nội Dung Tác Nghiệp Chi Tiết": "Đăng bài chuyên môn LinkedIn số 3: Giới thiệu quy mô nhà máy Phú Thọ 45.000m² & Chuỗi cung ứng FSC", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết LinkedIn B2B chuẩn xuất khẩu", "Thời Hạn / Khung Giờ": "Thứ Tư (25/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 35, "Mã ID": "KH11-23", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Biên tập và đăng video TikTok xưởng số 4", "Nội Dung Tác Nghiệp Chi Tiết": "Biên tập và đăng video TikTok xưởng số 4: Quy trình kiểm soát độ ẩm khi đóng container 40ft xuất cảng Hải Phòng", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Video TikTok xuất bản", "Thời Hạn / Khung Giờ": "Thứ Năm (26/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 36, "Mã ID": "KH11-24", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Biên soạn bài viết SEO Tiếng Anh số 2 trên web", "Nội Dung Tác Nghiệp Chi Tiết": "Biên soạn bài viết SEO Tiếng Anh số 2 trên web: Vietnam Acacia Finger Joint Board Manufacturer - FSC Certified", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết web tiếng Anh chuẩn SEO quốc tế", "Thời Hạn / Khung Giờ": "Thứ Sáu (27/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Mục tiêu trọng tâm Tháng 11"}, {"STT": 37, "Mã ID": "KH11-25", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Rà soát kỹ thuật website", "Nội Dung Tác Nghiệp Chi Tiết": "Rà soát kỹ thuật website: Kiểm tra đường truyền, form liên hệ B2B và tốc độ tải trang", "Sản Phẩm Đầu Ra / Bàn Giao": "Báo cáo tình trạng vận hành website", "Thời Hạn / Khung Giờ": "Thứ Sáu (27/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 38, "Mã ID": "KH11-26", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Tổng hợp số liệu tháng 11 & Lập Dự thảo...", "Nội Dung Tác Nghiệp Chi Tiết": "Tổng hợp số liệu tháng 11 & Lập Dự thảo Báo cáo tháng 11 chuẩn bị họp đầu tháng 12", "Sản Phẩm Đầu Ra / Bàn Giao": "Bộ Báo cáo tháng 11 (bản thảo hoàn chỉnh)", "Thời Hạn / Khung Giờ": "Thứ Bảy (28/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 39, "Mã ID": "KH11-27", "Phân Hệ": "4. Kế Hoạch Làm Việc Chi Tiết Tháng 11", "Hạng Mục / Tiêu Đề": "Tổng hợp số liệu và gửi Báo cáo tuần số...", "Nội Dung Tác Nghiệp Chi Tiết": "Tổng hợp số liệu và gửi Báo cáo tuần số 4 gửi Ban Giám đốc", "Sản Phẩm Đầu Ra / Bàn Giao": "Báo cáo tuần 4 gửi Ban Giám đốc", "Thời Hạn / Khung Giờ": "Thứ Bảy (28/11)", "Trạng Thái": "Chuẩn bị thực hiện", "Số Giờ (h)": 0, "Tỷ Trọng (%)": 0, "Phân Loại Nhóm": "Tuần 4 (23/11 - 28/11)", "Ghi Chú Tiến Độ": "Tác nghiệp định kỳ"}, {"STT": 40, "Mã ID": "TB-1", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Hai: 08:00 – 12:00", "Nội Dung Tác Nghiệp Chi Tiết": "• Tuần 1 (Thứ Hai đầu tháng): Họp giao ban tháng với Ban Giám đốc & phòng Kinh doanh (08:00 – 12:00): Báo cáo công tác T10, giải trình tồn đọng, trình duyệt kinh phí công cụ AI và duyệt Lịch tháng.\n• Tuần 2, 3, 4: Biên soạn bài viết kỹ thuật Tiếng Việt theo đúng Lịch biên tập đã duyệt.", "Sản Phẩm Đầu Ra / Bàn Giao": "Biên bản họp tháng (Tuần 1) / Bản thảo bài viết web (Tuần 2-4)", "Thời Hạn / Khung Giờ": "Thứ Hai (08:00 – 12:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 4, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Hai", "Ghi Chú Tiến Độ": "Họp 4h sáng Thứ Hai đầu tháng"}, {"STT": 41, "Mã ID": "TB-2", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Hai: 13:00 – 13:30", "Nội Dung Tác Nghiệp Chi Tiết": "Tối ưu hình ảnh, kiểm tra thông số SEO và xuất bản bài viết lên website gemmywood.vn.", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết hoàn chỉnh trên web", "Thời Hạn / Khung Giờ": "Thứ Hai (13:00 – 13:30)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 0.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Hai", "Ghi Chú Tiến Độ": "Xuất bản website"}, {"STT": 42, "Mã ID": "TB-3", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Hai: 13:30 – 15:30", "Nội Dung Tác Nghiệp Chi Tiết": "Fanpage Facebook (Bài 1): Thiết kế hình ảnh minh họa bằng Canva Pro, biên soạn nội dung bài đăng số 1 trong tuần.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bản thiết kế hình ảnh + Nội dung bài 1", "Thời Hạn / Khung Giờ": "Thứ Hai (13:30 – 15:30)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Hai", "Ghi Chú Tiến Độ": "Định mức 3 bài/tuần"}, {"STT": 43, "Mã ID": "TB-4", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Hai: 15:30 – 17:00", "Nội Dung Tác Nghiệp Chi Tiết": "Phát hành bài đăng số 1 lên Fanpage GMW, chia sẻ thông tin chuyên ngành, theo dõi tương tác và trả lời phản hồi của khách hàng.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bài viết phát hành & theo dõi tương tác", "Thời Hạn / Khung Giờ": "Thứ Hai (15:30 – 17:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 1.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Hai", "Ghi Chú Tiến Độ": "Chăm sóc trang"}, {"STT": 44, "Mã ID": "TB-5", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Ba: 08:00 – 12:00", "Nội Dung Tác Nghiệp Chi Tiết": "Dựng ảnh phối cảnh sản phẩm (Công cụ AI chuyên dụng):\n• Tuần 1: Nghiên cứu thông số kỹ thuật, thử nghiệm tạo bối cảnh gỗ, test tách viền và đổ bóng tự nhiên, hoàn thiện bộ prompt chuẩn.\n• Tuần 2: Xuất bản bộ ảnh bối cảnh chất lượng cao cho 4 dòng sản phẩm chủ lực và ghép mẫu sản phẩm.\n• Tuần 3-4: Tạo hình ảnh phục vụ bài viết website và các kênh mạng xã hội.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bộ thông số prompt chuẩn (Tuần 1) / Bộ ảnh phối cảnh hoàn thiện (Tuần 2)", "Thời Hạn / Khung Giờ": "Thứ Ba (08:00 – 12:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 4, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Ba", "Ghi Chú Tiến Độ": "Dựng ảnh phối cảnh in-house"}, {"STT": 45, "Mã ID": "TB-6", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Ba: 13:00 – 15:00", "Nội Dung Tác Nghiệp Chi Tiết": "Dàn trang Catalog B2B phiên bản 2 trên Canva Pro: chèn ảnh phối cảnh, đối soát bảng mã quy cách L x W x H mm chuẩn xưởng sản xuất.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bản dàn trang Catalog V2 hoàn chỉnh", "Thời Hạn / Khung Giờ": "Thứ Ba (13:00 – 15:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Ba", "Ghi Chú Tiến Độ": "Khớp quy cách xưởng"}, {"STT": 46, "Mã ID": "TB-7", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Ba: 15:00 – 17:00", "Nội Dung Tác Nghiệp Chi Tiết": "Kênh LinkedIn B2B (Buổi 1): Chuẩn hóa Company Page Gemmy Wood theo tiêu chuẩn xuất khẩu quốc tế; tiếp cận và kết nối 20-30 Buyer mục tiêu.", "Sản Phẩm Đầu Ra / Bàn Giao": "Hồ sơ LinkedIn hoàn thiện", "Thời Hạn / Khung Giờ": "Thứ Ba (15:00 – 17:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Ba", "Ghi Chú Tiến Độ": "Kết nối đối tác quốc tế"}, {"STT": 47, "Mã ID": "TB-8", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Tư: 08:00 – 10:30", "Nội Dung Tác Nghiệp Chi Tiết": "Phân loại và xử lý tư liệu video từ nhà máy Phú Thọ: lò sấy hơi nước MC 8-12%, dây chuyền finger joint, quy trình đóng container.", "Sản Phẩm Đầu Ra / Bàn Giao": "Kho tư liệu video sản xuất", "Thời Hạn / Khung Giờ": "Thứ Tư (08:00 – 10:30)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Tư", "Ghi Chú Tiến Độ": "Nguồn tư liệu thực tế xưởng"}, {"STT": 48, "Mã ID": "TB-9", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Tư: 10:30 – 12:00", "Nội Dung Tác Nghiệp Chi Tiết": "Biên tập video ngắn bằng CapCut Pro: chèn phụ đề song ngữ Anh - Việt, xuất file định dạng chất lượng cao.", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Video hoàn chỉnh", "Thời Hạn / Khung Giờ": "Thứ Tư (10:30 – 12:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 1.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Tư", "Ghi Chú Tiến Độ": "01 video/tuần"}, {"STT": 49, "Mã ID": "TB-10", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Tư: 13:00 – 15:00", "Nội Dung Tác Nghiệp Chi Tiết": "Đăng tải video lên kênh TikTok xưởng; biên soạn nội dung mô tả B2B, kiểm tra hiển thị và gắn thẻ ngành hàng gỗ xuất khẩu.", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Video TikTok xuất bản", "Thời Hạn / Khung Giờ": "Thứ Tư (13:00 – 15:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Tư", "Ghi Chú Tiến Độ": "Định mức 4 video/tháng"}, {"STT": 50, "Mã ID": "TB-11", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Tư: 15:00 – 17:00", "Nội Dung Tác Nghiệp Chi Tiết": "Fanpage Facebook (Bài 2): Biên tập và phát hành bài đăng số 2 (video quy trình sản xuất hoặc hình ảnh sản phẩm thực tế); trực tin nhắn và hỗ trợ khách hàng.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bài đăng Fanpage số 2 phát hành", "Thời Hạn / Khung Giờ": "Thứ Tư (15:00 – 17:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Tư", "Ghi Chú Tiến Độ": "Chăm sóc khách hàng"}, {"STT": 51, "Mã ID": "TB-12", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Năm: 08:00 – 10:30", "Nội Dung Tác Nghiệp Chi Tiết": "Kênh LinkedIn B2B (Buổi 2): Biên soạn và đăng bài chuyên môn kỹ thuật tiếng Anh (tiêu chuẩn MC 8-12%, keo D4, kiểm soát độ ẩm cont biển).", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết LinkedIn chuyên ngành", "Thời Hạn / Khung Giờ": "Thứ Năm (08:00 – 10:30)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Năm", "Ghi Chú Tiến Độ": "Xây dựng hình ảnh nhà máy"}, {"STT": 52, "Mã ID": "TB-13", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Năm: 10:30 – 12:00", "Nội Dung Tác Nghiệp Chi Tiết": "Tương tác và phản hồi tin nhắn của Buyer trên LinkedIn; mở rộng mạng lưới kết nối thêm 20-30 đối tác quốc tế.", "Sản Phẩm Đầu Ra / Bàn Giao": "Mạng lưới Buyer được chăm sóc", "Thời Hạn / Khung Giờ": "Thứ Năm (10:30 – 12:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 1.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Năm", "Ghi Chú Tiến Độ": "Duy trì tương tác định kỳ"}, {"STT": 53, "Mã ID": "TB-14", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Năm: 13:00 – 14:30", "Nội Dung Tác Nghiệp Chi Tiết": "Quản trị website: Cập nhật và rà soát bảng thông số kỹ thuật ván ghép thanh, thớt gỗ keo, mặt bàn lên website gemmywood.vn.", "Sản Phẩm Đầu Ra / Bàn Giao": "Thông số kỹ thuật đồng bộ", "Thời Hạn / Khung Giờ": "Thứ Năm (13:00 – 14:30)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 1.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Năm", "Ghi Chú Tiến Độ": "Khớp dữ liệu sản xuất"}, {"STT": 54, "Mã ID": "TB-15", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Năm: 14:30 – 15:00", "Nội Dung Tác Nghiệp Chi Tiết": "Fanpage Facebook: Theo dõi hoạt động trang, kiểm duyệt bình luận và trực hộp thư tư vấn.", "Sản Phẩm Đầu Ra / Bàn Giao": "Hộp thư được xử lý kịp thời", "Thời Hạn / Khung Giờ": "Thứ Năm (14:30 – 15:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 0.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Năm", "Ghi Chú Tiến Độ": "Phản hồi khách hàng"}, {"STT": 55, "Mã ID": "TB-16", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Năm: 15:00 – 17:00", "Nội Dung Tác Nghiệp Chi Tiết": "Quỹ thời gian dự phòng phát sinh 1 (Buffer Time): Xử lý các nhiệm vụ đột xuất từ Ban Giám đốc hoặc các công việc phát sinh tại nhà máy.", "Sản Phẩm Đầu Ra / Bàn Giao": "Xử lý việc phát sinh trong tuần", "Thời Hạn / Khung Giờ": "Thứ Năm (15:00 – 17:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Năm", "Ghi Chú Tiến Độ": "Dự phòng chiều Thứ Năm"}, {"STT": 56, "Mã ID": "TB-17", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Sáu: 08:00 – 12:00", "Nội Dung Tác Nghiệp Chi Tiết": "SEO Tiếng Anh Website gemmywood.vn/en/: Nghiên cứu từ khóa B2B Sourcing quốc tế, biên soạn bài viết kỹ thuật chuyên sâu (MC 8-12%, keo D4, Butcher block), tối ưu Onpage SEO và cấu trúc Schema tiếp cận Buyer quốc tế.", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Bài viết web tiếng Anh chuẩn SEO", "Thời Hạn / Khung Giờ": "Thứ Sáu (08:00 – 12:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 4, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Sáu", "Ghi Chú Tiến Độ": "Định mức 2 bài/tháng"}, {"STT": 57, "Mã ID": "TB-18", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Sáu: 13:00 – 15:30", "Nội Dung Tác Nghiệp Chi Tiết": "Fanpage Facebook (Bài 3): Biên tập và phát hành bài đăng số 3 (chủ đề không gian sống, ứng dụng đồ gỗ ngoại thất/bếp, văn hóa nhà xưởng); theo dõi tương tác trang.", "Sản Phẩm Đầu Ra / Bàn Giao": "Bài đăng Fanpage số 3 phát hành", "Thời Hạn / Khung Giờ": "Thứ Sáu (13:00 – 15:30)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Sáu", "Ghi Chú Tiến Độ": "Duy trì tần suất cuối tuần"}, {"STT": 58, "Mã ID": "TB-19", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Sáu: 15:30 – 17:00", "Nội Dung Tác Nghiệp Chi Tiết": "Fanpage Facebook (Tổng kết tuần & Chăm sóc trang): Rà soát số liệu tiếp cận bài đăng trong tuần, kiểm tra hộp thư tư vấn khách hàng.", "Sản Phẩm Đầu Ra / Bàn Giao": "Tổng hợp tương tác trang trong tuần", "Thời Hạn / Khung Giờ": "Thứ Sáu (15:30 – 17:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 1.5, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Sáu", "Ghi Chú Tiến Độ": "Chăm sóc khách hàng"}, {"STT": 59, "Mã ID": "TB-20", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Bảy: 08:00 – 10:00", "Nội Dung Tác Nghiệp Chi Tiết": "Kiểm tra kỹ thuật website định kỳ: kiểm tra tốc độ tải trang, đường dẫn tải Catalog V2 hoạt động ổn định, sao lưu dữ liệu hệ thống.", "Sản Phẩm Đầu Ra / Bàn Giao": "Website vận hành an toàn, ổn định", "Thời Hạn / Khung Giờ": "Thứ Bảy (08:00 – 10:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Bảy", "Ghi Chú Tiến Độ": "Bảo trì định kỳ Thứ Bảy"}, {"STT": 60, "Mã ID": "TB-21", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Bảy: 10:00 – 12:00", "Nội Dung Tác Nghiệp Chi Tiết": "Quỹ thời gian dự phòng phát sinh 2 (Buffer Time): Xử lý các nhiệm vụ đột xuất cuối tuần từ Ban Giám đốc hoặc hỗ trợ tư liệu gấp cho phòng Kinh doanh.", "Sản Phẩm Đầu Ra / Bàn Giao": "Xử lý dứt điểm việc phát sinh", "Thời Hạn / Khung Giờ": "Thứ Bảy (10:00 – 12:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Bảy", "Ghi Chú Tiến Độ": "Dự phòng sáng Thứ Bảy"}, {"STT": 61, "Mã ID": "TB-22", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Bảy: 13:00 – 15:00", "Nội Dung Tác Nghiệp Chi Tiết": "Nghiên cứu công nghệ & Ứng dụng AI: Nghiên cứu các giải pháp tự động hóa quy trình và ứng dụng công nghệ hỗ trợ tác nghiệp Marketing.", "Sản Phẩm Đầu Ra / Bàn Giao": "Báo cáo thử nghiệm công nghệ mới", "Thời Hạn / Khung Giờ": "Thứ Bảy (13:00 – 15:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Bảy", "Ghi Chú Tiến Độ": "Chiều Thứ Bảy"}, {"STT": 62, "Mã ID": "TB-23", "Phân Hệ": "5. Lịch Time-Blocking Hàng Tuần", "Hạng Mục / Tiêu Đề": "Thứ Bảy: 15:00 – 17:00", "Nội Dung Tác Nghiệp Chi Tiết": "Tổng hợp số liệu công tác trong tuần và hoàn thiện Báo cáo tuần gửi Ban Giám đốc trước 17:00.", "Sản Phẩm Đầu Ra / Bàn Giao": "01 Báo cáo tuần hoàn chỉnh gửi Ban Giám đốc", "Thời Hạn / Khung Giờ": "Thứ Bảy (15:00 – 17:00)", "Trạng Thái": "Lịch cố định", "Số Giờ (h)": 2, "Tỷ Trọng (%)": "", "Phân Loại Nhóm": "Thứ Bảy", "Ghi Chú Tiến Độ": "Đúng hạn 17:00 Thứ Bảy"}]};
+
     let currentSheetData = EMBEDDED_UNIFIED_DATA.rows || [];
     let currentMonth = 'Tháng 10_2026';
     let activeTab = 'october';
-    let currentRoadmapFilter = 'ALL';
+    let currentNovFilter = 'ALL';
     let currentTimeblockFilter = 'ALL';
 
-    // Charts references
-    let doughnutChart = null;
-    let barChart = null;
+    let parsedSections = {
+      completed: [],
+      pending: [],
+      proposals: [],
+      november_plan: [],
+      daily_timeblocks: []
+    };
 
     document.addEventListener('DOMContentLoaded', () => {
       parseAndRenderUnifiedData(currentSheetData);
@@ -643,24 +628,12 @@
     });
 
     // ==================== PARSE & PROCESS 1-SHEET ROWS ====================
-    let parsedSections = {
-      completed: [],
-      pending: [],
-      proposals: [],
-      focus_tasks: [],
-      weekly_roadmap: [],
-      allocations: [],
-      daily_timeblocks: []
-    };
-
     function parseAndRenderUnifiedData(rows) {
       parsedSections = {
         completed: [],
         pending: [],
         proposals: [],
-        focus_tasks: [],
-        weekly_roadmap: [],
-        allocations: [],
+        november_plan: [],
         daily_timeblocks: []
       };
 
@@ -672,12 +645,8 @@
           parsedSections.pending.push(r);
         } else if (cat.includes('Đề Xuất')) {
           parsedSections.proposals.push(r);
-        } else if (cat.includes('Mục Tiêu')) {
-          parsedSections.focus_tasks.push(r);
-        } else if (cat.includes('Lộ Trình')) {
-          parsedSections.weekly_roadmap.push(r);
-        } else if (cat.includes('Định Mức')) {
-          parsedSections.allocations.push(r);
+        } else if (cat.includes('Kế Hoạch')) {
+          parsedSections.november_plan.push(r);
         } else if (cat.includes('Time-Blocking')) {
           parsedSections.daily_timeblocks.push(r);
         }
@@ -686,65 +655,11 @@
       // Update KPI counters
       document.getElementById('heroTotalRecords').textContent = rows.length;
       document.getElementById('kpiOctCount').textContent = `${parsedSections.completed.length} / ${parsedSections.completed.length}`;
-      document.getElementById('kpiNovFocusCount').textContent = parsedSections.focus_tasks.length;
-      document.getElementById('kpiProposalsCount').textContent = String(parsedSections.proposals.length).padStart(2, '0');
+      document.getElementById('kpiNovTasksCount').textContent = parsedSections.november_plan.length;
+      document.getElementById('kpiTimeblocksCount').textContent = parsedSections.daily_timeblocks.length;
 
       renderAllTables();
-      initOrUpdateCharts();
       lucide.createIcons();
-    }
-
-    // ==================== GOOGLE SHEETS LIVE SYNC ====================
-    async function loadFromGoogleSheet() {
-      const sheetId = document.getElementById('customSheetId').value.trim();
-      const sheetName = document.getElementById('monthSelect').value.trim();
-      const indicator = document.getElementById('syncIndicator');
-      const label = document.getElementById('syncStatusLabel');
-
-      indicator.className = 'w-2.5 h-2.5 rounded-full bg-amber-400 animate-spin';
-      label.textContent = `Đang tải dữ liệu từ Google Sheet tab [${sheetName}]...`;
-
-      const gvizUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
-
-      try {
-        const resp = await fetch(gvizUrl);
-        const text = await resp.text();
-        const jsonMatch = text.match(/google\.visualization\.Query\.setResponse\(([\s\S\w\W]*)\);/);
-        if (!jsonMatch) throw new Error('Không đọc được định dạng Google Sheet');
-        
-        const gvizData = JSON.parse(jsonMatch[1]);
-        const cols = gvizData.table.cols.map(c => (c.label || '').trim());
-        const parsedRows = [];
-
-        gvizData.table.rows.forEach(r => {
-          const rowObj = {};
-          cols.forEach((colName, idx) => {
-            const cell = r.c[idx];
-            rowObj[colName] = (cell && cell.v !== null && cell.v !== undefined) ? cell.v : '';
-          });
-          parsedRows.push(rowObj);
-        });
-
-        if (parsedRows.length > 0) {
-          currentSheetData = parsedRows;
-          parseAndRenderUnifiedData(currentSheetData);
-          indicator.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400';
-          label.innerHTML = `🟢 <strong>Live Google Sheet:</strong> Đã đồng bộ ${parsedRows.length} dòng từ tab [${sheetName}]`;
-        } else {
-          throw new Error('Tab sheet rỗng');
-        }
-      } catch(err) {
-        console.warn('Google Sheet fetch error, fallback to local data:', err.message);
-        indicator.className = 'w-2.5 h-2.5 rounded-full bg-blue-400';
-        label.innerHTML = `💾 <strong>Chế độ Nhúng Sẵn:</strong> ${currentSheetData.length} dòng từ dữ liệu chuẩn hóa`;
-        parseAndRenderUnifiedData(currentSheetData);
-      }
-    }
-
-    function onMonthChange(monthValue) {
-      currentMonth = monthValue;
-      document.getElementById('currentSheetLabel').textContent = monthValue;
-      loadFromGoogleSheet();
     }
 
     // ==================== RENDER TABLES ====================
@@ -752,9 +667,7 @@
       renderOctoberCompleted();
       renderOctoberPending();
       renderOctoberProposals();
-      renderNovemberFocus();
-      renderNovemberRoadmap();
-      renderWorkloadAllocations();
+      renderNovemberPlan();
       renderTimeblocks();
     }
 
@@ -823,118 +736,111 @@
       `).join('');
     }
 
-    function renderNovemberFocus() {
-      const tbody = document.getElementById('tableNovemberFocus');
+    function renderNovemberPlan() {
+      const tbody = document.getElementById('tableNovemberPlan');
       if (!tbody) return;
-      tbody.innerHTML = parsedSections.focus_tasks.map(f => `
-        <tr onclick="openDrawerByRecord('${f['Mã ID']}')" class="hover:bg-slate-800/40 cursor-pointer transition">
-          <td class="py-3 px-4 text-center font-mono text-slate-400">${f['STT']}</td>
-          <td class="py-3 px-4 font-semibold text-white flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
-            ${f['Hạng Mục / Tiêu Đề']}
-          </td>
-          <td class="py-3 px-4 text-slate-300 leading-relaxed">${f['Nội Dung Tác Nghiệp Chi Tiết']}</td>
-          <td class="py-3 px-4 font-medium text-amber-300/90 leading-relaxed">${f['Sản Phẩm Đầu Ra / Bàn Giao']}</td>
-          <td class="py-3 px-4 text-center">
-            <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-amber-400 border border-amber-500/20 whitespace-nowrap">
-              ${f['Thời Hạn / Khung Giờ']}
-            </span>
-          </td>
-        </tr>
-      `).join('');
-    }
 
-    function renderNovemberRoadmap() {
-      const tbody = document.getElementById('tableNovemberRoadmap');
-      if (!tbody) return;
-      let list = parsedSections.weekly_roadmap;
-      if (currentRoadmapFilter !== 'ALL') {
-        list = list.filter(r => (r['Phân Loại Nhóm'] || '').includes(currentRoadmapFilter));
-      }
-      tbody.innerHTML = list.map(r => `
-        <tr onclick="openDrawerByRecord('${r['Mã ID']}')" class="hover:bg-slate-800/40 cursor-pointer transition">
-          <td class="py-3 px-4 font-mono font-bold text-amber-400 whitespace-nowrap">${r['Phân Loại Nhóm']}</td>
-          <td class="py-3 px-4 font-semibold text-white">${r['Hạng Mục / Tiêu Đề']}</td>
-          <td class="py-3 px-4 text-slate-300 leading-relaxed">${r['Nội Dung Tác Nghiệp Chi Tiết']}</td>
-          <td class="py-3 px-4 font-medium text-emerald-300/90 leading-relaxed">${r['Sản Phẩm Đầu Ra / Bàn Giao']}</td>
-          <td class="py-3 px-4 text-center font-mono text-slate-400 text-[11px] whitespace-nowrap">${r['Thời Hạn / Khung Giờ']}</td>
-        </tr>
-      `).join('');
-    }
-
-    function filterRoadmap(week) {
-      currentRoadmapFilter = week;
-      ['filterWAll', 'filterW1', 'filterW2', 'filterW3', 'filterW4'].forEach(id => {
-        const btn = document.getElementById(id);
-        if (btn) btn.className = 'px-2.5 py-1 rounded-lg text-slate-400 hover:text-white';
+      const filtered = parsedSections.november_plan.filter(item => {
+        if (currentNovFilter === 'ALL') return true;
+        return (item['Phân Loại Nhóm'] || '').includes(currentNovFilter);
       });
-      if (week === 'ALL') document.getElementById('filterWAll').className = 'px-2.5 py-1 rounded-lg bg-slate-800 text-white';
-      else if (week === 'Tuần 1') document.getElementById('filterW1').className = 'px-2.5 py-1 rounded-lg bg-slate-800 text-white';
-      else if (week === 'Tuần 2') document.getElementById('filterW2').className = 'px-2.5 py-1 rounded-lg bg-slate-800 text-white';
-      else if (week === 'Tuần 3') document.getElementById('filterW3').className = 'px-2.5 py-1 rounded-lg bg-slate-800 text-white';
-      else if (week === 'Tuần 4') document.getElementById('filterW4').className = 'px-2.5 py-1 rounded-lg bg-slate-800 text-white';
-      renderNovemberRoadmap();
-    }
 
-    function renderWorkloadAllocations() {
-      const tbody = document.getElementById('tableWorkloadAllocations');
-      if (!tbody) return;
-      tbody.innerHTML = parsedSections.allocations.map(a => `
-        <tr onclick="openDrawerByRecord('${a['Mã ID']}')" class="hover:bg-slate-800/40 cursor-pointer transition">
-          <td class="py-3 px-4 text-center font-mono text-slate-400">${a['STT']}</td>
-          <td class="py-3 px-4 font-semibold text-white flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-            ${a['Hạng Mục / Tiêu Đề']}
-          </td>
-          <td class="py-3 px-4 text-slate-300 leading-relaxed">${a['Nội Dung Tác Nghiệp Chi Tiết']}</td>
-          <td class="py-3 px-4 text-center font-mono font-bold text-blue-400">${a['Số Giờ (h)']}h</td>
-          <td class="py-3 px-4 text-center font-mono text-slate-300">${Number(a['Số Giờ (h)'] || 0)*4}h</td>
-          <td class="py-3 px-4 text-center">
-            <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-blue-500/10 text-blue-400 border border-blue-500/20">
-              ${a['Tỷ Trọng (%)']}%
+      tbody.innerHTML = filtered.map(t => `
+        <tr onclick="openDrawerByRecord('${t['Mã ID']}')" class="hover:bg-slate-800/40 cursor-pointer transition">
+          <td class="py-3 px-3 text-center font-mono text-slate-400">${t['STT']}</td>
+          <td class="py-3 px-3 font-mono text-purple-400 font-semibold">${t['Mã ID']}</td>
+          <td class="py-3 px-4">
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-purple-500/10 text-purple-300 border border-purple-500/20 whitespace-nowrap">
+              ${t['Phân Loại Nhóm']}
             </span>
           </td>
-          <td class="py-3 px-4 text-slate-400 text-[11px]">${a['Ghi Chú Tiến Độ']}</td>
+          <td class="py-3 px-4 font-bold text-white leading-snug">
+            ${t['Hạng Mục / Tiêu Đề']}
+          </td>
+          <td class="py-3 px-4 text-slate-300 leading-relaxed">${t['Nội Dung Tác Nghiệp Chi Tiết']}</td>
+          <td class="py-3 px-4 font-medium text-purple-300/90 leading-relaxed">${t['Sản Phẩm Đầu Ra / Bàn Giao']}</td>
+          <td class="py-3 px-4 text-center font-mono text-slate-300 whitespace-nowrap">${t['Thời Hạn / Khung Giờ']}</td>
+          <td class="py-3 px-4 text-center">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 whitespace-nowrap">
+              ${t['Trạng Thái']}
+            </span>
+          </td>
         </tr>
       `).join('');
+    }
+
+    function filterNovPlan(week) {
+      currentNovFilter = week;
+      const btns = {
+        'ALL': document.getElementById('filterPlanAll'),
+        'Tuần 1': document.getElementById('filterPlanW1'),
+        'Tuần 2': document.getElementById('filterPlanW2'),
+        'Tuần 3': document.getElementById('filterPlanW3'),
+        'Tuần 4': document.getElementById('filterPlanW4')
+      };
+
+      Object.entries(btns).forEach(([k, btn]) => {
+        if (!btn) return;
+        if (k === week) {
+          btn.className = 'px-2.5 py-1 rounded-lg bg-purple-600 text-white font-medium';
+        } else {
+          btn.className = 'px-2.5 py-1 rounded-lg text-slate-400 hover:text-white';
+        }
+      });
+
+      renderNovemberPlan();
     }
 
     function renderTimeblocks() {
       const tbody = document.getElementById('tableTimeblocks');
       if (!tbody) return;
-      let list = parsedSections.daily_timeblocks;
-      if (currentTimeblockFilter !== 'ALL') {
-        list = list.filter(t => (t['Phân Loại Nhóm'] || '').includes(currentTimeblockFilter));
-      }
-      tbody.innerHTML = list.map(t => `
-        <tr onclick="openDrawerByRecord('${t['Mã ID']}')" class="hover:bg-slate-800/40 cursor-pointer transition">
-          <td class="py-3 px-4 font-semibold text-emerald-400 whitespace-nowrap">${t['Phân Loại Nhóm']}</td>
-          <td class="py-3 px-4 font-mono text-slate-300 whitespace-nowrap">${t['Thời Hạn / Khung Giờ']}</td>
-          <td class="py-3 px-4 text-center font-mono font-bold text-amber-400">${t['Số Giờ (h)']}h</td>
-          <td class="py-3 px-4 text-slate-200 leading-relaxed">${t['Nội Dung Tác Nghiệp Chi Tiết']}</td>
-          <td class="py-3 px-4 font-medium text-emerald-300/90 leading-relaxed">${t['Sản Phẩm Đầu Ra / Bàn Giao']}</td>
-          <td class="py-3 px-4 text-slate-400 text-[11px]">${t['Ghi Chú Tiến Độ']}</td>
+
+      const filtered = parsedSections.daily_timeblocks.filter(tb => {
+        if (currentTimeblockFilter === 'ALL') return true;
+        return (tb['Phân Loại Nhóm'] || '').includes(currentTimeblockFilter);
+      });
+
+      tbody.innerHTML = filtered.map(tb => `
+        <tr onclick="openDrawerByRecord('${tb['Mã ID']}')" class="hover:bg-slate-800/40 cursor-pointer transition">
+          <td class="py-3 px-4 font-semibold text-white flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            ${tb['Phân Loại Nhóm']}
+          </td>
+          <td class="py-3 px-4 font-mono text-emerald-400">${tb['Hạng Mục / Tiêu Đề'].split(':')[1] ? tb['Hạng Mục / Tiêu Đề'].split(':')[1].trim() : tb['Thời Hạn / Khung Giờ']}</td>
+          <td class="py-3 px-4 text-center font-mono text-slate-300 font-semibold">${tb['Số Giờ (h)'] || '-'}h</td>
+          <td class="py-3 px-4 text-slate-300 leading-relaxed">${tb['Nội Dung Tác Nghiệp Chi Tiết']}</td>
+          <td class="py-3 px-4 font-medium text-emerald-300/90 leading-relaxed">${tb['Sản Phẩm Đầu Ra / Bàn Giao']}</td>
+          <td class="py-3 px-4 text-slate-400 text-[11px]">${tb['Ghi Chú Tiến Độ'] || '-'}</td>
         </tr>
       `).join('');
     }
 
     function filterTimeblocks(day) {
       currentTimeblockFilter = day;
-      ['filterDayAll', 'filterDay2', 'filterDay3', 'filterDay4', 'filterDay5', 'filterDay6', 'filterDay7'].forEach(id => {
+      const dayMap = {
+        'ALL': 'filterDayAll',
+        'Thứ Hai': 'filterDay2',
+        'Thứ Ba': 'filterDay3',
+        'Thứ Tư': 'filterDay4',
+        'Thứ Năm': 'filterDay5',
+        'Thứ Sáu': 'filterDay6',
+        'Thứ Bảy': 'filterDay7'
+      };
+
+      Object.entries(dayMap).forEach(([d, id]) => {
         const btn = document.getElementById(id);
-        if (btn) btn.className = 'px-2 py-1 rounded-lg text-slate-400 hover:text-white';
+        if (!btn) return;
+        if (d === day) {
+          btn.className = 'px-2 py-1 rounded-lg bg-emerald-600 text-white font-medium';
+        } else {
+          btn.className = 'px-2 py-1 rounded-lg text-slate-400 hover:text-white';
+        }
       });
-      if (day === 'ALL') document.getElementById('filterDayAll').className = 'px-2 py-1 rounded-lg bg-slate-800 text-white';
-      else if (day.includes('Hai')) document.getElementById('filterDay2').className = 'px-2 py-1 rounded-lg bg-slate-800 text-white';
-      else if (day.includes('Ba')) document.getElementById('filterDay3').className = 'px-2 py-1 rounded-lg bg-slate-800 text-white';
-      else if (day.includes('Tư')) document.getElementById('filterDay4').className = 'px-2 py-1 rounded-lg bg-slate-800 text-white';
-      else if (day.includes('Năm')) document.getElementById('filterDay5').className = 'px-2 py-1 rounded-lg bg-slate-800 text-white';
-      else if (day.includes('Sáu')) document.getElementById('filterDay6').className = 'px-2 py-1 rounded-lg bg-slate-800 text-white';
-      else if (day.includes('Bảy')) document.getElementById('filterDay7').className = 'px-2 py-1 rounded-lg bg-slate-800 text-white';
+
       renderTimeblocks();
     }
 
-    // ==================== TABS SWITCHER ====================
+    // ==================== TAB SWITCHING ====================
     function switchTab(tab) {
       activeTab = tab;
       
@@ -959,7 +865,7 @@
         btnOct.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-emerald-600 text-white shadow-sm';
       } else if (tab === 'november') {
         tabNov.classList.remove('hidden');
-        btnNov.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-amber-600 text-white shadow-sm';
+        btnNov.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-purple-600 text-white shadow-sm';
       } else if (tab === 'workload') {
         tabWorkload.classList.remove('hidden');
         btnWorkload.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 bg-blue-600 text-white shadow-sm';
@@ -968,245 +874,183 @@
       lucide.createIcons();
     }
 
-    // ==================== CHARTS ====================
-    function initOrUpdateCharts() {
-      const allocs = parsedSections.allocations || [];
-      const doughnutCtx = document.getElementById('workloadDoughnutChart');
-      if (doughnutCtx) {
-        const labels = allocs.map(a => (a['Hạng Mục / Tiêu Đề'] || '').split('&')[0].trim());
-        const hours = allocs.map(a => Number(a['Số Giờ (h)'] || 0));
-        const colors = [
-          '#10b981', '#3b82f6', '#f59e0b', '#ec4899', '#8b5cf6',
-          '#06b6d4', '#6366f1', '#14b8a6', '#f97316', '#a855f7', '#64748b'
-        ];
+    // ==================== GOOGLE SHEETS LIVE SYNC ====================
+    async function loadFromGoogleSheet() {
+      const sheetId = document.getElementById('customSheetId').value.trim();
+      const sheetName = document.getElementById('monthSelect').value.trim();
+      const indicator = document.getElementById('syncIndicator');
+      const label = document.getElementById('syncStatusLabel');
 
-        if (doughnutChart) doughnutChart.destroy();
-        doughnutChart = new Chart(doughnutCtx, {
-          type: 'doughnut',
-          data: {
-            labels: labels,
-            datasets: [{
-              data: hours,
-              backgroundColor: colors,
-              borderWidth: 2,
-              borderColor: '#0B0F19'
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            cutout: '68%',
-            plugins: {
-              legend: { display: false },
-              tooltip: {
-                callbacks: {
-                  label: function(ctx) {
-                    const val = ctx.raw || 0;
-                    const pct = ((val / 48) * 100).toFixed(1);
-                    return ` ${ctx.label}: ${val}h/tuần (${pct}%)`;
-                  }
-                }
-              }
-            }
-          }
-        });
-      }
+      indicator.className = 'w-2.5 h-2.5 rounded-full bg-amber-400 animate-spin';
+      label.textContent = `Đang tải dữ liệu từ Google Sheet tab [${sheetName}]...`;
 
-      // Bar Chart
-      const barCtx = document.getElementById('deliverablesBarChart');
-      if (barCtx) {
-        if (barChart) barChart.destroy();
-        barChart = new Chart(barCtx, {
-          type: 'bar',
-          data: {
-            labels: [
-              'Fanpage GMW (Bài viết)',
-              'TikTok Xưởng (Video ngắn)',
-              'LinkedIn B2B (Bài kỹ thuật)',
-              'Buyer Quốc tế (Kết nối mới/tháng)',
-              'SEO Website Tiếng Anh (Bài chuyên sâu)',
-              'SEO Website Tiếng Việt (Bài chuyên sâu)',
-              'Catalog B2B V2 (Số trang Master PDF)'
-            ],
-            datasets: [{
-              label: 'Chỉ tiêu đầu ra Tháng 11',
-              data: [12, 4, 6, 200, 2, 2, 36],
-              backgroundColor: ['#3b82f6', '#10b981', '#06b6d4', '#8b5cf6', '#f59e0b', '#ec4899', '#14b8a6'],
-              borderRadius: 6
-            }]
-          },
-          options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: { display: false },
-              tooltip: {
-                callbacks: {
-                  label: (ctx) => ` ${ctx.dataset.label}: ${ctx.raw} sản phẩm/chỉ tiêu`
-                }
-              }
-            },
-            scales: {
-              x: {
-                grid: { color: 'rgba(255, 255, 255, 0.06)' },
-                ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 10 } }
-              },
-              y: {
-                grid: { display: false },
-                ticks: { color: '#e2e8f0', font: { size: 11 } }
-              }
-            }
-          }
+      const gvizUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
+
+      try {
+        const resp = await fetch(gvizUrl);
+        const text = await resp.text();
+        const jsonMatch = text.match(/google\.visualization\.Query\.setResponse\(([\s\S\w\W]*)\);/);
+        if (!jsonMatch) throw new Error('Không đọc được định dạng Google Sheet');
+        
+        const gvizData = JSON.parse(jsonMatch[1]);
+        const cols = gvizData.table.cols.map(c => c ? c.label : '');
+        const rows = gvizData.table.rows.map(r => {
+          let obj = {};
+          r.c.forEach((cell, idx) => {
+            const colName = cols[idx] || `col_${idx}`;
+            obj[colName] = cell ? cell.v : '';
+          });
+          return obj;
         });
+
+        currentSheetData = rows;
+        parseAndRenderUnifiedData(rows);
+
+        indicator.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse';
+        label.innerHTML = `Đã đồng bộ thành công <span class="text-white font-mono font-bold">${rows.length}</span> dòng từ Google Sheet!`;
+      } catch (err) {
+        console.warn('Google Sheet Live Sync error, giữ nguyên dữ liệu nội bộ:', err);
+        indicator.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400';
+        label.innerHTML = `Đang dùng dữ liệu nội bộ (<span class="text-white font-mono font-bold">${currentSheetData.length}</span> bản ghi chuẩn)`;
       }
     }
 
-    // ==================== DRAWER 360 ====================
-    function openDrawerByRecord(id) {
+    function toggleSheetConfig() {
+      const panel = document.getElementById('sheetConfigPanel');
+      panel.classList.toggle('hidden');
+    }
+
+    function changeMonthDataset(val) {
+      currentMonth = val;
+      parseAndRenderUnifiedData(EMBEDDED_UNIFIED_DATA.rows);
+    }
+
+    // ==================== DRAWER 360° ====================
+    function openDrawerByRecord(recordId) {
+      const record = currentSheetData.find(r => r['Mã ID'] === recordId);
+      if (!record) return;
+
+      document.getElementById('drawerBadgeSection').textContent = record['Phân Hệ'] || 'Thông tin';
+      document.getElementById('drawerBadgeId').textContent = `Mã ID: ${record['Mã ID']}`;
+      document.getElementById('drawerTitle').textContent = record['Hạng Mục / Tiêu Đề'] || 'Chi tiết';
+      document.getElementById('drawerContent').textContent = record['Nội Dung Tác Nghiệp Chi Tiết'] || '-';
+      document.getElementById('drawerOutput').textContent = record['Sản Phẩm Đầu Ra / Bàn Giao'] || '-';
+      document.getElementById('drawerDeadline').textContent = record['Thời Hạn / Khung Giờ'] || '-';
+      document.getElementById('drawerStatus').textContent = record['Trạng Thái'] || 'Chuẩn bị thực hiện';
+      document.getElementById('drawerGroup').textContent = record['Phân Loại Nhóm'] || '-';
+      document.getElementById('drawerNote').textContent = record['Ghi Chú Tiến Độ'] || '-';
+
       const backdrop = document.getElementById('drawerBackdrop');
       const panel = document.getElementById('drawerPanel');
-      const badgeId = document.getElementById('drawerBadgeId');
-      const badgeTag = document.getElementById('drawerBadgeTag');
-      const title = document.getElementById('drawerTitle');
-      const body = document.getElementById('drawerBody');
-
-      const item = currentSheetData.find(x => x['Mã ID'] === id);
-      if (!item) return;
-
-      badgeId.textContent = item['Mã ID'];
-      badgeTag.textContent = item['Phân Hệ'];
-      title.textContent = item['Hạng Mục / Tiêu Đề'];
-
-      body.innerHTML = `
-        <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
-          <span class="text-[10px] font-mono uppercase text-slate-400">Nội Dung Tác Nghiệp Chi Tiết</span>
-          <p class="text-slate-200 leading-relaxed whitespace-pre-line">${item['Nội Dung Tác Nghiệp Chi Tiết']}</p>
-        </div>
-        <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-900/40 space-y-1.5">
-          <span class="text-[10px] font-mono uppercase text-emerald-400">Sản Phẩm Đầu Ra / Bàn Giao</span>
-          <p class="text-emerald-200 font-medium leading-relaxed">${item['Sản Phẩm Đầu Ra / Bàn Giao']}</p>
-        </div>
-        <div class="grid grid-cols-2 gap-2 text-center">
-          <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
-            <span class="text-[10px] text-slate-400">Thời Hạn / Khung Giờ</span>
-            <div class="text-xs font-bold font-mono text-amber-400 mt-1">${item['Thời Hạn / Khung Giờ']}</div>
-          </div>
-          <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
-            <span class="text-[10px] text-slate-400">Trạng Thái</span>
-            <div class="text-xs font-bold text-emerald-400 mt-1">${item['Trạng Thái']}</div>
-          </div>
-        </div>
-        ${item['Ghi Chú Tiến Độ'] ? `
-          <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
-            <span class="text-[10px] font-mono uppercase text-slate-400">Ghi Chú Tiến Độ / Quy Cách</span>
-            <p class="text-slate-400 leading-relaxed">${item['Ghi Chú Tiến Độ']}</p>
-          </div>
-        ` : ''}
-      `;
 
       backdrop.classList.remove('hidden');
-      setTimeout(() => {
-        backdrop.classList.remove('opacity-0');
-        panel.classList.remove('translate-x-full');
-      }, 10);
+      setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
+      panel.classList.remove('translate-x-full');
       lucide.createIcons();
     }
 
     function closeDrawer() {
       const backdrop = document.getElementById('drawerBackdrop');
       const panel = document.getElementById('drawerPanel');
-      backdrop.classList.add('opacity-0');
+
       panel.classList.add('translate-x-full');
-      setTimeout(() => { backdrop.classList.add('hidden'); }, 300);
+      backdrop.classList.add('opacity-0');
+      setTimeout(() => backdrop.classList.add('hidden'), 300);
     }
 
-    // ==================== OMNIBAR ====================
-    function toggleOmnibar() {
-      const modal = document.getElementById('omnibarModal');
-      const input = document.getElementById('omnibarInput');
-      if (modal.classList.contains('hidden')) {
-        modal.classList.remove('hidden');
-        input.value = '';
-        input.focus();
-        handleOmnibarSearch('');
-      } else {
-        modal.classList.add('hidden');
-      }
+    // ==================== OMNIBAR SEARCH (⌘K) ====================
+    function setupKeyboardShortcuts() {
+      window.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          openSearchModal();
+        }
+        if (e.key === 'Escape') {
+          closeSearchModal();
+          closeDrawer();
+        }
+      });
     }
 
-    function handleOmnibarSearch(q) {
-      const query = (q || '').trim().toLowerCase();
-      const resultsDiv = document.getElementById('omnibarResults');
-      if (!query) {
-        resultsDiv.innerHTML = '<div class="p-4 text-center text-slate-500">Nhập từ khóa để tra cứu toàn bộ 84 dòng của sheet...</div>';
+    function openSearchModal() {
+      const modal = document.getElementById('searchModal');
+      const input = document.getElementById('omniSearchInput');
+      modal.classList.remove('hidden');
+      input.value = '';
+      input.focus();
+      handleOmniSearch('');
+    }
+
+    function closeSearchModal() {
+      document.getElementById('searchModal').classList.add('hidden');
+    }
+
+    function closeSearchModalOnBackdrop(e) {
+      if (e.target.id === 'searchModal') closeSearchModal();
+    }
+
+    function handleOmniSearch(query) {
+      const q = query.trim().toLowerCase();
+      const container = document.getElementById('omniSearchResults');
+      if (!q) {
+        container.innerHTML = '<div class="p-4 text-center text-slate-500">Nhập từ khóa bất kỳ (Catalog, AI, TikTok, Buyer, FSC, Sấy, Deadline...)</div>';
         return;
       }
 
       const matches = currentSheetData.filter(r => {
-        const text = `${r['Hạng Mục / Tiêu Đề']} ${r['Nội Dung Tác Nghiệp Chi Tiết']} ${r['Sản Phẩm Đầu Ra / Bàn Giao']} ${r['Phân Hệ']}`.toLowerCase();
-        return text.includes(query);
+        const fullText = `${r['Mã ID']} ${r['Phân Hệ']} ${r['Hạng Mục / Tiêu Đề']} ${r['Nội Dung Tác Nghiệp Chi Tiết']} ${r['Sản Phẩm Đầu Ra / Bàn Giao']} ${r['Thời Hạn / Khung Giờ']}`.toLowerCase();
+        return fullText.includes(q);
       });
 
       if (matches.length === 0) {
-        resultsDiv.innerHTML = `<div class="p-4 text-center text-slate-500">Không tìm thấy kết quả phù hợp cho "${query}"</div>`;
+        container.innerHTML = `<div class="p-4 text-center text-slate-500">Không tìm thấy bản ghi nào khớp với "<strong>${query}</strong>"</div>`;
         return;
       }
 
-      resultsDiv.innerHTML = matches.slice(0, 15).map(m => `
-        <div onclick="selectSearchResult('${m['Mã ID']}', '${m['Phân Hệ']}')" class="p-2.5 rounded-lg hover:bg-slate-800 cursor-pointer transition flex items-start justify-between gap-3">
-          <div class="space-y-0.5">
-            <div class="font-semibold text-white flex items-center gap-2">
-              <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-slate-800 text-slate-400 border border-slate-700">${m['Phân Hệ']}</span>
-              ${m['Hạng Mục / Tiêu Đề']}
+      container.innerHTML = matches.map(m => `
+        <div onclick="selectSearchResult('${m['Mã ID']}')" class="p-3 rounded-xl hover:bg-slate-800/80 cursor-pointer transition flex items-center justify-between group">
+          <div class="space-y-1 pr-3">
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-brand-500/10 text-brand-400 border border-brand-500/20">${m['Mã ID']}</span>
+              <span class="font-bold text-white text-xs">${m['Hạng Mục / Tiêu Đề']}</span>
+              <span class="text-[10px] text-slate-400">(${m['Phân Hệ']})</span>
             </div>
-            <p class="text-[11px] text-slate-400 line-clamp-1">${m['Sản Phẩm Đầu Ra / Bàn Giao']}</p>
+            <p class="text-[11px] text-slate-400 line-clamp-1">${m['Nội Dung Tác Nghiệp Chi Tiết']}</p>
           </div>
-          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500 shrink-0 mt-1"></i>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500 group-hover:text-white transition"></i>
         </div>
       `).join('');
       lucide.createIcons();
     }
 
-    function selectSearchResult(id, cat) {
-      toggleOmnibar();
-      if (cat.includes('Kết Quả') || cat.includes('Tồn Đọng') || cat.includes('Đề Xuất')) switchTab('october');
-      else if (cat.includes('Mục Tiêu') || cat.includes('Lộ Trình')) switchTab('november');
-      else switchTab('workload');
-      setTimeout(() => openDrawerByRecord(id), 150);
+    function selectSearchResult(recordId) {
+      closeSearchModal();
+      openDrawerByRecord(recordId);
+
+      const r = currentSheetData.find(item => item['Mã ID'] === recordId);
+      if (r) {
+        const cat = r['Phân Hệ'] || '';
+        if (cat.includes('Kết Quả') || cat.includes('Tồn Đọng') || cat.includes('Đề Xuất')) switchTab('october');
+        else if (cat.includes('Kế Hoạch')) switchTab('november');
+        else switchTab('workload');
+      }
     }
 
-    function setupKeyboardShortcuts() {
-      window.addEventListener('keydown', (e) => {
-        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-          e.preventDefault();
-          toggleOmnibar();
-        }
-        if (e.key === 'Escape') {
-          closeDrawer();
-          const modal = document.getElementById('omnibarModal');
-          if (!modal.classList.contains('hidden')) modal.classList.add('hidden');
-        }
-      });
-    }
-
+    // ==================== THEME TOGGLE ====================
     function toggleTheme() {
       const html = document.documentElement;
       const icon = document.getElementById('themeIcon');
-      if (html.classList.contains('dark')) {
-        html.classList.remove('dark');
-        html.classList.add('light');
-        document.body.className = 'bg-[#F8FAFC] text-slate-800 min-h-screen font-sans selection:bg-brand-500 selection:text-white transition-colors duration-200';
-        icon.setAttribute('data-lucide', 'moon');
-      } else {
-        html.classList.remove('light');
+      if (html.classList.contains('light-theme')) {
+        html.classList.remove('light-theme');
         html.classList.add('dark');
-        document.body.className = 'bg-[#0B0F19] text-slate-100 min-h-screen font-sans selection:bg-brand-500 selection:text-white transition-colors duration-200';
         icon.setAttribute('data-lucide', 'sun');
+      } else {
+        html.classList.remove('dark');
+        html.classList.add('light-theme');
+        icon.setAttribute('data-lucide', 'moon');
       }
       lucide.createIcons();
     }
   </script>
-
 </body>
 </html>
