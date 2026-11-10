@@ -402,7 +402,7 @@
             </span>
             <div class="flex items-baseline gap-2 mt-1">
               <span id="kpiActionRate" class="text-3xl sm:text-4xl font-black font-num tracking-tight text-slate-900 dark:text-white">100%</span>
-              <span class="text-xs text-slate-500 font-medium">phòng ban</span>
+              <span class="text-xs text-slate-500 font-medium">kế hoạch</span>
             </div>
           </div>
           <div class="w-10 h-10 rounded-2xl bg-cyan-50 dark:bg-cyan-950/60 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0 border border-cyan-200/60 dark:border-cyan-800/60">
@@ -411,7 +411,7 @@
         </div>
 
         <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-semibold text-slate-500">
-          <span>Phân công BGD, XNK, QA-FSC</span>
+          <span>Khuyến nghị chiến lược đầy đủ</span>
           <span class="text-cyan-600 dark:text-cyan-400 font-mono">24/7 SOP</span>
         </div>
       </div>
@@ -755,7 +755,6 @@
 
         <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 space-y-1.5 text-xs">
           <div><span class="text-slate-400">Đối thủ cạnh tranh:</span> <span id="drawerCompetitor" class="font-semibold text-slate-800 dark:text-slate-200">--</span></div>
-          <div><span class="text-slate-400">Đơn vị chủ trì:</span> <span id="drawerDept" class="font-bold text-indigo-600 dark:text-indigo-400">--</span></div>
           <div><span class="text-slate-400">Thời hạn hoàn thành:</span> <span id="drawerDeadline" class="font-semibold font-num">--</span></div>
         </div>
       </div>
@@ -1978,7 +1977,6 @@
             <!-- Khuyến Nghị Hành Động (SOP) -->
             <td class="py-3 px-3.5 align-top">
               <p class="text-xs text-slate-800 dark:text-slate-200 font-medium line-clamp-2">${d['Hành động đề xuất'] || '--'}</p>
-              <span class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mt-1 block">Phụ trách: ${d['Bộ phận phụ trách'] || 'BGD'}</span>
             </td>
 
             <!-- Nút Chi Tiết -->
@@ -2041,7 +2039,7 @@
       document.getElementById('drawerOppText').textContent = item['Cơ hội cho VN'] || '--';
       document.getElementById('drawerActionText').textContent = item['Hành động đề xuất'] || '--';
       document.getElementById('drawerCompetitor').textContent = item['Đối Thủ Cạnh tranh'] || '--';
-      document.getElementById('drawerDept').textContent = item['Bộ phận phụ trách'] || '--';
+      const deptEl = document.getElementById('drawerDept'); if (deptEl) deptEl.textContent = item['Bộ phận phụ trách'] || '--';
       document.getElementById('drawerDeadline').textContent = item['Deadiline'] || 'Hàng tháng';
 
       const sourceLink = document.getElementById('drawerSourceLink');
