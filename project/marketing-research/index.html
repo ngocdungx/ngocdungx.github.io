@@ -421,10 +421,11 @@
     <!-- ==================== TẦNG 2: STRATEGIC MATRIX & OPERATIONS RADAR (7 : 5 ASYMMETRIC GRID) ==================== -->
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
       
-      <!-- Cột Trái (7 cols): MA TRẬN RỦI RO & CƠ HỘI 2x2 (Strategic Scatter Quadrant) -->
-      <div class="lg:col-span-7 bento-card p-5 sm:p-6 flex flex-col justify-between space-y-4">
+      <!-- Cột Trái (7 cols): MA TRẬN ĐỊNH VỊ CHIẾN LƯỢC 2x2 (DUAL-VIEW: 4 PHÂN VÙNG THẺ & BIỂU ĐỒ) -->
+      <div class="lg:col-span-7 bento-card p-4 sm:p-6 flex flex-col justify-between space-y-4">
         <div>
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
+          <!-- Header with View Mode Switcher -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3.5 border-b border-slate-100 dark:border-slate-800">
             <div>
               <div class="flex items-center gap-2">
                 <h2 class="text-sm sm:text-base font-extrabold uppercase tracking-wide text-slate-900 dark:text-white flex items-center gap-2">
@@ -433,39 +434,61 @@
                 </h2>
               </div>
               <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Định vị đủ 10 sự kiện trọng yếu: Bấm trực tiếp vào bóng để xem hồ sơ 360° & khuyến nghị SOP
+                Phân loại 10 sự kiện trọng yếu theo 4 phân vùng ứng phó & khai thác thị trường
               </p>
             </div>
-            <div class="flex items-center gap-2 text-[11px] font-bold">
-              <span class="flex items-center gap-1 text-rose-600 dark:text-rose-400"><span class="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block"></span> Rủi ro cao</span>
-              <span class="flex items-center gap-1 text-emerald-600 dark:text-emerald-400"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> Cơ hội cao</span>
+
+            <!-- View Switcher: 4 Phân Vùng Thẻ (Tối ưu Mobile) vs Biểu Đồ 2x2 -->
+            <div class="flex items-center gap-1 p-1 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shrink-0 self-start sm:self-auto">
+              <button id="btnViewCards" onclick="setMatrixView('cards')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs" title="Xem 4 phân vùng thẻ trực quan">
+                <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+                <span>4 Phân Vùng</span>
+              </button>
+              <button id="btnViewChart" onclick="setMatrixView('chart')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200" title="Xem dạng đồ thị tọa độ 2x2">
+                <i data-lucide="crosshair" class="w-3.5 h-3.5"></i>
+                <span>Biểu Đồ 2x2</span>
+              </button>
             </div>
           </div>
 
-          <!-- 2x2 Matrix Canvas Container -->
-          <div class="h-80 sm:h-96 w-full relative mt-3">
-            <canvas id="strategicMatrixChart"></canvas>
+          <!-- VIEW 1: 4 Phân Vùng Thẻ Trực Quan (Ultra-Intuitive & Mobile-Native) -->
+          <div id="matrixCardsView" class="pt-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="strategicQuadrantsList">
+              <!-- Populated dynamically by JS -->
+            </div>
+          </div>
+
+          <!-- VIEW 2: Biểu Đồ Ma Trận Tọa Độ 2x2 Canvas -->
+          <div id="matrixChartView" class="hidden">
+            <div class="h-80 sm:h-96 w-full relative mt-3">
+              <canvas id="strategicMatrixChart"></canvas>
+            </div>
+            <!-- Matrix Quadrant Legend Footer -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 text-[11px] font-semibold text-slate-500">
+              <div class="p-2 rounded-lg bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200/60 dark:border-rose-900/40 text-rose-800 dark:text-rose-300">
+                <span class="block font-bold">Góc I: Phòng Vệ Khẩn</span>
+                <span>Rủi ro cao • Cơ hội thấp</span>
+              </div>
+              <div class="p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-200/60 dark:border-indigo-900/40 text-indigo-800 dark:text-indigo-300">
+                <span class="block font-bold">Góc II: Chiến Trường Lớn</span>
+                <span>Rủi ro cao • Cơ hội lớn</span>
+              </div>
+              <div class="p-2 rounded-lg bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-900/40 text-emerald-800 dark:text-emerald-300">
+                <span class="block font-bold">Góc III: Bứt Phá Doanh Số</span>
+                <span>Rủi ro thấp • Cơ hội lớn</span>
+              </div>
+              <div class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
+                <span class="block font-bold">Góc IV: Giám Sát</span>
+                <span>Biến động định kỳ</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Matrix Quadrant Legend Footer -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 text-[11px] font-semibold text-slate-500">
-          <div class="p-2 rounded-lg bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200/60 dark:border-rose-900/40 text-rose-800 dark:text-rose-300">
-            <span class="block font-bold">Góc I (Đỏ): Phòng Vệ Khẩn</span>
-            <span>Rủi ro cao • Cơ hội thấp</span>
-          </div>
-          <div class="p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-200/60 dark:border-indigo-900/40 text-indigo-800 dark:text-indigo-300">
-            <span class="block font-bold">Góc II (Tím): Chiến Trường Lớn</span>
-            <span>Rủi ro cao • Cơ hội lớn</span>
-          </div>
-          <div class="p-2 rounded-lg bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-900/40 text-emerald-800 dark:text-emerald-300">
-            <span class="block font-bold">Góc III (Xanh): Bứt Phá Doanh Số</span>
-            <span>Rủi ro thấp • Cơ hội lớn</span>
-          </div>
-          <div class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300">
-            <span class="block font-bold">Góc IV (Xám): Giám Sát</span>
-            <span>Biến động định kỳ</span>
-          </div>
+        <!-- Matrix Card Footer -->
+        <div class="pt-2 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between text-xs text-slate-500">
+          <span class="flex items-center gap-1.5"><i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5 text-indigo-500"></i> Chạm vào sự kiện bất kỳ để trượt Drawer xem hồ sơ 360°</span>
+          <span class="font-medium text-slate-700 dark:text-slate-300 hidden sm:inline">10 sự kiện trọng yếu</span>
         </div>
       </div>
 
@@ -1351,6 +1374,7 @@
 
     /* ==================== DATA VISUALIZATION ENGINE ==================== */
     function renderAllVisualizations() {
+      renderStrategicQuadrantsCards();
       renderStrategicMatrix();
       renderOperationsRadar();
       renderTimelineTrend();
@@ -1361,6 +1385,172 @@
     function stripEventCode(str) {
       if (!str) return '';
       return String(str).replace(/^(\[?GMW-[a-zA-Z0-9_-]+\]?\s*[-:]?\s*)/i, '').trim();
+    }
+
+    /* Core Strategic Configuration Engine (Matches by STT, ID or Title) */
+    function getStrategicPointConfig(d, idx) {
+      const title = (d['Loại biến động'] || '').toLowerCase();
+      const id = String(d.ID || '').toUpperCase();
+      let stt = parseInt(d.STT);
+      if (isNaN(stt)) stt = idx + 1;
+
+      if (stt === 1 || id.includes('001') || id.includes('101') || title.includes('thuế')) {
+        return { x: 68.0, y: 92.0, label: 'Thuế DOC', color: '#f97316', quad: 'Góc I: Phòng Vệ Khẩn', quadKey: 'q1' };
+      }
+      if (stt === 2 || id.includes('002') || id.includes('102') || title.includes('eudr') || title.includes('gps')) {
+        return { x: 91.0, y: 91.0, label: 'EUDR GPS', color: '#a855f7', quad: 'Góc II: Chiến Trường Lớn', quadKey: 'q2' };
+      }
+      if (stt === 3 || id.includes('003') || id.includes('103') || title.includes('biển đỏ') || title.includes('cước')) {
+        return { x: 74.0, y: 86.0, label: 'Biển Đỏ', color: '#ef4444', quad: 'Góc I: Phòng Vệ Khẩn', quadKey: 'q1' };
+      }
+      if (stt === 4 || id.includes('004') || id.includes('104') || (title.includes('mỹ') && title.includes('lãi suất'))) {
+        return { x: 93.0, y: 72.0, label: 'Lãi Suất Mỹ', color: '#3b82f6', quad: 'Góc III: Bứt Phá Doanh Số', quadKey: 'q3' };
+      }
+      if (stt === 5 || id.includes('005') || id.includes('105') || title.includes('fed') || title.includes('tỷ giá')) {
+        return { x: 69.0, y: 69.0, label: 'Tỷ Giá Fed', color: '#3b82f6', quad: 'Góc IV: Giám Sát Định Kỳ', quadKey: 'q4' };
+      }
+      if (stt === 6 || id.includes('006') || id.includes('106') || title.includes('keo') || title.includes('fsc')) {
+        return { x: 86.0, y: 76.0, label: 'Keo FSC', color: '#10b981', quad: 'Góc II: Chiến Trường Lớn', quadKey: 'q2' };
+      }
+      if (stt === 7 || id.includes('007') || id.includes('107') || title.includes('nhật') || title.includes('hàn')) {
+        return { x: 94.0, y: 65.0, label: 'Nhật & Hàn', color: '#a855f7', quad: 'Góc III: Bứt Phá Doanh Số', quadKey: 'q3' };
+      }
+      if (stt === 8 || id.includes('008') || id.includes('108') || title.includes('anh') || title.includes('canada')) {
+        return { x: 82.0, y: 71.0, label: 'Anh / Canada', color: '#a855f7', quad: 'Góc III: Bứt Phá Doanh Số', quadKey: 'q3' };
+      }
+      if (stt === 9 || id.includes('009') || id.includes('109') || title.includes('úc') || title.includes('australia')) {
+        return { x: 89.0, y: 61.0, label: 'Úc Thuế 0%', color: '#3b82f6', quad: 'Góc III: Bứt Phá Doanh Số', quadKey: 'q3' };
+      }
+      if (stt === 10 || id.includes('010') || id.includes('110') || title.includes('trung quốc') || title.includes('c/o')) {
+        return { x: 83.0, y: 63.0, label: 'TQ Siết C/O', color: '#a855f7', quad: 'Góc III: Bứt Phá Doanh Số', quadKey: 'q3' };
+      }
+
+      return {
+        x: parseFloat(d['Điểm ưu tiên cơ hội']) || 75,
+        y: parseFloat(d['Điểm ưu tiên']) || 75,
+        label: stripEventCode(d['Loại biến động']).slice(0, 16) || `Sự kiện ${idx+1}`,
+        color: '#6366f1',
+        quad: 'Góc IV: Giám Sát Định Kỳ',
+        quadKey: 'q4'
+      };
+    }
+
+    /* Matrix View Mode Switcher: 'cards' (default on mobile) or 'chart' */
+    let currentMatrixView = 'cards';
+
+    function setMatrixView(mode) {
+      currentMatrixView = mode;
+      const cardsView = document.getElementById('matrixCardsView');
+      const chartView = document.getElementById('matrixChartView');
+      const btnCards = document.getElementById('btnViewCards');
+      const btnChart = document.getElementById('btnViewChart');
+
+      if (!cardsView || !chartView) return;
+
+      if (mode === 'cards') {
+        cardsView.classList.remove('hidden');
+        chartView.classList.add('hidden');
+
+        btnCards.className = 'px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs';
+        btnChart.className = 'px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200';
+
+        renderStrategicQuadrantsCards();
+      } else {
+        cardsView.classList.add('hidden');
+        chartView.classList.remove('hidden');
+
+        btnChart.className = 'px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs';
+        btnCards.className = 'px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200';
+
+        renderStrategicMatrix();
+      }
+      if (window.lucide) lucide.createIcons();
+    }
+
+    /* Render 4 Strategic Quadrant Cards (Crystal-clear & Mobile-optimized) */
+    function renderStrategicQuadrantsCards() {
+      const container = document.getElementById('strategicQuadrantsList');
+      if (!container) return;
+
+      const QUADRANTS_DEF = [
+        {
+          key: 'q1',
+          name: 'Góc I: Phòng Vệ Khẩn Cấp',
+          desc: 'Rủi ro cao • Cơ hội thấp — Cần kích hoạt đối ứng pháp lý & tối ưu cước vận tải',
+          borderClass: 'border-rose-400/60 dark:border-rose-800/60 bg-rose-50/40 dark:bg-rose-950/20',
+          badgeClass: 'bg-rose-100 text-rose-700 dark:bg-rose-900/60 dark:text-rose-300',
+          countClass: 'bg-rose-200 text-rose-800 dark:bg-rose-800 dark:text-rose-200'
+        },
+        {
+          key: 'q2',
+          name: 'Góc II: Chiến Trường Lớn',
+          desc: 'Rủi ro cao • Cơ hội lớn — Chuẩn hóa chứng chỉ FSC & định vị GPS để thâu tóm thị phần',
+          borderClass: 'border-indigo-400/60 dark:border-indigo-800/60 bg-indigo-50/40 dark:bg-indigo-950/20',
+          badgeClass: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/60 dark:text-indigo-300',
+          countClass: 'bg-indigo-200 text-indigo-800 dark:bg-indigo-800 dark:text-indigo-200'
+        },
+        {
+          key: 'q3',
+          name: 'Góc III: Bứt Phá Doanh Số',
+          desc: 'Rủi ro thấp • Cơ hội lớn — Mở rộng quy mô xuất khẩu & đón đầu đơn hàng dịch chuyển',
+          borderClass: 'border-emerald-400/60 dark:border-emerald-800/60 bg-emerald-50/40 dark:bg-emerald-950/20',
+          badgeClass: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300',
+          countClass: 'bg-emerald-200 text-emerald-800 dark:bg-emerald-800 dark:text-emerald-200'
+        },
+        {
+          key: 'q4',
+          name: 'Góc IV: Giám Sát Định Kỳ',
+          desc: 'Rủi ro thấp • Biến động vĩ mô — Theo dõi chu kỳ lãi suất Fed & quản trị ngoại hối',
+          borderClass: 'border-slate-300 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-800/40',
+          badgeClass: 'bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-300',
+          countClass: 'bg-slate-300 text-slate-800 dark:bg-slate-600 dark:text-slate-200'
+        }
+      ];
+
+      container.innerHTML = QUADRANTS_DEF.map(q => {
+        const items = filteredData.map((d, idx) => ({ ...d, _cfg: getStrategicPointConfig(d, idx) }))
+                                  .filter(d => d._cfg.quadKey === q.key);
+
+        return `
+          <div class="p-4 rounded-2xl border ${q.borderClass} space-y-3 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 pb-2 border-b border-black/5 dark:border-white/5">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider ${q.badgeClass}">
+                  ${q.name}
+                </span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold font-num ${q.countClass}">
+                  ${items.length} sự kiện
+                </span>
+              </div>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1.5 leading-snug font-medium">
+                ${q.desc}
+              </p>
+            </div>
+
+            <div class="space-y-2 pt-1">
+              ${items.length === 0 ? '<p class="text-xs text-slate-400 italic">Không có sự kiện nào khớp bộ lọc</p>' : items.map(d => `
+                <div onclick="openDrawerById('${d.ID}')" class="p-2.5 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/70 dark:border-slate-800/80 hover:border-indigo-500/50 cursor-pointer transition shadow-xs group space-y-1">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-extrabold text-xs text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition">
+                      ${d._cfg.label}
+                    </span>
+                    <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0">
+                      ${d['Quốc Gia Tác Động'] || d['Top thị trường'] || 'Toàn cầu'}
+                    </span>
+                  </div>
+                  <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-1 leading-normal">
+                    ${stripEventCode(d['Loại biến động'])}
+                  </p>
+                  <div class="flex items-center justify-between pt-1 text-[10px] font-semibold text-slate-400 group-hover:text-indigo-500 transition">
+                    <span>${d['Mức độ rủi rõ'] ? 'Rủi ro ' + d['Mức độ rủi rõ'] : 'Theo dõi'}</span>
+                    <span class="inline-flex items-center gap-0.5 font-bold text-indigo-600 dark:text-indigo-400">Xem hồ sơ ➔</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
     // 1. MA TRẬN RỦI RO & CƠ HỘI 2x2 (Precision Coordinates & Direct Labels)
@@ -1374,34 +1564,13 @@
       const textColor = isDark ? '#94a3b8' : '#64748b';
       const gridColor = isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)';
 
-      // Bảng ánh xạ tọa độ phân bổ chiến lược (đảm bảo 10 sự kiện đứng độc lập, không bị đè lên nhau)
-      const COORD_MAP = {
-        'GMW-202610-001': { x: 68.0, y: 92.0, label: 'Thuế DOC', color: '#f97316' },
-        'GMW-202610-002': { x: 91.0, y: 91.0, label: 'EUDR GPS', color: '#a855f7' },
-        'GMW-202610-003': { x: 74.0, y: 86.0, label: 'Biển Đỏ', color: '#ef4444' },
-        'GMW-202610-004': { x: 93.0, y: 72.0, label: 'Lãi Suất Mỹ', color: '#3b82f6' },
-        'GMW-202610-005': { x: 69.0, y: 69.0, label: 'Tỷ Giá Fed', color: '#3b82f6' },
-        'GMW-202610-006': { x: 86.0, y: 76.0, label: 'Keo FSC', color: '#10b981' },
-        'GMW-202610-007': { x: 94.0, y: 65.0, label: 'Nhật & Hàn', color: '#a855f7' },
-        'GMW-202610-008': { x: 82.0, y: 71.0, label: 'Anh / Canada', color: '#a855f7' },
-        'GMW-202610-009': { x: 89.0, y: 61.0, label: 'Úc Thuế 0%', color: '#3b82f6' },
-        'GMW-202610-010': { x: 83.0, y: 63.0, label: 'TQ Siết C/O', color: '#a855f7' }
-      };
-
       const scatterPoints = filteredData.map((d, idx) => {
-        const id = d.ID || '';
-        const mapped = COORD_MAP[id] || {
-          x: parseFloat(d['Điểm ưu tiên cơ hội']) || 50,
-          y: parseFloat(d['Điểm ưu tiên']) || 50,
-          label: d['Loại biến động'] ? (d['Loại biến động'].length > 18 ? d['Loại biến động'].slice(0, 18) + '...' : d['Loại biến động']) : `Sự kiện ${idx+1}`,
-          color: '#6366f1'
-        };
-
+        const cfg = getStrategicPointConfig(d, idx);
         return {
-          x: mapped.x,
-          y: mapped.y,
-          displayLabel: mapped.label,
-          pointColor: mapped.color,
+          x: cfg.x,
+          y: cfg.y,
+          displayLabel: cfg.label,
+          pointColor: cfg.color,
           raw: d
         };
       });
@@ -1410,7 +1579,7 @@
       const quadrantPlugin = {
         id: 'quadrantPlugin',
         beforeDraw: (chart) => {
-          const { ctx, chartArea: { left, top, right, bottom, width, height }, scales: { x, y } } = chart;
+          const { ctx, chartArea: { left, top, right, bottom }, scales: { x, y } } = chart;
           const midX = x.getPixelForValue(78);
           const midY = y.getPixelForValue(78);
 
@@ -1455,7 +1624,6 @@
             // Vẽ badge nền cho nhãn chữ
             const text = p.displayLabel;
             const textWidth = ctx.measureText(text).width;
-            // Tự động lật nhãn sang trái nếu vẽ sang phải bị tràn mép màn hình mobile
             let badgeX = px + 11;
             const badgeY = py - 6;
             if (badgeX + textWidth + 8 > chart.width - 4) {
