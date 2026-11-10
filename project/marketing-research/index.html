@@ -266,32 +266,32 @@
           
           <!-- Market Filter -->
           <select id="marketFilter" onchange="setFilterState('market', this.value)" class="w-full sm:w-auto px-2.5 sm:px-3 py-1.5 control-pill rounded-xl text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 cursor-pointer shadow-xs">
-            <option value="ALL">🌍 Mọi thị trường</option>
-            <option value="Mỹ">🇺🇸 Hoa Kỳ (US)</option>
-            <option value="EU">🇪🇺 Liên minh Châu Âu (EU)</option>
-            <option value="Úc">🇦🇺 Úc (Australia)</option>
-            <option value="Việt Nam">🇻🇳 Việt Nam (Nội địa & SX)</option>
-            <option value="Nhật">🇯🇵 Nhật Bản & 🇰🇷 Hàn Quốc</option>
-            <option value="Anh">🇬🇧 Anh & 🇨🇦 Canada</option>
-            <option value="Trung Quốc">🇨🇳 Trung Quốc</option>
+            <option value="ALL">Mọi thị trường</option>
+            <option value="Mỹ">Hoa Kỳ (US)</option>
+            <option value="EU">Liên minh Châu Âu (EU)</option>
+            <option value="Úc">Úc (Australia)</option>
+            <option value="Việt Nam">Việt Nam (Nội địa & SX)</option>
+            <option value="Nhật">Nhật Bản & Hàn Quốc</option>
+            <option value="Anh">Anh & Canada</option>
+            <option value="Trung Quốc">Trung Quốc</option>
           </select>
 
           <!-- Pillar Filter -->
           <select id="pillarFilter" onchange="setFilterState('pillar', this.value)" class="w-full sm:w-auto px-2.5 sm:px-3 py-1.5 control-pill rounded-xl text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 cursor-pointer shadow-xs">
-            <option value="ALL">🏛️ Mọi trụ cột vĩ mô</option>
-            <option value="Kinh tế">📈 Kinh tế & Tỷ giá</option>
-            <option value="Thuế quan">🛡️ Thuế quan & PVTM</option>
-            <option value="Luật pháp">⚖️ Luật pháp & Tiêu chuẩn EUDR</option>
-            <option value="Logistics">🚢 Logistics & Biển Đỏ</option>
-            <option value="Nguyên liệu">🌲 Nguyên liệu & Gỗ keo FSC</option>
+            <option value="ALL">Mọi trụ cột vĩ mô</option>
+            <option value="Kinh tế">Kinh tế & Tỷ giá</option>
+            <option value="Thuế quan">Thuế quan & PVTM</option>
+            <option value="Luật pháp">Luật pháp & Tiêu chuẩn EUDR</option>
+            <option value="Logistics">Logistics & Biển Đỏ</option>
+            <option value="Nguyên liệu">Nguyên liệu & Gỗ keo FSC</option>
           </select>
 
           <!-- Risk Filter -->
           <select id="riskFilter" onchange="setFilterState('risk', this.value)" class="w-full sm:w-auto px-2.5 sm:px-3 py-1.5 control-pill rounded-xl text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 cursor-pointer shadow-xs">
-            <option value="ALL">⚡ Mọi cấp độ rủi ro</option>
-            <option value="Cao">🔴 Rủi ro cao</option>
-            <option value="Trung bình">🟡 Rủi ro trung bình</option>
-            <option value="Thấp">🟢 Rủi ro thấp</option>
+            <option value="ALL">Mọi cấp độ rủi ro</option>
+            <option value="Cao">Rủi ro cao</option>
+            <option value="Trung bình">Rủi ro trung bình</option>
+            <option value="Thấp">Rủi ro thấp</option>
           </select>
 
           <!-- Search Input -->
@@ -632,7 +632,7 @@
         <table class="w-full text-left text-sm border-collapse">
           <thead>
             <tr class="bg-slate-50/90 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider text-[11px] border-b border-slate-200 dark:border-slate-700">
-              <th class="py-3 px-3.5 w-28 shrink-0">MÃ & NGÀY</th>
+              <th class="py-3 px-3.5 w-28 shrink-0">NGÀY CẬP NHẬT</th>
               <th class="py-3 px-3.5 w-40 shrink-0">THỊ TRƯỜNG</th>
               <th class="py-3 px-3.5 w-44 shrink-0">TRỤ CỘT</th>
               <th class="py-3 px-3.5 min-w-[340px]">DIỄN BIẾN VĨ MÔ & NỘI DUNG</th>
@@ -672,7 +672,7 @@
     <div class="p-5 border-b border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/50 flex items-start justify-between gap-4">
       <div class="space-y-1">
         <div class="flex items-center gap-2 flex-wrap">
-          <span id="drawerId" class="px-2 py-0.5 rounded text-xs font-mono font-bold bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">ID</span>
+          <span id="drawerId" class="hidden"></span>
           <span id="drawerPillarBadge" class="px-2 py-0.5 rounded text-xs font-bold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">Nhóm</span>
           <span id="drawerDate" class="text-xs text-slate-500 font-semibold font-num">Kỳ báo cáo</span>
         </div>
@@ -719,23 +719,23 @@
 
         <div class="space-y-2 text-xs">
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
-            <span class="font-bold text-indigo-600 dark:text-indigo-400 block mb-0.5">📦 Đơn hàng & Sức mua:</span>
+            <span class="font-bold text-indigo-600 dark:text-indigo-400 block mb-0.5">Đơn hàng & Sức mua:</span>
             <span id="drawerImpactOrder" class="text-slate-700 dark:text-slate-300">--</span>
           </div>
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
-            <span class="font-bold text-amber-600 dark:text-amber-400 block mb-0.5">💵 Giá bán & Biên lợi nhuận:</span>
+            <span class="font-bold text-amber-600 dark:text-amber-400 block mb-0.5">Giá bán & Biên lợi nhuận:</span>
             <span id="drawerImpactPrice" class="text-slate-700 dark:text-slate-300">--</span>
           </div>
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
-            <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-0.5">🌲 Nguyên liệu & Gỗ keo FSC:</span>
+            <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-0.5">Nguyên liệu & Gỗ keo FSC:</span>
             <span id="drawerImpactMaterial" class="text-slate-700 dark:text-slate-300">--</span>
           </div>
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
-            <span class="font-bold text-rose-600 dark:text-rose-400 block mb-0.5">🚢 Logistics & Tuyến biển:</span>
+            <span class="font-bold text-rose-600 dark:text-rose-400 block mb-0.5">Logistics & Tuyến biển:</span>
             <span id="drawerImpactLogistics" class="text-slate-700 dark:text-slate-300">--</span>
           </div>
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
-            <span class="font-bold text-cyan-600 dark:text-cyan-400 block mb-0.5">💱 Tỷ giá & Ngoại hối:</span>
+            <span class="font-bold text-cyan-600 dark:text-cyan-400 block mb-0.5">Tỷ giá & Ngoại hối:</span>
             <span id="drawerImpactFx" class="text-slate-700 dark:text-slate-300">--</span>
           </div>
         </div>
@@ -787,11 +787,11 @@
       <!-- Quick Suggested Keywords -->
       <div class="px-3.5 py-2 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 flex items-center gap-1.5 overflow-x-auto text-xs custom-scrollbar">
         <span class="text-slate-400 shrink-0 font-medium">Gợi ý:</span>
-        <button onclick="setOmnibarKeyword('Mỹ')" class="px-2 py-0.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-semibold text-slate-700 dark:text-slate-300 hover:border-indigo-500 shrink-0">🇺🇸 Mỹ</button>
-        <button onclick="setOmnibarKeyword('EUDR')" class="px-2 py-0.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-semibold text-slate-700 dark:text-slate-300 hover:border-indigo-500 shrink-0">🇪🇺 EUDR</button>
-        <button onclick="setOmnibarKeyword('FSC')" class="px-2 py-0.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-semibold text-slate-700 dark:text-slate-300 hover:border-indigo-500 shrink-0">🌲 FSC</button>
+        <button onclick="setOmnibarKeyword('Mỹ')" class="px-2 py-0.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-semibold text-slate-700 dark:text-slate-300 hover:border-indigo-500 shrink-0">Mỹ</button>
+        <button onclick="setOmnibarKeyword('EUDR')" class="px-2 py-0.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-semibold text-slate-700 dark:text-slate-300 hover:border-indigo-500 shrink-0">EUDR</button>
+        <button onclick="setOmnibarKeyword('FSC')" class="px-2 py-0.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-semibold text-slate-700 dark:text-slate-300 hover:border-indigo-500 shrink-0">FSC</button>
         <button onclick="setOmnibarKeyword('Thuế quan')" class="px-2 py-0.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-semibold text-slate-700 dark:text-slate-300 hover:border-indigo-500 shrink-0">🛡️ Thuế DOC</button>
-        <button onclick="setOmnibarKeyword('Biển Đỏ')" class="px-2 py-0.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-semibold text-slate-700 dark:text-slate-300 hover:border-indigo-500 shrink-0">🚢 Cước tàu</button>
+        <button onclick="setOmnibarKeyword('Biển Đỏ')" class="px-2 py-0.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-semibold text-slate-700 dark:text-slate-300 hover:border-indigo-500 shrink-0">Cước tàu</button>
       </div>
 
       <!-- Results List -->
@@ -1371,16 +1371,16 @@
 
       // Bảng ánh xạ tọa độ phân bổ chiến lược (đảm bảo 10 sự kiện đứng độc lập, không bị đè lên nhau)
       const COORD_MAP = {
-        'GMW-202610-001': { x: 68.0, y: 92.0, label: 'GMW-001 🇺🇸 Thuế DOC', color: '#f97316' },
-        'GMW-202610-002': { x: 91.0, y: 91.0, label: 'GMW-002 🇪🇺 EUDR GPS', color: '#a855f7' },
-        'GMW-202610-003': { x: 74.0, y: 86.0, label: 'GMW-003 🚢 Biển Đỏ', color: '#ef4444' },
-        'GMW-202610-004': { x: 93.0, y: 72.0, label: 'GMW-004 🇺🇸 Lãi Suất Mỹ', color: '#3b82f6' },
-        'GMW-202610-005': { x: 69.0, y: 69.0, label: 'GMW-005 💱 Tỷ Giá Fed', color: '#3b82f6' },
-        'GMW-202610-006': { x: 86.0, y: 76.0, label: 'GMW-006 🌲 Keo FSC', color: '#10b981' },
-        'GMW-202610-007': { x: 94.0, y: 65.0, label: 'GMW-007 🇯🇵 Nhật & Hàn', color: '#a855f7' },
-        'GMW-202610-008': { x: 82.0, y: 71.0, label: 'GMW-008 🇬🇧 Anh/Canada', color: '#a855f7' },
-        'GMW-202610-009': { x: 89.0, y: 61.0, label: 'GMW-009 🇦🇺 Úc Thuế 0%', color: '#3b82f6' },
-        'GMW-202610-010': { x: 83.0, y: 63.0, label: 'GMW-010 🇨🇳 TQ Siết C/O', color: '#a855f7' }
+        'GMW-202610-001': { x: 68.0, y: 92.0, label: 'Thuế DOC', color: '#f97316' },
+        'GMW-202610-002': { x: 91.0, y: 91.0, label: 'EUDR GPS', color: '#a855f7' },
+        'GMW-202610-003': { x: 74.0, y: 86.0, label: 'Biển Đỏ', color: '#ef4444' },
+        'GMW-202610-004': { x: 93.0, y: 72.0, label: 'Lãi Suất Mỹ', color: '#3b82f6' },
+        'GMW-202610-005': { x: 69.0, y: 69.0, label: 'Tỷ Giá Fed', color: '#3b82f6' },
+        'GMW-202610-006': { x: 86.0, y: 76.0, label: 'Keo FSC', color: '#10b981' },
+        'GMW-202610-007': { x: 94.0, y: 65.0, label: 'Nhật & Hàn', color: '#a855f7' },
+        'GMW-202610-008': { x: 82.0, y: 71.0, label: 'Anh / Canada', color: '#a855f7' },
+        'GMW-202610-009': { x: 89.0, y: 61.0, label: 'Úc Thuế 0%', color: '#3b82f6' },
+        'GMW-202610-010': { x: 83.0, y: 63.0, label: 'TQ Siết C/O', color: '#a855f7' }
       };
 
       const scatterPoints = filteredData.map((d, idx) => {
@@ -1388,7 +1388,7 @@
         const mapped = COORD_MAP[id] || {
           x: parseFloat(d['Điểm ưu tiên cơ hội']) || 50,
           y: parseFloat(d['Điểm ưu tiên']) || 50,
-          label: id || `Sự kiện ${idx+1}`,
+          label: d['Loại biến động'] ? (d['Loại biến động'].length > 18 ? d['Loại biến động'].slice(0, 18) + '...' : d['Loại biến động']) : `Sự kiện ${idx+1}`,
           color: '#6366f1'
         };
 
@@ -1428,13 +1428,13 @@
           ctx.setLineDash([]);
 
           ctx.textAlign = 'left';
-          ctx.fillText('🛡️ GÓC I: PHÒNG VỆ KHẨN', left + 8, top + 16);
+          ctx.fillText('GÓC I: PHÒNG VỆ KHẨN', left + 8, top + 16);
           ctx.textAlign = 'right';
-          ctx.fillText('🔥 GÓC II: CHIẾN TRƯỜNG LỚN', right - 8, top + 16);
+          ctx.fillText('GÓC II: CHIẾN TRƯỜNG LỚN', right - 8, top + 16);
           ctx.textAlign = 'right';
-          ctx.fillText('🚀 GÓC III: BỨT PHÁ DOANH SỐ', right - 8, bottom - 10);
+          ctx.fillText('GÓC III: BỨT PHÁ DOANH SỐ', right - 8, bottom - 10);
           ctx.textAlign = 'left';
-          ctx.fillText('📋 GÓC IV: GIÁM SÁT ĐỊNH KỲ', left + 8, bottom - 10);
+          ctx.fillText('GÓC IV: GIÁM SÁT ĐỊNH KỲ', left + 8, bottom - 10);
 
           ctx.restore();
         },
@@ -1508,7 +1508,7 @@
               callbacks: {
                 title: (items) => {
                   const p = items[0].raw;
-                  return `[${p.raw.ID || 'N/A'}] ${p.raw['Loại biến động'] || ''}`;
+                  return p.raw['Loại biến động'] || '';
                 },
                 label: (item) => {
                   const p = item.raw;
@@ -1516,7 +1516,7 @@
                     `Thị trường: ${p.raw['Top thị trường'] || p.raw['Quốc Gia Tác Động'] || 'Toàn cầu'}`,
                     `Trụ cột: ${p.raw['Nhóm biến động'] || ''}`,
                     `Cơ Hội: ${p.raw['Top Cơ hội cho VN'] || 'TB'} • Rủi Ro: ${p.raw['Mức độ rủi rõ'] || 'TB'}`,
-                    `👉 Bấm chuột để mở Drawer xem chi tiết 360°`
+                    `Bấm chuột để mở Drawer xem chi tiết 360°`
                   ];
                 }
               }
@@ -1790,13 +1790,13 @@
       const gridColor = isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)';
 
       const markets = [
-        '🇯🇵 Nhật & Hàn',
-        '🇺🇸 Mỹ (US)',
-        '🇪🇺 Châu Âu (EU)',
-        '🇦🇺 Úc (Australia)',
-        '🇨🇳 Trung Quốc',
-        '🇬🇧 Anh & Canada',
-        '🚢 Tuyến Biển Đỏ'
+        'Nhật Bản & Hàn Quốc',
+        'Hoa Kỳ (US)',
+        'Châu Âu (EU)',
+        'Úc (Australia)',
+        'Trung Quốc',
+        'Anh & Canada',
+        'Tuyến Biển Đỏ'
       ];
 
       const oppScores = [94, 93, 91, 89, 83, 82, 35];
@@ -1852,12 +1852,12 @@
                 label: (ctx) => `${ctx.dataset.label.split('(')[0].trim()}: ${ctx.raw}/100 điểm`,
                 footer: (items) => {
                   const idx = items[0].dataIndex;
-                  if (idx === 0) return '👉 Nhật & Hàn: Thị trường hấp thụ tốt, biên độ an toàn cao';
-                  if (idx === 1) return '⚠️ Mỹ: Thị trường xuất khẩu lớn nhất nhưng áp lực thuế DOC khẩn cấp';
-                  if (idx === 2) return '🌱 EU: Chuẩn xanh EUDR kịch trần, chuẩn bị vùng trồng GPS';
-                  if (idx === 3) return '🚀 Úc: Thuế 0% AANZFTA & 1.2M nhà ở - Đòn bẩy mở rộng lớn';
-                  if (idx === 6) return '🚨 Biển Đỏ: Điểm nghẽn logistics cước tàu tăng 25-40%';
-                  return '👉 Bấm chuột để lọc danh sách sự kiện theo thị trường này';
+                  if (idx === 0) return 'Nhật Bản & Hàn Quốc: Thị trường hấp thụ tốt, biên độ an toàn cao';
+                  if (idx === 1) return 'Hoa Kỳ (US): Thị trường xuất khẩu lớn nhất nhưng áp lực thuế DOC khẩn cấp';
+                  if (idx === 2) return 'Châu Âu (EU): Chuẩn xanh EUDR kịch trần, chuẩn bị vùng trồng GPS';
+                  if (idx === 3) return 'Úc (Australia): Thuế 0% AANZFTA & 1.2M nhà ở - Đòn bẩy mở rộng lớn';
+                  if (idx === 6) return 'Tuyến Biển Đỏ: Điểm nghẽn logistics cước tàu tăng 25-40%';
+                  return 'Bấm chuột để lọc danh sách sự kiện theo thị trường này';
                 }
               }
             }
@@ -1939,10 +1939,10 @@
 
         return `
           <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 cursor-pointer transition" onclick="openDrawerById('${d.ID}')">
-            <!-- Mã & Ngày -->
+            <!-- Ngày cập nhật -->
             <td class="py-3 px-3.5 align-top">
-              <span class="font-mono font-bold text-xs text-indigo-600 dark:text-indigo-400 block">${d.ID || 'N/A'}</span>
-              <span class="text-[11px] text-slate-400 font-num">${d['Ngày cập nhật'] || ''}</span>
+              <span class="font-bold text-xs text-slate-800 dark:text-slate-200 block">${d['Ngày cập nhật'] || ''}</span>
+              <span class="text-[11px] text-slate-400 font-mono">${d['Tháng Báo Cáo'] || ''}</span>
             </td>
 
             <!-- Thị Trường & SP -->
@@ -2146,9 +2146,9 @@
         <div onclick="selectOmnibarItem('${d.ID}')" class="p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/80 cursor-pointer transition flex items-center justify-between gap-3">
           <div class="min-w-0">
             <div class="flex items-center gap-2 mb-0.5">
-              <span class="font-mono font-bold text-xs text-indigo-600 dark:text-indigo-400">${d.ID}</span>
-              <span class="px-1.5 py-0.2 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">${d['Quốc Gia Tác Động'] || 'Toàn cầu'}</span>
-              <span class="text-[11px] text-slate-400 font-num">${d['Tháng Báo Cáo'] || ''}</span>
+              <span class="px-1.5 py-0.2 rounded text-[10px] font-bold bg-indigo-50 dark:bg-indigo-950/70 text-indigo-600 dark:text-indigo-400">${d['Quốc Gia Tác Động'] || 'Toàn cầu'}</span>
+              <span class="px-1.5 py-0.2 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">${d['Nhóm biến động'] || ''}</span>
+              <span class="text-[11px] text-slate-400 font-num">${d['Ngày cập nhật'] || d['Tháng Báo Cáo'] || ''}</span>
             </div>
             <h5 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">${d['Loại biến động'] || ''}</h5>
           </div>
