@@ -561,20 +561,27 @@
         </div>
       </div>
 
-      <!-- Cột Phải (6 cols): ĐỐI SÁNH THỊ TRƯỜNG TRỌNG ĐIỂM (Horizontal Grouped Bar) -->
+      <!-- Cột Phải (6 cols): CƠ CẤU 7 TRỤ CỘT & THỊ TRƯỜNG VĨ MÔ (Macro Pillar & Market Breakdown) -->
       <div class="lg:col-span-6 bento-card p-5 sm:p-6 flex flex-col justify-between space-y-3">
         <div>
-          <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 gap-2">
             <div>
               <h2 class="text-sm sm:text-base font-extrabold uppercase tracking-wide text-slate-900 dark:text-white flex items-center gap-2">
                 <i data-lucide="bar-chart-3" class="w-4 h-4 text-indigo-600"></i>
-                Đối Sánh Chỉ Số: 7 Thị Trường & Tuyến Vận Tải
+                <span id="benchmarkChartTitle">Cơ Cấu 7 Trụ Cột: Rủi Ro vs Cơ Hội</span>
               </h2>
-              <p class="text-xs text-slate-500 mt-0.5">So sánh song song Điểm Cơ Hội vs Áp Lực Rủi Ro (Thang 0 – 100)</p>
+              <p id="benchmarkChartSubtitle" class="text-xs text-slate-500 mt-0.5">Phân bổ sự kiện theo sắc thái Rủi ro (Đỏ) vs Cơ hội (Xanh)</p>
             </div>
-            <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200/50 dark:border-emerald-800/50">
-              Bấm thanh để lọc
-            </span>
+            
+            <!-- Mode Switcher: Trụ Cột vs Thị Trường -->
+            <div class="inline-flex p-1 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-700/60 shrink-0 self-start sm:self-auto">
+              <button id="btnModePillars" onclick="setBenchmarkMode('pillars')" class="px-2.5 py-1 rounded-md text-xs font-bold bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 shadow-sm transition">
+                Theo Trụ Cột
+              </button>
+              <button id="btnModeMarkets" onclick="setBenchmarkMode('markets')" class="px-2.5 py-1 rounded-md text-xs font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition">
+                Theo Thị Trường
+              </button>
+            </div>
           </div>
 
           <div class="h-64 sm:h-72 w-full relative mt-3">
@@ -582,10 +589,15 @@
           </div>
         </div>
 
-        <div class="pt-2 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between text-xs text-slate-500">
-          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-sm bg-emerald-500"></span> Điểm Cơ Hội</span>
-          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-sm bg-rose-500"></span> Áp Lực Rủi Ro</span>
-          <span class="font-medium text-slate-700 dark:text-slate-300">Mỹ & EU rủi ro cao nhất • Úc & Nhật hấp thụ tốt</span>
+        <div class="pt-2 border-t border-slate-100 dark:border-slate-800/60 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+          <div class="flex items-center gap-3">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-rose-500"></span> Rủi ro cao</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span> Cơ hội cao</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-slate-400 dark:bg-slate-500"></span> Biến động TB</span>
+          </div>
+          <span class="font-medium text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+            <i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5"></i> Bấm thanh để lọc bảng
+          </span>
         </div>
       </div>
 
@@ -1955,7 +1967,33 @@
       });
     }
 
-    // 4. ĐỐI SÁNH THỊ TRƯỜNG TRỌNG ĐIỂM (Market Benchmark Horizontal Bar Chart)
+    // 4. CƠ CẤU 7 TRỤ CỘT & THỊ TRƯỜNG VĨ MÔ (Macro Pillar & Market Breakdown)
+    let currentBenchmarkMode = 'pillars'; // 'pillars' hoặc 'markets'
+
+    function setBenchmarkMode(mode) {
+      currentBenchmarkMode = mode;
+      const btnP = document.getElementById('btnModePillars');
+      const btnM = document.getElementById('btnModeMarkets');
+      const titleEl = document.getElementById('benchmarkChartTitle');
+      const subtitleEl = document.getElementById('benchmarkChartSubtitle');
+
+      if (btnP && btnM) {
+        if (mode === 'pillars') {
+          btnP.className = 'px-2.5 py-1 rounded-md text-xs font-bold bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 shadow-sm transition';
+          btnM.className = 'px-2.5 py-1 rounded-md text-xs font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition';
+          if (titleEl) titleEl.textContent = 'Cơ Cấu 7 Trụ Cột: Rủi Ro vs Cơ Hội';
+          if (subtitleEl) subtitleEl.textContent = 'Phân bổ sự kiện theo sắc thái Rủi ro (Đỏ) vs Cơ hội (Xanh)';
+        } else {
+          btnM.className = 'px-2.5 py-1 rounded-md text-xs font-bold bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 shadow-sm transition';
+          btnP.className = 'px-2.5 py-1 rounded-md text-xs font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition';
+          if (titleEl) titleEl.textContent = 'Trọng Tâm 6 Thị Trường Xuất Khẩu';
+          if (subtitleEl) subtitleEl.textContent = 'Mức độ biến động & cơ hội tại từng thị trường mục tiêu';
+        }
+      }
+      renderMarketBenchmark();
+      lucide.createIcons();
+    }
+
     function renderMarketBenchmark() {
       const canvas = document.getElementById('marketBenchmarkChart');
       if (!canvas) return;
@@ -1966,38 +2004,96 @@
       const textColor = isDark ? '#94a3b8' : '#64748b';
       const gridColor = isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)';
 
-      const markets = [
-        'Nhật Bản & Hàn Quốc',
-        'Hoa Kỳ (US)',
-        'Châu Âu (EU)',
-        'Úc (Australia)',
-        'Trung Quốc',
-        'Anh & Canada',
-        'Tuyến Biển Đỏ'
-      ];
+      const dataPool = (allData && allData.length > 0) ? allData : EMBEDDED_INITIAL_DATA;
 
-      const oppScores = [94, 93, 91, 89, 83, 82, 35];
-      const riskScores = [65, 92, 91, 61, 63, 71, 86];
+      let labels = [];
+      let riskCounts = [];
+      let oppCounts = [];
+      let neutralCounts = [];
+      let clickKeys = [];
+
+      if (currentBenchmarkMode === 'pillars') {
+        const pillarDefs = [
+          { label: 'Thuế quan & PVTM', key: 'Thuế quan' },
+          { label: 'Tiêu chuẩn xanh & EUDR', key: 'Luật pháp' },
+          { label: 'Logistics & Vận tải', key: 'Logistics' },
+          { label: 'Kinh tế & Nhu cầu', key: 'Kinh tế' },
+          { label: 'Tài chính & Tỷ giá', key: 'Tỷ giá' },
+          { label: 'Nguyên liệu & Gỗ FSC', key: 'Nguyên liệu' },
+          { label: 'Chính trị & Vĩ mô', key: 'Chính trị' }
+        ];
+
+        labels = pillarDefs.map(p => p.label);
+        clickKeys = pillarDefs.map(p => p.key);
+
+        pillarDefs.forEach(p => {
+          const items = dataPool.filter(d => matchPillar(d, p.key));
+          const risks = items.filter(d => d['Rủi ro cao'] == 1 || (d['Mức độ rủi rõ'] || '').includes('Cao')).length;
+          const opps = items.filter(d => d['Cơ hội cao'] == 1 || (d['Top Cơ hội cho VN'] || '').includes('Cao')).length;
+          const neutral = Math.max(0, items.length - risks - opps);
+          riskCounts.push(risks);
+          oppCounts.push(opps);
+          neutralCounts.push(neutral);
+        });
+      } else {
+        const marketDefs = [
+          { label: 'Hoa Kỳ (US)', key: 'Mỹ' },
+          { label: 'Châu Âu (EU)', key: 'EU' },
+          { label: 'Úc (Australia)', key: 'Úc' },
+          { label: 'Nhật Bản & Hàn Quốc', key: 'Nhật' },
+          { label: 'Anh & Canada', key: 'Anh' },
+          { label: 'Việt Nam & Toàn cầu', key: 'Việt Nam' }
+        ];
+
+        labels = marketDefs.map(m => m.label);
+        clickKeys = marketDefs.map(m => m.key);
+
+        marketDefs.forEach(m => {
+          let items = [];
+          if (m.key === 'Việt Nam') {
+            items = dataPool.filter(d => matchMarket(d, 'Việt Nam') || (d['Quốc Gia Tác Động'] || '').includes('Toàn cầu'));
+          } else {
+            items = dataPool.filter(d => matchMarket(d, m.key));
+          }
+          const risks = items.filter(d => d['Rủi ro cao'] == 1 || (d['Mức độ rủi rõ'] || '').includes('Cao')).length;
+          const opps = items.filter(d => d['Cơ hội cao'] == 1 || (d['Top Cơ hội cho VN'] || '').includes('Cao')).length;
+          const neutral = Math.max(0, items.length - risks - opps);
+          riskCounts.push(risks);
+          oppCounts.push(opps);
+          neutralCounts.push(neutral);
+        });
+      }
 
       charts.benchmark = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: markets,
+          labels: labels,
           datasets: [
             {
-              label: 'Điểm Cơ Hội (Opportunity)',
-              data: oppScores,
-              backgroundColor: '#10b981',
-              borderRadius: 6,
-              barPercentage: 0.7,
+              label: 'Rủi ro cao (Phòng vệ)',
+              data: riskCounts,
+              backgroundColor: '#f43f5e',
+              borderRadius: 4,
+              stack: 'stack1',
+              barPercentage: 0.72,
               categoryPercentage: 0.8
             },
             {
-              label: 'Áp Lực Rủi Ro (Risk Pressure)',
-              data: riskScores,
-              backgroundColor: '#f43f5e',
-              borderRadius: 6,
-              barPercentage: 0.7,
+              label: 'Cơ hội cao (Bứt phá)',
+              data: oppCounts,
+              backgroundColor: '#10b981',
+              borderRadius: 4,
+              stack: 'stack1',
+              barPercentage: 0.72,
+              categoryPercentage: 0.8
+            },
+            {
+              label: 'Biến động định kỳ',
+              data: neutralCounts,
+              backgroundColor: isDark ? '#475569' : '#cbd5e1',
+              borderRadius: 4,
+              stack: 'stack1',
+              barPercentage: 0.72,
               categoryPercentage: 0.8
             }
           ]
@@ -2012,9 +2108,9 @@
               align: 'end',
               labels: { 
                 color: textColor, 
-                boxWidth: 10, 
-                font: { size: 10.5, weight: 'bold', family: 'Plus Jakarta Sans' },
-                padding: 10
+                boxWidth: 8, 
+                font: { size: 10, weight: 'bold', family: 'Plus Jakarta Sans' },
+                padding: 8
               }
             },
             tooltip: {
@@ -2026,44 +2122,39 @@
               padding: 10,
               boxPadding: 4,
               callbacks: {
-                label: (ctx) => `${ctx.dataset.label.split('(')[0].trim()}: ${ctx.raw}/100 điểm`,
-                footer: (items) => {
-                  const idx = items[0].dataIndex;
-                  if (idx === 0) return 'Nhật Bản & Hàn Quốc: Thị trường hấp thụ tốt, biên độ an toàn cao';
-                  if (idx === 1) return 'Hoa Kỳ (US): Thị trường xuất khẩu lớn nhất nhưng áp lực thuế DOC khẩn cấp';
-                  if (idx === 2) return 'Châu Âu (EU): Chuẩn xanh EUDR kịch trần, chuẩn bị vùng trồng GPS';
-                  if (idx === 3) return 'Úc (Australia): Thuế 0% AANZFTA & 1.2M nhà ở - Đòn bẩy mở rộng lớn';
-                  if (idx === 6) return 'Tuyến Biển Đỏ: Điểm nghẽn logistics cước tàu tăng 25-40%';
-                  return 'Bấm chuột để lọc danh sách sự kiện theo thị trường này';
-                }
+                footer: () => '👉 Bấm chuột vào thanh này để lọc danh sách sự kiện'
               }
             }
           },
           scales: {
             x: {
-              min: 0,
-              max: 100,
+              stacked: true,
               grid: { color: gridColor },
-              ticks: { stepSize: 25, color: textColor, font: { family: 'JetBrains Mono', size: 10 } }
+              ticks: { 
+                stepSize: 1, 
+                precision: 0, 
+                color: textColor, 
+                font: { family: 'JetBrains Mono', size: 10 } 
+              }
             },
             y: {
+              stacked: true,
               grid: { display: false },
-              ticks: { color: textColor, font: { family: 'Plus Jakarta Sans', size: 10.5, weight: '600' } }
+              ticks: { 
+                color: textColor, 
+                font: { family: 'Plus Jakarta Sans', size: 10, weight: '600' } 
+              }
             }
           },
           onClick: (evt, activeEls) => {
             if (activeEls.length > 0) {
               const idx = activeEls[0].index;
-              const marketName = markets[idx];
-              let filterKey = 'Mỹ';
-              if (marketName.includes('Nhật')) filterKey = 'Nhật Bản';
-              else if (marketName.includes('EU') || marketName.includes('Châu Âu')) filterKey = 'EU';
-              else if (marketName.includes('Úc')) filterKey = 'Úc';
-              else if (marketName.includes('Trung Quốc')) filterKey = 'Trung Quốc';
-              else if (marketName.includes('Anh')) filterKey = 'Anh';
-              else if (marketName.includes('Biển Đỏ')) filterKey = 'Toàn cầu';
-
-              setFilterState('country', filterKey);
+              const filterVal = clickKeys[idx];
+              if (currentBenchmarkMode === 'pillars') {
+                setFilterState('pillar', filterVal);
+              } else {
+                setFilterState('market', filterVal);
+              }
             }
           }
         }
