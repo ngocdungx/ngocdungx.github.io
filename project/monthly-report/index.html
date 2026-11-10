@@ -155,11 +155,12 @@
       <!-- Quick Action Buttons -->
       <div class="flex items-center gap-2.5 sm:gap-3">
         
-        <!-- Link to Google Sheet -->
-        <a href="https://docs.google.com/spreadsheets/d/1f5bju1SiwjHTe2MRrWbtlqyO27tNDvWAC7ZC71STBgI/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 text-xs sm:text-sm font-semibold flex items-center gap-2 transition" title="Mở file Google Sheet gốc">
-          <i data-lucide="external-link" class="w-4 h-4"></i>
-          <span class="hidden md:inline">Mở Google Sheet</span>
-        </a>
+        <!-- Nút Đồng bộ Google Sheet -->
+        <button onclick="syncAllFromGoogleSheet()" id="btnSyncNow" class="px-3.5 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 transition shadow-sm shadow-brand-500/20" title="Đồng bộ trực tiếp dữ liệu mới nhất từ Google Sheet">
+          <i data-lucide="refresh-cw" id="syncIconSpin" class="w-4 h-4"></i>
+          <span id="syncBtnLabel" class="hidden sm:inline">Đồng bộ Google Sheet</span>
+          <span id="syncIndicator" class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse hidden sm:inline-block"></span>
+        </button>
 
         <!-- Search Omnibar (⌘K) -->
         <button onclick="openSearchModal()" class="px-3.5 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-xs sm:text-sm font-medium flex items-center gap-2.5 transition shadow-sm">
@@ -181,29 +182,6 @@
 
     </div>
   </header>
-
-  <!-- ==================== GOOGLE SHEETS LIVE SYNC STATUS BAR (1800PX) ==================== -->
-  <section id="syncBar" class="border-b border-slate-200 dark:border-white/5 bg-slate-50/90 dark:bg-slate-950/70 backdrop-blur-md no-print">
-    <div class="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm">
-      
-      <div class="flex items-center gap-2.5">
-        <span id="syncIndicator" class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span id="syncStatusLabel" class="text-slate-700 dark:text-slate-300 font-medium">
-          Đã kết nối Google Sheet: <span class="text-emerald-700 dark:text-emerald-400 font-mono font-bold">Work Plan Gemmy</span>
-        </span>
-        <span class="text-slate-400 dark:text-slate-600">|</span>
-        <span class="text-slate-500 dark:text-slate-400 text-xs">Đồng bộ tự động 3 Phân hệ: Tháng 10, Tháng 11 & Time-Blocking</span>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <button onclick="syncAllFromGoogleSheet()" id="btnSyncNow" class="text-xs sm:text-sm px-3.5 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-semibold flex items-center gap-1.5 transition shadow-sm shadow-brand-500/20">
-          <i data-lucide="refresh-cw" id="syncIconSpin" class="w-3.5 h-3.5"></i>
-          <span>Đồng bộ từ Google Sheet</span>
-        </button>
-      </div>
-
-    </div>
-  </section>
 
   <!-- ==================== MAIN CONTENT CONTAINER (1800PX) ==================== -->
   <main class="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -1218,12 +1196,12 @@
     // ==================== GOOGLE SHEETS LIVE SYNC ====================
     async function syncAllFromGoogleSheet() {
       const indicator = document.getElementById('syncIndicator');
-      const label = document.getElementById('syncStatusLabel');
+      const btnLabel = document.getElementById('syncBtnLabel');
       const spinIcon = document.getElementById('syncIconSpin');
 
-      indicator.className = 'w-2.5 h-2.5 rounded-full bg-amber-500 animate-spin';
-      spinIcon.classList.add('animate-spin');
-      label.textContent = 'Đang đồng bộ trực tiếp từ Google Sheet...';
+      if (indicator) indicator.className = 'w-2 h-2 rounded-full bg-amber-300 animate-spin inline-block';
+      if (spinIcon) spinIcon.classList.add('animate-spin');
+      if (btnLabel) btnLabel.textContent = 'Đang đồng bộ...';
 
       try {
         const tabNames = [
@@ -1239,19 +1217,22 @@
 
         await Promise.all(fetchPromises);
         
-        indicator.className = 'w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse';
-        spinIcon.classList.remove('animate-spin');
+        if (indicator) indicator.className = 'w-2 h-2 rounded-full bg-emerald-300 animate-pulse hidden sm:inline-block';
+        if (spinIcon) spinIcon.classList.remove('animate-spin');
         
         const now = new Date();
         const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
-        label.innerHTML = `Đồng bộ thành công lúc <span class="text-emerald-700 dark:text-white font-mono font-bold">${timeStr}</span> (Work Plan Gemmy)`;
+        if (btnLabel) btnLabel.textContent = `Đã đồng bộ (${timeStr})`;
+        setTimeout(() => {
+          if (btnLabel) btnLabel.textContent = 'Đồng bộ Google Sheet';
+        }, 4000);
 
         renderAll(currentData);
       } catch (err) {
         console.warn('Lỗi kết nối Google Sheet:', err);
-        indicator.className = 'w-2.5 h-2.5 rounded-full bg-emerald-500';
-        spinIcon.classList.remove('animate-spin');
-        label.textContent = 'Đang sử dụng dữ liệu Google Sheet đã tải sẵn';
+        if (indicator) indicator.className = 'w-2 h-2 rounded-full bg-emerald-300 hidden sm:inline-block';
+        if (spinIcon) spinIcon.classList.remove('animate-spin');
+        if (btnLabel) btnLabel.textContent = 'Đồng bộ Google Sheet';
       }
     }
 
