@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GEMMY WOOD — Báo Cáo Công Tác & Kế Hoạch Marketing B2B</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300C8F0' stroke='%23000000' stroke-width='2.5'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+  <title>BÁO CÁO MARKETING — Báo Cáo Công Tác & Kế Hoạch Marketing B2B</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -173,13 +173,10 @@
       
       <!-- Brand & Metadata -->
       <div class="flex items-center gap-3.5">
-        <div class="w-11 h-11 rounded-[5px] bg-[var(--main)] border-2 border-black flex items-center justify-center flex-shrink-0">
-          <i data-lucide="trees" class="w-6 h-6 text-black stroke-[2.5]"></i>
-        </div>
+        <img src="logo.jpg" alt="Logo Báo Cáo Marketing" class="w-11 h-11 rounded-[5px] border-2 border-black object-contain bg-white p-0.5 flex-shrink-0" />
         <div>
           <div class="flex items-center gap-2.5 flex-wrap">
-            <span class="font-black tracking-tight text-black text-lg sm:text-xl uppercase">GEMMY WOOD</span>
-            <span class="px-2.5 py-0.5 text-xs font-mono font-bold tracking-wider uppercase rounded-[5px] bg-[var(--chart-2)] text-black border-2 border-black">Phòng Marketing & Truyền Thông B2B</span>
+            <span class="font-black tracking-tight text-black text-lg sm:text-xl uppercase">BÁO CÁO MARKETING</span>
             <span id="headerDynamicCycleBadge" class="px-2.5 py-0.5 text-xs font-mono font-bold rounded-[5px] bg-[var(--chart-3)] text-black border-2 border-black">Kỳ báo cáo: Tháng trước → Kế hoạch: Tháng hiện tại</span>
           </div>
           <p class="text-xs text-black font-semibold hidden sm:block mt-0.5">Báo Cáo Kết Quả Công Tác Tháng Trước & Kế Hoạch Tác Nghiệp Marketing Xuất Khẩu Tháng Hiện Tại</p>
@@ -1123,7 +1120,7 @@
       const w3 = cal.weeks[2];
       const w4 = cal.weeks[3];
 
-      document.title = `GEMMY WOOD — Báo Cáo Tháng ${cal.prevM}/${cal.prevY} & Kế Hoạch Tháng ${cal.currM}/${cal.currY}`;
+      document.title = `BÁO CÁO MARKETING — Báo Cáo Tháng ${cal.prevM}/${cal.prevY} & Kế Hoạch Tháng ${cal.currM}/${cal.currY}`;
       setTxt('headerDynamicCycleBadge', `Báo cáo T${cal.prevM}/${cal.prevY} • Kế hoạch T${cal.currM}/${cal.currY}`);
 
       // KPI Cards
