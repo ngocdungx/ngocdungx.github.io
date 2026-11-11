@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GEMMY WOOD — Báo Cáo Công Tác & Kế Hoạch Marketing B2B</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23A985FF' stroke='%23000000' stroke-width='2.5'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300C8F0' stroke='%23000000' stroke-width='2.5'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -52,22 +52,22 @@
     }
   </script>
   <style>
-    /* Neobrutalism duotone palette: violet */
+    /* Neobrutalism duotone palette: cyan */
     :root {
-      --background: hsl(162, 100%, 80%);
+      --background: hsl(28, 100%, 80%);
       --secondary-background: oklch(100% 0 0);
       --foreground: oklch(0% 0 0);
       --main-foreground: oklch(0% 0 0);
-      --main: hsl(258, 100%, 76%);
+      --main: hsl(190, 100%, 47%);
       --border: oklch(0% 0 0);
       --ring: oklch(0% 0 0);
       --overlay: oklch(0% 0 0 / 0.8);
       --shadow: 0px 0px 0px 0px var(--border);
-      --chart-1: #A985FF;
-      --chart-2: #00D696;
-      --chart-3: #FACC00;
+      --chart-1: #00C8F0;
+      --chart-2: #FF7A05;
+      --chart-3: #7A83FF;
       --chart-4: #FF4D50;
-      --chart-5: #0099FF;
+      --chart-5: #FACC00;
       --chart-active-dot: #000;
 
       --color-main: var(--main);
@@ -333,11 +333,11 @@
             </div>
 
             <div class="grid grid-cols-2 gap-3 pt-3 border-t-2 border-black text-center">
-              <div class="p-2.5 rounded-[5px] bg-[var(--chart-2)] border-2 border-black">
+              <div class="p-2.5 rounded-[5px] bg-[var(--chart-1)] border-2 border-black">
                 <span class="text-xs text-black font-bold block uppercase">Đã Hoàn Thành</span>
                 <span class="text-xl font-black font-mono text-black">07 Mục (77.8%)</span>
               </div>
-              <div class="p-2.5 rounded-[5px] bg-[var(--chart-3)] border-2 border-black">
+              <div class="p-2.5 rounded-[5px] bg-[var(--chart-2)] border-2 border-black">
                 <span class="text-xs text-black font-bold block uppercase">Tồn Đọng / Chưa Xong</span>
                 <span class="text-xl font-black font-mono text-black">02 Mục (22.2%)</span>
               </div>
@@ -1058,7 +1058,7 @@
           labels: ['Đã Hoàn Thành (7 việc)', 'Tồn Đọng / Cần Khắc Phục (2 việc)'],
           datasets: [{
             data: [completedCount, pendingCount],
-            backgroundColor: ['#00D696', '#FACC00'],
+            backgroundColor: ['#00C8F0', '#FF7A05'],
             borderColor: '#000000',
             borderWidth: 2.5,
             hoverOffset: 6
@@ -1354,8 +1354,8 @@
       const dataHours = allocations.map(a => a.hours_month);
 
       const colors = [
-        '#A985FF', '#00D696', '#FACC00', '#FF4D50', '#0099FF',
-        '#A985FF', '#00D696', '#FACC00', '#FF4D50', '#0099FF', '#A985FF'
+        '#00C8F0', '#FF7A05', '#7A83FF', '#FF4D50', '#FACC00',
+        '#00C8F0', '#FF7A05', '#7A83FF', '#FF4D50', '#FACC00', '#00C8F0'
       ];
 
       if (doughnutChart) doughnutChart.destroy();
