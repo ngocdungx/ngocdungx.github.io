@@ -256,7 +256,7 @@
         </div>
         <div>
           <div class="text-3xl sm:text-4xl font-black text-black font-mono tracking-tight" id="kpiHours">48h/Tuần (192h)</div>
-          <p class="text-xs sm:text-sm text-black font-medium mt-1.5">11 Nhóm chuyên môn, 23 Ca Time-blocking Thứ 2 - Thứ 7</p>
+          <p id="kpiHoursDesc" class="text-xs sm:text-sm text-black font-medium mt-1.5">11 Nhóm chuyên môn, 23 Ca Time-blocking Thứ 2 - Thứ 7</p>
         </div>
       </div>
 
@@ -270,7 +270,7 @@
         </div>
         <div>
           <div class="text-3xl sm:text-4xl font-black text-black font-mono tracking-tight" id="kpiBudget">5.500.000 VNĐ</div>
-          <p class="text-xs sm:text-sm text-black font-medium mt-1.5">Công cụ AI Dựng Bối Cảnh (5.000k) + Claude Pro (500k)</p>
+          <p id="kpiBudgetDesc" class="text-xs sm:text-sm text-black font-medium mt-1.5">Công cụ AI Dựng Bối Cảnh (5.000k) + Claude Pro (500k)</p>
         </div>
       </div>
 
@@ -488,8 +488,8 @@
               <span id="lblMilestoneW1" class="px-2.5 py-1 rounded-[5px] text-xs font-mono font-bold bg-[var(--chart-5)] text-black border-2 border-black">TUẦN 1</span>
               <i data-lucide="flag" class="w-5 h-5 text-black stroke-[2.5]"></i>
             </div>
-            <h4 class="text-sm font-bold text-black">Khởi Động & Duyệt Lịch Zalo</h4>
-            <p class="text-xs sm:text-sm text-black font-medium leading-relaxed">Họp giao ban, duyệt Lịch biên tập các kênh và kích hoạt tài khoản AI dựng ảnh bối cảnh gỗ.</p>
+            <h4 id="lblMilestoneW1Title" class="text-sm font-bold text-black">Khởi Động & Duyệt Lịch Zalo</h4>
+            <p id="lblMilestoneW1Desc" class="text-xs sm:text-sm text-black font-medium leading-relaxed">Họp giao ban, duyệt Lịch biên tập các kênh và kích hoạt tài khoản AI dựng ảnh bối cảnh gỗ.</p>
           </div>
 
           <div class="p-5 glass-card space-y-2.5">
@@ -497,7 +497,7 @@
               <span id="lblMilestoneW2" class="px-2.5 py-1 rounded-[5px] text-xs font-mono font-bold bg-[var(--chart-3)] text-black border-2 border-black">TUẦN 2</span>
               <i data-lucide="award" class="w-5 h-5 text-black stroke-[2.5]"></i>
             </div>
-            <h4 class="text-sm font-bold text-black">Bàn Giao Master Catalog V2</h4>
+            <h4 id="lblMilestoneW2Title" class="text-sm font-bold text-black">Bàn Giao Master Catalog V2</h4>
             <p id="lblMilestoneW2Desc" class="text-xs sm:text-sm text-black font-medium leading-relaxed">Xuất bản bộ ảnh bối cảnh AI chất lượng cao & Bàn giao bản PDF Master Catalog V2.</p>
           </div>
 
@@ -506,8 +506,8 @@
               <span id="lblMilestoneW3" class="px-2.5 py-1 rounded-[5px] text-xs font-mono font-bold bg-[var(--chart-2)] text-black border-2 border-black">TUẦN 3</span>
               <i data-lucide="globe" class="w-5 h-5 text-black stroke-[2.5]"></i>
             </div>
-            <h4 class="text-sm font-bold text-black">Chuẩn Hóa Thông Số Thớt & Butcher</h4>
-            <p class="text-xs sm:text-sm text-black font-medium leading-relaxed">Cập nhật thông số Thớt gỗ keo & Mặt bàn Butcher Block lên gemmywood.vn; SEO tiếng Anh xuất khẩu.</p>
+            <h4 id="lblMilestoneW3Title" class="text-sm font-bold text-black">Chuẩn Hóa Thông Số Thớt & Butcher</h4>
+            <p id="lblMilestoneW3Desc" class="text-xs sm:text-sm text-black font-medium leading-relaxed">Cập nhật thông số Thớt gỗ keo & Mặt bàn Butcher Block lên gemmywood.vn; SEO tiếng Anh xuất khẩu.</p>
           </div>
 
           <div class="p-5 glass-card space-y-2.5">
@@ -515,7 +515,7 @@
               <span id="lblMilestoneW4" class="px-2.5 py-1 rounded-[5px] text-xs font-mono font-bold bg-[var(--main)] text-black border-2 border-black">TUẦN 4</span>
               <i data-lucide="video" class="w-5 h-5 text-black stroke-[2.5]"></i>
             </div>
-            <h4 class="text-sm font-bold text-black">SEO Quốc Tế & Video Cont Hải Phòng</h4>
+            <h4 id="lblMilestoneW4Title" class="text-sm font-bold text-black">SEO Quốc Tế & Video Cont Hải Phòng</h4>
             <p id="lblMilestoneW4Desc" class="text-xs sm:text-sm text-black font-medium leading-relaxed">Video đóng cont 40ft tại cảng Hải Phòng, kiểm tra form B2B website và lập báo cáo tháng.</p>
           </div>
 
@@ -633,7 +633,7 @@
             </span>
           </div>
 
-          <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5" id="containerBusinessImpact">
             
             <!-- Trụ Cột 1 -->
             <div class="p-5 rounded-[5px] bg-[var(--secondary-background)] border-2 border-black space-y-3 flex flex-col justify-between">
@@ -1170,6 +1170,181 @@
     });
 
     // ==================== RENDER ALL SECTIONS ====================
+    // ==================== DYNAMIC MILESTONES & BUSINESS IMPACT ====================
+    function renderMilestones(roadmapTasks) {
+      if (!roadmapTasks || roadmapTasks.length === 0) return;
+      
+      const weeks = ['Tuần 1', 'Tuần 2', 'Tuần 3', 'Tuần 4'];
+      weeks.forEach((wName, idx) => {
+        const wNum = idx + 1;
+        const wTasks = roadmapTasks.filter(t => (t.week || '').includes(wName));
+        if (wTasks.length > 0) {
+          const keyTask = wTasks.find(t => (t.status || '').includes('Trọng tâm') || (t.notes || '').includes('Ưu tiên')) || wTasks[0];
+          const titleEl = document.getElementById(`lblMilestoneW${wNum}Title`);
+          const descEl = document.getElementById(`lblMilestoneW${wNum}Desc`);
+          if (titleEl && keyTask.title) {
+            titleEl.textContent = keyTask.title.length > 38 ? keyTask.title.slice(0, 38) + '...' : keyTask.title;
+          }
+          if (descEl && (keyTask.output || keyTask.content)) {
+            const descText = keyTask.output ? `${keyTask.output} (${keyTask.deadline || ''})` : keyTask.content;
+            descEl.textContent = descText.length > 90 ? descText.slice(0, 90) + '...' : descText;
+          }
+        }
+      });
+    }
+
+    function renderBusinessImpact(data) {
+      const container = document.getElementById('containerBusinessImpact');
+      if (!container) return;
+
+      const focus = (data.tab_november && data.tab_november.focus_targets) || [];
+      const roadmap = (data.tab_november && data.tab_november.roadmap_tasks) || [];
+      const budget = (data.tab_november && data.tab_november.budget_proposals) || [];
+      const pending = (data.tab_october && data.tab_october.pending) || [];
+      const cal = calendarCtx || { currM: 11, currY: 2026, prevM: 10 };
+
+      // Pillar 1: Vũ Khí Bán Hàng (Sales Enablement)
+      let p1Items = focus.slice(0, 3).map((f, i) => ({
+        label: f.title.length > 30 ? f.title.slice(0, 30) + '...' : f.title,
+        badge: f.deadline || '100% Tiến độ',
+        bg: i === 0 ? 'bg-[var(--chart-2)]' : i === 1 ? 'bg-[var(--chart-3)]' : 'bg-[var(--main)]'
+      }));
+      if (p1Items.length === 0) {
+        p1Items = [
+          { label: 'Tài liệu bán hàng & Catalog:', badge: '100% Tiến độ', bg: 'bg-[var(--chart-2)]' },
+          { label: 'Bảng quy cách kỹ thuật B2B:', badge: 'Chuẩn hóa File', bg: 'bg-[var(--chart-3)]' },
+          { label: 'Tư liệu mẫu gửi Buyer:', badge: 'Sẵn sàng giao dịch', bg: 'bg-[var(--main)]' }
+        ];
+      }
+
+      // Pillar 2: Uy Tín Nhà Máy & Hiện Diện B2B
+      let p2Items = focus.slice(3, 6).map((f, i) => ({
+        label: f.title.length > 30 ? f.title.slice(0, 30) + '...' : f.title,
+        badge: f.output && f.output.length > 18 ? f.output.slice(0, 18) + '...' : (f.output || 'Đạt chuẩn'),
+        bg: i === 0 ? 'bg-[var(--chart-2)]' : i === 1 ? 'bg-[var(--chart-3)]' : 'bg-[var(--main)]'
+      }));
+      if (p2Items.length === 0) {
+        p2Items = [
+          { label: 'Kênh truyền thông LinkedIn B2B:', badge: 'Chuẩn B2B Global', bg: 'bg-[var(--chart-2)]' },
+          { label: 'Bài kỹ thuật chuyên sâu SEO:', badge: 'Định mức tháng', bg: 'bg-[var(--chart-3)]' },
+          { label: 'Video quy trình xưởng sản xuất:', badge: 'Phát hành định kỳ', bg: 'bg-[var(--main)]' }
+        ];
+      }
+
+      // Pillar 3: Tối Ưu Ngân Sách Sản Xuất Tư Liệu (ROI)
+      const totalBudgetItem = budget.find(b => String(b.stt).toUpperCase() === 'TỔNG' || String(b.id).includes('TỔNG'));
+      const totalBudgetVal = totalBudgetItem ? totalBudgetItem.amount : (budget.length > 0 ? budget[budget.length - 1].amount : '5.500.000');
+      const nonTotalBudget = budget.filter(b => String(b.stt).toUpperCase() !== 'TỔNG' && !String(b.id).includes('TỔNG'));
+      const primaryTool = nonTotalBudget.length > 0 ? nonTotalBudget[0].type_cost : 'Công cụ AI in-house';
+
+      // Pillar 4: Kỷ Luật Kiểm Duyệt & Khắc Phục Tồn Đọng
+      const pendingCount = pending.length;
+      const pendingText = pendingCount > 0 ? `Khắc phục ${pendingCount} việc tồn đọng` : '0 việc tồn đọng (Hoàn thành)';
+      const pendingBadge = pendingCount > 0 ? 'Hoàn thành dứt điểm' : 'Sạch tồn đọng';
+
+      container.innerHTML = `
+        <!-- Trụ Cột 1 -->
+        <div class="p-5 rounded-[5px] bg-[var(--secondary-background)] border-2 border-black space-y-3 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-[5px] bg-[var(--chart-3)] text-black border border-black">TRỤ CỘT 01</span>
+              <i data-lucide="briefcase" class="w-4 h-4 text-black stroke-[2.5]"></i>
+            </div>
+            <h4 class="text-sm font-extrabold text-black">Vũ Khí Bán Hàng Cho Phòng Kinh Doanh</h4>
+            <p class="text-xs text-black font-medium mt-1.5 leading-relaxed">
+              Cung cấp trọn bộ tài liệu chuẩn hóa quốc tế giúp đội ngũ Kinh doanh tự tin tiếp cận Buyer, rút ngắn 50% thời gian giải thích quy cách.
+            </p>
+          </div>
+          <div class="pt-3 border-t-2 border-black space-y-2">
+            ${p1Items.map(item => `
+              <div class="flex items-center justify-between text-xs font-bold gap-2">
+                <span class="truncate">${escapeHtml(item.label)}</span>
+                <span class="font-mono text-black ${item.bg} px-1.5 py-0.5 rounded border border-black text-[11px] whitespace-nowrap flex-shrink-0">${escapeHtml(item.badge)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Trụ Cột 2 -->
+        <div class="p-5 rounded-[5px] bg-[var(--secondary-background)] border-2 border-black space-y-3 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-[5px] bg-[var(--main)] text-black border border-black">TRỤ CỘT 02</span>
+              <i data-lucide="award" class="w-4 h-4 text-black stroke-[2.5]"></i>
+            </div>
+            <h4 class="text-sm font-extrabold text-black">Uy Tín Nhà Máy & Hiện Diện B2B</h4>
+            <p class="text-xs text-black font-medium mt-1.5 leading-relaxed">
+              Xây dựng diện mạo nhà máy chuẩn mực (quy mô 45.000m², lò sấy hơi nước MC 8-12%, keo D4, chứng chỉ FSC) trên môi trường số tiếp cận đối tác.
+            </p>
+          </div>
+          <div class="pt-3 border-t-2 border-black space-y-2">
+            ${p2Items.map(item => `
+              <div class="flex items-center justify-between text-xs font-bold gap-2">
+                <span class="truncate">${escapeHtml(item.label)}</span>
+                <span class="font-mono ${item.bg} px-1.5 py-0.5 rounded border border-black text-[11px] whitespace-nowrap flex-shrink-0">${escapeHtml(item.badge)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Trụ Cột 3 -->
+        <div class="p-5 rounded-[5px] bg-[var(--secondary-background)] border-2 border-black space-y-3 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-[5px] bg-[var(--chart-2)] text-black border border-black">TRỤ CỘT 03</span>
+              <i data-lucide="trending-up" class="w-4 h-4 text-black stroke-[2.5]"></i>
+            </div>
+            <h4 class="text-sm font-extrabold text-black">Tối Ưu Ngân Sách Sản Xuất Tư Liệu</h4>
+            <p class="text-xs text-black font-medium mt-1.5 leading-relaxed">
+              Tự động hóa và ứng dụng công nghệ AI in-house thay vì thuê ngoài dịch vụ chụp/dựng 3D đắt đỏ, tiết kiệm ngân sách ròng cho công ty.
+            </p>
+          </div>
+          <div class="pt-3 border-t-2 border-black space-y-2">
+            <div class="flex items-center justify-between text-xs font-bold">
+              <span>Chi phí thuê ngoài 3D dự kiến:</span>
+              <span class="font-mono line-through text-black/70 text-[11px]">~20.000.000 đ</span>
+            </div>
+            <div class="flex items-center justify-between text-xs font-bold">
+              <span class="truncate">Gói đầu tư ${escapeHtml(primaryTool)}:</span>
+              <span class="font-mono bg-[var(--chart-2)] px-1.5 py-0.5 rounded border border-black text-[11px] flex-shrink-0">${escapeHtml(totalBudgetVal)} đ</span>
+            </div>
+            <div class="flex items-center justify-between text-xs font-bold">
+              <span>Hiệu quả tiết kiệm ròng:</span>
+              <span class="font-mono text-black font-black bg-[var(--chart-3)] px-1.5 py-0.5 rounded border border-black text-[11px]">Tiết kiệm ~75%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trụ Cột 4 -->
+        <div class="p-5 rounded-[5px] bg-[var(--secondary-background)] border-2 border-black space-y-3 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-mono font-bold px-2 py-0.5 rounded-[5px] bg-[var(--background)] text-black border border-black">TRỤ CỘT 04</span>
+              <i data-lucide="shield-check" class="w-4 h-4 text-black stroke-[2.5]"></i>
+            </div>
+            <h4 class="text-sm font-extrabold text-black">Kỷ Luật Kiểm Duyệt & Khắc Phục Tồn Đọng</h4>
+            <p class="text-xs text-black font-medium mt-1.5 leading-relaxed">
+              Thiết lập cơ chế kiểm soát chất lượng truyền thông, bảo đảm thông tin kỹ thuật gỗ xuất khẩu chuẩn xác 100% trước khi ra công chúng.
+            </p>
+          </div>
+          <div class="pt-3 border-t-2 border-black space-y-2">
+            <div class="flex items-center justify-between text-xs font-bold">
+              <span>Duyệt trọn gói Lịch tháng trên Zalo:</span>
+              <span class="font-mono bg-[var(--chart-2)] px-1.5 py-0.5 rounded border border-black text-[11px]">Duyệt 1 lần đầu tháng</span>
+            </div>
+            <div class="flex items-center justify-between text-xs font-bold">
+              <span>Tỷ lệ bài viết qua kiểm duyệt:</span>
+              <span class="font-mono bg-[var(--main)] px-1.5 py-0.5 rounded border border-black text-[11px]">100% thông qua</span>
+            </div>
+            <div class="flex items-center justify-between text-xs font-bold">
+              <span class="truncate">${escapeHtml(pendingText)}:</span>
+              <span class="font-mono bg-[var(--chart-3)] px-1.5 py-0.5 rounded border border-black text-[11px] flex-shrink-0">${escapeHtml(pendingBadge)}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     function renderAll(data) {
       renderKPIs(data);
       renderOctoberCharts(data.tab_october || {});
@@ -1179,6 +1354,8 @@
       renderNovemberFocus(data.tab_november.focus_targets || []);
       renderNovemberRoadmap(data.tab_november.roadmap_tasks || []);
       renderNovemberBudget(data.tab_november.budget_proposals || []);
+      renderMilestones(data.tab_november.roadmap_tasks || []);
+      renderBusinessImpact(data);
       renderWorkloadAllocations(data.tab_workload.allocations || []);
       renderTimeblocks(data.tab_workload.timeblocks || []);
       initOrUpdateCharts(data.tab_workload.allocations || []);
@@ -1186,11 +1363,54 @@
     }
 
     function renderKPIs(data) {
-      const kpis = data.summary_kpis || {};
-      document.getElementById('kpiOctRate').textContent = kpis.october_completed_rate || '7 / 7 (100%)';
-      document.getElementById('kpiNovTasks').textContent = `${kpis.november_roadmap_count || 16} Đầu Việc`;
-      document.getElementById('kpiHours').textContent = `${kpis.weekly_hours_total || 48}h/Tuần (${kpis.monthly_hours_total || 192}h)`;
-      document.getElementById('kpiBudget').textContent = kpis.budget_total_vnd || '5.500.000 VNĐ';
+      const completed = (data.tab_october && data.tab_october.completed) || [];
+      const pending = (data.tab_october && data.tab_october.pending) || [];
+      const focus = (data.tab_november && data.tab_november.focus_targets) || [];
+      const roadmap = (data.tab_november && data.tab_november.roadmap_tasks) || [];
+      const budget = (data.tab_november && data.tab_november.budget_proposals) || [];
+      const allocations = (data.tab_workload && data.tab_workload.allocations) || [];
+      const timeblocks = (data.tab_workload && data.tab_workload.timeblocks) || [];
+
+      // KPI 1: Tỷ lệ hoàn thành tháng trước
+      const totalPrev = completed.length + pending.length;
+      const octRate = totalPrev > 0 ? Math.round((completed.length / totalPrev) * 100) : 100;
+      const kpiOctRateEl = document.getElementById('kpiOctRate');
+      if (kpiOctRateEl) kpiOctRateEl.textContent = `${completed.length} / ${totalPrev || completed.length} (${octRate}%)`;
+      const kpiOctDescEl = document.getElementById('kpiOctDesc');
+      if (kpiOctDescEl) {
+        kpiOctDescEl.textContent = `Hoàn tất ${completed.length} mục tiêu; ${pending.length > 0 ? `${pending.length} tồn đọng đã có giải pháp` : '0 tồn đọng'}`;
+      }
+
+      // KPI 2: Kế hoạch tháng hiện tại
+      const kpiNovTasksEl = document.getElementById('kpiNovTasks');
+      if (kpiNovTasksEl) kpiNovTasksEl.textContent = `${roadmap.length} Đầu Việc`;
+      const kpiNovDescEl = document.getElementById('kpiNovDesc');
+      if (kpiNovDescEl) {
+        kpiNovDescEl.textContent = `4 Tuần triển khai (${roadmap.length} đầu việc) + ${focus.length} Mục tiêu trọng tâm`;
+      }
+
+      // KPI 3: Định mức năng lực
+      const weeklyHours = allocations.reduce((sum, a) => sum + (parseFloat(a.hours_week) || 0), 0) || 48;
+      const monthlyHours = allocations.reduce((sum, a) => sum + (parseFloat(a.hours_month) || 0), 0) || (weeklyHours * 4);
+      const kpiHoursEl = document.getElementById('kpiHours');
+      if (kpiHoursEl) kpiHoursEl.textContent = `${weeklyHours}h/Tuần (${monthlyHours}h)`;
+      const kpiHoursDescEl = document.getElementById('kpiHoursDesc');
+      if (kpiHoursDescEl) {
+        kpiHoursDescEl.textContent = `${allocations.length} Nhóm chuyên môn, ${timeblocks.length} Ca Time-blocking Thứ 2 – Thứ 7`;
+      }
+
+      // KPI 4: Dự toán ngân sách
+      const totalBudgetItem = budget.find(b => String(b.stt).toUpperCase() === 'TỔNG' || String(b.id).includes('TỔNG'));
+      const totalBudgetVal = totalBudgetItem ? totalBudgetItem.amount : (budget.length > 0 ? budget[budget.length - 1].amount : '5.500.000');
+      const kpiBudgetEl = document.getElementById('kpiBudget');
+      if (kpiBudgetEl) kpiBudgetEl.textContent = `${totalBudgetVal} VNĐ`;
+      const kpiBudgetDescEl = document.getElementById('kpiBudgetDesc');
+      if (kpiBudgetDescEl) {
+        const nonTotalItems = budget.filter(b => String(b.stt).toUpperCase() !== 'TỔNG' && !String(b.id).includes('TỔNG'));
+        if (nonTotalItems.length > 0) {
+          kpiBudgetDescEl.textContent = nonTotalItems.map(b => `${b.type_cost} (${b.amount}đ)`).join(' + ');
+        }
+      }
     }
 
     // ==================== TAB 1 RENDERING (THÁNG TRƯỚC & CHART — NEOBRUTALISM) ====================
@@ -1206,7 +1426,7 @@
       octoberChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-          labels: ['Đã Hoàn Thành (7 việc)', 'Tồn Đọng / Cần Khắc Phục (2 việc)'],
+          labels: [`Đã Hoàn Thành (${completedCount} việc)`, `Tồn Đọng / Cần Khắc Phục (${pendingCount} việc)`],
           datasets: [{
             data: [completedCount, pendingCount],
             backgroundColor: ['#00C8F0', '#FF7A05'],
@@ -1343,6 +1563,31 @@
     function renderNovemberRoadmap(items) {
       const tbody = document.getElementById('tableNovemberRoadmap');
       if (!tbody) return;
+
+      // Cập nhật số lượng trên các nút lọc tuần động (Dynamic Week Counts)
+      const countAll = items.length;
+      const countW1 = items.filter(t => (t.week || '').includes('Tuần 1')).length;
+      const countW2 = items.filter(t => (t.week || '').includes('Tuần 2')).length;
+      const countW3 = items.filter(t => (t.week || '').includes('Tuần 3')).length;
+      const countW4 = items.filter(t => (t.week || '').includes('Tuần 4')).length;
+
+      const btnAll = document.getElementById('filterPlanAll');
+      if (btnAll) btnAll.textContent = `Tất cả (${countAll})`;
+      const btnW1 = document.getElementById('filterPlanW1');
+      if (btnW1) btnW1.textContent = `Tuần 1 (${countW1})`;
+      const btnW2 = document.getElementById('filterPlanW2');
+      if (btnW2) btnW2.textContent = `Tuần 2 (${countW2})`;
+      const btnW3 = document.getElementById('filterPlanW3');
+      if (btnW3) btnW3.textContent = `Tuần 3 (${countW3})`;
+      const btnW4 = document.getElementById('filterPlanW4');
+      if (btnW4) btnW4.textContent = `Tuần 4 (${countW4})`;
+
+      // Cập nhật tiêu đề bảng 2.2 theo đúng số đầu việc thực tế
+      const lblTitle = document.getElementById('lblTable22Title');
+      const cal = calendarCtx || { currMPad: '11', currY: 2026 };
+      if (lblTitle) {
+        lblTitle.textContent = `2.2 LỘ TRÌNH THỰC HIỆN CHI TIẾT 4 TUẦN THÁNG ${cal.currMPad}/${cal.currY} (${countAll} ĐẦU VIỆC)`;
+      }
 
       const filtered = items.filter(item => {
         if (currentNovFilter === 'ALL') return true;
@@ -1638,6 +1883,23 @@
           fetchGvizJsonp(SPREADSHEET_ID, '2141512327'),
           fetchGvizJsonp(SPREADSHEET_ID, '1429319423')
         ]);
+
+        // Tự động nhận diện Tháng & Năm từ tiêu đề trên Google Sheet (Tab 2)
+        let detectedMonth = null;
+        let detectedYear = null;
+        for (const r of rowsTab2) {
+          const str = r.join(' ');
+          const m = str.match(/THÁNG\s+(\d{1,2})\/(\d{4})/i);
+          if (m) {
+            detectedMonth = parseInt(m[1], 10);
+            detectedYear = parseInt(m[2], 10);
+            break;
+          }
+        }
+        if (detectedMonth && detectedYear) {
+          calendarCtx = computeDynamicCalendar(new Date(detectedYear, detectedMonth - 1, 1));
+          updateDynamicDOMHeaders(calendarCtx);
+        }
 
         // --- 1. Parse Tab 1 (Báo cáo tháng trước) ---
         const completed = [];
