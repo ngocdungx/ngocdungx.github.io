@@ -169,39 +169,36 @@
 
   <!-- ==================== HEADER NAVIGATION (1800PX — NEOBRUTALISM) ==================== -->
   <header class="sticky top-0 z-40 border-b-2 border-black bg-[var(--secondary-background)]">
-    <div class="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3 flex items-center justify-between">
+    <div class="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 flex items-center justify-between">
       
       <!-- Brand & Metadata -->
-      <div class="flex items-center gap-3.5">
-        <img src="logo.jpg" alt="Logo Báo Cáo Marketing" class="w-11 h-11 rounded-[5px] border-2 border-black object-contain bg-white p-0.5 flex-shrink-0" />
-        <div>
-          <div class="flex items-center gap-2.5 flex-wrap">
-            <span class="font-black tracking-tight text-black text-lg sm:text-xl uppercase">BÁO CÁO MARKETING</span>
-            <span id="headerDynamicCycleBadge" class="px-2.5 py-0.5 text-xs font-mono font-bold rounded-[5px] bg-[var(--chart-3)] text-black border-2 border-black">Kỳ báo cáo: Tháng trước → Kế hoạch: Tháng hiện tại</span>
-          </div>
-          <p class="text-xs text-black font-semibold hidden sm:block mt-0.5">Báo Cáo Kết Quả Công Tác Tháng Trước & Kế Hoạch Tác Nghiệp Marketing Xuất Khẩu Tháng Hiện Tại</p>
+      <div class="flex items-center gap-3">
+        <img src="logo.jpg" alt="Logo Báo Cáo Marketing" class="w-10 h-10 rounded-[5px] border-2 border-black object-contain bg-white p-0.5 flex-shrink-0" />
+        <div class="flex items-center gap-2.5 sm:gap-3 flex-wrap">
+          <span class="font-black tracking-tight text-black text-xl sm:text-2xl uppercase">BÁO CÁO MARKETING</span>
+          <span id="headerDynamicCycleBadge" class="px-3 py-1 text-xs sm:text-sm font-mono font-bold rounded-[5px] bg-[var(--chart-2)] text-black border-2 border-black whitespace-nowrap">Kết quả T10/2026 • Kế hoạch T11/2026</span>
         </div>
       </div>
 
       <!-- Quick Action Buttons -->
-      <div class="flex items-center gap-2.5 sm:gap-3">
+      <div class="flex items-center gap-2 sm:gap-2.5">
         
         <!-- Nút Đồng bộ Google Sheet -->
-        <button onclick="syncAllFromGoogleSheet()" id="btnSyncNow" aria-label="Đồng bộ trực tiếp dữ liệu mới nhất từ Google Sheet" class="neo-btn px-3.5 py-2 bg-[var(--main)] hover:bg-[var(--chart-2)] text-black text-xs sm:text-sm font-bold flex items-center gap-2" title="Đồng bộ trực tiếp dữ liệu mới nhất từ Google Sheet">
+        <button onclick="syncAllFromGoogleSheet()" id="btnSyncNow" aria-label="Đồng bộ trực tiếp dữ liệu mới nhất từ Google Sheet" class="neo-btn px-3 py-1.5 bg-[var(--main)] hover:bg-[var(--chart-2)] text-black text-xs sm:text-sm font-bold flex items-center gap-2" title="Đồng bộ trực tiếp dữ liệu mới nhất từ Google Sheet">
           <i data-lucide="refresh-cw" id="syncIconSpin" class="w-4 h-4 stroke-[2.5]"></i>
           <span id="syncBtnLabel" class="hidden sm:inline">Đồng bộ Google Sheet</span>
           <span id="syncIndicator" class="w-2.5 h-2.5 rounded-full bg-[var(--chart-2)] border border-black hidden sm:inline-block"></span>
         </button>
 
         <!-- Search Omnibar (⌘K) -->
-        <button onclick="openSearchModal()" aria-label="Mở hộp thoại tìm kiếm nhanh (Ctrl+K)" class="neo-btn px-3.5 py-2 bg-[var(--secondary-background)] hover:bg-[var(--main)] text-black text-xs sm:text-sm font-bold flex items-center gap-2.5">
+        <button onclick="openSearchModal()" aria-label="Mở hộp thoại tìm kiếm nhanh (Ctrl+K)" class="neo-btn px-3 py-1.5 bg-[var(--secondary-background)] hover:bg-[var(--main)] text-black text-xs sm:text-sm font-bold flex items-center gap-2">
           <i data-lucide="search" class="w-4 h-4 stroke-[2.5]"></i>
           <span class="hidden md:inline">Tìm kiếm</span>
-          <kbd class="px-2 py-0.5 rounded-[5px] bg-[var(--background)] text-[11px] font-mono font-bold text-black border-2 border-black">⌘K</kbd>
+          <kbd class="px-1.5 py-0.5 rounded-[5px] bg-[var(--background)] text-[11px] font-mono font-bold text-black border-2 border-black">⌘K</kbd>
         </button>
 
         <!-- Print PDF -->
-        <button onclick="window.print()" title="In Báo Cáo / Xuất PDF Điều Hành" aria-label="In Báo Cáo hoặc Xuất PDF Điều Hành" class="neo-btn p-2.5 bg-[var(--chart-3)] hover:bg-[var(--main)] text-black">
+        <button onclick="window.print()" title="In Báo Cáo / Xuất PDF Điều Hành" aria-label="In Báo Cáo hoặc Xuất PDF Điều Hành" class="neo-btn p-2 bg-[var(--chart-3)] hover:bg-[var(--main)] text-black">
           <i data-lucide="printer" class="w-4 h-4 stroke-[2.5]"></i>
         </button>
       </div>
@@ -1121,7 +1118,7 @@
       const w4 = cal.weeks[3];
 
       document.title = `BÁO CÁO MARKETING — Báo Cáo Tháng ${cal.prevM}/${cal.prevY} & Kế Hoạch Tháng ${cal.currM}/${cal.currY}`;
-      setTxt('headerDynamicCycleBadge', `Báo cáo T${cal.prevM}/${cal.prevY} • Kế hoạch T${cal.currM}/${cal.currY}`);
+      setTxt('headerDynamicCycleBadge', `Kết quả T${cal.prevM}/${cal.prevY} • Kế hoạch T${cal.currM}/${cal.currY}`);
 
       // KPI Cards
       setTxt('kpiOctTitle', `Tiến Độ Tháng ${cal.prevM}/${cal.prevY}`);
